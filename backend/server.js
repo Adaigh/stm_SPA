@@ -7,6 +7,9 @@ const mongoose = require('mongoose')
 // Create the express app
 const app = express()
 
+// Middleware to send request body to router
+app.use(express.json())
+
 // Middleware to log incoming requests
 app.use((req, res, next) => {
     console.log(req.path, req.method)

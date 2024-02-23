@@ -11,13 +11,13 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    phoneNumbers: {
-        type: [ {
-            phoneNumber:{
-                type: String,
-                required: true
-            }
-        }],
-        validate: [(val) => val.length>0, 'At least one phone number is required.']
+    phoneNumber:{
+        type: String,
+        required: true
+    },
+    emailAddress: {
+        type: String
     }
-})
+}, {timestamps: true})
+
+module.exports = mongoose.model('User', userSchema)
