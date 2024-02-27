@@ -21,7 +21,7 @@ const Home = () => {
 
     return (
         <div className="home">
-            <h2>Users Home</h2>
+            <h2>Users</h2>
              {users && users.map((user) => (
                 <UserDetails key={user._id} user={user} />
              ))}
