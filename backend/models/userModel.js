@@ -16,7 +16,8 @@ const userSchema = new Schema({
         required: true
     },
     emailAddress: {
-        type: String
+        type: String,
+        default: "Not Stored"
     }
 }, {timestamps: true})
 

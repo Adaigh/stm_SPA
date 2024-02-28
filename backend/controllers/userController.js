@@ -39,7 +39,7 @@ const createUser = async (req, res) => {
         if(emailAddress){
             user = await User.create({firstName, lastName, phoneNumber, emailAddress})
         } else {
-            user = await User.create({firstName, lastName, phoneNumber, emailAddress: "Not Stored"})
+            user = await User.create({firstName, lastName, phoneNumber})
         }
         res.status(200).json(user)
     } catch (error){
