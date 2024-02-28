@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 // Pages and Components
-import Home from './pages/UserHome.js'
+import UserHome from './pages/UserHome.js'
 import NavBar from './components/NavBar.js';
 
 
@@ -16,7 +16,7 @@ function App() {
             <Routes>
               <Route
                 path="/"
-                element={<Home />}
+                element={<UserHome />}
                 />
             </Routes>
         </div>      

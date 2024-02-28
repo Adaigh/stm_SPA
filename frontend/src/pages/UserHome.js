@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import UserDetails from '../components/UserDetails'
 
-const Home = () => {
+const UserHome = () => {
 
     const [users, setUsers] = useState(null)
 
@@ -29,4 +29,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default UserHome

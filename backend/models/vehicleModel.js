@@ -1,10 +1,8 @@
 const mongoose = require('mongoose')
 
-const Schema = mongoose.Schema
-
-const vehicleSchema = new Schema({
+const vehicleSchema = new mongoose.Schema({
     vehicleYear: {
-        type: String,
+        type: Number,
         required: true
     },
     vehicleMake: {
@@ -16,8 +14,9 @@ const vehicleSchema = new Schema({
         required: true
     },
     vehicleVIN: {
-        type: String
+        type: String,
+        default: "Not Stored"
     }
 })
 
-module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model('Vehicle', vehicleSchema)

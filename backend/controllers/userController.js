@@ -26,7 +26,7 @@ const getUser = async (req, res) => {
 
 // POST a new user
 const createUser = async (req, res) => {
-    const {firstName, lastName, phoneNumber, emailAddress} = req.body
+    const {firstName, lastName, phoneNumbers, emailAddress} = req.body
 
     // Check to see if user already exists
     let user = await User.findOne({firstName, lastName})
@@ -37,9 +37,9 @@ const createUser = async (req, res) => {
     // ADD new user document
     try {
         if(emailAddress){
-            user = await User.create({firstName, lastName, phoneNumber, emailAddress})
+            user = await User.create({firstName, lastName, phoneNumbers, emailAddress})
         } else {
-            user = await User.create({firstName, lastName, phoneNumber})
+            user = await User.create({firstName, lastName, phoneNumbers})
         }
         res.status(200).json(user)
     } catch (error){

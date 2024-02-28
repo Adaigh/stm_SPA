@@ -11,9 +11,9 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    phoneNumber:{
-        type: String,
-        required: true
+    phoneNumbers:{
+        type: [Number],
+        validate: [v => Array.isArray(v) && v.length > 0, "One phone number is required"]
     },
     emailAddress: {
         type: String,
