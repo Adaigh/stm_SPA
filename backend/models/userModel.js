@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+const vehicleSchema = require('./vehicleModel')
+
 
 const Schema = mongoose.Schema
 
@@ -15,9 +17,13 @@ const userSchema = new Schema({
         type: [Number],
         validate: [v => Array.isArray(v) && v.length > 0, "One phone number is required"]
     },
-    emailAddress: {
-        type: String,
-        default: "Not Stored"
+    emailAddresses: {
+        type: [String],
+        default: ["Not Stored"]
+    },
+    vehicles: {
+        type: [vehicleSchema],
+        validate: [v => Array.isArray(v) && v.length > 0, "One vehicle is required"]
     }
 }, {timestamps: true})
 

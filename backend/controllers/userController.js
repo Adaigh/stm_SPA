@@ -26,7 +26,7 @@ const getUser = async (req, res) => {
 
 // POST a new user
 const createUser = async (req, res) => {
-    const {firstName, lastName, phoneNumbers, emailAddress} = req.body
+    const {firstName, lastName, phoneNumbers, emailAddresses, vehicles} = req.body
 
     // Check to see if user already exists
     let user = await User.findOne({firstName, lastName})
@@ -34,12 +34,14 @@ const createUser = async (req, res) => {
         return res.status(409).json({message: "User data already exists", userData: user._doc})
     }
 
+    console.log(vehicles)
+
     // ADD new user document
     try {
-        if(emailAddress){
-            user = await User.create({firstName, lastName, phoneNumbers, emailAddress})
+        if(emailAddresses){
+            user = await User.create({firstName, lastName, phoneNumbers, emailAddresses, vehicles})
         } else {
-            user = await User.create({firstName, lastName, phoneNumbers})
+            user = await User.create({firstName, lastName, phoneNumbers, vehicles})
         }
         res.status(200).json(user)
     } catch (error){

@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 
-const vehicleSchema = new mongoose.Schema({
+const Schema = mongoose.Schema
+
+const vehicleSchema = new Schema({
     vehicleYear: {
         type: Number,
         required: true
@@ -19,4 +21,4 @@ const vehicleSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('Vehicle', vehicleSchema)
+module.exports = vehicleSchema

@@ -1,17 +1,21 @@
 h4 {
-    margin: 10px;
+    margin: 10px 10px 0 10px;
     color: var(--primary);
     font-size: 1.2rem;
 }
 
 ul {
+    margin: 0;
     list-style: none;
 }
 
+.info-columns {
+    display: flex;
+}
   
 .user-details {
-    margin: 10px 0;
-    padding: 0 10px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
     border: 1px solid darkgray;
     border-radius: 10px;
     box-shadow: 2px 2px 5px rgba(0,0,0.5);
