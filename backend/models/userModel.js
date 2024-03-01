@@ -14,7 +14,7 @@ const userSchema = new Schema({
         required: true
     },
     phoneNumbers:{
-        type: [Number],
+        type: [String],
         validate: [v => Array.isArray(v) && v.length > 0, "One phone number is required"]
     },
     emailAddresses: {
@@ -23,7 +23,6 @@ const userSchema = new Schema({
     },
     vehicles: {
         type: [vehicleSchema],
-        validate: [v => Array.isArray(v) && v.length > 0, "One vehicle is required"]
     }
 }, {timestamps: true})
 

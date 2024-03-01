@@ -40,3 +40,8 @@ header a:hover {
   padding: 20px;
   margin: 0 auto;
 }
+
+.userHome {
+  display: flex;
+  justify-content: space-around;
+}

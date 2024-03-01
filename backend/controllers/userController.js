@@ -34,8 +34,6 @@ const createUser = async (req, res) => {
         return res.status(409).json({message: "User data already exists", userData: user._doc})
     }
 
-    console.log(vehicles)
-
     // ADD new user document
     try {
         if(emailAddresses){

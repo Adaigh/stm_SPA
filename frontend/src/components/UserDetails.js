@@ -9,7 +9,7 @@ const UserDetails = ({user}) => {
                 <ul>
                     <li><u>Phone Numbers</u>:&emsp;</li>
                     {user.phoneNumbers.map((number, index) => {
-                        return <li key={index}>{number.toString().replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')}</li>
+                        return <li key={index}>{number.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')}</li>
                     })}
                 </ul>
                 <ul>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import UserDetails from '../components/UserDetails'
+import UserForm from "../components/UserForm"
 
 const UserHome = () => {
 
@@ -20,11 +21,14 @@ const UserHome = () => {
     }, [])
 
     return (
-        <div className="home">
-            <h2>Users</h2>
-             {users && users.map((user) => (
-                <UserDetails key={user._id} user={user} />
-             ))}
+        <div className="userHome">
+            <div className="users">
+                <h2>Users</h2>
+                {users && users.map((user) => (
+                    <UserDetails key={user._id} user={user} />
+                ))}
+            </div>
+            <UserForm />
         </div>
     )
 }
