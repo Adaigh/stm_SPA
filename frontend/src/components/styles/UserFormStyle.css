@@ -1,15 +1,23 @@
 h3 {
-    color: var(--primary)
+    color: var(--primary);
+    text-decoration: underline;
 }
 
 button {
     width: 80px;
     margin: 0 auto;
     padding: 5px;
+    background: var(--primary);
+    color:#fff;
+    font-weight: 600;
+    border: 0;
+    border-radius: 8px;
 }
 
 input {
     padding: 5px;
+    border: 0;
+    border-radius: 5px;
 }
 
 .create {
@@ -17,8 +25,16 @@ input {
     padding: 20px;
     padding-top: 0px;;
     display: flex;
-    gap: 15px;
+    gap: 10px;
     flex-direction: column;
     max-width: 300px;
     max-height: 400px;
+}
+
+.error {
+    border: 2px solid var(--error);
+    border-radius: 10px;
+    padding: 10px;
+    color: var(--error);
+    background: #ffefef
 }

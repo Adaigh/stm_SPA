@@ -1,9 +1,26 @@
 import './styles/UserDetailStyle.css'
+import { useUsersContext } from '../hooks/useUsersContext'
 
 const UserDetails = ({user}) => {
+    const {dispatch} = useUsersContext()
+
+    const callDeleteUser = async () => {
+        const response = await fetch('/api/users/' + user._id, {
+            method: 'DELETE'
+        })
+        const json = await response.json()
+
+        if(response.ok) {
+            dispatch({type: 'DELETE_USER', payload: json})
+        }
+    }
+
     return (
         <div className="user-details">
-            <h4>{user.lastName}, {user.firstName}</h4>
+            <div className='user-header'>
+                <h4>{user.lastName}, {user.firstName}</h4>
+                <span className='delete' onClick={callDeleteUser}>delete</span>
+            </div>
             <div className='info-columns'>
                 {/* Listing phone number */}
                 <ul>
