@@ -1,19 +1,19 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
+import { useUsersContext } from "../hooks/useUsersContext"
+
+// Components
 import UserDetails from '../components/UserDetails'
 import UserForm from "../components/UserForm"
 
 const UserHome = () => {
-
-    const [users, setUsers] = useState(null)
+    const {users, dispatch} = useUsersContext()
 
     useEffect(() =>{
         const fetchUsers = async () => {
             const response = await fetch('/api/users')
             const json = await response.json()
             if(response.ok) {
-                setUsers(json)
-            }else{
-                console.error("ERROR")
+                dispatch({type:'SET_USERS', payload: json})
             }
         }
 

@@ -1,9 +1,10 @@
 import './styles/UserFormStyle.css'
 import { useState } from "react"
-
+import { useUsersContext } from "../hooks/useUsersContext"
 
 const UserForm = () => {
 
+    const {dispatch} = useUsersContext()
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [phoneNumber, setPhoneNumber] = useState('')
@@ -34,6 +35,7 @@ const UserForm = () => {
             setEmailAddress('')
             setError(null)
             console.log('New user added!')
+            dispatch({type: 'CREATE_USER', payload: json})
         }
     }
 
