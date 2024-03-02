@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useUsersContext } from "../hooks/useUsersContext"
 
 // Components
@@ -7,6 +7,7 @@ import UserForm from "../components/UserForm"
 
 const UserHome = () => {
     const {users, dispatch} = useUsersContext()
+    const [filter, setFilter] = useState('')
 
     useEffect(() =>{
         const fetchUsers = async () => {
@@ -18,17 +19,30 @@ const UserHome = () => {
         }
 
         fetchUsers()
-    }, [])
+    }, [dispatch])
 
     return (
         <div className="userHome">
             <div className="users">
-                <h2>Users</h2>
-                {users && users.map((user) => (
+                <span className="user-title">Users</span>
+                <input
+                    className="user-filter"
+                    type="text"
+                    onChange={(e) => setFilter(e.target.value)}
+                    placeholder="Search"
+                    size='50'
+                />
+                {users && users.filter((user) => {
+                    return (user.firstName.toUpperCase().includes(filter.toUpperCase()) ||
+                    user.lastName.toUpperCase().includes(filter.toUpperCase()))
+                }).map((user) => (
                     <UserDetails key={user._id} user={user} />
                 ))}
             </div>
-            <UserForm />
+            <div>
+            <span className="add-user-title">Add User:</span>
+                <UserForm />
+            </div>
         </div>
     )
 }

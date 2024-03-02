@@ -50,3 +50,19 @@ header a:hover {
   display: flex;
   justify-content: space-around;
 }
+
+.user-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+.user-filter {
+  margin:20px;
+}
+
+.add-user-title {
+  text-decoration: underline;
+  color: var(--primary);
+  font-size: 1.2rem;
+  font-weight: 900;
+}

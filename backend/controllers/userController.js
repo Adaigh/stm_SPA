@@ -39,8 +39,9 @@ const createUser = async (req, res) => {
     if(!phoneNumbers){
         emptyFields.push('phoneNumbers')
     }
+
     if(emptyFields.length > 0){
-        return res.status(400).json({error: 'Please fill in required fields', emptyFields})
+        return res.status(400).json({error: 'Incomplete user details', emptyFields})
     }
 
     // Check to see if user already exists

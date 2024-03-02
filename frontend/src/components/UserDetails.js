@@ -5,6 +5,10 @@ const UserDetails = ({user}) => {
     const {dispatch} = useUsersContext()
 
     const callDeleteUser = async () => {
+
+        if(!window.confirm("Are you sure you want to delete user " + user.firstName + " " + user.lastName + "?")){
+            return;
+        }
         const response = await fetch('/api/users/' + user._id, {
             method: 'DELETE'
         })
@@ -19,7 +23,7 @@ const UserDetails = ({user}) => {
         <div className="user-details">
             <div className='user-header'>
                 <h4>{user.lastName}, {user.firstName}</h4>
-                <span className='delete' onClick={callDeleteUser}>delete</span>
+                <span className='material-symbols-outlined delete' onClick={callDeleteUser}>delete</span>
             </div>
             <div className='info-columns'>
                 {/* Listing phone number */}

@@ -9,17 +9,45 @@ const UserForm = () => {
     const [lastName, setLastName] = useState('')
     const [phoneNumber, setPhoneNumber] = useState('')
     const [emailAddress, setEmailAddress] = useState('')
+    const [vYear, setVYear] = useState('')
+    const [vMake, setVMake] = useState('Audi')
+    const [vModel, setVModel] = useState('')
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const workout = {firstName, lastName, phoneNumbers: [phoneNumber], emailAddresses: [emailAddress]}
+        let user = {
+            firstName,
+            lastName,
+            phoneNumbers: [phoneNumber],
+            emailAddresses: [emailAddress],
+            vehicles: []
+        }
+        
+        user.firstName = user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1)
+        user.lastName = user.lastName.charAt(0).toUpperCase() + user.lastName.slice(1)
+        
+        if(vYear && vMake && vModel){
+            user.vehicles.push({
+                vehicleYear: vYear,
+                vehicleMake: vMake,
+                vehicleModel: vModel
+            })
+        } else if (!vYear && !vModel){
+            // Do Nothing
+        } else if(!vYear || !vModel){
+            setError("Incomplete vehicle details")
+            if(!vYear) setEmptyFields(['vehicleYear'])
+            if(!vModel) setEmptyFields([...emptyFields, 'vehicleModel'])
+            return
+        }
+        console.log(user)
 
         const response = await fetch('/api/users', {
             method: 'POST',
-            body: JSON.stringify(workout),
+            body: JSON.stringify(user),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -35,6 +63,9 @@ const UserForm = () => {
             setLastName('')
             setPhoneNumber('')
             setEmailAddress('')
+            setVYear('')
+            setVMake('Audi')
+            setVModel('')
             setError(null)
             setEmptyFields([])
             console.log('New user added!')
@@ -44,12 +75,11 @@ const UserForm = () => {
 
     return (
         <form className="create" onSubmit={handleSubmit}>
-            <h3>Add a New User</h3>
 
             <label>First Name: *</label>
             <input
                 type="text"
-                onChange={(e)=> setFirstName(e.target.value)}
+                onChange={(e) => setFirstName(e.target.value)}
                 value={firstName}
                 className={emptyFields.includes('firstName') ? 'error' : ''}
             />
@@ -57,7 +87,7 @@ const UserForm = () => {
             <label>Last Name: *</label>
             <input
                 type="text"
-                onChange={(e)=> setLastName(e.target.value)}
+                onChange={(e) => setLastName(e.target.value)}
                 value={lastName}
                 className={emptyFields.includes('lastName') ? 'error' : ''}
             />
@@ -65,7 +95,7 @@ const UserForm = () => {
             <label>Phone Number: *</label>
             <input
                 type="text"
-                onInput={(e)=> setPhoneNumber(e.target.value)}
+                onInput={(e) => setPhoneNumber(e.target.value)}
                 pattern='[0-9]{10}'
                 placeholder='xxxxxxxxxx'
                 title="xxxxxxxxxx"
@@ -77,8 +107,35 @@ const UserForm = () => {
             <label>Email Address:</label>
             <input
                 type="text"
-                onChange={(e)=> setEmailAddress(e.target.value)}
+                onChange={(e) => setEmailAddress(e.target.value)}
                 value={emailAddress}
+            />
+
+            <label>Vehicle Year:</label>
+            <input
+                type="number"
+                onChange={(e) => setVYear(e.target.value)}
+                value={vYear}
+                min="1800"
+                max="2500"
+                className={emptyFields.includes('vehicleYear') ? 'error' : ''}
+            />
+            
+            <label>Vehicle Make:</label>
+            <select 
+                onChange={(e) => setVMake(e.target.value)}
+                className={emptyFields.includes('vehicleMake') ? 'error' : ''}>
+                <option value="Audi">Audi</option>
+                <option value="VW">VW</option>
+                <option value="BMW">BMW</option>
+            </select>
+
+            <label>Vehicle Model:</label>
+            <input
+                type="text"
+                onChange={(e)=> setVModel(e.target.value)}
+                value={vModel}
+                className={emptyFields.includes('vehicleModel') ? 'error' : ''}
             />
 
             <button> Add User </button>

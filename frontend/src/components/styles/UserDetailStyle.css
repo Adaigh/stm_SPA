@@ -29,6 +29,7 @@ ul {
 
 .delete {
     color: var(--error);
+    cursor: pointer;
 }
 
 .delete:hover {
