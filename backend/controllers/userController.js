@@ -28,6 +28,21 @@ const getUser = async (req, res) => {
 const createUser = async (req, res) => {
     const {firstName, lastName, phoneNumbers, emailAddresses, vehicles} = req.body
 
+    let emptyFields = []
+
+    if(!firstName){
+        emptyFields.push('firstName')
+    }
+    if(!lastName){
+        emptyFields.push('lastName')
+    }
+    if(!phoneNumbers){
+        emptyFields.push('phoneNumbers')
+    }
+    if(emptyFields.length > 0){
+        return res.status(400).json({error: 'Please fill in required fields', emptyFields})
+    }
+
     // Check to see if user already exists
     let user = await User.findOne({firstName, lastName})
     if(user) {

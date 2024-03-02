@@ -31,10 +31,14 @@ input {
     max-height: 400px;
 }
 
-.error {
+div.error {
     border: 2px solid var(--error);
     border-radius: 10px;
     padding: 10px;
     color: var(--error);
     background: #ffefef
+}
+
+input.error {
+    border: 2px solid var(--error)
 }
