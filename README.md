@@ -2,6 +2,7 @@
 For this project I am reworking the company website I made for STM Tuning to provide additional functionality for scheduling and managing customer appointments.
 
 ## Features:
+- MongoDB, Express, React, Node
 - User/Vehicle/Appointment database
 - Management route for employee activites
 - Client-facing website for customer access
