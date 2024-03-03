@@ -19,28 +19,49 @@ const UserHome = () => {
         }
 
         fetchUsers()
+        console.log("useEffect triggered")
     }, [dispatch])
+
+    const callRefreshUsers = async (e) => {
+        setFilter('')
+        e.target.classList.toggle('waiting')
+        const response = await fetch('/api/users')
+        const json = await response.json()
+        if(response.ok) {
+            dispatch({type:'SET_USERS', payload: json})
+        }
+        e.target.classList.toggle('waiting')
+
+    }
 
     return (
         <div className="userHome">
             <div className="users">
-                <span className="user-title">Users</span>
-                <input
-                    className="user-filter"
-                    type="text"
-                    onChange={(e) => setFilter(e.target.value)}
-                    placeholder="Search"
-                    size='50'
-                />
+                <div className="user-header">
+                    <span className="user-title">Users</span> 
+                    <input
+                        className="user-filter"
+                        type="text"
+                        onChange={(e) => setFilter(e.target.value)}
+                        value={filter}
+                        placeholder="Search by Name, Phone, or Email"
+                        size='50'
+                    />
+                    <span class="material-symbols-outlined refresh" onClick={(e) => callRefreshUsers(e)}>
+                            refresh
+                    </span>
+                </div>
                 {users && users.filter((user) => {
                     return (user.firstName.toUpperCase().includes(filter.toUpperCase()) ||
-                    user.lastName.toUpperCase().includes(filter.toUpperCase()))
+                    user.lastName.toUpperCase().includes(filter.toUpperCase()) || 
+                    user.phoneNumbers[0].toString().includes(filter) || 
+                    user.emailAddresses[0].toUpperCase().includes(filter.toUpperCase()))
                 }).map((user) => (
                     <UserDetails key={user._id} user={user} />
                 ))}
             </div>
-            <div>
-            <span className="add-user-title">Add User:</span>
+            <div className="user-form">
+            <div className="add-user-title">Add a New User:</div>
                 <UserForm />
             </div>
         </div>

@@ -21,7 +21,7 @@ ul {
     box-shadow: 2px 2px 5px rgba(0,0,0.5);
 }
 
-.user-header {
+.user-details-header {
     display: flex;
     justify-content: space-between;
     margin: 10px 10px 0 10px;

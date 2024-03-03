@@ -21,7 +21,7 @@ const UserDetails = ({user}) => {
 
     return (
         <div className="user-details">
-            <div className='user-header'>
+            <div className='user-details-header'>
                 <h4>{user.lastName}, {user.firstName}</h4>
                 <span className='material-symbols-outlined delete' onClick={callDeleteUser}>delete</span>
             </div>

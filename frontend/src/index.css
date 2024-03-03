@@ -42,13 +42,23 @@ header a:hover {
 
 .pages {
   max-width: 1400px;
-  padding: 20px;
+  padding: 0 20px;
   margin: 0 auto;
+}
+
+.users {
+  width: 60%;
 }
 
 .userHome {
   display: flex;
   justify-content: space-around;
+}
+
+.user-header {
+  display: flex;
+  margin: 0;
+  align-items: center;
 }
 
 .user-title {
@@ -65,4 +75,14 @@ header a:hover {
   color: var(--primary);
   font-size: 1.2rem;
   font-weight: 900;
+  text-align: center;
+  padding: 20px;
+}
+
+.refresh {
+  cursor: pointer;
+}
+
+.waiting {
+  color: var(--error)
 }

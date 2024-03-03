@@ -18,6 +18,7 @@ const UserForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
+        // Create new User Object
         let user = {
             firstName,
             lastName,
@@ -26,9 +27,11 @@ const UserForm = () => {
             vehicles: []
         }
         
+        // Capitalize names
         user.firstName = user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1)
         user.lastName = user.lastName.charAt(0).toUpperCase() + user.lastName.slice(1)
         
+        // Check for vehicle details
         if(vYear && vMake && vModel){
             user.vehicles.push({
                 vehicleYear: vYear,
@@ -43,8 +46,8 @@ const UserForm = () => {
             if(!vModel) setEmptyFields([...emptyFields, 'vehicleModel'])
             return
         }
-        console.log(user)
 
+        // Fetch the new user details
         const response = await fetch('/api/users', {
             method: 'POST',
             body: JSON.stringify(user),
