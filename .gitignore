@@ -1,2 +1,5 @@
+#Ignore node_modules for faster cloning
 node_modules/
+
+#Ignore .env for privacy
 .env
