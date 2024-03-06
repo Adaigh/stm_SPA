@@ -1,18 +1,18 @@
 import AboutPane from '../components/AboutPane.js'
-import NewCarousel from '../components/Carousel_two.js';
+import NewCarousel from '../components/Carousel.js';
 
 
 
 const sectionData = [
     {
-        sectionTitle: 'Performance:',
+        sectionTitle: 'Performance',
         sectionContent: 'Our team is passionate about performance... (rest of content)',
         src: process.env.PUBLIC_URL + '/images/engine1.jpg',
         alt: 'Built engine',
         caption: 'Freshly built 2.0'
     },
     {
-        sectionTitle: 'Repairs:',
+        sectionTitle: 'Repairs',
         sectionContent: 'Putting your vehicle through its paces... (rest of content)',
         src: process.env.PUBLIC_URL + '/images/dave1.jpg',
         alt: 'Portrait - Dave K.',
@@ -22,7 +22,7 @@ const sectionData = [
 
 const STMHome = () => (
     <>
-      <AboutPane />
+        <AboutPane />
         <NewCarousel sectionData={sectionData}/>
     </> 
   );

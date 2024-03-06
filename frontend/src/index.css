@@ -87,9 +87,3 @@ header a:hover {
   color: var(--error)
 }
 
-.infopane {
-  margin: 50px auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}

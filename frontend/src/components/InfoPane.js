@@ -1,9 +1,10 @@
 import React from 'react';
+import './styles/InfoPane.css'
 
 // Reusable component for sections with image and text
 const InfoPane = ({ children }) => {
     // Ensure children is an array in case only a single child is passed
-    const childArray = React.useMemo(() => Array.isArray(children) ? children : [children]);
+    const childArray = Array.isArray(children) ? children : [children];
   
     return (
       <div className="infopane">
