@@ -18,8 +18,8 @@ const userAccountSchema = new Schema({
         required: true
     },
     userInfo: {
-        type: String,
-        default: "No user info"
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     }
 })
 
