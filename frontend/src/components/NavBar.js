@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom"
 
-const NavBar = () => {
+const NavBar = ({children}) => {
 
     return (
         <header>
+            {children}
             <div className="container">
                 <Link to="/">
                     <h1>STM Home</h1>

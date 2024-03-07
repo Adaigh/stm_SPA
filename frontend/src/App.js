@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import STMHome from './pages/STMHome.js'
 import UserHome from './pages/UserHome.js'
 import NavBar from './components/NavBar.js'
+import PictureFrame from './components/PictureFrame.js'
 
 
 function App() {
@@ -15,7 +16,11 @@ function App() {
       
       <BrowserRouter>
 
-      <NavBar />
+      <NavBar>
+        <PictureFrame 
+              src={process.env.PUBLIC_URL + '/images/STMLogo.png'} 
+              alt={'STM Tuning'} /> 
+      </NavBar>
         <div className="pages">
         <Routes>
               <Route

@@ -1,7 +1,7 @@
 
 // Component specifically for about section
 const AboutPane = () => (
-    <div className="aboutpane bg1">
+    <div className="aboutpane">
       <h2>Stay Tuned Motorsports</h2>
       <p>
         Welcome! STM tuning has been doing maintenance and repair in Spokane,
