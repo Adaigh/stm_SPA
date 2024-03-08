@@ -19,7 +19,6 @@ const UserHome = () => {
         }
 
         fetchUsers()
-        console.log("useEffect triggered")
     }, [dispatch])
 
     const callRefreshUsers = async (e) => {
@@ -47,7 +46,7 @@ const UserHome = () => {
                         placeholder="Search by Name, Phone, or Email"
                         size='50'
                     />
-                    <span class="material-symbols-outlined refresh" onClick={(e) => callRefreshUsers(e)}>
+                    <span className="material-symbols-outlined refresh" onClick={(e) => callRefreshUsers(e)}>
                             refresh
                     </span>
                 </div>
