@@ -1,0 +1,15 @@
+.navigation {
+    display: flex;
+    gap:50px;
+    align-items: center;
+}
+
+.navigation a {
+    text-decoration: none;
+    color: #000;
+    font-weight: 700;
+}
+
+.navigation a:hover {
+    text-decoration: underline;
+}
