@@ -1,20 +1,15 @@
 import { Link } from "react-router-dom"
+import './styles/NavBar.css'
 
 const NavBar = ({children}) => {
 
     return (
         <header>
             {children}
-            <div className="container">
-                <Link to="/">
-                    <h1>STM Home</h1>
-                </Link>
-                <nav>
-                    <div>
-                        <Link to='/login'>Login</Link>
-                        <Link to='/selfsignup'>Signup</Link>
-                    </div>
-                </nav>
+            <div className="navigation">
+                <Link to="/">Home</Link>
+                <Link to='/login'>Login</Link>
+                <Link to='/selfsignup'>Signup</Link>
             </div>
         </header>
     )

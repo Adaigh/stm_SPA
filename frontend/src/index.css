@@ -16,11 +16,14 @@ input, textarea, button {
   font-family: inherit
 }
 
-/* 
+
 header {
   background: #fff;
+  display: flex;
 }
 
+
+/* 
 header .container {
   max-width: 1400px;
   margin: 0 auto;

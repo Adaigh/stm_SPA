@@ -1,4 +1,4 @@
-import './styles/PictureFrameStyle.css'
+import './styles/PictureFrame.css'
 
 
 // Could be adjusted to use the above image component

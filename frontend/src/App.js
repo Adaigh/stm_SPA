@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
 
 // Pages and Components
 import STMHome from './pages/STMHome.js'
@@ -19,9 +19,11 @@ function App() {
       <BrowserRouter>
 
       <NavBar>
-        <PictureFrame 
+        <Link to="/">
+          <PictureFrame 
               src={process.env.PUBLIC_URL + '/images/STMLogo.png'} 
               alt={'STM Tuning'} /> 
+        </Link>
       </NavBar>
         <div className="pages">
         <Routes>

@@ -1,4 +1,4 @@
-import './styles/UserDetailStyle.css'
+import './styles/UserDetail.css'
 import { useUsersContext } from '../hooks/useUsersContext'
 
 const UserDetails = ({user}) => {
