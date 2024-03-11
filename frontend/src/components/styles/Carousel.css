@@ -9,3 +9,8 @@
 .carousel-nav li{
     display: inline;
 }
+
+.control-arrow{
+  margin-top: 50px;
+  max-height:50px;
+}

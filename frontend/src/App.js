@@ -6,6 +6,7 @@ import UserHome from './pages/UserHome.js'
 import NavBar from './components/NavBar.js';
 import Login from './pages/Login.js';
 import SelfSignup from './pages/SelfSignup.js';
+import PictureFrame from './components/PictureFrame.js';
 
 
 function App() {
