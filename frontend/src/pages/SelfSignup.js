@@ -1,12 +1,14 @@
 import { useState } from "react"
+import { useSelfSignup } from "../hooks/useSelfSignup"
 
 const SelfSignup = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const {selfSignup, isLoading, error} = useSelfSignup()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(email, password)
+        await selfSignup(email, password)
     }
 
     return (
@@ -26,7 +28,9 @@ const SelfSignup = () => {
                 value={password}
             />
 
-            <button>Submit</button>
+            <button disabled={isLoading}>Submit</button>
+            {error && <div className="error">{error}</div>}
+
         </form>
     )
 }
