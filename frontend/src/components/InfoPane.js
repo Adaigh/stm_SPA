@@ -7,7 +7,7 @@ const InfoPane = ({ children }) => {
     const childArray = Array.isArray(children) ? children : [children];
   
     return (
-      <div className="infopane">
+      <div className="infopane horizontal-segment">
         {childArray.map((child, index) => (
           <div key={index}>{child}</div>
         ))}

@@ -11,7 +11,7 @@ const NewCarousel = ({ sectionData }) => {
   return (
     <div>
 
-        <ul className="carousel-nav">
+        {/* <ul className="carousel-nav">
         {sectionData.map((section, index) => (
           <li key={index} className={selected}>
             <button onClick={(e) => { e.preventDefault(); setSelected(index); }}>
@@ -19,13 +19,13 @@ const NewCarousel = ({ sectionData }) => {
             </button>
           </li>
         ))}
-      </ul>
+      </ul> */}
       
       <Carousel 
         selectedItem={selected} 
         showArrows={false}
         showThumbs={false}
-        showIndicators={false}
+        showStatus={false}
         onChange={setSelected}
         onClickItem={setSelected}
         onClickThumb={setSelected} 

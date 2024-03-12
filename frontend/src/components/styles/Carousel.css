@@ -9,3 +9,7 @@
 .carousel-nav li{
     display: inline;
 }
+
+.control-dots {
+  position: relative;
+}

@@ -4,12 +4,18 @@
 :root {
   --primary: #1aac83;
   --error: #e7195a;
+  box-sizing: border-box;
 }
 
 body {
-  background: #f1f1f1;
+  background: linear-gradient(to bottom right, rgba(180,180,0,1), rgba(120,120,0,1), rgba(180,0,0,1), rgba(150,0,0,1), rgba(0,0,0,1));
   margin: 0;
   font-family: "Poppins";
+  color: #ddd;
+}
+
+a{
+  color: #ddd;
 }
 
 input, textarea, button {
@@ -18,10 +24,25 @@ input, textarea, button {
 
 
 header {
-  background: #fff;
+  background: #000;
   display: flex;
 }
 
+header img{
+  max-width: 250px;
+}
+
+.pages {
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 1000px;
+}
+
+.horizontal-segment {
+  background: rgba(0,0,0,0.8);
+  margin-top: 20px;
+  padding: 10px;
+}
 
 /* 
 header .container {
