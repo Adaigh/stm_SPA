@@ -24,6 +24,6 @@ const userSchema = new Schema({
     vehicles: {
         type: [vehicleSchema],
     }
-}, {timestamps: true})
+})
 
 module.exports = mongoose.model('User', userSchema)
