@@ -17,6 +17,9 @@ const NavBar = () => {
                 <Link to="/">
                     <h1>STM Home</h1>
                 </Link>
+                <Link to="/users">
+                    <h2>Users</h2>
+                </Link>
                 <nav>
                     {user && (
                         <div>

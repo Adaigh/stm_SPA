@@ -27,8 +27,8 @@ header .container {
   margin: 0 auto;
   padding: 10px 20px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: baseline;
+  gap: 50px;
 }
 
 header a {
@@ -85,4 +85,11 @@ header a:hover {
 
 .waiting {
   color: var(--error)
+}
+
+.infopane {
+  margin: 50px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
