@@ -2,8 +2,8 @@ const UserAccount = require('../models/userAccountModel')
 const jwt = require('jsonwebtoken')
 
 // JWT creator
-const createToken = (_id, access) => {
-    return jwt.sign({_id, access}, process.env.JWT_SECRET, {expiresIn: '3d'})
+const createToken = (_id) => {
+    return jwt.sign({_id}, process.env.JWT_SECRET, {expiresIn: '1d'})
 }
 
 
@@ -15,7 +15,7 @@ const loginUserAccount = async (req, res) => {
     try {
         const userAccount = await UserAccount.login(email, password)
 
-        const webToken = createToken(userAccount._id, userAccount.access)
+        const webToken = createToken(userAccount._id)
 
         res.status(200).json({email, webToken})
     } catch (error) {
@@ -31,9 +31,9 @@ const signupUserAccount = async (req, res) =>  {
     try {
         const userAccount = await UserAccount.signup(email, password, access)
 
-        const webToken = createToken(userAccount._id, userAccount.access)
+        const webToken = createToken(userAccount._id)
 
-        res.status(200).json({email, userAccount, webToken})
+        res.status(200).json({email, webToken})
     } catch (error){
         res.status(400).json({error: error.message})
     }
