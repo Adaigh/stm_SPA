@@ -60,9 +60,20 @@ const getMonth = async (req,res) => {
     res.status(200).json(appointments)
 }
 
+const getAppointmentCounts = async (req,res) => {
+    await Appointment.aggregate([
+        { $group: { _id: { day: '$date' }, count: { $sum: 1 } } },
+        { $sort: { _id: 1 } },
+        { $project: { _id: 0, day: '$_id.day', count: '$count' } }
+    ])
+    .then(results => res.status(200).json(results))
+    .catch(err => res.status(404).json(err.message))
+}
+
 module.exports = {
     getAppointments,
     getAppointment,
     createAppointment,
-    getMonth
+    getMonth,
+    getAppointmentCounts
 }

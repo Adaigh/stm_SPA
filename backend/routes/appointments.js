@@ -4,7 +4,8 @@ const {
     getAppointments,
     getAppointment,
     createAppointment,
-    getMonth
+    getMonth,
+    getAppointmentCounts
 } = require ('../controllers/appointmentController')
 
 const router = express.Router()
@@ -20,5 +21,9 @@ router.post('/', createAppointment)
 
 // Get a month of appointments
 router.get('/month', getMonth)
+
+// Get appointment counts
+// TODO: refine to next month's appointments
+router.get('/counts', getAppointmentCounts)
 
 module.exports = router
