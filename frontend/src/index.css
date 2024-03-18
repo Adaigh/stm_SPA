@@ -1,5 +1,6 @@
 /* google font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
 
 :root {
   --primary: #1aac83;
@@ -8,24 +9,36 @@
 }
 
 body {
-  background: linear-gradient(to bottom right, rgba(180,180,0,1), rgba(120,120,0,1), rgba(180,0,0,1), rgba(150,0,0,1), rgba(0,0,0,1));
+  background: linear-gradient(to right, rgba(180,180,0,1), rgba(150,0,0,1), rgba(0,0,0,1));
   margin: 0;
   font-family: "Poppins";
   color: #ddd;
+  height: 100%;
 }
 
 a{
   color: #ddd;
 }
 
+h1, h2, h3, h4 {
+  color: #fff;
+  font-family: "Black Ops One";
+}
+ 
+h2 {
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+
 input, textarea, button {
   font-family: inherit
 }
 
-
 header {
-  background: #000;
+  background: #333;
   display: flex;
+  justify-content: space-between;
+  gap:50px;
 }
 
 header img{
@@ -33,15 +46,7 @@ header img{
 }
 
 .pages {
-  max-width: 1400px;
   margin: 0 auto;
-  min-height: 1000px;
-}
-
-.horizontal-segment {
-  background: rgba(0,0,0,0.8);
-  margin-top: 20px;
-  padding: 10px;
 }
 
 /* 

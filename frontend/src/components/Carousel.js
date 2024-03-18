@@ -1,29 +1,18 @@
-import React, { useState } from 'react';
-import "react-responsive-carousel/lib/styles/carousel.min.css"; 
-import { Carousel } from 'react-responsive-carousel';
-import InfoPane from './InfoPane'; // Assuming InfoPane is in a file named InfoPane.jsx
-import PictureFrame from './PictureFrame';
+import React, { useState } from 'react'
+import "react-responsive-carousel/lib/styles/carousel.min.css"
+import { Carousel } from 'react-responsive-carousel'
+import InfoPane from './InfoPane'
 import './styles/Carousel.css'
 
-const NewCarousel = ({ sectionData }) => {
+const MyCarousel = ({ sectionData }) => {
   const [selected, setSelected] = useState(0);
-
+  
   return (
-    <div>
-
-        {/* <ul className="carousel-nav">
-        {sectionData.map((section, index) => (
-          <li key={index} className={selected}>
-            <button onClick={(e) => { e.preventDefault(); setSelected(index); }}>
-              {section.sectionTitle} 
-            </button>
-          </li>
-        ))}
-      </ul> */}
-      
+    <div className='carousel-container' style={{backgroundImage: 'url(/images/gears3.jpg', backgroundSize: 'cover'}}>
+           
       <Carousel 
         selectedItem={selected} 
-        showArrows={false}
+        showArrows={true}
         showThumbs={false}
         showStatus={false}
         onChange={setSelected}
@@ -31,15 +20,21 @@ const NewCarousel = ({ sectionData }) => {
         onClickThumb={setSelected} 
       >
         {sectionData.map((section, index) => (
-          <InfoPane key={index}>
-            <div>
-              <h3>{section.sectionTitle}</h3>
-              <p>{section.sectionContent}</p>
+          <InfoPane key={index} bgurl={section.bgurl}>
+            <h2>{section.sectionTitle}</h2>
+            <div className='info-content'>
+              <div className='info-text'>
+                <p>{section.sectionContent}</p>
+                <div className='info-list'>
+                <ul>
+                {section.sectionList.map((listItem, index) => (
+                  <li>{listItem}</li>
+                ))}
+                </ul>
+              </div>
+              </div>
+              
             </div>
-            <PictureFrame 
-              src={section.src} 
-              alt={section.alt} 
-              caption={section.caption} />
           </InfoPane>
         ))}
       </Carousel>
@@ -49,4 +44,4 @@ const NewCarousel = ({ sectionData }) => {
   );
 };
 
-export default NewCarousel;
+export default MyCarousel;

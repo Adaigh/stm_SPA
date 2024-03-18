@@ -1,5 +1,20 @@
 .infopane {
+  margin: 40px;
+}
+
+.info-content {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.info-text {
+  max-width: 800px;
+  text-align: end;
+  font-size: 1.2rem;
+  text-align: start;
+}
+
+.info-list {
+  text-align: start;
 }
