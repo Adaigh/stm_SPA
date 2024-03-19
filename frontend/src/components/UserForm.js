@@ -1,6 +1,7 @@
 import './styles/UserFormStyle.css'
 import { useState } from "react"
 import { useUsersContext } from "../hooks/useUsersContext"
+import { useAuthContext } from "../hooks/useAuthContext"
 
 const UserForm = () => {
 
@@ -14,12 +15,19 @@ const UserForm = () => {
     const [vModel, setVModel] = useState('')
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
+    const {user} = useAuthContext()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
+        if(!user) {
+            setError('You must be logged in')
+            setEmptyFields([])
+            return
+        }
+
         // Create new User Object
-        let user = {
+        let newUser = {
             firstName,
             lastName,
             phoneNumbers: [phoneNumber],
@@ -28,12 +36,12 @@ const UserForm = () => {
         }
         
         // Capitalize names
-        user.firstName = user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1)
-        user.lastName = user.lastName.charAt(0).toUpperCase() + user.lastName.slice(1)
+        newUser.firstName = newUser.firstName.charAt(0).toUpperCase() + newUser.firstName.slice(1)
+        newUser.lastName = newUser.lastName.charAt(0).toUpperCase() + newUser.lastName.slice(1)
         
         // Check for vehicle details
         if(vYear && vMake && vModel){
-            user.vehicles.push({
+            newUser.vehicles.push({
                 vehicleYear: vYear,
                 vehicleMake: vMake,
                 vehicleModel: vModel
@@ -50,16 +58,19 @@ const UserForm = () => {
         // Fetch the new user details
         const response = await fetch('/api/users', {
             method: 'POST',
-            body: JSON.stringify(user),
+            body: JSON.stringify(newUser),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.webToken}`
             }
         })
         const json = await response.json()
 
         if(!response.ok) {
             setError(json.error)
-            setEmptyFields(json.emptyFields)
+            if(json.emptyFields){
+                setEmptyFields(json.emptyFields)
+            }
         }
         if(response.ok) {
             setFirstName('')
@@ -84,7 +95,7 @@ const UserForm = () => {
                 type="text"
                 onChange={(e) => setFirstName(e.target.value)}
                 value={firstName}
-                className={emptyFields.includes('firstName') ? 'error' : ''}
+                className={emptyFields && emptyFields.includes('firstName') ? 'error' : ''}
             />
 
             <label>Last Name: *</label>
@@ -92,7 +103,7 @@ const UserForm = () => {
                 type="text"
                 onChange={(e) => setLastName(e.target.value)}
                 value={lastName}
-                className={emptyFields.includes('lastName') ? 'error' : ''}
+                className={emptyFields && emptyFields.includes('lastName') ? 'error' : ''}
             />
 
             <label>Phone Number: *</label>

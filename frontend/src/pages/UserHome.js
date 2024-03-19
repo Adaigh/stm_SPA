@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 import { useUsersContext } from "../hooks/useUsersContext"
+import { useAuthContext } from "../hooks/useAuthContext"
+
 
 // Components
 import UserDetails from '../components/UserDetails'
@@ -8,18 +10,28 @@ import UserForm from "../components/UserForm"
 const UserHome = () => {
     const {users, dispatch} = useUsersContext()
     const [filter, setFilter] = useState('')
+    const {user} = useAuthContext()
 
     useEffect(() =>{
         const fetchUsers = async () => {
-            const response = await fetch('/api/users')
+            const response = await fetch('/api/users', {
+                headers: {
+                    'Authorization': `Bearer ${user.webToken}`
+                }
+            })
             const json = await response.json()
             if(response.ok) {
                 dispatch({type:'SET_USERS', payload: json})
             }
         }
+        console.log("Before fetch " + user)
 
-        fetchUsers()
-    }, [dispatch])
+        if(user) {
+            console.log("Fetching...")
+            fetchUsers()
+        }
+        console.log("After fetch " + user)
+    }, [dispatch, user])
 
     const callRefreshUsers = async (e) => {
         setFilter('')
@@ -50,13 +62,13 @@ const UserHome = () => {
                             refresh
                     </span>
                 </div>
-                {users && users.filter((user) => {
-                    return (user.firstName.toUpperCase().includes(filter.toUpperCase()) ||
-                    user.lastName.toUpperCase().includes(filter.toUpperCase()) || 
-                    user.phoneNumbers[0].toString().includes(filter) || 
-                    user.emailAddresses[0].toUpperCase().includes(filter.toUpperCase()))
-                }).map((user) => (
-                    <UserDetails key={user._id} user={user} />
+                {users && users.filter((userInfo) => {
+                    return (userInfo.firstName.toUpperCase().includes(filter.toUpperCase()) ||
+                    userInfo.lastName.toUpperCase().includes(filter.toUpperCase()) || 
+                    userInfo.phoneNumbers[0].toString().includes(filter) || 
+                    userInfo.emailAddresses[0].toUpperCase().includes(filter.toUpperCase()))
+                }).map((userInfo) => (
+                    <UserDetails key={userInfo._id} userInfo={userInfo} />
                 ))}
             </div>
             <div className="user-form">
