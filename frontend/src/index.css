@@ -86,3 +86,7 @@ header a:hover {
 .waiting {
   color: var(--error)
 }
+
+nav button, nav a {
+  margin-left: 20px;
+}
