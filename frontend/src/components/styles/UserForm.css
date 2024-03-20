@@ -1,5 +1,5 @@
 button {
-    width: 80px;
+    min-width: 80px;
     margin: 0 auto;
     padding: 5px;
     background: var(--primary);

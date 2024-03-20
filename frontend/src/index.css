@@ -1,11 +1,11 @@
 /* google font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
 
 * {
   box-sizing: border-box;
 }
 
-/* layout */
 :root {
   --primary: #1aac83;
   --error: #e7195a;
@@ -13,27 +13,54 @@
 }
 
 body {
-  background: var(--bg-primary);
+  background: linear-gradient(to right, rgba(180,180,0,1), rgba(150,0,0,1), rgba(0,0,0,1));
   margin: 0;
   font-family: "Poppins";
+  color: #ddd;
+  height: 100%;
+}
+
+a{
+  color: #ddd;
+}
+
+h1, h2, h3, h4 {
+  color: #fff;
+  font-family: "Black Ops One";
+}
+ 
+h2 {
+  font-size: 1.8rem;
+  font-weight: 400;
 }
 
 input, textarea, button {
   font-family: inherit
 }
 
-
 header {
-  background: #fff;
+  background: #333;
+  display: flex;
+  justify-content: space-between;
+  gap:50px;
 }
 
+header img{
+  max-width: 250px;
+}
+
+.pages {
+  margin: 0 auto;
+}
+
+/* 
 header .container {
   max-width: 1400px;
   margin: 0 auto;
   padding: 10px 20px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: baseline;
+  gap: 50px;
 }
 
 header a {
@@ -101,3 +128,4 @@ span.waiting {
 .refresh {
   border: 2px solid var(--bg-primary);
 }
+ */
