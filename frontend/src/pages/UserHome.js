@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useUsersContext } from "../hooks/useUsersContext"
 import { useAuthContext } from "../hooks/useAuthContext"
 
@@ -12,42 +12,36 @@ const UserHome = () => {
     const [filter, setFilter] = useState('')
     const {user} = useAuthContext()
 
-    useEffect(() =>{
-        const fetchUsers = async () => {
-            const response = await fetch('/api/users', {
-                headers: {
-                    'Authorization': `Bearer ${user.webToken}`
-                }
-            })
-            const json = await response.json()
-            if(response.ok) {
-                dispatch({type:'SET_USERS', payload: json})
+    // GET user data from server
+    const fetchUsers = useCallback(async () => {
+        const response = await fetch('/api/users', {
+            headers: {
+                'Authorization': `Bearer ${user.webToken}`
             }
-        }
-        console.log("Before fetch " + user)
-
-        if(user) {
-            console.log("Fetching...")
-            fetchUsers()
-        }
-        console.log("After fetch " + user)
-    }, [dispatch, user])
-
-    const callRefreshUsers = async (e) => {
-        setFilter('')
-        e.target.classList.toggle('waiting')
-        const response = await fetch('/api/users')
+        })
         const json = await response.json()
         if(response.ok) {
             dispatch({type:'SET_USERS', payload: json})
         }
-        e.target.classList.toggle('waiting')
+    }, [dispatch, user.webToken])
 
+    // Fetch user list on load 
+    useEffect(() =>{
+        fetchUsers()
+    }, [dispatch, user, fetchUsers])
+
+    // Refresh (fetch) user list
+    const callRefreshUsers = (e) => {
+        e.target.classList.toggle("waiting")
+        fetchUsers()
+        e.target.classList.toggle("waiting")
     }
 
     return (
         <div className="userHome">
             <div className="users">
+
+                {/* Header including search filter and buttons  */}
                 <div className="user-header">
                     <span className="user-title">Users</span> 
                     <input
@@ -58,10 +52,11 @@ const UserHome = () => {
                         placeholder="Search by Name, Phone, or Email"
                         size='50'
                     />
-                    <span className="material-symbols-outlined refresh" onClick={(e) => callRefreshUsers(e)}>
-                            refresh
-                    </span>
+                    <span className="material-symbols-outlined close" onClick={() => setFilter('')}>close</span>
+                    <span className="material-symbols-outlined refresh" onClick={(e) => callRefreshUsers(e)}>refresh</span>
                 </div>
+
+                {/* Filter and map users into userDetail components */}
                 {users && users.filter((userInfo) => {
                     return (userInfo.firstName.toUpperCase().includes(filter.toUpperCase()) ||
                     userInfo.lastName.toUpperCase().includes(filter.toUpperCase()) || 
@@ -70,9 +65,12 @@ const UserHome = () => {
                 }).map((userInfo) => (
                     <UserDetails key={userInfo._id} userInfo={userInfo} />
                 ))}
+
             </div>
+
+            {/* New User Information form */}
             <div className="user-form">
-            <div className="add-user-title">Add a New User:</div>
+                <div className="add-user-title">Add a New User:</div>
                 <UserForm />
             </div>
         </div>
