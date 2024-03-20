@@ -1,24 +1,44 @@
-.logo-link {
-    background: #000;
+header {
+    background: #333;
+    display: flex;
+    justify-content: space-between;
+    gap:50px;
 }
 
-.login {
-    margin-right: 5%;
-}
-
-.navigation {
+.links {
     display: flex;
     gap:50px;
     align-items: center;
     justify-content: space-between;
 }
 
-.navigation a {
+.links a {
     text-decoration: none;
     font-weight: 400;
     font-size: 1.2rem;
 }
 
-.navigation a:hover {
+.links a:hover {
     text-decoration: underline;
+}
+
+.logo-link {
+    background: #000;
+}
+
+.logo-link img{
+    max-width: 250px;
+}
+
+/* .login {
+    display: flex;
+    align-items: center;
+} */
+
+.logged-in button {
+    margin: 0 15px;
+}
+
+.login a {
+    margin-right: 15px;
 }

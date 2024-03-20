@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react"
 import { useUsersContext } from "../hooks/useUsersContext"
 import { useAuthContext } from "../hooks/useAuthContext"
-
+import './styles/UserHome.css'
 
 // Components
 import UserDetails from '../components/UserDetails'

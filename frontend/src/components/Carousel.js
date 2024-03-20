@@ -28,7 +28,7 @@ const MyCarousel = ({ sectionData }) => {
                 <div className='info-list'>
                 <ul>
                 {section.sectionList.map((listItem, index) => (
-                  <li>{listItem}</li>
+                  <li key={index}>{listItem}</li>
                 ))}
                 </ul>
               </div>

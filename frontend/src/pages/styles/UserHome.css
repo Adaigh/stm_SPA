@@ -1,0 +1,46 @@
+.users {
+    width: 60%;
+  }
+  
+  .userHome {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .user-header {
+    display: flex;
+    margin: 10px 0;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .user-title {
+    font-size: 1.5rem;
+    font-weight: 900;
+  }
+  
+  .add-user-title {
+    text-decoration: underline;
+    color: var(--primary);
+    font-size: 1.2rem;
+    font-weight: 900;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  span.waiting {
+    border: 2px solid var(--error);
+    border-radius: 10px;
+    color: var(--error);
+    background: #ffefef
+  }
+  
+  .refresh, .close {
+    cursor: pointer;
+    position: relative;
+    left: -45px;
+  }
+  
+  .refresh {
+    border: 2px solid rgba(0,0,0,0);
+  }

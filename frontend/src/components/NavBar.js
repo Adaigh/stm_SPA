@@ -15,23 +15,7 @@ const NavBar = () => {
 
     return (
         <header>
-            <div className="container">
-                <Link to="/">
-                    <h1>STM Home</h1>
-                </Link>
-                <nav>
-                    {user && (
-                        <div>
-                            <span>{user.email}</span>
-                            <button onClick={handleClick}>Log Out</button>
-                        </div>)}
-                    {!user && (
-                        <div>
-                            <Link to='/login'>Login</Link>
-                            <Link to='/selfsignup'>Signup</Link>
-                        </div>)}
-                </nav>
-            <div className="navigation">
+            <div className="links">
                 <div className="logo-link">
                     <Link to="/">
                         <PictureFrame
@@ -39,12 +23,22 @@ const NavBar = () => {
                             alt={'STM Tuning, Volkswagen and Audi performance garage and repair shop.'} /> 
                     </Link>
                 </div>
-                <Link to="/">Home</Link>
-                <Link to="/">Schedule</Link>
+                {user && user.access > 1 && <Link to="/users">
+                    Customers
+                </Link>}
             </div>
-            <div className="navigation login">
-                <Link to='/login'>Login</Link>
-                <Link to='/selfsignup'>Signup</Link>
+
+            <div className="links">
+                {user && (
+                    <div className="logged-in">
+                        <span>{user.email}</span>
+                        <button onClick={handleClick}>Log Out</button>
+                    </div>)}
+                {!user && (
+                    <div className="login">
+                        <Link to='/login'>Login</Link>
+                        <Link to='/selfsignup'>Signup</Link>
+                    </div>)}
             </div>
         </header>
     )

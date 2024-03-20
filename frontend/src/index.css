@@ -17,7 +17,6 @@ body {
   margin: 0;
   font-family: "Poppins";
   color: #ddd;
-  height: 100%;
 }
 
 a{
@@ -38,20 +37,6 @@ input, textarea, button {
   font-family: inherit
 }
 
-header {
-  background: #333;
-  display: flex;
-  justify-content: space-between;
-  gap:50px;
-}
-
-header img{
-  max-width: 250px;
-}
-
-.pages {
-  margin: 0 auto;
-}
 
 /* 
 header .container {
