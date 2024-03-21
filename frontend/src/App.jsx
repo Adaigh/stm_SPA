@@ -2,11 +2,12 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 import { useAuthContext } from './hooks/useAuthContext'
 
 // Pages and Components
-import STMHome from './pages/STMHome.js'
-import UserHome from './pages/UserHome.js'
-import NavBar from './components/NavBar.js';
-import Login from './pages/Login.js';
-import SelfSignup from './pages/SelfSignup.js';
+import STMHome from './pages/STMHome'
+import UserHome from './pages/UserHome'
+import NavBar from './components/NavBar'
+import Login from './pages/Login'
+import SelfSignup from './pages/SelfSignup'
+import Schedule from './pages/Schedule'
 
 
 function App() {
@@ -24,6 +25,10 @@ function App() {
               <Route
                 path="/"
                 element={<STMHome />}
+                />
+              <Route
+                path="/schedule"
+                element={<Schedule/>}
                 />
               <Route
                 path="/users"

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import "react-responsive-carousel/lib/styles/carousel.min.css"
 import { Carousel } from 'react-responsive-carousel'
-import InfoPane from './InfoPane'
-import './styles/Carousel.css'
 import { sectionData } from '../pages/resources/CarouselData'
+import InfoPane from './InfoPane'
+import "react-responsive-carousel/lib/styles/carousel.min.css"
+import './styles/Carousel.css'
 
 const MyCarousel = () => {
   const [selected, setSelected] = useState(0);

@@ -1,0 +1,12 @@
+.calendar {
+    background: var(--bg-dark);
+    background: rgba(0,0,0,0.8)
+}
+
+.calendar h2 {
+    text-align: center;
+}
+
+.react-calendar__tile {
+    width:15px;
+}

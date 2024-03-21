@@ -1,6 +1,6 @@
-import AboutPane from '../components/AboutPane.js'
-import MyCarousel from '../components/Carousel.js';
-import ContactInfo from '../components/ContactInfo.js';
+import AboutPane from '../components/AboutPane'
+import MyCarousel from '../components/Carousel'
+import ContactInfo from '../components/ContactInfo'
 import './styles/STMHome.css'
 
 const STMHome = () => (

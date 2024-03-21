@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
 import { useLogout } from '../hooks/useLogout'
 import { useAuthContext } from "../hooks/useAuthContext"
+import PictureFrame from './PictureFrame'
 import './styles/NavBar.css'
-import PictureFrame from '../components/PictureFrame.js';
 
 const NavBar = () => {
 
@@ -23,6 +23,7 @@ const NavBar = () => {
                             alt={'STM Tuning, Volkswagen and Audi performance garage and repair shop.'} /> 
                     </Link>
                 </div>
+                <Link to="/schedule">Schedule</Link>
                 {user && user.access > 1 && <Link to="/users">
                     Customers
                 </Link>}
