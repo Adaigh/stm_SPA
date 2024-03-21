@@ -1,0 +1,9 @@
+.aboutpane {
+  background: url(../../../public/images/gears2.jpg);
+  background-size: cover;
+  padding: 2%;
+}
+
+.aboutpane p {
+  padding: 0 20px;
+}

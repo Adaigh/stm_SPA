@@ -3,8 +3,8 @@ const UserAccount = require('../models/userAccountModel')
 const jwt = require('jsonwebtoken')
 
 // JWT creator
-const createToken = (_id, access) => {
-    return jwt.sign({_id, access}, process.env.JWT_SECRET, {expiresIn: '3d'})
+const createToken = (_id) => {
+    return jwt.sign({_id}, process.env.JWT_SECRET, {expiresIn: '1d'})
 }
 
 
@@ -16,25 +16,39 @@ const loginUserAccount = async (req, res) => {
     try {
         const userAccount = await UserAccount.login(email, password)
 
-        const webToken = createToken(userAccount._id, userAccount.access)
-
-        res.status(200).json({email, webToken})
+        const webToken = createToken(userAccount._id)
+        const access = userAccount.access
+        res.status(200).json({email, access, webToken})
     } catch (error) {
         res.status(400).json({error: error.message})
     }
 }
 
-// Signup
+// Self Signup
 const signupUserAccount = async (req, res) =>  {
 
-    const { email, password, access} = req.body
+    const {email, password} = req.body
+
+    try {
+        const userAccount = await UserAccount.signup(email, password, access=0)
+
+        const webToken = createToken(userAccount._id)
+
+        res.status(200).json({email, access: 0, webToken})
+    } catch (error){
+        res.status(400).json({error: error.message})
+    }
+}
+
+// Signup
+const createUserAccount = async (req, res) =>  {
+
+    const {email, password, access} = req.body
 
     try {
         const userAccount = await UserAccount.signup(email, password, access)
-
-        const webToken = createToken(userAccount._id, userAccount.access)
-
-        res.status(200).json({email, userAccount, webToken})
+        const new_id = userAccount._id
+        res.status(200).json({new_id, email, access})
     } catch (error){
         res.status(400).json({error: error.message})
     }
@@ -62,4 +76,4 @@ const findUserDetails = async (req, res) => {
     }
 }
 
-module.exports = { loginUserAccount, signupUserAccount, findUserDetails}
+module.exports = {loginUserAccount, signupUserAccount, findUserDetails, createUserAccount}

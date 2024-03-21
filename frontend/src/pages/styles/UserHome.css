@@ -1,0 +1,40 @@
+.users {
+    width: 60%;
+  }
+  
+  .userHome {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .userHome h2{
+    font-weight: 600;
+  }
+  
+  .user-header {
+    display: flex;
+    margin: 10px 0;
+    align-items: center;
+    gap: 15px;
+  }
+    
+  .add-user-title {
+    padding: 20px 0;
+  }
+  
+  span.waiting {
+    border: 2px solid var(--error);
+    border-radius: 10px;
+    color: var(--error);
+    background: #ffefef
+  }
+  
+  .refresh, .close {
+    cursor: pointer;
+    position: relative;
+    left: -45px;
+  }
+  
+  .refresh {
+    border: 2px solid rgba(0,0,0,0);
+  }

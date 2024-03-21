@@ -1,0 +1,18 @@
+.contact {
+    background: rgba(0,0,0,0.8);
+    padding: 5px;
+    width: 100%;
+}
+
+.contact ul {
+    list-style: none;
+}
+
+.contact li {
+    color: #aaa;
+}
+
+.contact span {
+    color: #DFF7FA;
+    font-weight: 500;
+}

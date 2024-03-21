@@ -1,28 +1,14 @@
 import AboutPane from '../components/AboutPane.js'
-import NewCarousel from '../components/Carousel_two.js';
-
-const sectionData = [
-    {
-        sectionTitle: 'Performance:',
-        sectionContent: 'Our team is passionate about performance... (rest of content)',
-        src: './images/engine1.jpg',
-        alt: 'Built engine',
-        caption: 'Freshly built 2.0'
-    },
-    {
-        sectionTitle: 'Repairs:',
-        sectionContent: 'Putting your vehicle through its paces... (rest of content)',
-        src: './images/dave1.jpg',
-        alt: 'Portrait - Dave K.',
-        caption: 'Dave K. - Owner, Lead Mechanic'
-    }
-  ]
+import MyCarousel from '../components/Carousel.js';
+import ContactInfo from '../components/ContactInfo.js';
+import './styles/STMHome.css'
 
 const STMHome = () => (
-    <>
-      <AboutPane />
-        <NewCarousel sectionData={sectionData}/>
-    </> 
+    <div className='stm-home'>
+        <AboutPane />
+        <MyCarousel/>
+        <ContactInfo/>
+    </div> 
   );
 
   export default STMHome

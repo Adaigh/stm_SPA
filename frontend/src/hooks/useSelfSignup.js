@@ -13,7 +13,7 @@ export const useSelfSignup = () => {
         const response = await fetch('/api/account/signup', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({email, password, access: 0})            
+            body: JSON.stringify({email, password})            
         })
         const json = await response.json()
 

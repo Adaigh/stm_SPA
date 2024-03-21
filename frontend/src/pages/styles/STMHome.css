@@ -1,0 +1,12 @@
+.stm-home{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100vh - 150px);
+}
+
+.stm-home h2 {
+    font-family: 'Black Ops One';
+    font-weight: 400;
+}
+

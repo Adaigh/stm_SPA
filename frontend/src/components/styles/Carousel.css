@@ -1,0 +1,25 @@
+.carousel-container {
+  background-image: url('../../../public/images/gears3.jpg');
+  background-size: cover;
+  margin: auto 0;
+}
+
+.carousel-container h2 {
+  font-size: 3rem;
+}
+
+.carousel-nav button{
+    border: unset;
+    background: unset;
+    color: #000;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+.carousel-nav li{
+    display: inline;
+}
+
+.control-dots {
+  position: relative;
+}

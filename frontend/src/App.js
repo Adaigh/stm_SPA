@@ -1,23 +1,24 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
+import { useAuthContext } from './hooks/useAuthContext'
 
 // Pages and Components
 import STMHome from './pages/STMHome.js'
 import UserHome from './pages/UserHome.js'
-import NavBar from './components/NavBar.js'
+import NavBar from './components/NavBar.js';
 import Login from './pages/Login.js';
 import SelfSignup from './pages/SelfSignup.js';
 
 
 function App() {
 
-  
+  const {user} = useAuthContext()
 
   return (
     <div className="App">
       
       <BrowserRouter>
 
-      <NavBar />
+      <NavBar/>
         <div className="pages">
         <Routes>
               <Route
@@ -26,27 +27,19 @@ function App() {
                 />
               <Route
                 path="/users"
-                element={<UserHome />}
+                element={user ? <UserHome /> : <Navigate to="/login"/>}
                 />
               <Route
                 path="/login"
-                element={<Login />}
+                element={!user ? <Login /> : <Navigate to="/"/>}
                 />
               <Route
                 path="/selfsignup"
-                element={<SelfSignup />}
+                element={!user ? <SelfSignup /> : <Navigate to="/"/>}
                 />
             </Routes>
         </div>      
       </BrowserRouter>
-{/* 
-      <NewCarousel>
-        <div className='infopane' style={{ background: 'red', height: '200px' }}>Slide 1</div>
-        <div className='infopane' style={{ background: 'blue', height: '200px' }}>Slide 2</div>
-        <div className='infopane' style={{ background: 'green', height: '200px' }}>Slide 3</div>
-      </NewCarousel> */}
-      
-
     </div>
   );
 }

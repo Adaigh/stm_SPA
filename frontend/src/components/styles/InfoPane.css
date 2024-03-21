@@ -1,0 +1,36 @@
+.infopane {
+  margin:  0 15vw;
+  background: none;
+  background: rgba(255,0,0,0.2);
+  transform: skewX(-15deg);
+  translate: -1%;
+  height: 100%;
+}
+
+.infochildren {
+  opacity: 100;
+  transform: skewX(15deg);
+  translate: 5%;
+  padding: 50px 0;
+}
+
+.infochildren h2 {
+  margin: 0;
+}
+
+.info-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info-text {
+  max-width: 800px;
+  text-align: end;
+  font-size: 1.2rem;
+  text-align: start;
+}
+
+.info-list {
+  text-align: start;
+}

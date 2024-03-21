@@ -1,16 +1,24 @@
-import './styles/UserDetailStyle.css'
+import './styles/UserDetail.css'
 import { useUsersContext } from '../hooks/useUsersContext'
+import { useAuthContext } from "../hooks/useAuthContext"
 
-const UserDetails = ({user}) => {
+const UserDetails = ({userInfo}) => {
     const {dispatch} = useUsersContext()
+    const {user} = useAuthContext()
 
-    const callDeleteUser = async () => {
+    const handleSubmit = async () => {
+        if(!user){
+            return
+        }
 
-        if(!window.confirm("Are you sure you want to delete user " + user.firstName + " " + user.lastName + "?")){
+        if(!window.confirm("Are you sure you want to delete user " + userInfo.firstName + " " + userInfo.lastName + "?")){
             return;
         }
-        const response = await fetch('/api/users/' + user._id, {
-            method: 'DELETE'
+        const response = await fetch('/api/users/' + userInfo._id, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${user.webToken}`
+            }
         })
         const json = await response.json()
 
@@ -22,28 +30,28 @@ const UserDetails = ({user}) => {
     return (
         <div className="user-details">
             <div className='user-details-header'>
-                <h4>{user.lastName}, {user.firstName}</h4>
-                <span className='material-symbols-outlined delete' onClick={callDeleteUser}>delete</span>
+                <h3>{userInfo.lastName}, {userInfo.firstName}</h3>
+                <span className='material-symbols-outlined delete' onClick={handleSubmit}>delete</span>
             </div>
             <div className='info-columns'>
                 {/* Listing phone number */}
                 <ul>
                     <li><u>Phone Numbers</u>:&emsp;</li>
-                    {user.phoneNumbers.map((number, index) => {
+                    {userInfo.phoneNumbers.map((number, index) => {
                         return <li key={index}>{number.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')}</li>
                     })}
                 </ul>
                 <ul>
                     <li><u>Email Addresses</u>:&emsp;</li>
                     {/* List available emails */}
-                    {user.emailAddresses.map((email, index) => {
+                    {userInfo.emailAddresses.map((email, index) => {
                         return <li key={index}>{email}</li>
                     })}
                 </ul>
                 <ul>
                     {/* List vehicles */}
                     <li><u>Vehicles</u>:&emsp;</li>
-                    {user.vehicles.map((vehicle, index) => {
+                    {userInfo.vehicles.map((vehicle, index) => {
                         return  <li key={index}>
                                     {vehicle.vehicleYear}&nbsp;
                                     {vehicle.vehicleMake}&nbsp;

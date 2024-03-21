@@ -6,8 +6,11 @@ const {
     deleteUser,
     updateUser
 } = require('../controllers/userController')
+const requireAuth = require('../middleware/requireAuth')
 
 const router = express.Router()
+
+router.use(requireAuth)
 
 // GET all users
 router.get('/', getUsers)

@@ -1,27 +1,76 @@
 /* google font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
 
-/* layout */
+* {
+  box-sizing: border-box;
+}
+
 :root {
-  --primary: #1aac83;
+  --primary: #DFF7FA;
   --error: #e7195a;
+  --bg-primary: #f1f1f1;
+  --bg-dark: #222;
+  --button-grn: #1aac83;
 }
 
 body {
-  background: #f1f1f1;
+  background: linear-gradient(to right, rgba(180,180,0,1), rgba(150,0,0,1), rgba(0,0,0,1));
   margin: 0;
   font-family: "Poppins";
+  color: #ddd;
+  min-height: 100vh;
+}
+
+a{
+  color: #ddd;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--primary);
 }
 
 input, textarea, button {
-  font-family: inherit
+  font-family: inherit;
+  padding: 5px;
+}
+
+input {
+  border: 0;
+  border-radius: 5px;
+}
+
+input.error {
+  border: 2px solid var(--error)
+}
+
+button {
+  background: var(--bg-dark);
+  color:#fff;
+  border: 2px solid var(--bg-primary);
+  border-radius: 8px;
+  font-weight: 600;
+  margin: 0 auto;
+  min-width: 80px;
+}
+
+select {
+  padding: 10px 5px;
+  border: 0;
+  border-radius: 5px;
+}
+
+div.error {
+  border: 2px solid var(--error);
+  border-radius: 10px;
+  padding: 10px;
+  color: var(--error);
+  background: #ffefef
 }
 
 
-header {
-  background: #fff;
-}
 
+/* 
 header .container {
   max-width: 1400px;
   margin: 0 auto;
@@ -57,17 +106,14 @@ header a:hover {
 
 .user-header {
   display: flex;
-  margin: 0;
+  margin: 10px 0;
   align-items: center;
+  gap: 15px;
 }
 
 .user-title {
   font-size: 1.5rem;
   font-weight: 900;
-}
-
-.user-filter {
-  margin:20px;
 }
 
 .add-user-title {
@@ -79,17 +125,24 @@ header a:hover {
   padding: 20px;
 }
 
-.refresh {
+nav button, nav a {
+  margin-left: 20px;
+}
+
+span.waiting {
+  border: 2px solid var(--error);
+  border-radius: 10px;
+  color: var(--error);
+  background: #ffefef
+}
+
+.refresh, .close {
   cursor: pointer;
+  position: relative;
+  left: -45px;
 }
 
-.waiting {
-  color: var(--error)
+.refresh {
+  border: 2px solid var(--bg-primary);
 }
-
-.infopane {
-  margin: 50px auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+ */

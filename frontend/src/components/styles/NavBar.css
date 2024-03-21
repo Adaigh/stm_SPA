@@ -1,0 +1,40 @@
+header {
+    background: #333;
+    display: flex;
+    justify-content: space-between;
+    gap:50px;
+    height: 150px;
+}
+
+.links {
+    display: flex;
+    gap:50px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.links a {
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 1.2rem;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+.logo-link {
+    background: #000;
+}
+
+.logo-link img{
+    height: 100px;
+}
+
+.logged-in button {
+    margin: 0 15px;
+}
+
+.login a {
+    margin-right: 15px;
+}

@@ -1,32 +1,44 @@
-import React, { useState } from 'react';
-import "react-responsive-carousel/lib/styles/carousel.min.css"; 
-import { Carousel } from 'react-responsive-carousel';
+import React, { useState } from 'react'
+import "react-responsive-carousel/lib/styles/carousel.min.css"
+import { Carousel } from 'react-responsive-carousel'
+import InfoPane from './InfoPane'
+import './styles/Carousel.css'
+import { sectionData } from '../pages/resources/CarouselData'
 
-const MyCarousel = ({ children }) => {
+const MyCarousel = () => {
   const [selected, setSelected] = useState(0);
-
-  const handleNext = () => {
-    setSelected(selected + 1 >= children.length ? 0 : selected + 1);
-  };
-
-  const handlePrev = () => {
-    setSelected(selected - 1 < 0 ? children.length - 1 : selected - 1);
-  };
-
+  
   return (
-    <div className='myCarousel'>
+    <div className='carousel-container'>
+           
       <Carousel 
         selectedItem={selected} 
         showArrows={true}
         showThumbs={false}
+        showStatus={false}
         onChange={setSelected}
         onClickItem={setSelected}
         onClickThumb={setSelected} 
       >
-        {children}
+        {sectionData.map((section, index) => (
+          <InfoPane key={index} bgurl={section.bgurl}>
+            <h2>{section.sectionTitle}</h2>
+            <div className='info-content'>
+              <div className='info-text'>
+                <p>{section.sectionContent}</p>
+                <ul className='info-list'>
+                {section.sectionList.map((listItem, index) => (
+                  <li key={index}>{listItem}</li>
+                ))}
+                </ul>
+              </div>
+              
+            </div>
+          </InfoPane>
+        ))}
       </Carousel>
-      <button onClick={handlePrev}>Prev</button>
-      <button onClick={handleNext}>Next</button>
+
+      
     </div>
   );
 };
