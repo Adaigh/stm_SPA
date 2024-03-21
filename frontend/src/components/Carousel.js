@@ -3,8 +3,9 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"
 import { Carousel } from 'react-responsive-carousel'
 import InfoPane from './InfoPane'
 import './styles/Carousel.css'
+import { sectionData } from '../pages/resources/CarouselData'
 
-const MyCarousel = ({ sectionData }) => {
+const MyCarousel = () => {
   const [selected, setSelected] = useState(0);
   
   return (
