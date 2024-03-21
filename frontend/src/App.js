@@ -7,7 +7,6 @@ import UserHome from './pages/UserHome.js'
 import NavBar from './components/NavBar.js';
 import Login from './pages/Login.js';
 import SelfSignup from './pages/SelfSignup.js';
-import ContactInfo from './components/ContactInfo.js';
 
 function App() {
 
@@ -40,8 +39,6 @@ function App() {
             </Routes>
         </div>      
       </BrowserRouter>
-      <ContactInfo/>
-
     </div>
   );
 }

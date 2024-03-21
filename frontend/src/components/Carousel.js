@@ -9,7 +9,7 @@ const MyCarousel = () => {
   const [selected, setSelected] = useState(0);
   
   return (
-    <div className='carousel-container' style={{backgroundImage: 'url(/images/gears3.jpg', backgroundSize: 'cover'}}>
+    <div className='carousel-container'>
            
       <Carousel 
         selectedItem={selected} 
@@ -26,13 +26,11 @@ const MyCarousel = () => {
             <div className='info-content'>
               <div className='info-text'>
                 <p>{section.sectionContent}</p>
-                <div className='info-list'>
-                <ul>
+                <ul className='info-list'>
                 {section.sectionList.map((listItem, index) => (
                   <li key={index}>{listItem}</li>
                 ))}
                 </ul>
-              </div>
               </div>
               
             </div>

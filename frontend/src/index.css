@@ -7,9 +7,11 @@
 }
 
 :root {
-  --primary: #1aac83;
+  --primary: #DFF7FA;
   --error: #e7195a;
   --bg-primary: #f1f1f1;
+  --bg-dark: #222;
+  --button-grn: #1aac83;
 }
 
 body {
@@ -17,25 +19,55 @@ body {
   margin: 0;
   font-family: "Poppins";
   color: #ddd;
+  min-height: 100vh;
 }
 
 a{
   color: #ddd;
 }
 
-h1, h2, h3, h4 {
-  color: #fff;
-  font-family: "Black Ops One";
-}
- 
-h2 {
-  font-size: 1.8rem;
-  font-weight: 400;
+h1, h2, h3, h4, h5, h6 {
+  color: var(--primary);
 }
 
 input, textarea, button {
-  font-family: inherit
+  font-family: inherit;
+  padding: 5px;
 }
+
+input {
+  border: 0;
+  border-radius: 5px;
+}
+
+input.error {
+  border: 2px solid var(--error)
+}
+
+button {
+  background: var(--bg-dark);
+  color:#fff;
+  border: 2px solid var(--bg-primary);
+  border-radius: 8px;
+  font-weight: 600;
+  margin: 0 auto;
+  min-width: 80px;
+}
+
+select {
+  padding: 10px 5px;
+  border: 0;
+  border-radius: 5px;
+}
+
+div.error {
+  border: 2px solid var(--error);
+  border-radius: 10px;
+  padding: 10px;
+  color: var(--error);
+  background: #ffefef
+}
+
 
 
 /* 

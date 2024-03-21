@@ -3,6 +3,7 @@ header {
     display: flex;
     justify-content: space-between;
     gap:50px;
+    height: 150px;
 }
 
 .links {
@@ -27,13 +28,8 @@ header {
 }
 
 .logo-link img{
-    max-width: 250px;
+    height: 100px;
 }
-
-/* .login {
-    display: flex;
-    align-items: center;
-} */
 
 .logged-in button {
     margin: 0 15px;

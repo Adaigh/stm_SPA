@@ -1,7 +1,6 @@
-.user-details h4 {
+.user-details h3 {
     margin: 0;
-    color: var(--primary);
-    font-size: 1.2rem;
+    font-weight: 500;
 }
 
 .user-details ul {

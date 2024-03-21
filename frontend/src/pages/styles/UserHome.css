@@ -6,6 +6,10 @@
     display: flex;
     justify-content: space-around;
   }
+
+  .userHome h2{
+    font-weight: 600;
+  }
   
   .user-header {
     display: flex;
@@ -13,19 +17,9 @@
     align-items: center;
     gap: 15px;
   }
-  
-  .user-title {
-    font-size: 1.5rem;
-    font-weight: 900;
-  }
-  
+    
   .add-user-title {
-    text-decoration: underline;
-    color: var(--primary);
-    font-size: 1.2rem;
-    font-weight: 900;
-    text-align: center;
-    padding: 20px;
+    padding: 20px 0;
   }
   
   span.waiting {

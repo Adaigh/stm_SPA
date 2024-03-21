@@ -1,5 +1,21 @@
 .infopane {
-  margin: 40px;
+  margin:  0 15vw;
+  background: none;
+  background: rgba(255,0,0,0.2);
+  transform: skewX(-15deg);
+  translate: -1%;
+  height: 100%;
+}
+
+.infochildren {
+  opacity: 100;
+  transform: skewX(15deg);
+  translate: 5%;
+  padding: 40px 0;
+}
+
+.infochildren h2 {
+  margin: 0;
 }
 
 .info-content {

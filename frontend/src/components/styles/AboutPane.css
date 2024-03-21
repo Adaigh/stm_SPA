@@ -1,8 +1,8 @@
 .aboutpane {
-  background: rgba(0,0,0,0.8);
+  background: url(../../../public/images/gears2.jpg);
   padding: 2%;
 }
 
 .aboutpane p {
-  padding: 0 20px 0 20px;
+  padding: 0 20px;
 }

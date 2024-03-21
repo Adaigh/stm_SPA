@@ -43,7 +43,7 @@ const UserHome = () => {
 
                 {/* Header including search filter and buttons  */}
                 <div className="user-header">
-                    <span className="user-title">Users</span> 
+                    <h2 className="user-title">Users</h2> 
                     <input
                         className="user-filter"
                         type="text"
@@ -70,7 +70,7 @@ const UserHome = () => {
 
             {/* New User Information form */}
             <div className="user-form">
-                <div className="add-user-title">Add a New User:</div>
+                <h2 className="add-user-title">Add a New User:</h2>
                 <UserForm />
             </div>
         </div>

@@ -1,6 +1,11 @@
 .carousel-container {
-  background: rgba(0,0,0,0.8);
-  margin-top: 50px;
+  background-image: url('../../../public/images/gears3.jpg');
+  background-size: 'cover';
+  margin: auto 0;
+}
+
+.carousel-container h2 {
+  font-size: 3rem;
 }
 
 .carousel-nav button{

@@ -30,7 +30,7 @@ const UserDetails = ({userInfo}) => {
     return (
         <div className="user-details">
             <div className='user-details-header'>
-                <h4>{userInfo.lastName}, {userInfo.firstName}</h4>
+                <h3>{userInfo.lastName}, {userInfo.firstName}</h3>
                 <span className='material-symbols-outlined delete' onClick={handleSubmit}>delete</span>
             </div>
             <div className='info-columns'>
