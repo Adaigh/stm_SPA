@@ -32,6 +32,7 @@ const UserHome = () => {
 
     // Refresh (fetch) user list
     const callRefreshUsers = (e) => {
+        setFilter('')
         e.target.classList.toggle("waiting")
         fetchUsers()
         e.target.classList.toggle("waiting")
@@ -39,6 +40,13 @@ const UserHome = () => {
 
     return (
         <div className="userHome">
+
+            {/* New User Information form */}
+            <div className="user-form">
+                <h2 className="add-user-title">Add a New User:</h2>
+                <UserForm />
+            </div>
+
             <div className="users">
 
                 {/* Header including search filter and buttons  */}
@@ -68,11 +76,7 @@ const UserHome = () => {
 
             </div>
 
-            {/* New User Information form */}
-            <div className="user-form">
-                <h2 className="add-user-title">Add a New User:</h2>
-                <UserForm />
-            </div>
+            
         </div>
     )
 }

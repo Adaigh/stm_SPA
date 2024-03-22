@@ -1,12 +1,47 @@
 .calendar {
     background: var(--bg-dark);
-    background: rgba(0,0,0,0.8)
+    background: rgba(0,0,0,0.8);
+    margin: 5vh 20vw;
+    padding: 20px;
+    border-radius: 20px;
 }
 
 .calendar h2 {
     text-align: center;
+    margin-top: 0;
 }
 
-.react-calendar__tile {
-    width:15px;
+.react-calendar__navigation {
+    text-align: center;
+    margin: 10px 0;
+    justify-content: baseline;
+}
+
+.react-calendar__navigation__label {
+    font-size: 1.5rem;
+}
+
+.react-calendar__month-view__weekdays__weekday {
+    text-align: center;
+}
+
+.react-calendar__navigation__prev2-button,
+.react-calendar__navigation__next2-button {
+    visibility: hidden;
+}
+
+
+.weekend, .weekday{
+    display: block;
+    height: 40px;
+    width: 40px;
+    border: none;
+}
+
+.weekend{
+    background: #888;
+}
+
+.weekday {
+    background: var(--bg-primary)
 }

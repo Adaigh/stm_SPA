@@ -9,13 +9,15 @@
 :root {
   --primary: #DFF7FA;
   --error: #e7195a;
-  --bg-primary: #f1f1f1;
+  --bg-primary: #0039a6;
   --bg-dark: #222;
+  --button-border: #f1f1f1;
   --button-grn: #1aac83;
 }
 
 body {
-  background: linear-gradient(to right, rgba(180,180,0,1), rgba(150,0,0,1), rgba(0,0,0,1));
+  background: var(--bg-primary);
+  background: linear-gradient(to right, #0039a6, #eee);
   margin: 0;
   font-family: "Poppins";
   color: #ddd;
@@ -47,7 +49,7 @@ input.error {
 button {
   background: var(--bg-dark);
   color:#fff;
-  border: 2px solid var(--bg-primary);
+  border: 2px solid var(--button-border);
   border-radius: 8px;
   font-weight: 600;
   min-width: 80px;

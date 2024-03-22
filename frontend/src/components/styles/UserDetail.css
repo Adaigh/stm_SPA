@@ -15,6 +15,7 @@
 .user-details {
     margin-bottom: 10px;
     padding: 0 20px 10px 0;
+    background: var(--bg-dark);
     background: rgba(0,0,0,0.8);
     border: 1px solid darkgray;
     border-radius: 10px;
