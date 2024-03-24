@@ -1,20 +1,35 @@
 .calendar {
     background: var(--bg-dark);
     background: rgba(0,0,0,0.8);
-    margin: 5vh 20vw;
-    padding: 20px;
+    background: url(../../../public/images/interior.jpg);
+    background-size: cover;
+    background-position: center;
+    margin: 5vh auto;
+    max-width: 1200px;
+    padding: 50px;
     border-radius: 20px;
 }
 
 .calendar h2 {
     text-align: center;
-    margin-top: 0;
+    font-size: 3rem;
+    margin: 10px 30px;
+}
+
+.calendar-nav button {
+    font-size: 3rem;
 }
 
 .react-calendar__navigation {
     text-align: center;
     margin: 10px 0;
-    justify-content: baseline;
+    justify-content: center;
+    display: flex;
+    gap: 10vw;
+}
+
+.react-calendar__navigation h2 {
+    font-size: 1.5rem;
 }
 
 .react-calendar__navigation__label {
@@ -25,23 +40,32 @@
     text-align: center;
 }
 
+.react-calendar__navigation__label,
 .react-calendar__navigation__prev2-button,
 .react-calendar__navigation__next2-button {
-    visibility: hidden;
+    display: none;
 }
 
-
-.weekend, .weekday{
+.weekend, .weekday, .past{
     display: block;
     height: 40px;
     width: 40px;
+    border-radius: 0;
+}
+
+.weekend, .past{
+    background: #888;
     border: none;
 }
 
-.weekend{
-    background: #888;
+button.weekend, button.past {
+    cursor: default !important;
 }
 
 .weekday {
     background: var(--bg-primary)
+}
+
+.selectedDay {
+    border: 4px solid greenyellow;
 }

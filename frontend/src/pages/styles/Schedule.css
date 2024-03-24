@@ -1,6 +1,29 @@
-.calendar-container {
+.schedule-container {
     height: calc(100vh - 150px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.schedule-container h2 {
+    font-family: 'Black Ops One';
+    font-weight: 400;
+}
+
+.schedule-container button{
+    cursor: pointer;
+}
+
+.appointment-request {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.appointment-request h3 {
+    margin: 5px;
+    font-weight: 500;
+}
+
+.appointment-request button {
+    padding: 10px;
 }
