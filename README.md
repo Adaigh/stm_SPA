@@ -23,4 +23,4 @@ For this project I am reworking the company website I made for STM Tuning to pro
    - Navigate to /frontend/: ```cd frontend```
    - Install dependencies ```npm install```
    - Run frontend dev ```npm start```
-   - Frontend is served at ```localhost:300```
+   - Frontend is served at ```localhost:3000```
