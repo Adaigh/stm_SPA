@@ -1,6 +1,6 @@
 import Calendar from 'react-calendar';
 import './styles/CalendarDisplay.css'
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 function CalendarDisplay({today,
                           setSelectedDate,
@@ -8,7 +8,7 @@ function CalendarDisplay({today,
 
     const [prevDayPicked, setPrevDayPicked] = useState(null)
     const [currentDate, setCurrentDate ] = useState(today)
-    const endDate = new Date(today).setMonth(today.getMonth+3)
+    const endDate = useMemo(() => new Date(today.getFullYear(), today.getMonth()+3, today.getDate()))
 
     const handleDaySelect = (value, event) => {
       console.log(value)
@@ -35,7 +35,7 @@ function CalendarDisplay({today,
             showNavigation={true}
             calendarType="gregory"
             view="month"
-            tileDisabled={({date}) => (date.getDay() === 0|| date.getDay() === 6)}
+            // tileDisabled={({date}) => (date.getDay() === 0|| date.getDay() === 6)}
             tileClassName={({date}) => {
               if(date.getDay() === 0|| date.getDay() === 6) return 'weekend'
               if(date < today) return 'past'
