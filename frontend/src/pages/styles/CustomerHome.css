@@ -1,19 +1,19 @@
-.users {
+.customers {
   width: 60%;
 }
 
-.userHome {
+.customerHome {
   display: flex;
   justify-content: center;
   gap: 5vw;
   margin: 5vh auto;
 }
 
-.userHome h2{
+.customerHome h2{
   font-weight: 600;
 }
 
-.user-header {
+.customer-header {
   display: flex;
   align-items: center;
   gap: 15px;

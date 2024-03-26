@@ -3,7 +3,7 @@ import { useAuthContext } from './hooks/useAuthContext'
 
 // Pages and Components
 import STMHome from './pages/STMHome'
-import UserHome from './pages/UserHome'
+import CustomerHome from './pages/CustomerHome'
 import NavBar from './components/NavBar'
 import Login from './pages/Login'
 import SelfSignup from './pages/SelfSignup'
@@ -31,8 +31,8 @@ function App() {
                 element={<Schedule/>}
                 />
               <Route
-                path="/users"
-                element={user ? <UserHome /> : <Navigate to="/login"/>}
+                path="/customers"
+                element={user ? <CustomerHome /> : <Navigate to="/login"/>}
                 />
               <Route
                 path="/login"

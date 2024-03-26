@@ -24,7 +24,7 @@ const NavBar = () => {
                     </Link>
                 </div>
                 <Link to="/schedule">Schedule</Link>
-                {user && user.access > 1 && <Link to="/users">
+                {user && user.access > 1 && <Link to="/customers">
                     Customers
                 </Link>}
             </div>

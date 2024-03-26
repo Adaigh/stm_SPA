@@ -1,11 +1,11 @@
-import './styles/UserForm.css'
+import './styles/CustomerForm.css'
 import { useState } from "react"
-import { useUsersContext } from "../hooks/useUsersContext"
+import { useCustomersContext } from "../hooks/useCustomersContext"
 import { useAuthContext } from "../hooks/useAuthContext"
 
-const UserForm = () => {
+const CustomerForm = () => {
 
-    const {dispatch} = useUsersContext()
+    const {dispatch} = useCustomersContext()
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [phoneNumber, setPhoneNumber] = useState('')
@@ -27,7 +27,7 @@ const UserForm = () => {
         }
 
         // Create new User Object
-        let newUser = {
+        let newCustomer = {
             firstName,
             lastName,
             phoneNumbers: [phoneNumber],
@@ -36,12 +36,12 @@ const UserForm = () => {
         }
         
         // Capitalize names
-        newUser.firstName = newUser.firstName.charAt(0).toUpperCase() + newUser.firstName.slice(1)
-        newUser.lastName = newUser.lastName.charAt(0).toUpperCase() + newUser.lastName.slice(1)
+        newCustomer.firstName = newCustomer.firstName.charAt(0).toUpperCase() + newCustomer.firstName.slice(1)
+        newCustomer.lastName = newCustomer.lastName.charAt(0).toUpperCase() + newCustomer.lastName.slice(1)
         
         // Check for vehicle details
         if(vYear && vMake && vModel){
-            newUser.vehicles.push({
+            newCustomer.vehicles.push({
                 vehicleYear: vYear,
                 vehicleMake: vMake,
                 vehicleModel: vModel
@@ -56,9 +56,9 @@ const UserForm = () => {
         }
 
         // Fetch the new user details
-        const response = await fetch('/api/users', {
+        const response = await fetch('/api/customers', {
             method: 'POST',
-            body: JSON.stringify(newUser),
+            body: JSON.stringify(newCustomer),
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${user.webToken}`
@@ -83,7 +83,7 @@ const UserForm = () => {
             setError(null)
             setEmptyFields([])
             console.log('New user added!')
-            dispatch({type: 'CREATE_USER', payload: json})
+            dispatch({type: 'CREATE_CUSTOMER', payload: json})
         }
     }
 
@@ -158,4 +158,4 @@ const UserForm = () => {
     )
 }
 
-export default UserForm
+export default CustomerForm

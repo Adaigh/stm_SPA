@@ -1,10 +1,9 @@
 const mongoose = require('mongoose')
 const vehicleSchema = require('./vehicleModel')
 
-
 const Schema = mongoose.Schema
 
-const userSchema = new Schema({
+const customerSchema = new Schema({
     firstName: {
         type: String,
         required: true
@@ -26,4 +25,4 @@ const userSchema = new Schema({
     }
 })
 
-module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model('Customer', customerSchema)

@@ -1,9 +1,9 @@
-.user-details h3 {
+.customer-details h3 {
     margin: 0;
     font-weight: 500;
 }
 
-.user-details ul {
+.customer-details ul {
     margin: 0;
     list-style: none;
 }
@@ -12,7 +12,7 @@
     display: flex;
 }
   
-.user-details {
+.customer-details {
     margin-bottom: 10px;
     padding: 0 20px 10px 0;
     background: var(--bg-dark);
@@ -22,7 +22,7 @@
     box-shadow: 2px 2px 5px rgba(0,0,0.5);
 }
 
-.user-details-header {
+.customer-details-header {
     display: flex;
     justify-content: space-between;
     margin: 10px 10px 0 10px;

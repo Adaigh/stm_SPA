@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 const express = require('express')
-const userRoutes = require('./routes/users')
+const customerRoutes = require('./routes/customers')
 const userAccountRoutes = require('./routes/userAccount')
 const appointmentRoutes = require('./routes/appointments')
 const mongoose = require('mongoose')
@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 })
 
 // Route handler
-app.use('/api/users', userRoutes)
+app.use('/api/customers', customerRoutes)
 app.use('/api/account', userAccountRoutes)
 app.use('/api/appointments', appointmentRoutes)
 
