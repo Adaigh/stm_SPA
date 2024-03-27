@@ -34,7 +34,7 @@ const signupUserAccount = async (req, res) =>  {
 
         const webToken = createToken(userAccount._id)
 
-        res.status(200).json({email, access: 0, webToken})
+        res.status(200).json({_id: userAccount._id, email, access: 0, webToken})
     } catch (error){
         res.status(400).json({error: error.message})
     }
@@ -76,4 +76,29 @@ const findUserDetails = async (req, res) => {
     }
 }
 
-module.exports = {loginUserAccount, signupUserAccount, findUserDetails, createUserAccount}
+const deleteUserAccount = async (req, res) => {
+    const {id} = req.params
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({error: "User not found"})
+    }
+
+    try {
+        const userAccount = await UserAccount.deleteOne({_id: id})
+
+        if (!userAccount) {
+            return res.status(404).json({ error: 'User Account not found' }); 
+        }
+
+        return res.status(200).json(userAccount); // Send the complete object
+
+    } catch (error) {
+        console.error(error); // Log the error for analysis 
+        return res.status(500).json({ error: 'Failed to fetch user info' }); 
+    }
+}
+module.exports = {
+    loginUserAccount,
+    signupUserAccount,
+    findUserDetails,
+    createUserAccount,
+    deleteUserAccount}

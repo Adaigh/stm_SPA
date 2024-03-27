@@ -1,0 +1,29 @@
+form.login {
+    width: 40vw;
+    margin: 5vh auto;
+    padding: 40px;
+    border: 4px solid var(--primary);
+    border-radius: 20px;
+    background: var(--bg-dark);
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+form.login h3 {
+    margin: 0;
+    font-size: 3rem;
+}
+
+form.login label {
+    margin-top: 20px;
+}
+
+form.login button {
+    margin: 20px auto 0 auto;
+}
+
+form.login div.error {
+    margin-top: 20px;
+}

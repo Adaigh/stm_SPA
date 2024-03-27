@@ -1,6 +1,5 @@
 .calendar {
     background: var(--bg-dark);
-    background: rgba(0,0,0,0.8);
     background: url(../../../public/images/interior.jpg);
     background-size: cover;
     background-position: center;

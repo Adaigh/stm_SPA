@@ -5,7 +5,8 @@ const {
     loginUserAccount,
     signupUserAccount,
     createUserAccount,
-    findUserDetails
+    findUserDetails,
+    deleteUserAccount
 } = require ('../controllers/userAccountController')
 
 const router = express.Router()
@@ -19,5 +20,7 @@ router.post('/signup', signupUserAccount)
 router.post('/create', requireAuth, verifyAccessLevel, createUserAccount)
 
 router.get('/:id', findUserDetails)
+
+router.delete('/:id', deleteUserAccount)
 
 module.exports = router

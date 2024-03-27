@@ -6,7 +6,7 @@ export const useSelfSignup = () => {
     const [isLoading, setIsLoading] = useState(null)
     const { dispatch } = useAuthContext()
 
-    const selfSignup = async (email, password) => {
+    const selfSignup = async (email, password, newCustomer) => {
         setIsLoading(true)
         setError(null)
 
@@ -15,21 +15,48 @@ export const useSelfSignup = () => {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({email, password})            
         })
-        const json = await response.json()
+        const accountJson = await response.json()
 
         if(!response.ok){
             setIsLoading(false)
-            setError(json.error)
-        } else {
-            // saving data to local storage
-            localStorage.setItem('STMuser', JSON.stringify(json))
-
-            // Update auth context
-            dispatch({type: 'LOGIN', payload: json})
-
-            setIsLoading(false)
+            setError(accountJson.error)
+            return
         }
+        // saving data to local storage
+        localStorage.setItem('STMuser', JSON.stringify(accountJson))
+
+
+        // Fetch the new user details
+        const customerResponse = await fetch('/api/customers', {
+            method: 'POST',
+            body: JSON.stringify(newCustomer),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accountJson.webToken}`
+            }
+        })
+        const customerJson = await customerResponse.json()
+
+        if(!customerResponse.ok) {
+            setError(customerJson.error)
+            await fetch('/api/account/' + accountJson._id, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accountJson.webToken}`
+                }
+            })
+            setIsLoading(false)
+            return
+        }
+
+        // Update auth context
+        dispatch({type: 'LOGIN', payload: accountJson})
+
+        // TODO: UPDATE ACCOUNT WITH USERINFO ID
+
+        setIsLoading(false)
     }
 
-    return {selfSignup, isLoading, error}
+    return {selfSignup, isLoading, error, setError}
 }
