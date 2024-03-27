@@ -6,8 +6,13 @@ export const ScheduleContext = createContext();
 export const scheduleReducer = (state, action) => {
     switch (action.type) {
         case 'SET_SCHEDULE':
+            let formattedSchedule = {}
+            for (let item of action.payload){
+                console.log(item)
+                formattedSchedule[item.day] = item.count
+            }
             return {
-                schedule: action.payload
+                schedule: formattedSchedule
             }
 
         default:
