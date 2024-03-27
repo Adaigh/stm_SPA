@@ -6,13 +6,8 @@ export const ScheduleContext = createContext();
 export const scheduleReducer = (state, action) => {
     switch (action.type) {
         case 'SET_SCHEDULE':
-            let formattedSchedule = {}
-            for (let item of action.payload){
-                console.log(item)
-                formattedSchedule[item.day] = item.count
-            }
             return {
-                schedule: formattedSchedule
+                schedule: action.payload
             }
 
         default:
@@ -32,11 +27,8 @@ export const ScheduleContextProvider = ({children}) => {
             if(response.ok) dispatch({type: 'SET_SCHEDULE', payload: json})
             return "error"
         }
-        console.log("Fetch schedule here on load")
         getAppt()
     }, [])
-
-    console.log(state)
 
     return (
         <ScheduleContext.Provider value={{...state, dispatch}}>

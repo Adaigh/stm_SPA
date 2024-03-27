@@ -52,19 +52,29 @@ const getMonth = async (req,res) => {
         .populate('userInformation')
 
     if(!appointments){
-        res.status(400).json({error: "GET MONTH"})
+        res.status(400).json({error: "GET MONTH ERROR"})
     }
     res.status(200).json(appointments)
 }
 
 const getAppointmentCounts = async (req,res) => {
-    await Appointment.aggregate([
+    
+    const appointments = await Appointment.aggregate([
         { $group: { _id: { day: '$date' }, count: { $sum: 1 } } },
         { $sort: { _id: 1 } },
         { $project: { _id: 0, day: '$_id.day', count: '$count' } }
     ])
-    .then(results => res.status(200).json(results))
-    .catch(err => res.status(404).json(err.message))
+    
+    if(!appointments){
+        res.status(404).json({error: "No response from DB"})
+    }
+
+    let results = {}
+    for (let item of appointments){
+        results[item.day] = item.count
+    }
+    
+    res.status(200).json(results)
 }
 
 module.exports = {
