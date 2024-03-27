@@ -46,11 +46,12 @@
     display: none;
 }
 
-.weekend, .weekday, .past{
-    display: block;
-    height: 40px;
-    width: 40px;
+.react-calendar__month-view__days button {
     border-radius: 0;
+}
+
+.calendar .full {
+    background-color: var(--red);
 }
 
 .weekend, .past{
@@ -63,7 +64,7 @@ button.weekend, button.past {
 }
 
 .weekday {
-    background: var(--bg-primary)
+    background: var(--blue);
 }
 
 .selectedDay {

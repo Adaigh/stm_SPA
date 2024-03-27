@@ -50,9 +50,6 @@ const getMonth = async (req,res) => {
         .gte(currentDate)
         .lte(nexMonth)
         .populate('userInformation')
-        // .exec()
-        // .then(appointments => res.status(200).json(appointments))
-        // .catch(err => res.status(400).json({error: err.message}))
 
     if(!appointments){
         res.status(400).json({error: "GET MONTH"})

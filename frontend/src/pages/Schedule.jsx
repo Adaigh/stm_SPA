@@ -34,13 +34,18 @@ const Schedule = () => {
                 today={today}
                 selectedDate={selectedDate}
                 setSelectedDate={setSelectedDate}>
+
                 <div className="appointment-request">
-                
-                {selectedDate && <button onClick={() => user ? console.log(user.email) : console.log("Guest")}>
-                    <h3>Request Appointment </h3>
-                    {selectedDate.toDateString()}
-                </button>}
-                {!selectedDate && <h3>Select a day to request an appointment!</h3>}
+                    {selectedDate && <button onClick={() => user ? console.log(user.email) : console.log("Guest")}>
+                        <h3>Request Appointment </h3>
+                        {selectedDate.toDateString()}
+                    </button>}
+                    {!selectedDate && <h3>Select a day to request an appointment!</h3>}
+                </div>
+                <div className="legend">
+                    <button className="blue" disabled>Many appointments available</button>
+                    <button className="yellow" disabled>Few appointments available</button>
+                    <button className="red" disabled>Urgent appointments only</button>
                 </div>
             </CalendarDisplay>
             <ContactInfo/>

@@ -3,6 +3,9 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    --red: #f55;
+    --yellow: #ff8;
+    --blue: #55f;
 }
 
 .schedule-container h2 {
@@ -26,4 +29,30 @@
 
 .appointment-request button {
     padding: 10px;
+}
+
+.legend {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.legend .red {
+    background: var(--red);   
+}
+
+.legend .yellow {
+    background: var(--yellow);
+}
+
+.legend .blue {
+    background: var(--blue);
+}
+
+.legend button {
+    width: 250px;
+    border-radius: 0;
+    padding: 10px;
+    cursor: default;
+    color: #000;
 }
