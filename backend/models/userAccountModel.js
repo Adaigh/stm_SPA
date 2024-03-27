@@ -20,7 +20,7 @@ const userAccountSchema = new Schema({
     },
     userInfo: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'Customer'
     }
 })
 
