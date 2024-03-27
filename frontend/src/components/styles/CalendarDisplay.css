@@ -48,10 +48,15 @@
 
 .react-calendar__month-view__days button {
     border-radius: 0;
+    border-width: 4px;
 }
 
 .calendar .full {
-    background-color: var(--red);
+    background: var(--red);
+}
+
+.calendar .partial {
+    background: var(--orange);
 }
 
 .weekend, .past{
@@ -68,5 +73,6 @@ button.weekend, button.past {
 }
 
 .selectedDay {
-    border: 4px solid greenyellow;
+    border-color: #5f5;
+    /* background-color: green !important; */
 }

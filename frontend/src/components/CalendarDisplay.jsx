@@ -13,7 +13,6 @@ function CalendarDisplay({today,
     const {schedule} = useScheduleContext()
 
     const handleDaySelect = (value, event) => {
-      console.log(value)
       if(value < new Date()) return
       setSelectedDate(value)
       if(prevDayPicked) prevDayPicked.classList.toggle('selectedDay')
@@ -42,7 +41,10 @@ function CalendarDisplay({today,
               if(date.getDay() === 0|| date.getDay() === 6) return 'weekend'
               if(date < today) return 'past'
               if(date === today) return 'today'
-              if(schedule && date.toLocaleDateString() in schedule) return 'full'
+              if(schedule && date.toLocaleDateString() in schedule) {
+                if(schedule[date.toLocaleDateString()] === 1) return 'partial'
+                return 'full'
+              }
               else return 'weekday'
             }}
         />

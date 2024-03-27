@@ -3,8 +3,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    --red: #f55;
-    --yellow: #ff8;
+    --red: #f22;
+    --orange: #f84;
     --blue: #55f;
 }
 
@@ -41,8 +41,8 @@
     background: var(--red);   
 }
 
-.legend .yellow {
-    background: var(--yellow);
+.legend .orange {
+    background: var(--orange);
 }
 
 .legend .blue {
@@ -54,5 +54,4 @@
     border-radius: 0;
     padding: 10px;
     cursor: default;
-    color: #000;
 }

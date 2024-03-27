@@ -58,7 +58,7 @@ const getMonth = async (req,res) => {
 }
 
 const getAppointmentCounts = async (req,res) => {
-    
+
     const appointments = await Appointment.aggregate([
         { $group: { _id: { day: '$date' }, count: { $sum: 1 } } },
         { $sort: { _id: 1 } },
@@ -69,6 +69,7 @@ const getAppointmentCounts = async (req,res) => {
         res.status(404).json({error: "No response from DB"})
     }
 
+    // Reformat server-side
     let results = {}
     for (let item of appointments){
         results[item.day] = item.count
