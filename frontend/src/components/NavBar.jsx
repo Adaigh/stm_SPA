@@ -32,7 +32,7 @@ const NavBar = () => {
             <div className="links">
                 {user && (
                     <div className="logged-in">
-                        <span>{user.email}</span>
+                        <span>{user.user}</span>
                         <button onClick={handleClick}>Log Out</button>
                     </div>)}
                 {!user && (

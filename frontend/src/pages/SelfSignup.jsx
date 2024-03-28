@@ -20,7 +20,7 @@ const SelfSignup = () => {
         let newCustomer = {
             firstName,
             lastName,
-            emailAddresses: [email],
+            emailAddress: email,
             phoneNumbers: [phoneNumber],
             vehicles: []
         }

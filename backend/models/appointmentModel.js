@@ -8,22 +8,16 @@ const appointmentSchema = new mongoose.Schema({
     }
   },
   userInformation: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     required: true,
-    ref: 'User'
+    ref: 'Customer'
   },
   vehicle: {
     type: Number,
-    required: true,
-    index: true
+    required: true
   },
-  shortDescription: {
+  description: {
     type: String,
-    required: false
-  },
-  longDescription: {
-    type: String,
-    required: false
   }
 });
 

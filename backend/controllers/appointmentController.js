@@ -23,7 +23,7 @@ const getAppointment = async (req,res) => {
 }
 
 const createAppointment = async (req,res) => {
-    const {date, userInformation, vehicle, shortDescription, longDescription} = req.body
+    const {date, userInformation, vehicle, description} = req.body
     
     // TODO: VALIDATION CHECKS
     
@@ -33,7 +33,7 @@ const createAppointment = async (req,res) => {
     }
 
     try {
-        appointment = await Appointment.create({date, userInformation, vehicle, shortDescription, longDescription})
+        appointment = await Appointment.create({date, userInformation, vehicle, description})
         res.status(200).json(appointment)
     } catch (error){
         res.status(400).json({error: error.message})
@@ -66,7 +66,7 @@ const getAppointmentCounts = async (req,res) => {
     ])
     
     if(!appointments){
-        res.status(404).json({error: "No response from DB"})
+        res.status(500).json({error: "Server Error"})
     }
 
     // Reformat server-side

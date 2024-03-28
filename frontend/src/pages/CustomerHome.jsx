@@ -69,7 +69,7 @@ const CustomerHome = () => {
                     return (customerInfo.firstName.toUpperCase().includes(filter.toUpperCase()) ||
                     customerInfo.lastName.toUpperCase().includes(filter.toUpperCase()) || 
                     customerInfo.phoneNumbers[0].toString().includes(filter) || 
-                    customerInfo.emailAddresses[0].toUpperCase().includes(filter.toUpperCase()))
+                    (customerInfo.emailAddress && customerInfo.emailAddress.toUpperCase().includes(filter.toUpperCase())))
                 }).map((customerInfo) => (
                     <CustomerDetails key={customerInfo._id} customerInfo={customerInfo} />
                 ))}

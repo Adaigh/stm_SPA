@@ -26,7 +26,7 @@ const getCustomer = async (req, res) => {
 
 // POST a new Customer
 const createCustomer = async (req, res) => {
-    const {firstName, lastName, phoneNumbers, emailAddresses, vehicles} = req.body
+    const {firstName, lastName, phoneNumbers, emailAddress, vehicles} = req.body
 
     let emptyFields = []
 
@@ -45,15 +45,17 @@ const createCustomer = async (req, res) => {
     }
 
     // Check to see if Customer already exists
-    let customer = await Customer.findOne({firstName, lastName})
+    let customer = {}
+    if(!emailAddress)  customer = await Customer.findOne({firstName, lastName})
+    else customer = await Customer.findOne({emailAddress})
     if(customer) {
         return res.status(409).json({error: "Customer data already exists", CustomerData: customer})
     }
 
     // ADD new Customer document
     try {
-        if(emailAddresses){
-            customer = await Customer.create({firstName, lastName, phoneNumbers, emailAddresses, vehicles})
+        if(emailAddress){
+            customer = await Customer.create({firstName, lastName, phoneNumbers, emailAddress, vehicles})
         } else {
             customer = await Customer.create({firstName, lastName, phoneNumbers, vehicles})
         }

@@ -43,10 +43,7 @@ const CustomerDetails = ({customerInfo}) => {
                 </ul>
                 <ul>
                     <li><u>Email Addresses</u>:&emsp;</li>
-                    {/* List available emails */}
-                    {customerInfo.emailAddresses.map((email, index) => {
-                        return <li key={index}>{email}</li>
-                    })}
+                    <li>{customerInfo.emailAddress}</li>
                 </ul>
                 <ul>
                     {/* List vehicles */}

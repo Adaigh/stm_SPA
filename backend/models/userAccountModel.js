@@ -5,10 +5,11 @@ const validator = require('validator')
 const Schema = mongoose.Schema
 
 const userAccountSchema = new Schema({
-    email: {
+    user: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        ref: 'Customer'
     },
     password: {
         type: String,
@@ -17,21 +18,17 @@ const userAccountSchema = new Schema({
     access: {
         type: String,
         required: true
-    },
-    userInfo: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Customer'
     }
 })
 
 // Static signup method
-userAccountSchema.statics.signup = async function(email, password, access) {
+userAccountSchema.statics.signup = async function(user, password, access) {
 
-    if(!email || !password) {
+    if(!user || !password) {
         throw Error('All fields must be filled')
     }
 
-    if (!validator.isEmail(email)) {
+    if (!validator.isEmail(user)) {
         throw Error('Invalid email address')
     }
 
@@ -40,7 +37,7 @@ userAccountSchema.statics.signup = async function(email, password, access) {
     // }
 
     // Check email
-    const exists = await this.findOne({email})
+    const exists = await this.findOne({user})
 
     if(exists) {
         throw Error("Email already in use.")
@@ -51,19 +48,19 @@ userAccountSchema.statics.signup = async function(email, password, access) {
     const hash = await bcrypt.hash(password, salt)
 
     // Create new user account
-    const userAccount = await this.create({email, password: hash, access})
+    const userAccount = await this.create({user, password: hash, access})
 
     return userAccount
 }
 
 // Static login method
-userAccountSchema.statics.login = async function(email, password) {
+userAccountSchema.statics.login = async function(user, password) {
 
-    if(!email || !password) {
+    if(!user || !password) {
         throw Error('All fields must be filled')
     }
 
-    const userAccount = await this.findOne({email})
+    const userAccount = await this.findOne({user})
 
     if(!userAccount){
         throw Error('Email or password incorrect')
