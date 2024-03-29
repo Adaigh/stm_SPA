@@ -16,7 +16,7 @@ router.use(requireAuth)
 router.get('/', getCustomers)
 
 // GET single Customer
-router.get('/:id', getCustomer)
+router.get('/details', getCustomer)
 
 // POST a new Customer
 router.post('/', createCustomer)

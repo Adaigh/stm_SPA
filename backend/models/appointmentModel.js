@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const appointmentSchema = new mongoose.Schema({
   date: {
     type: String,
-    get: function(val) { // Convert the date to ISODate format when retrieving it
+    get: function(val) {
+      // Conversion to short-string format mm/dd/yyyy
       return val.toLocaleDateString();
     }
   },

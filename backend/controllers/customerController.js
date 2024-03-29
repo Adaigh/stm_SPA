@@ -3,19 +3,16 @@ const mongoose = require('mongoose')
 
 // GET all Customers
 const getCustomers = async (req,res) => {
-    const customers = await Customer.find({}).sort({lastName: 1})
+    const customers = await Customer.find().sort({lastName: 1})
     res.status(200).json(customers)
 }
 
-// GET single Customer
+// GET single Customer details using account email
 const getCustomer = async (req, res) => {
-    // ID validation check
-    const {id} = req.params
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error: "Customer not found"})
-    }
 
-    const customer = await Customer.findById(id)
+    const {user} = req.body
+
+    const customer = await Customer.findOne({emailAddress: user})
 
     if(!customer){
         return res.status(404).json({error: 'Customer not found'})

@@ -40,7 +40,7 @@ const signupUserAccount = async (req, res) =>  {
     }
 }
 
-// Signup
+// Signup elevated access
 const createUserAccount = async (req, res) =>  {
 
     const {user, password, access} = req.body
@@ -54,24 +54,33 @@ const createUserAccount = async (req, res) =>  {
     }
 }
 
-const findUserDetails = async (req, res) => {
+// Find customer information associated with account
+// const findUserDetails = async (req, res) => {
 
-    const {emailAddress} = req.params
+//     const {emailAddress} = req.body
 
-    try {
-        const userAccount = await UserAccount.findOne({emailAddress: emailAddress}).populate('user');
+//     try {
+//         const userAccount = await UserAccount.findOne({user: emailAddress})
+//         .populate({
+//             path: 'user',
+//             model: 'Customer',
+//             select: ['emailAddress', 'firstName', 'lastName', 'phoneNumbers', 'vehicles'],
+//             foreignField: 'emailAddress'
+//         }).select('user')
 
-        if (!userAccount) {
-            return res.status(404).json({ error: 'User Account not found' }); 
-        }
+//         if (!userAccount) {
+//             return res.status(404).json({ error: 'User Account not found' }); 
+//         }
 
-        return res.status(200).json(userAccount); // Send the complete object
+//         return res.status(200).json(userAccount); // Send the complete object
 
-    } catch (error) {
-        return res.status(500).json({ error: 'Failed to fetch user info' }); 
-    }
-}
+//     } catch (error) {
+//         console.log(error)
+//         return res.status(500).json({ error: 'Failed to fetch user info' }); 
+//     }
+// }
 
+// Remove a user account
 const deleteUserAccount = async (req, res) => {
     const {id} = req.params
     if(!mongoose.Types.ObjectId.isValid(id)){
@@ -85,10 +94,9 @@ const deleteUserAccount = async (req, res) => {
             return res.status(404).json({ error: 'User Account not found' }); 
         }
 
-        return res.status(200).json(userAccount); // Send the complete object
+        return res.status(200).json(userAccount);
 
     } catch (error) {
-        console.error(error); // Log the error for analysis 
         return res.status(500).json({ error: 'Failed to fetch user info' }); 
     }
 }
@@ -96,6 +104,6 @@ const deleteUserAccount = async (req, res) => {
 module.exports = {
     loginUserAccount,
     signupUserAccount,
-    findUserDetails,
+    // findUserDetails,
     createUserAccount,
     deleteUserAccount}

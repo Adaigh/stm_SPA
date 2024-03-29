@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken')
 const UserAccount = require('../models/userAccountModel')
 
+// Requires the user to be logged in to the system
+// Uses server-signed JWT token to verify authenticated status
 const requireAuth = async (req,res,next) => {
 
     // Verify authentication
@@ -9,6 +11,7 @@ const requireAuth = async (req,res,next) => {
     if(!authorization) {
         return res.status(401).json({error: "Authorization token required"})
     }
+
     // Isolate JWT
     const token = authorization.split(' ')[1]
 

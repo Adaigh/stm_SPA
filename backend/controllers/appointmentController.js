@@ -1,12 +1,17 @@
 const Appointment = require('../models/appointmentModel')
 const mongoose = require('mongoose')
 
+// Get all appointments with user information 
 const getAppointments = async (req,res) => {
-    const appointments = await Appointment.find({}).sort({date:1})
+    const appointments = await Appointment.find()
+    .populate('userInformation')
+    .sort({date:1})
     res.status(200).json(appointments)
 }
 
+// Get a specific appointment
 const getAppointment = async (req,res) => {
+
     // ID validation check
     const {id} = req.params
     if(!mongoose.Types.ObjectId.isValid(id)){
@@ -22,6 +27,7 @@ const getAppointment = async (req,res) => {
     res.status(200).json(appointment)
 }
 
+// Create a new appointment
 const createAppointment = async (req,res) => {
     const {date, userInformation, vehicle, description} = req.body
     
@@ -40,6 +46,7 @@ const createAppointment = async (req,res) => {
     }
 }
 
+// Get appointments and customer details for the next Month
 const getMonth = async (req,res) => {
     const currentDate = new Date();
     const nexMonth = new Date()
@@ -57,6 +64,7 @@ const getMonth = async (req,res) => {
     res.status(200).json(appointments)
 }
 
+// Get all appointments for calendar display
 const getAppointmentCounts = async (req,res) => {
 
     const appointments = await Appointment.aggregate([

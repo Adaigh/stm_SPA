@@ -9,7 +9,7 @@ const userAccountSchema = new Schema({
         type: String,
         required: true,
         unique: true,
-        ref: 'Customer'
+        ref: 'Customer.emailAddress'
     },
     password: {
         type: String,
