@@ -1,4 +1,5 @@
 const Customer = require('../models/customerModel')
+const UserAccount = require('../models/userAccountModel')
 const mongoose = require('mongoose')
 
 // GET all Customers
@@ -10,15 +11,27 @@ const getCustomers = async (req,res) => {
 // GET single Customer details using account email
 const getCustomer = async (req, res) => {
 
-    const {user} = req.body
+    const {_id} = req.user._id
+    
+    try{
+        const customer = await UserAccount.findById({_id})
+        .populate({
+            path: 'user',
+            model: 'Customer',
+            foreignField: 'emailAddress'
+        })
 
-    const customer = await Customer.findOne({emailAddress: user})
+        if(!customer){
+            return res.status(404).json({error: 'Customer not found'})
+        }
+        res.status(200).json(customer)
 
-    if(!customer){
-        return res.status(404).json({error: 'Customer not found'})
+    } catch(error) {
+        return res.status(500).json({error: 'Failed to fetch data'})
     }
 
-    res.status(200).json(customer)
+    
+
 }
 
 // POST a new Customer

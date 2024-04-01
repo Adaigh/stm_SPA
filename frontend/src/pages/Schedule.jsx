@@ -1,14 +1,39 @@
 import { useState } from "react";
+import Modal from 'react-modal';
+
+// Components
 import AboutPane from '../components/AboutPane'
 import CalendarDisplay from '../components/CalendarDisplay'
 import ContactInfo from '../components/ContactInfo'
-import './styles/Schedule.css'
+import AppointmentForm from '../components/AppointmentForm'
+
+// Hooks
 import { useAuthContext } from "../hooks/useAuthContext";
+
+// Styles
+import './styles/Schedule.css'
+
+const standardStyle = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+    }
+}
+
+Modal.setAppElement('#root');
+
 const Schedule = () => {
 
     const {user} = useAuthContext();
     const [today] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(null);
+    const [formIsOpen, setFormIsOpen] = useState(false)
+
+    console.log(formIsOpen)
 
     return (
         <div className="schedule-container">
@@ -36,7 +61,7 @@ const Schedule = () => {
                 setSelectedDate={setSelectedDate}>
 
                 <div className="appointment-request">
-                    {selectedDate && <button onClick={() => user ? console.log(user.email) : console.log("Guest")}>
+                    {selectedDate && <button onClick={() => setFormIsOpen(true)}>
                         <h3>Request Appointment </h3>
                         {selectedDate.toDateString()}
                     </button>}
@@ -48,6 +73,16 @@ const Schedule = () => {
                     <button className="red" disabled>Urgent appointments only</button>
                 </div>
             </CalendarDisplay>
+            <Modal
+                isOpen={formIsOpen}
+                onRequestClose={() => setFormIsOpen(false)}
+                style={standardStyle}
+                contentLabel="Appointment Request"
+                // className="modal"
+                overlayClassName="overlay"
+                >
+                    <AppointmentForm/>
+            </Modal>
             <ContactInfo/>
         </div>
     )
