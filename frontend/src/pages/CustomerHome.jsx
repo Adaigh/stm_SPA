@@ -14,7 +14,7 @@ const CustomerHome = () => {
 
     // GET user data from server
     const fetchCustomers = useCallback(async () => {
-        const response = await fetch('/api/customers', {
+        const response = await fetch('/api/customers/', {
             headers: {
                 'Authorization': `Bearer ${user.webToken}`
             }
