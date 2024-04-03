@@ -5,7 +5,7 @@ import Modal from 'react-modal';
 import AboutPane from '../components/AboutPane'
 import CalendarDisplay from '../components/CalendarDisplay'
 import ContactInfo from '../components/ContactInfo'
-import AppointmentForm from '../components/AppointmentForm'
+import GuestAppointmentForm from '../components/GuestAppointmentForm'
 
 // Hooks
 import { useAuthContext } from "../hooks/useAuthContext";
@@ -32,8 +32,6 @@ const Schedule = () => {
     const [today] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(null);
     const [formIsOpen, setFormIsOpen] = useState(false)
-
-    console.log(formIsOpen)
 
     return (
         <div className="schedule-container">
@@ -78,10 +76,10 @@ const Schedule = () => {
                 onRequestClose={() => setFormIsOpen(false)}
                 style={standardStyle}
                 contentLabel="Appointment Request"
-                // className="modal"
+                className="modal"
                 overlayClassName="overlay"
                 >
-                    <AppointmentForm/>
+                    {!user && <GuestAppointmentForm date={selectedDate}/>}
             </Modal>
             <ContactInfo/>
         </div>

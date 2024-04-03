@@ -42,7 +42,7 @@ input {
   border-radius: 5px;
 }
 
-input.error {
+input.error, select.error {
   border: 2px solid var(--error)
 }
 
