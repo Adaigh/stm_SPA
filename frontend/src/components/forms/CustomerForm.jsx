@@ -1,7 +1,21 @@
 import './styles/CustomerForm.css'
 import { useState } from "react"
+
+// Context
 import { useCustomersContext } from "../../hooks/useCustomersContext"
 import { useAuthContext } from "../../hooks/useAuthContext"
+
+// Form inputs
+import {
+    EmailAddress,
+    FirstName,
+    LastName,
+    PhoneNumber,
+    VehicleMake,
+    VehicleModel,
+    VehicleYear,
+    VinEntry,
+} from './labeledInputs'
 
 const CustomerForm = () => {
 
@@ -11,49 +25,51 @@ const CustomerForm = () => {
     const [phoneNumber, setPhoneNumber] = useState('')
     const [emailAddress, setEmailAddress] = useState('')
     const [vYear, setVYear] = useState('')
-    const [vMake, setVMake] = useState('Audi')
+    const [vMake, setVMake] = useState('')
     const [vModel, setVModel] = useState('')
+    const [vin, setVin] = useState('')
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
     const {user} = useAuthContext()
 
+    // Form submission handler
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        if(!user) {
-            setError('You must be logged in')
-            setEmptyFields([])
+        // Check for missing fields
+        let missing = []
+        if(!firstName) missing.push('firstName')
+        if(!lastName) missing.push('lastName')
+        if(!phoneNumber) missing.push('phoneNumber')
+        if(!vYear) missing.push('vehicleYear')
+        if(!vMake) missing.push('vehicleMake')
+        if(!vModel) missing.push('vehicleModel')
+        if(missing.length > 0){
+            setError("All (*) fields are required")
+            setEmptyFields(missing)
             return
+        } else {
+            setError(null)
+            setEmptyFields([])
         }
 
-        // Create new User Object
+        // Create new customer object
         let newCustomer = {
             firstName,
             lastName,
             phoneNumbers: [phoneNumber],
-            emailAddresses: [emailAddress],
-            vehicles: []
+            emailAddress: emailAddress ? emailAddress+' (SHOP)' : null,
+            vehicles: [{
+                vehicleYear: vYear,
+                vehicleMake: vMake,
+                vehicleModel: vModel,
+                vehicleVIN: vin ? vin : "Not Stored"
+            }]
         }
         
         // Capitalize names
         newCustomer.firstName = newCustomer.firstName.charAt(0).toUpperCase() + newCustomer.firstName.slice(1)
         newCustomer.lastName = newCustomer.lastName.charAt(0).toUpperCase() + newCustomer.lastName.slice(1)
-        
-        // Check for vehicle details
-        if(vYear && vMake && vModel){
-            newCustomer.vehicles.push({
-                vehicleYear: vYear,
-                vehicleMake: vMake,
-                vehicleModel: vModel
-            })
-        } else if (!vYear && !vModel){
-            // Do Nothing
-        } else if(!vYear || !vModel){
-            setError("Incomplete vehicle details")
-            if(!vYear) setEmptyFields(['vehicleYear'])
-            if(!vModel) setEmptyFields([...emptyFields, 'vehicleModel'])
-            return
-        }
 
         // Fetch the new user details
         const response = await fetch('/api/customers', {
@@ -66,11 +82,9 @@ const CustomerForm = () => {
         })
         const json = await response.json()
 
+        // Handle response errors
         if(!response.ok) {
             setError(json.error)
-            if(json.emptyFields){
-                setEmptyFields(json.emptyFields)
-            }
         }
         if(response.ok) {
             setFirstName('')
@@ -78,79 +92,68 @@ const CustomerForm = () => {
             setPhoneNumber('')
             setEmailAddress('')
             setVYear('')
-            setVMake('Audi')
+            setVMake('')
             setVModel('')
+            setVin('')
             setError(null)
             setEmptyFields([])
-            console.log('New user added!')
             dispatch({type: 'CREATE_CUSTOMER', payload: json})
         }
     }
 
     return (
         <form className="create" onSubmit={handleSubmit}>
+            <FirstName 
+                val={firstName}
+                req={true}
+                error={emptyFields && emptyFields.includes('firstName')}
+                changeFn={(e) => setFirstName(e.target.value)}
+                />
 
-            <label>First Name: *</label>
-            <input
-                type="text"
-                onChange={(e) => setFirstName(e.target.value)}
-                value={firstName}
-                className={emptyFields && emptyFields.includes('firstName') ? 'error' : ''}
-            />
+            <LastName
+                val={lastName}
+                req={true}
+                error={emptyFields && emptyFields.includes('lastName')}
+                changeFn={(e) => setLastName(e.target.value)}
+                />
 
-            <label>Last Name: *</label>
-            <input
-                type="text"
-                onChange={(e) => setLastName(e.target.value)}
-                value={lastName}
-                className={emptyFields && emptyFields.includes('lastName') ? 'error' : ''}
-            />
+            <PhoneNumber
+                val={phoneNumber}
+                req={true}
+                error={emptyFields && emptyFields.includes('phoneNumber')}
+                changeFn={(e) => setPhoneNumber(e.target.value)}
+                />
 
-            <label>Phone Number: *</label>
-            <input
-                type="text"
-                onInput={(e) => setPhoneNumber(e.target.value)}
-                pattern='[0-9]{10}'
-                placeholder='xxxxxxxxxx'
-                title="xxxxxxxxxx"
-                required='required'
-                value={phoneNumber}
-                className={emptyFields.includes('phoneNumbers') ? 'error' : ''}
-            />
+            <EmailAddress
+                val={emailAddress}
+                req={false}
+                changeFn={(e) => setEmailAddress(e.target.value)}
+                />
 
-            <label>Email Address:</label>
-            <input
-                type="text"
-                onChange={(e) => setEmailAddress(e.target.value)}
-                value={emailAddress}
-            />
+            <VehicleYear
+                val={vYear}
+                req={true}
+                error={emptyFields && emptyFields.includes('vehicleYear')}
+                changeFn={(e) => setVYear(e.target.value)}
+                />
 
-            <label>Vehicle Year:</label>
-            <input
-                type="number"
-                onChange={(e) => setVYear(e.target.value)}
-                value={vYear}
-                min="1800"
-                max="2500"
-                className={emptyFields.includes('vehicleYear') ? 'error' : ''}
-            />
-            
-            <label>Vehicle Make:</label>
-            <select 
-                onChange={(e) => setVMake(e.target.value)}
-                className={emptyFields.includes('vehicleMake') ? 'error' : ''}>
-                <option value="Audi">Audi</option>
-                <option value="VW">VW</option>
-                <option value="BMW">BMW</option>
-            </select>
+            <VehicleMake
+                req={true}
+                error={emptyFields && emptyFields.includes('vehicleMake')}
+                changeFn={(e) => setVMake(e.target.value)}
+                />
+                    
+            <VehicleModel 
+                val={vModel}
+                req={true}
+                error={emptyFields && emptyFields.includes('vehicleModel')}
+                changeFn={(e) => setVModel(e.target.value)}
+                />
 
-            <label>Vehicle Model:</label>
-            <input
-                type="text"
-                onChange={(e)=> setVModel(e.target.value)}
-                value={vModel}
-                className={emptyFields.includes('vehicleModel') ? 'error' : ''}
-            />
+            <VinEntry
+                    val={vin}
+                    changeFn={(e)=> setVin(e.target.value)}
+                    />
 
             <button> Add User </button>
             {error && <div className="error">{error}</div>}

@@ -1,6 +1,19 @@
 import { useState } from "react";
 import './styles/GuestAppointmentForm.css'
 
+// Form inputs
+import {
+    FirstName,
+    LastName,
+    PhoneNumber,
+    EmailAddress,
+    VehicleYear,
+    VehicleMake,
+    VehicleModel,
+    VinEntry,
+    Description
+} from "./labeledInputs"
+
 const GuestAppointmentForm = ({date, closeForm}) => {
 
     const [firstName, setFirstName] = useState('')
@@ -15,11 +28,12 @@ const GuestAppointmentForm = ({date, closeForm}) => {
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
 
+    // Form submission handler
     const handleSubmit = async (e) => {
         e.preventDefault()
         
+        // Check for missing fields
         const missing = []
-        
         if(!firstName) missing.push('firstName')
         if(!lastName) missing.push('lastName')
         if(!vYear) missing.push('vehicleYear')
@@ -36,6 +50,7 @@ const GuestAppointmentForm = ({date, closeForm}) => {
             console.log("All fields filled! fetching...")
         }
 
+        // Create new appointment object
         let newAppt = {
             date: date.toLocaleDateString(),
             firstName,
@@ -45,6 +60,8 @@ const GuestAppointmentForm = ({date, closeForm}) => {
             vehicle: {vehicleYear: vYear, vehicleMake: vMake, vehicleModel: vModel},
             description
         }
+
+        // Fetch new appointment details
         const response = await fetch('/api/appointments', {
             method: 'POST',
             body: JSON.stringify(newAppt),
@@ -54,6 +71,7 @@ const GuestAppointmentForm = ({date, closeForm}) => {
         })
         const json = await response.json()
 
+        // Handle response errors
         if(!response.ok){
             setError(json.error)
         } else {
@@ -82,90 +100,68 @@ const GuestAppointmentForm = ({date, closeForm}) => {
         <h3>{date.toDateString()}</h3>
         <form onSubmit={handleSubmit}>
             <div>
-                <label className="required">First Name: <span className="required">*</span></label>
-                <input
-                    type="text"
-                    onChange={(e) => setFirstName(e.target.value)}
-                    value={firstName}
-                    className={emptyFields && emptyFields.includes('firstName') ? 'error' : ''}
-                />
+                <FirstName 
+                    val={firstName}
+                    req={true}
+                    error={emptyFields && emptyFields.includes('firstName')}
+                    changeFn={(e) => setFirstName(e.target.value)}
+                    />
 
-                <label className="required">Last Name: <span className="required">*</span></label>
-                <input
-                    type="text"
-                    onChange={(e) => setLastName(e.target.value)}
-                    value={lastName}
-                    className={emptyFields && emptyFields.includes('lastName') ? 'error' : ''}
-                />
+                <LastName
+                    val={lastName}
+                    req={true}
+                    error={emptyFields && emptyFields.includes('lastName')}
+                    changeFn={(e) => setLastName(e.target.value)}
+                    />
 
-                <label className="required">Phone Number: <span className="required">*</span></label>
-                <input
-                    type="text"
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                    pattern='[0-9]{10}'
-                    placeholder='xxxxxxxxxx'
-                    title="xxxxxxxxxx"
-                    required='required'
-                    value={phoneNumber}
-                    className={emptyFields.includes('phoneNumber') ? 'error' : ''}
-                />
+                <PhoneNumber
+                    val={phoneNumber}
+                    req={true}
+                    error={emptyFields && emptyFields.includes('phoneNumber')}
+                    changeFn={(e) => setPhoneNumber(e.target.value)}
+                    />
 
-                <label>Email Address:</label>
-                <input
-                    type="text"
-                    onChange={(e) => setEmailAddress(e.target.value)}
-                    value={emailAddress}
-                />
+                <EmailAddress
+                    val={emailAddress}
+                    req={false}
+                    changeFn={(e) => setEmailAddress(e.target.value)}
+                    />
             </div>
 
             <div>
-                <label>Vehicle Year: <span className="required">*</span></label>
-                <input
-                    type="number"
-                    onChange={(e) => setVYear(e.target.value)}
-                    value={vYear}
-                    min="1800"
-                    max="2500"
-                    className={emptyFields.includes('vehicleYear') ? 'error' : ''}
-                />
-                
-                <label>Vehicle Make: <span className="required">*</span></label>
-                <select 
-                    defaultValue={''}
-                    onChange={(e) => setVMake(e.target.value)}
-                    className={emptyFields.includes('vehicleMake') ? 'error' : ''}>
-                    <option value="" disabled>--Please choose vehicle make--</option>
-                    <option value="Audi">Audi</option>
-                    <option value="VW">VW</option>
-                    <option value="BMW">BMW</option>
-                </select>
+                <VehicleYear
+                    val={vYear}
+                    req={true}
+                    error={emptyFields && emptyFields.includes('vehicleYear')}
+                    changeFn={(e) => setVYear(e.target.value)}
+                    />
 
-                <label>Vehicle Model: <span className="required">*</span></label>
-                <input
-                    type="text"
-                    onChange={(e)=> setVModel(e.target.value)}
-                    value={vModel}
-                    className={emptyFields.includes('vehicleModel') ? 'error' : ''}
-                />
+                <VehicleMake
+                    val={vMake}
+                    req={true}
+                    error={emptyFields && emptyFields.includes('vehicleMake')}
+                    changeFn={(e) => setVMake(e.target.value)}
+                    />
 
-                <label>VIN:</label>
-                <input
-                    type="text"
-                    onChange={(e)=> setVin(e.target.value)}
-                    value={vin}
-                />
+                <VehicleModel 
+                    val={vModel}
+                    req={true}
+                    error={emptyFields && emptyFields.includes('vehicleModel')}
+                    changeFn={(e) => setVModel(e.target.value)}
+                    />
+                <VinEntry
+                    val={vin}
+                    changeFn={(e)=> setVin(e.target.value)}
+                    />
             </div>
 
             <div>
-            <label>Reason for Appointment: <span className="required">*</span></label>
-            <textarea
-                rows={10}
-                cols={50}
-                onChange={e => setDescription(e.target.value)}
-                value={description}
-                maxLength={2000}
-                className={emptyFields.includes('description') ? 'error' : ''}
-                />
+                <Description
+                    val={description}
+                    req={true}
+                    error={emptyFields && emptyFields.includes('description')}
+                    changeFn={(e)=> setDescription(e.target.value)}
+                    />
             </div>
 
         </form>

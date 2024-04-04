@@ -4,10 +4,7 @@ const vehicleSchema = require('./vehicleModel')
 const appointmentSchema = new mongoose.Schema({
   date: {
     type: String,
-    get: function(val) {
-      // Conversion to short-string format mm/dd/yyyy
-      return val.toLocaleDateString();
-    }
+    required: true
   },
   firstName: {
       type: String,
@@ -35,7 +32,8 @@ const appointmentSchema = new mongoose.Schema({
   },
   reviewed: {
     type: Boolean,
-    default: false
+    default: false,
+    required: true
   }
 });
 

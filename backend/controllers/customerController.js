@@ -38,27 +38,16 @@ const getCustomer = async (req, res) => {
 const createCustomer = async (req, res) => {
     const {firstName, lastName, phoneNumbers, emailAddress, vehicles} = req.body
 
-    let emptyFields = []
-
-    if(!firstName){
-        emptyFields.push('firstName')
-    }
-    if(!lastName){
-        emptyFields.push('lastName')
-    }
-    if(!phoneNumbers){
-        emptyFields.push('phoneNumbers')
-    }
-
-    if(emptyFields.length > 0){
-        return res.status(400).json({error: 'Incomplete Customer details', emptyFields})
+    // Validation
+    if(!firstName || !lastName || !phoneNumbers || !vehicles){
+        return res.status(422).json({error: "Missing required data"})
     }
 
     // Check to see if Customer already exists
     let customer = {}
     if(!emailAddress)  customer = await Customer.findOne({firstName, lastName})
     else customer = await Customer.findOne({emailAddress})
-    if(customer) {
+    if(customer && customer.firstName == firstName && customer.lastName == lastName) {
         return res.status(409).json({error: "Customer data already exists", CustomerData: customer})
     }
 
