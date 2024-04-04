@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const vehicleSchema = require('./vehicleModel')
 
 const appointmentSchema = new mongoose.Schema({
   date: {
@@ -8,17 +9,33 @@ const appointmentSchema = new mongoose.Schema({
       return val.toLocaleDateString();
     }
   },
-  userInformation: {
+  firstName: {
+      type: String,
+      trim: true,
+      required: true
+  },
+  lastName: {
+      type: String,
+      trim: true,
+      required: true
+  },
+  phoneNumber: {
     type: String,
-    required: true,
-    ref: 'Customer'
+    required: true
+  },
+  emailAddress: {
+    type: String,
   },
   vehicle: {
-    type: Number,
+    type: vehicleSchema,
     required: true
   },
   description: {
     type: String,
+  },
+  reviewed: {
+    type: Boolean,
+    default: false
   }
 });
 

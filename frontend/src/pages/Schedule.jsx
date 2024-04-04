@@ -79,7 +79,8 @@ const Schedule = () => {
                 className="modal"
                 overlayClassName="overlay"
                 >
-                    {!user && <GuestAppointmentForm date={selectedDate}/>}
+                    {!user && <GuestAppointmentForm date={selectedDate}
+                    closeForm={() => setFormIsOpen(false)}/>}
             </Modal>
             <ContactInfo/>
         </div>

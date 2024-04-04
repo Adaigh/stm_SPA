@@ -19,7 +19,7 @@ router.get('/', requireAuth, verifyAccessLevel(staffAccess), getAppointments)
 router.get('/single/:id', requireAuth, verifyAccessLevel(staffAccess), getAppointment)
 
 // Create new appointment
-router.post('/', requireAuth, verifyAccessLevel(staffAccess), createAppointment)
+router.post('/', createAppointment)
 
 // Get a month of appointments
 router.get('/month', requireAuth, verifyAccessLevel(staffAccess), getMonth)

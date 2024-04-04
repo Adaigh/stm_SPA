@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 // Get all appointments with user information 
 const getAppointments = async (req,res) => {
     const appointments = await Appointment.find()
-    .populate('userInformation')
+    // .populate('userInformation')
     .sort({date:1})
     res.status(200).json(appointments)
 }
@@ -29,17 +29,19 @@ const getAppointment = async (req,res) => {
 
 // Create a new appointment
 const createAppointment = async (req,res) => {
-    const {date, userInformation, vehicle, description} = req.body
+    const {date, firstName, lastName, phoneNumber, emailAddress, vehicle, description} = req.body
     
     // TODO: VALIDATION CHECKS
     
-    let appointment = await Appointment.findOne({date, userInformation, vehicle})
+    let appointment = await Appointment.findOne({date, firstName, lastName, vehicle})
     if(appointment) {
         return res.status(409).json({message: "Appointment already exists"})
     }
 
     try {
-        appointment = await Appointment.create({date, userInformation, vehicle, description})
+        appointment = await Appointment.create({
+            date, firstName, lastName, phoneNumber, emailAddress, vehicle, description, reviewed: false
+        })
         res.status(200).json(appointment)
     } catch (error){
         res.status(400).json({error: error.message})
@@ -51,12 +53,12 @@ const getMonth = async (req,res) => {
     const currentDate = new Date();
     const nexMonth = new Date()
     nexMonth.setMonth(currentDate.getMonth()+1)
-    console.log(currentDate, nexMonth)
+    currentDate = currentDate.toLocaleDateString()
+    nexMonth = nexMonth.toLocaleDateString()
     const appointments = await Appointment.find()
         .where('date')
         .gte(currentDate)
         .lte(nexMonth)
-        .populate('userInformation')
 
     if(!appointments){
         res.status(400).json({error: "GET MONTH ERROR"})
@@ -68,6 +70,7 @@ const getMonth = async (req,res) => {
 const getAppointmentCounts = async (req,res) => {
 
     const appointments = await Appointment.aggregate([
+        { $match: {reviewed: true}},
         { $group: { _id: { day: '$date' }, count: { $sum: 1 } } },
         { $sort: { _id: 1 } },
         { $project: { _id: 0, day: '$_id.day', count: '$count' } }

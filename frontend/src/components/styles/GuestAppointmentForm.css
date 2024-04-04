@@ -1,6 +1,24 @@
-.appointment-form {
+.app-req form {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.app-req div{
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    width: 20vw;
+}
+
+.app-req label{
+    margin-top: 5px;
+}
+
+.app-req button{
+    margin-top: 5px;
+}
+
+.app-req .close {
+    position: fixed;
+    left: auto;
+    right: 20px;
 }
