@@ -4,7 +4,7 @@ import { useAuthContext } from './hooks/useAuthContext'
 // Pages and Components
 import STMHome from './pages/STMHome'
 import CustomerHome from './pages/CustomerHome'
-import NavBar from './components/NavBar'
+import NavBar from './components/ui/NavBar'
 import Login from './pages/Login'
 import SelfSignup from './pages/SelfSignup'
 import Schedule from './pages/Schedule'

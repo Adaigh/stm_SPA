@@ -1,6 +1,6 @@
 import './styles/CustomerDetails.css'
-import { useCustomersContext } from '../hooks/useCustomersContext'
-import { useAuthContext } from "../hooks/useAuthContext"
+import { useCustomersContext } from '../../hooks/useCustomersContext'
+import { useAuthContext } from "../../hooks/useAuthContext"
 
 const CustomerDetails = ({customerInfo}) => {
     const {dispatch} = useCustomersContext()

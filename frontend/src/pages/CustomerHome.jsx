@@ -4,8 +4,8 @@ import { useAuthContext } from "../hooks/useAuthContext"
 import './styles/CustomerHome.css'
 
 // Components
-import CustomerDetails from '../components/CustomerDetails'
-import CustomerForm from "../components/CustomerForm"
+import CustomerDetails from '../components/ui/CustomerDetails'
+import CustomerForm from "../components/forms/CustomerForm"
 
 const CustomerHome = () => {
     const {customers, dispatch} = useCustomersContext()

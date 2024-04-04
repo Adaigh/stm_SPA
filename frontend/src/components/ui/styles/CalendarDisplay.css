@@ -1,6 +1,6 @@
 .calendar {
     background: var(--bg-dark);
-    background: url(../../../public/images/interior.jpg);
+    background: url(./assets/interior.jpg);
     background-size: cover;
     background-position: center;
     margin: 5vh auto;

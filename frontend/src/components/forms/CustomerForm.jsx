@@ -1,7 +1,7 @@
 import './styles/CustomerForm.css'
 import { useState } from "react"
-import { useCustomersContext } from "../hooks/useCustomersContext"
-import { useAuthContext } from "../hooks/useAuthContext"
+import { useCustomersContext } from "../../hooks/useCustomersContext"
+import { useAuthContext } from "../../hooks/useAuthContext"
 
 const CustomerForm = () => {
 

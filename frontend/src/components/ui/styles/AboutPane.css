@@ -1,5 +1,5 @@
 .aboutpane {
-  background: url(../../../public/images/gears2.jpg);
+  background: url(./assets/gears2.jpg);
   background-size: cover;
   padding: 2%;
 }

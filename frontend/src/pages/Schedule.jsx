@@ -2,10 +2,10 @@ import { useState } from "react";
 import Modal from 'react-modal';
 
 // Components
-import AboutPane from '../components/AboutPane'
-import CalendarDisplay from '../components/CalendarDisplay'
-import ContactInfo from '../components/ContactInfo'
-import GuestAppointmentForm from '../components/GuestAppointmentForm'
+import AboutPane from '../components/ui/AboutPane'
+import CalendarDisplay from '../components/ui/CalendarDisplay'
+import ContactInfo from '../components/ui/ContactInfo'
+import GuestAppointmentForm from '../components/forms/GuestAppointmentForm'
 
 // Hooks
 import { useAuthContext } from "../hooks/useAuthContext";

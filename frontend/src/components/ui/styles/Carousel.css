@@ -1,6 +1,6 @@
 .carousel-container {
   background: var(--bg-dark);
-  background-image: url('../../../public/images/gears3.jpg');
+  background: url(./assets/gears3.jpg);
   background-size: cover;
   margin: auto 0;
 }
