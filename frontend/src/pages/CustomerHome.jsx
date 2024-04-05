@@ -64,7 +64,7 @@ const CustomerHome = () => {
                     <span className="material-symbols-outlined refresh" onClick={(e) => callRefreshCustomers(e)}>refresh</span>
                 </div>
 
-                {/* Filter and map users into userDetail components */}
+                {/* Filter and map users into CustomerDetail components */}
                 {customers && customers.filter((customerInfo) => {
                     return (customerInfo.firstName.toUpperCase().includes(filter.toUpperCase()) ||
                     customerInfo.lastName.toUpperCase().includes(filter.toUpperCase()) || 
