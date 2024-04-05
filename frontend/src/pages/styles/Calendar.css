@@ -1,4 +1,4 @@
-.schedule-container {
+.calendar-container {
     height: calc(100vh - 150px);
     display: flex;
     flex-direction: column;
@@ -8,12 +8,12 @@
     --blue: #55f;
 }
 
-.schedule-container h2 {
+.calendar-container h2 {
     font-family: 'Black Ops One';
     font-weight: 400;
 }
 
-.schedule-container button{
+.calendar-container button{
     cursor: pointer;
 }
 

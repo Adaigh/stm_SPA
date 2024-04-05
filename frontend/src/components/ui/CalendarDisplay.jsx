@@ -1,7 +1,7 @@
 import Calendar from 'react-calendar';
 import './styles/CalendarDisplay.css'
 import { useState } from 'react';
-import { useScheduleContext } from '../../hooks/useScheduleContext'
+import { useCalendarContext } from '../../hooks/useCalendarContext'
 
 function CalendarDisplay({today,
                           setSelectedDate,
@@ -10,7 +10,7 @@ function CalendarDisplay({today,
     const [prevDayPicked, setPrevDayPicked] = useState(null)
     const [currentDate, setCurrentDate ] = useState(today)
     const endDate = new Date(today.getFullYear(), today.getMonth()+3, today.getDate())
-    const {schedule} = useScheduleContext()
+    const {calendar} = useCalendarContext()
 
     const handleDaySelect = (value, event) => {
       if(value < new Date()) return
@@ -41,8 +41,8 @@ function CalendarDisplay({today,
               if(date.getDay() === 0|| date.getDay() === 6) return 'weekend'
               if(date < today) return 'past'
               if(date === today) return 'today'
-              if(schedule && date.toLocaleDateString() in schedule) {
-                if(schedule[date.toLocaleDateString()] === 1) return 'partial'
+              if(calendar && date.toLocaleDateString() in calendar) {
+                if(calendar[date.toLocaleDateString()] === 1) return 'partial'
                 return 'full'
               }
               else return 'weekday'

@@ -7,6 +7,7 @@ import CustomerHome from './pages/CustomerHome'
 import NavBar from './components/ui/NavBar'
 import Login from './pages/Login'
 import SelfSignup from './pages/SelfSignup'
+import Calendar from './pages/Calendar'
 import Schedule from './pages/Schedule'
 
 
@@ -27,8 +28,12 @@ function App() {
                 element={<STMHome />}
                 />
               <Route
+                path="/calendar"
+                element={<Calendar/>}
+                />
+              <Route
                 path="/schedule"
-                element={<Schedule/>}
+                element={user ? <Schedule /> : <Navigate to="/login"/>}
                 />
               <Route
                 path="/customers"

@@ -23,10 +23,13 @@ const NavBar = () => {
                             alt={'STM Tuning, Volkswagen and Audi performance garage and repair shop.'} /> 
                     </Link>
                 </div>
-                <Link to="/schedule">Schedule</Link>
-                {user && user.access > 1 && <Link to="/customers">
-                    Customers
-                </Link>}
+                <Link to="/">Home</Link>
+                <Link to="/calendar">Calendar</Link>
+                {user && user.access > 1 && 
+                    <>
+                        <Link to="/customers" className="staff-only">Customers</Link>
+                        <Link to="/Schedule" className="staff-only">Schedule</Link>    
+                    </>}
             </div>
 
             <div className="links">

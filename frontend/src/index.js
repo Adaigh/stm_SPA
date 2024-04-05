@@ -4,15 +4,15 @@ import './index.css';
 import App from './App';
 import { CustomersContextProvider } from './context/CustomersContext'
 import { AuthContextProvider } from './context/AuthContext'
-import { ScheduleContextProvider } from './context/ScheduleContext';
+import { CalendarContextProvider } from './context/CalendarContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <AuthContextProvider>
     <CustomersContextProvider>
-      <ScheduleContextProvider>
+      <CalendarContextProvider>
         <App />
-      </ScheduleContextProvider>
+      </CalendarContextProvider>
     </CustomersContextProvider>
   </AuthContextProvider>
 );

@@ -17,10 +17,11 @@ header {
     text-decoration: none;
     font-weight: 400;
     font-size: 1.2rem;
+    border: 2px solid #333;
 }
 
 .links a:hover {
-    text-decoration: underline;
+    border-bottom: 2px solid red;
 }
 
 .logo-link {
@@ -37,4 +38,16 @@ header {
 
 .login a {
     margin-right: 15px;
+}
+
+a.staff-only {
+    padding: 0 5px;
+    border: 2px solid #333;
+    border-left: 2px solid red;
+    border-top: 2px solid red;
+}
+
+a.staff-only:hover {
+    text-decoration: none;
+    border: 2px solid red;
 }
