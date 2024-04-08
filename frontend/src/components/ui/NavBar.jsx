@@ -35,7 +35,10 @@ const NavBar = () => {
             <div className="links">
                 {user && (
                     <div className="logged-in">
-                        <span>{user.user}</span>
+                        {user.access !== 1 && <span><u>STAFF</u>: {user.user}</span>}
+                        {user.access === 1 && 
+                            <Link to='/details'>{user.user}</Link>
+                        }
                         <button onClick={handleClick}>Log Out</button>
                     </div>)}
                 {!user && (

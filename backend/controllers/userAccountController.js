@@ -27,6 +27,8 @@ const loginUserAccount = async (req, res) => {
 // Self Signup
 const signupUserAccount = async (req, res) =>  {
 
+    console.log(req.body)
+    
     const {user, password} = req.body
 
     try {

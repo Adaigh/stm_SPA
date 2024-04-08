@@ -25,7 +25,7 @@ export const CalendarContextProvider = ({children}) => {
             const response = await fetch('/api/appointments/counts')
             const json = await response.json()
             if(response.ok) dispatch({type: 'SET_CALENDAR', payload: json})
-            return "error"
+            else return "error"
         }
         getAppt()
     }, [])

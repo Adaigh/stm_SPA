@@ -9,6 +9,7 @@ import Login from './pages/Login'
 import SelfSignup from './pages/SelfSignup'
 import Calendar from './pages/Calendar'
 import Schedule from './pages/Schedule'
+import CustomerDetailHome from './pages/CustomerDetailHome'
 
 
 function App() {
@@ -38,6 +39,10 @@ function App() {
               <Route
                 path="/customers"
                 element={user ? <CustomerHome /> : <Navigate to="/login"/>}
+                />
+              <Route
+                path="/details"
+                element={user ? <CustomerDetailHome /> : <Navigate to="/login"/>}
                 />
               <Route
                 path="/login"
