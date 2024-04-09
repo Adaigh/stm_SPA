@@ -19,6 +19,6 @@ const vehicleSchema = new Schema({
         type: String,
         default: "Not Stored"
     }
-})
+}, {_id: false})
 
 module.exports = vehicleSchema

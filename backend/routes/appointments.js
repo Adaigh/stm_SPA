@@ -5,7 +5,6 @@ const {
     getAppointments,
     getAppointment,
     createAppointment,
-    getMonth,
     getAppointmentCounts
 } = require ('../controllers/appointmentController')
 
@@ -20,9 +19,6 @@ router.get('/single/:id', requireAuth, verifyAccessLevel(staffAccess), getAppoin
 
 // Create new appointment
 router.post('/', createAppointment)
-
-// Get a month of appointments
-router.get('/month', requireAuth, verifyAccessLevel(staffAccess), getMonth)
 
 // Get appointment counts
 router.get('/counts', getAppointmentCounts)

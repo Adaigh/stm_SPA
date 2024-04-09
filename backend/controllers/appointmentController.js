@@ -1,11 +1,14 @@
 const Appointment = require('../models/appointmentModel')
 const mongoose = require('mongoose')
 
+
 // Get all appointments with user information 
+// ********************
+// TODO: FILTER ONLY FOR CURRENT APPOINTMENTS
+// ********************
 const getAppointments = async (req,res) => {
     const appointments = await Appointment.find()
-    // .populate('userInformation')
-    .sort({date:1})
+    .sort({date:-1})
     res.status(200).json(appointments)
 }
 
@@ -31,11 +34,17 @@ const getAppointment = async (req,res) => {
 const createAppointment = async (req,res) => {
     const {date, firstName, lastName, phoneNumber, emailAddress, vehicle, description} = req.body
     
+    if(!date || !firstName || !lastName || !phoneNumber || !vehicle || !description) {
+        return res.status(400).json({error: "Missing required fields"})
+    }
+
+    // ********************
     // TODO: VALIDATION CHECKS
+    // ********************
     
     let appointment = await Appointment.findOne({date, firstName, lastName, vehicle})
     if(appointment) {
-        return res.status(409).json({message: "Appointment already exists"})
+        return res.status(409).json({error: "Appointment already exists"})
     }
 
     try {
@@ -46,24 +55,6 @@ const createAppointment = async (req,res) => {
     } catch (error){
         res.status(400).json({error: error.message})
     }
-}
-
-// Get appointments and customer details for the next Month
-const getMonth = async (req,res) => {
-    const currentDate = new Date();
-    const nexMonth = new Date()
-    nexMonth.setMonth(currentDate.getMonth()+1)
-    currentDate = currentDate.toLocaleDateString()
-    nexMonth = nexMonth.toLocaleDateString()
-    const appointments = await Appointment.find()
-        .where('date')
-        .gte(currentDate)
-        .lte(nexMonth)
-
-    if(!appointments){
-        res.status(400).json({error: "GET MONTH ERROR"})
-    }
-    res.status(200).json(appointments)
 }
 
 // Get all appointments for calendar display
@@ -93,6 +84,5 @@ module.exports = {
     getAppointments,
     getAppointment,
     createAppointment,
-    getMonth,
     getAppointmentCounts
 }
