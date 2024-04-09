@@ -1,8 +1,8 @@
 // Testing Tools
 require('jest')
 const httpMocks = require('node-mocks-http')
-const mongoose = require('mongoose')
 const { MongoMemoryServer } = require('mongodb-memory-server')
+const mongoose = require('mongoose')
 
 // Modules under test
 const {
@@ -97,17 +97,20 @@ let conn = null
 
 describe('APPOINTMENT TESTS', () => {
 
+    // Connect to mock DB and insert test appointments
     beforeAll( async () => {
         mdb = await MongoMemoryServer.create()
         conn = await mongoose.connect(mdb.getUri())
         await Appointment.insertMany(testAppointments)
     })
     
+    // Shut down mock DB
     afterAll( async () => {
         mongoose.connection.close()
         .then(() => mdb.stop())
     })
     
+    // Set up empty req and res objects
     beforeEach(() => {
         req = httpMocks.createRequest()
         res = httpMocks.createResponse()
