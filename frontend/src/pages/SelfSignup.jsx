@@ -44,6 +44,7 @@ const SelfSignup = () => {
             if(!vModel) setEmptyFields([...emptyFields, 'vehicleModel'])
             return
         }
+        console.log(email, password, newCustomer)
         await selfSignup(email, password, newCustomer)
     }
 
