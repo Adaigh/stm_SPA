@@ -13,81 +13,22 @@ const {
 } = require('../appointmentController')
 const Appointment = require('../../models/appointmentModel')
 
+// Testing data
+const {
+    testIDs,
+    invalidID,
+    badID,
+} = require('../testData/mongooseIDs')
 
-// IDs to use for testing data
-const testIDs = [
-    new mongoose.Types.ObjectId().toHexString(),
-    new mongoose.Types.ObjectId().toHexString()
-]
-const invalidID = '6615bc734f633db05275c581Z'
-const badID = new mongoose.Types.ObjectId().toHexString()
-    
-// Dates to use for testing data
-const currentDate = new Date()
-const today = currentDate.toLocaleDateString()
-const tomorrow = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1).toLocaleDateString()
-const yesterday = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - 1).toLocaleDateString()
-const nextWeek = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 7).toLocaleDateString()
-const testAppointments = [{
-    date: today,
-    firstName: "John",
-    lastName: "Doe",
-    phoneNumber: "1234567890",
-    emailAddress: "testemail1@email.com",
-    vehicle: {
-        vehicleYear:2011,
-        vehicleMake:"Audi",
-        vehicleModel: "A3",
-        vehicleVIN: "Not Stored"
-    },
-    description: "Oil Change",
-    reviewed: true,
-    __v: 0,
-    _id: testIDs[0]
-},
-{
-    date: tomorrow,
-    firstName: "Jane",
-    lastName: "Doe",
-    phoneNumber: "9876543210",
-    emailAddress: "testemail2@email.com",
-    vehicle: {
-        vehicleYear:2010,
-        vehicleMake:"BMW",
-        vehicleModel: "X5",
-        vehicleVIN: "Not Stored"
-    },
-    description: "Inspection",
-    reviewed: false,
-    __v: 0,
-    _id: testIDs[1]
-}]
-
-// Single test appointment
-const newAppt = {
-    date: today,
-    firstName: "Dan",
-    lastName: "Doughnut",
-    phoneNumber: "6549873210",
-    emailAddress: "testemail3@email.com",
-    vehicle: {
-        vehicleYear:2000,
-        vehicleMake:"BMW",
-        vehicleModel: "330xi",
-        vehicleVIN: "Not Stored"
-    },
-    description: "Brakes"
-}
-
-// List of fields required for new appointments
-const newApptReqFields = [
-    'date',
-    'firstName',
-    'lastName',
-    'phoneNumber',
-    'vehicle',
-    'description'
-]
+const {
+    today,
+    tomorrow,
+    yesterday,
+    nextWeek,
+    testAppointments,
+    newAppt,
+    newApptReqFields
+} = require('../testData/appointmentTestData')
 
 // Test suite parameters
 let req = {}
@@ -201,7 +142,7 @@ describe('APPOINTMENT TESTS', () => {
             await getAppointmentCounts(req, res)
             const data = res._getJSONData()
             let expected = {}
-            expected[today] = 1
+            expected[tomorrow] = 1
             expect(data).toStrictEqual(expected)
         })
     })
