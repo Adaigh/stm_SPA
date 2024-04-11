@@ -35,8 +35,8 @@ const NavBar = () => {
             <div className="links">
                 {user && (
                     <div className="logged-in">
-                        {user.access !== 1 && <span><u>STAFF</u>: {user.user}</span>}
-                        {user.access === 1 && 
+                        {user.access > 0 && <span><u>STAFF</u>: {user.user}</span>}
+                        {user.access === 0 && 
                             <Link to='/details'>{user.user}</Link>
                         }
                         <button onClick={handleClick}>Log Out</button>
