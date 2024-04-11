@@ -18,7 +18,7 @@ const getCustomer = async (req, res) => {
     
 
     if(!mongoose.Types.ObjectId.isValid(_id)){
-        return res.status(404).json({error: 'Invalid request ID'})
+        return res.status(400).json({error: 'Invalid request ID'})
     }
 
     try{
@@ -51,6 +51,10 @@ const createCustomer = async (req, res) => {
         return res.status(400).json({error: "Missing required data"})
     }
 
+    // ********************
+    // TODO: VALIDATION CHECKS
+    // ********************
+
     // If email is not provided, create placeholder string
     if(!emailAddress){
         emailAddress = `PLACEHOLDER - ${firstName} ${lastName}`
@@ -76,13 +80,13 @@ const deleteCustomer = async (req,res) => {
     // ID validation check
     const {id} = req.params
     if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error: 'Customer not found'})
+        return res.status(400).json({error: 'Invalid request data'})
     }
 
     const customer = await Customer.findByIdAndDelete(id)
 
     if(!customer){
-        return res.status(400).json({error: 'Customer not found'})
+        return res.status(404).json({error: 'Customer not found'})
     }
     res.status(200).json(customer)
 }
@@ -92,15 +96,19 @@ const updateCustomer = async (req, res) => {
     // ID validation check
     const {id} = req.params
     if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error: 'Customer not found'})
+        return res.status(400).json({error: 'Invalid request data'})
     }
+
+    // ********************
+    // TODO: VALIDATION CHECKS
+    // ********************
 
     const customer = await Customer.findByIdAndUpdate(id, {...req.body})
 
     if(!customer){
-        return res.status(400).json({error: 'Customer not found'})
+        return res.status(404).json({error: 'Customer not found'})
     }
-    res.status(200).json({CustomerData: customer, updates: req.body})
+    res.status(200).json({CustomerData: customer, updates: {...req.body}})
 }
 
 module.exports = {

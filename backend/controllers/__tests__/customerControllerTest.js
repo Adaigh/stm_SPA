@@ -102,7 +102,7 @@ describe('CUSTOMERS TESTS', () => {
             await getCustomer(req, res)
             
             // Verify Data
-            expect(res.statusCode).toBe(404)
+            expect(res.statusCode).toBe(400)
             const data = res._getJSONData()
             expect(data.error).toEqual("Invalid request ID")
         })
@@ -213,17 +213,17 @@ describe('CUSTOMERS TESTS', () => {
             
             // Execute
             await createCustomer(req, res);
-            const data = res._getJSONData()
             
             // Verify Data
             expect(res.statusCode).toBe(200)
+            const data = res._getJSONData()
             
             // Verify and remove auto-generated data
             expect(mongoose.Types.ObjectId.isValid(data._id)).toBe(true)
             expect(data.__v).toBe(0)
             delete data._id
             delete data.__v
-            
+
             expect(data).toEqual(cust)
 
         })
@@ -238,6 +238,113 @@ describe('CUSTOMERS TESTS', () => {
             expect(res.statusCode).toBe(409)
             const data = res._getJSONData()
             expect(data.error).toEqual("Customer data already exists")
+        })
+    })
+    describe('deleteCustomer', () => {
+        it('Should delete a customer', async () => {
+            // Setup
+            req.params = {id: testCustomers[4]._id}
+
+            // Execute
+            await deleteCustomer(req, res)
+
+            // Verify Data
+            expect(res.statusCode).toBe(200)
+            const data = res._getJSONData()
+            expect(data).toEqual(testCustomers[4])
+
+        })
+        it('Should fail for no ID', async () => {
+            // Execute
+            await deleteCustomer(req, res)
+
+            // Verify Data
+            expect(res.statusCode).toBe(400)
+            const data = res._getJSONData()
+            expect(data.error).toEqual("Invalid request data")
+        })
+        it('Should fail for invalid ID', async () => {
+            // Setup
+            req.params = {id: invalidID}
+
+            // Execute
+            await deleteCustomer(req, res)
+
+            // Verify Data
+            expect(res.statusCode).toBe(400)
+            const data = res._getJSONData()
+            expect(data.error).toEqual("Invalid request data")
+        })
+        it('Should fail for a bad ID', async () => {
+            // Setup
+            req.params = {id: newID()}
+
+            // Execute
+            await deleteCustomer(req, res)
+
+            // Verify Data
+            expect(res.statusCode).toBe(404)
+            const data = res._getJSONData()
+            expect(data.error).toEqual("Customer not found")
+        })
+    })
+
+    describe('updateCustomer', () => {
+        it('Should update a customer', async () => {
+            // Setup
+            let updatedCustomer = structuredClone(testCustomers[3])
+            updatedCustomer['emailAddress'] = 'updated@example.com'
+            updatedCustomer['phoneNumbers'] = ['9876543210']
+            updatedCustomer['vehicles'].push({
+                vehicleYear: 2020,
+                vehicleMake: "VW",
+                vehicleModel: "Atlas",
+                vehicleVin: "Not Stored"
+            })
+            req.params = {id: updatedCustomer._id}
+            req.body = updatedCustomer
+
+            // Execute
+            await updateCustomer(req, res)
+            
+            // Verify data
+            expect(res.statusCode).toBe(200)
+            const data = res._getJSONData()
+            expect(data.CustomerData).toEqual(testCustomers[3])
+            expect(data.updates).toEqual(updatedCustomer)
+        })
+        it('Should fail for no ID', async () => {
+            // Execute
+            await updateCustomer(req, res)
+
+            // Verify Data
+            expect(res.statusCode).toBe(400)
+            const data = res._getJSONData()
+            expect(data.error).toEqual("Invalid request data")
+        })
+        it('Should fail for invalid ID', async () => {
+            // Setup
+            req.params = {id: invalidID}
+
+            // Execute
+            await updateCustomer(req, res)
+
+            // Verify Data
+            expect(res.statusCode).toBe(400)
+            const data = res._getJSONData()
+            expect(data.error).toEqual("Invalid request data")
+        })
+        it('Should fail for a bad ID', async () => {
+            // Setup
+            req.params = {id: newID()}
+
+            // Execute
+            await updateCustomer(req, res)
+
+            // Verify Data
+            expect(res.statusCode).toBe(404)
+            const data = res._getJSONData()
+            expect(data.error).toEqual("Customer not found")
         })
     })
   })
