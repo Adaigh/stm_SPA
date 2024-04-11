@@ -12,17 +12,28 @@ const {
     deleteCustomer,
     updateCustomer
 } = require('../customerController')
+
 const Customer = require('../../models/customerModel')
+const UserAccount = require('../../models/userAccountModel')
 
 // Testing data
 const {
     testIDs,
     invalidID,
-    badID,
-} = require('../testData/mongooseIDs')
+    newID
+} = require('../testData/testUtils')
+
 const {
-    testCustomers
+    testCustomers,
+    newCustomer,
+    newCustomerDupEmail,
+    newCustomerNoEmail,
+    customerReqFields,
+    populatedAccount
  } = require("../testData/customerTestData")
+
+const {newAccount} = require('../testData/userAccountTestData')
+
 
  // Test suite parameters
 let req = {}
@@ -30,7 +41,7 @@ let res = {}
 let mdb = null
 let conn = null
 
-describe('getCustomers', () => {
+describe('CUSTOMERS TESTS', () => {
 
     // Connect to mock DB and insert test appointments
     beforeAll( async () => {
@@ -51,10 +62,182 @@ describe('getCustomers', () => {
         res = httpMocks.createResponse()
     })
   
-    it('should return a list of customers', async () => {
-      await getCustomers(req, res);
-      const data = res._getJSONData()
-      expect(res.statusCode).toBe(200)
-      expect(data).toStrictEqual(testCustomers);
-    });
-  });
+    describe('getCustomers', () => {
+        it('Should return a list of customers', async () => {
+            // Execute
+            await getCustomers(req, res);
+            
+            // Verify Data
+            expect(res.statusCode).toBe(200)
+            const data = res._getJSONData()
+            expect(data).toEqual(testCustomers);
+          })
+    })
+
+    describe('getCustomer', () => {
+        // Setup a single test account
+        const testAccount = structuredClone(newAccount)
+        testAccount.user = testCustomers[0].emailAddress
+        testAccount.__v = 0
+        testAccount._id = newID()
+        UserAccount.create(testAccount)
+
+        it('Should fail without an ID', async() => {
+            // Setup
+            req.user = {}
+
+            // Execute
+            await getCustomer(req, res)
+            
+            // Verify Data
+            expect(res.statusCode).toBe(400)
+            const data = res._getJSONData()
+            expect(data.error).toEqual("Invalid request data")
+        })
+        it('Should fail with an invalid ID', async () => {
+            // Setup
+            req.user = {_id: invalidID}
+            
+            // Execute
+            await getCustomer(req, res)
+            
+            // Verify Data
+            expect(res.statusCode).toBe(404)
+            const data = res._getJSONData()
+            expect(data.error).toEqual("Invalid request ID")
+        })
+        it('Should fail with a bad ID', async() => {
+            // Setup
+            req.user = {_id: newID()}
+            
+            // Execute
+            await getCustomer(req, res)
+            
+            // Verify Data
+            expect(res.statusCode).toBe(404)
+            const data = res._getJSONData()
+            expect(data.error).toEqual("Customer not found")
+        })
+        it('Should get the full details of a customer', async () => {
+            // Setup
+            const populatedAccount = structuredClone(testAccount)
+            populatedAccount.user = testCustomers[0]
+            req.user = {_id: testAccount._id}
+            
+            // Execute
+            await getCustomer(req, res)
+            
+            // Verify Data
+            expect(res.statusCode).toBe(200)
+            const data = res._getJSONData()
+            expect(data).toEqual(populatedAccount)
+        })
+    })
+
+    describe('createCustomer', () => {
+        it('Should store a customer', async () => {
+            // Setup
+            req.body = newCustomer
+            
+            // Execute
+            await createCustomer(req, res);
+            
+            // Verify Data
+            expect(res.statusCode).toBe(200)
+            const data = res._getJSONData()
+
+            // Verify and remove auto-generated data
+            expect(mongoose.Types.ObjectId.isValid(data._id)).toBe(true)
+            expect(data.__v).toBe(0)
+            delete data._id
+            delete data.__v
+            
+            expect(data).toEqual(newCustomer)
+        })
+        it('Should fail for missing fields', async () => {
+            for(let f of customerReqFields) {
+                // Setup
+                const cust = structuredClone(newCustomer)
+                delete cust[f]
+                req.body = cust
+                res = httpMocks.createResponse()
+            
+                // Execute
+                await createCustomer(req, res)
+                
+                // Verify Data
+                expect(res.statusCode).toBe(400)
+                const data = res._getJSONData()
+                expect(data).toEqual({"error": "Missing required data"})
+            }
+        })
+        it('Should fail for duplicated emails', async () => {
+            // Setup
+            req.body = newCustomerDupEmail
+            
+            // Execute
+            await createCustomer(req,res)
+            
+            // Verify Data
+            expect(res.statusCode).toBe(409)
+            const data = res._getJSONData()
+            expect(data.error).toEqual("Customer data already exists")
+        })
+        it('Should store a customer without an email address', async () => {
+            // Setup
+            let cust = structuredClone(newCustomerNoEmail[0])
+            req.body = cust
+            cust['emailAddress'] = `PLACEHOLDER - ${cust.firstName} ${cust.lastName}`
+            
+            // Execute
+            await createCustomer(req, res);
+            
+            // Verify Data
+            expect(res.statusCode).toBe(200)
+            const data = res._getJSONData()
+            
+            // Verify and remove auto-generated data
+            expect(mongoose.Types.ObjectId.isValid(data._id)).toBe(true)
+            expect(data.__v).toBe(0)
+            delete data._id
+            delete data.__v
+
+            expect(data).toEqual(cust)
+
+        })
+        it('Should store a second customer without an email address', async () => {
+            // Setup
+            let cust = structuredClone(newCustomerNoEmail[1])
+            req.body = cust
+            cust['emailAddress'] = `PLACEHOLDER - ${cust.firstName} ${cust.lastName}`
+            
+            // Execute
+            await createCustomer(req, res);
+            const data = res._getJSONData()
+            
+            // Verify Data
+            expect(res.statusCode).toBe(200)
+            
+            // Verify and remove auto-generated data
+            expect(mongoose.Types.ObjectId.isValid(data._id)).toBe(true)
+            expect(data.__v).toBe(0)
+            delete data._id
+            delete data.__v
+            
+            expect(data).toEqual(cust)
+
+        })
+        it('Should fail for duplicated names, no email', async () => {
+            // Setup
+            req.body = structuredClone(newCustomerNoEmail[0])
+            
+            // Execute
+            await createCustomer(req,res)
+            
+            // Verify Data
+            expect(res.statusCode).toBe(409)
+            const data = res._getJSONData()
+            expect(data.error).toEqual("Customer data already exists")
+        })
+    })
+  })

@@ -1,7 +1,7 @@
-const {testIDs} = require('./mongooseIDs')
+const {testIDs, newID} = require('./testUtils')
 
 // Test Customers array
-let testCustomers = [
+const testCustomers = [
     {
         __v: 0,
         _id: testIDs[0],
@@ -20,8 +20,8 @@ let testCustomers = [
     },
     {
         __v: 0,
-        _id: testIDs[2],
-        emailAddress: "test3@example.com",
+        _id: testIDs[1],
+        emailAddress: "test2@example.com",
         firstName: "Michael",
         lastName: "Jordan",
         phoneNumbers: ["2223334444"],
@@ -36,8 +36,8 @@ let testCustomers = [
     },
     {
         __v: 0,
-        _id: testIDs[3],
-        emailAddress: "test4@example.com",
+        _id: testIDs[2],
+        emailAddress: "test3@example.com",
         firstName: "Sarah",
         lastName: "Palin",
         phoneNumbers: ["3334445555"],
@@ -52,8 +52,8 @@ let testCustomers = [
     },
     {
         __v: 0,
-        _id: testIDs[1],
-        emailAddress: "test2@example.com",
+        _id: testIDs[3],
+        emailAddress: "test4@example.com",
         firstName: "Jane",
         lastName: "Smith",
         phoneNumbers: ["1112223333"],
@@ -82,8 +82,78 @@ let testCustomers = [
             }
         ]
     }
- ]
+]
+ 
+ const newCustomer = {
+    emailAddress: "test6@example.com",
+    firstName: "Steve",
+    lastName: "Twain",
+    phoneNumbers: ["4445556666"],
+    vehicles: [
+        {
+            vehicleYear: 2009,
+            vehicleMake: "VW",
+            vehicleModel: "Beetle",
+            vehicleVIN: "Not Stored"
+        }
+    ]
+}
+
+const newCustomerDupEmail = {
+    emailAddress: "test6@example.com",
+    firstName: "Mark",
+    lastName: "Cuban",
+    phoneNumbers: ["4445556666"],
+    vehicles: [
+        {
+            vehicleYear: 2009,
+            vehicleMake: "VW",
+            vehicleModel: "Beetle",
+            vehicleVIN: "Not Stored"
+        }
+    ]
+}
+
+const newCustomerNoEmail = [
+    {
+        firstName: "Steve",
+        lastName: "Smith",
+        phoneNumbers: ["4445556666"],
+        vehicles: [
+            {
+                vehicleYear: 2009,
+                vehicleMake: "VW",
+                vehicleModel: "Beetle",
+                vehicleVIN: "Not Stored"
+            }
+        ]
+    },
+    {
+        firstName: "Jake",
+        lastName: "Smith",
+        phoneNumbers: ["4445556666"],
+        vehicles: [
+            {
+                vehicleYear: 2009,
+                vehicleMake: "VW",
+                vehicleModel: "Beetle",
+                vehicleVIN: "Not Stored"
+            }
+        ]
+    }
+]
+
+const customerReqFields = [
+    "firstName",
+    "lastName",
+    "phoneNumbers",
+    "vehicles"
+]
 
  module.exports = {
-    testCustomers
+    testCustomers,
+    newCustomer,
+    newCustomerDupEmail,
+    newCustomerNoEmail,
+    customerReqFields
  }

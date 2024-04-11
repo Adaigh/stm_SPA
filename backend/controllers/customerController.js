@@ -10,9 +10,17 @@ const getCustomers = async (req,res) => {
 
 // GET single Customer details using account email
 const getCustomer = async (req, res) => {
-
-    const {_id} = req.user._id
+    const {_id} = req.user
     
+    if(typeof(_id) == 'undefined'){
+        return res.status(400).json({error: 'Invalid request data'})
+    }
+    
+
+    if(!mongoose.Types.ObjectId.isValid(_id)){
+        return res.status(404).json({error: 'Invalid request ID'})
+    }
+
     try{
         const customer = await UserAccount.findById({_id})
         .populate({
@@ -36,31 +44,30 @@ const getCustomer = async (req, res) => {
 
 // POST a new Customer
 const createCustomer = async (req, res) => {
-    const {firstName, lastName, phoneNumbers, emailAddress, vehicles} = req.body
+    let {firstName, lastName, phoneNumbers, emailAddress, vehicles} = req.body
 
     // Validation
     if(!firstName || !lastName || !phoneNumbers || !vehicles){
-        return res.status(422).json({error: "Missing required data"})
+        return res.status(400).json({error: "Missing required data"})
+    }
+
+    // If email is not provided, create placeholder string
+    if(!emailAddress){
+        emailAddress = `PLACEHOLDER - ${firstName} ${lastName}`
     }
 
     // Check to see if Customer already exists
-    let customer = {}
-    if(!emailAddress)  customer = await Customer.findOne({firstName, lastName})
-    else customer = await Customer.findOne({emailAddress})
-    if(customer && customer.firstName == firstName && customer.lastName == lastName) {
+    let customer = await Customer.findOne({emailAddress})
+    if(customer) {
         return res.status(409).json({error: "Customer data already exists", CustomerData: customer})
     }
 
     // ADD new Customer document
     try {
-        if(emailAddress){
-            customer = await Customer.create({firstName, lastName, phoneNumbers, emailAddress, vehicles})
-        } else {
-            customer = await Customer.create({firstName, lastName, phoneNumbers, vehicles})
-        }
+        customer = await Customer.create({firstName, lastName, phoneNumbers, emailAddress, vehicles})
         res.status(200).json(customer)
     } catch (error){
-        res.status(400).json({error: error.message})
+        res.status(500).json({error: error.message})
     }
 }
 
