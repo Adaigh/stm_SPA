@@ -56,32 +56,6 @@ const createUserAccount = async (req, res) =>  {
     }
 }
 
-// Find customer information associated with account
-// const findUserDetails = async (req, res) => {
-
-//     const {emailAddress} = req.body
-
-//     try {
-//         const userAccount = await UserAccount.findOne({user: emailAddress})
-//         .populate({
-//             path: 'user',
-//             model: 'Customer',
-//             select: ['emailAddress', 'firstName', 'lastName', 'phoneNumbers', 'vehicles'],
-//             foreignField: 'emailAddress'
-//         }).select('user')
-
-//         if (!userAccount) {
-//             return res.status(404).json({ error: 'User Account not found' }); 
-//         }
-
-//         return res.status(200).json(userAccount); // Send the complete object
-
-//     } catch (error) {
-//         console.log(error)
-//         return res.status(500).json({ error: 'Failed to fetch user info' }); 
-//     }
-// }
-
 // Remove a user account
 const deleteUserAccount = async (req, res) => {
     const {id} = req.params
@@ -106,6 +80,5 @@ const deleteUserAccount = async (req, res) => {
 module.exports = {
     loginUserAccount,
     signupUserAccount,
-    // findUserDetails,
     createUserAccount,
     deleteUserAccount}
