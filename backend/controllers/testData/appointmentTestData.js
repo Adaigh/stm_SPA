@@ -1,15 +1,8 @@
-const {testIDs} = require('./mongooseIDs')
-    
-// Dates to use for testing data
-const currentDate = new Date()
-const today = currentDate.toLocaleDateString()
-const tomorrow = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1).toLocaleDateString()
-const yesterday = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - 1).toLocaleDateString()
-const nextWeek = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 7).toLocaleDateString()
+const { dates, testIDs } = require('./testUtils')
 
 // Test appointments array
 const testAppointments = [{
-    date: tomorrow,
+    date: dates[0],
     firstName: "John",
     lastName: "Doe",
     phoneNumber: "1234567890",
@@ -26,7 +19,7 @@ const testAppointments = [{
     _id: testIDs[0]
 },
 {
-    date: today,
+    date: dates[1],
     firstName: "Jane",
     lastName: "Doe",
     phoneNumber: "9876543210",
@@ -41,11 +34,62 @@ const testAppointments = [{
     reviewed: false,
     __v: 0,
     _id: testIDs[1]
+},
+{
+    date: dates[2],
+    firstName: "Michael",
+    lastName: "Brown",
+    phoneNumber: "0987654321",
+    emailAddress: "testemail4@email.com",
+    vehicle: {
+        vehicleYear:2015,
+        vehicleMake:"Ford",
+        vehicleModel: "F150",
+        vehicleVIN: "Not Stored"
+    },
+    description: "Tire Rotation",
+    reviewed: false,
+    __v: 0,
+    _id: testIDs[2]
+},
+{
+    date: dates[3],
+    firstName: "Michael",
+    lastName: "Jackson",
+    phoneNumber: "0987654321",
+    emailAddress: "testemail3@email.com",
+    vehicle: {
+        vehicleYear:2015,
+        vehicleMake:"Tesla",
+        vehicleModel: "Model S",
+        vehicleVIN: "Not Stored"
+    },
+    description: "Alignment Check",
+    reviewed: false,
+    __v: 0,
+    _id: testIDs[3]
+},
+{
+    date: dates[4],
+    firstName: "Jennifer",
+    lastName: "Aniston",
+    phoneNumber: "1112223333",
+    emailAddress: "testemail4@email.com",
+    vehicle: {
+        vehicleYear:2008,
+        vehicleMake:"Honda",
+        vehicleModel: "Civic",
+        vehicleVIN: "Not Stored"
+    },
+    description: "Brake Fluid Check",
+    reviewed: true,
+    __v: 0,
+    _id: testIDs[4]
 }]
 
 // Single test appointment
 const newAppt = {
-    date: today,
+    date: dates[4],
     firstName: "Dan",
     lastName: "Doughnut",
     phoneNumber: "6549873210",
@@ -70,10 +114,6 @@ const newApptReqFields = [
 ]
 
 module.exports = {
-    today,
-    tomorrow,
-    yesterday,
-    nextWeek,
     testAppointments,
     newAppt,
     newApptReqFields

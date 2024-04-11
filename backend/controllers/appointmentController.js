@@ -18,7 +18,7 @@ const getAppointment = async (req,res) => {
     // ID validation check
     const {id} = req.params
     if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error: "Appointment not found"})
+        return res.status(400).json({error: "Invalid request data"})
     }
 
     const appointment = await Appointment.findById(id)
@@ -68,7 +68,7 @@ const getAppointmentCounts = async (req,res) => {
     ])
     
     if(!appointments){
-        res.status(500).json({error: "Server Error"})
+        return res.status(500).json({error: "Server Error"})
     }
 
     // Reformat server-side

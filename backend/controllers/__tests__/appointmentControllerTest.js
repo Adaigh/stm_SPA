@@ -15,16 +15,13 @@ const Appointment = require('../../models/appointmentModel')
 
 // Testing data
 const {
+    dates,
     testIDs,
     invalidID,
-    badID,
-} = require('../testData/mongooseIDs')
+    newID
+} = require('../testData/testUtils')
 
 const {
-    today,
-    tomorrow,
-    yesterday,
-    nextWeek,
     testAppointments,
     newAppt,
     newApptReqFields
@@ -60,50 +57,88 @@ describe('APPOINTMENT TESTS', () => {
     // GET multiple Appointments
     describe('getAppointments', () => {
         it('Should get all appointments', async () => {
+            // Execute
             await getAppointments(req,res)
+
+            // Verify Data
+            expect(res.statusCode).toBe(200)
             const data = res._getJSONData()
-            expect(data).toStrictEqual(testAppointments)
+            expect(data).toEqual(testAppointments)
         })
     })
 
     // Get single Appointment
     describe('getAppointment', () => {
         it("Should get the first appointment", async () => {
+            // Setup
             req.params = {id: testIDs[0]}
+            
+            // Execute
             await getAppointment(req, res)
+
+            // Verify Data
+            expect(res.statusCode).toBe(200)
             const data = res._getJSONData()
-            expect(data).toStrictEqual(testAppointments[0])
+            expect(data).toEqual(testAppointments[0])
         })
         it("Should get the second appointment", async () => {
+            // Setup
             req.params = {id: testIDs[1]}
+            
+            // Execute
             await getAppointment(req, res)
+
+            // Verify Data
+            expect(res.statusCode).toBe(200)
             const data = res._getJSONData()
-            expect(data).toStrictEqual(testAppointments[1])
+            expect(data).toEqual(testAppointments[1])
         })
         it("Should fail if no ID", async () => {
+            // Execute
             await getAppointment(req, res)
+
+            // Verify Data
+            expect(res.statusCode).toBe(400)
             const data = res._getJSONData()
-            expect(data).toStrictEqual({"error":"Appointment not found"})
+            expect(data.error).toEqual("Invalid request data")
         })
         it("Should fail if invalid ID ", async () => {
+            // Setup
             req.params = {id: invalidID}
+            
+            // Execute
             await getAppointment(req, res)
+
+            // Verify Data
+            expect(res.statusCode).toBe(400)
             const data = res._getJSONData()
-            expect(data).toStrictEqual({"error":"Appointment not found"})
+            expect(data.error).toEqual("Invalid request data")
         })
         it("Should fail if ID does not exist ", async () => {
-            req.params = {id: badID}
+            // Setup
+            req.params = {id: newID()}
+            
+            // Execute
             await getAppointment(req, res)
+
+            // Verify Data
+            expect(res.statusCode).toBe(404)
             const data = res._getJSONData()
-            expect(data).toStrictEqual({"error":"Appointment not found"})
+            expect(data.error).toEqual("Appointment not found")
         })
     })
 
     // Create an appointment
     describe('createAppointment', () => {
         it('Should create a new appointment', async () => {
+            // Setup
             req.body = newAppt
+            
+            // Execute
             await createAppointment(req,res)
+
+            // Verify Data
+            expect(res.statusCode).toBe(200)
             const data = res._getJSONData()
             
             // Verify and remove auto-generated data
@@ -114,36 +149,51 @@ describe('APPOINTMENT TESTS', () => {
             delete data.__v
             delete data.reviewed
 
-            expect(data).toStrictEqual(newAppt)
+            expect(data).toEqual(newAppt)
         })
         it("Should fail for missing fields", async () => {
             for (let k of newApptReqFields) {
+                // Setup
                 const appt = structuredClone(newAppt)
                 delete appt[k]
                 req.body = appt
                 res = httpMocks.createResponse()
+            
+                // Execute
                 await createAppointment(req, res)
+
+                // Verify Data
                 expect(res.statusCode).toBe(400)
                 const data = res._getJSONData()
-                expect(data).toStrictEqual({"error": "Missing required fields"})
+                expect(data.error).toEqual("Missing required fields")
             }
         })
         it("Should fail for existing appointments", async () => {
+            // Setup
             req.body = testAppointments[0]
+            
+            // Execute
             await createAppointment(req, res)
+
+            // Verify Data
             expect(res.statusCode).toBe(409)
             const data = res._getJSONData()
-            expect(data).toStrictEqual({"error": "Appointment already exists"})
+            expect(data.error).toEqual("Appointment already exists")
         })
     })
 
     describe('getAppointmentCounts', () => {
         it("Should return reviewed counts", async () => {
+            // Setup
+            let expected = {[dates[0]]:1, [dates[4]]: 1}
+            
+            // Execute
             await getAppointmentCounts(req, res)
+
+            // Verify Data
+            expect(res.statusCode).toBe(200)
             const data = res._getJSONData()
-            let expected = {}
-            expected[tomorrow] = 1
-            expect(data).toStrictEqual(expected)
+            expect(data).toEqual(expected)
         })
     })
 })

@@ -1,4 +1,4 @@
-const {testIDs} = require('./mongooseIDs')
+const {testIDs} = require('./testUtils')
 
 const testAccounts = [
     {
@@ -38,7 +38,14 @@ const testAccounts = [
     }
 ]
 
+const newAccount = {
+    user: "user6@example.com",
+    password: "password131415",
+    access: 1
+}
+
 
 module.exports = {
-    testAccounts
+    testAccounts,
+    newAccount
  }
