@@ -136,3 +136,17 @@ export const VinEntry = ({val, req, error, changeFn}) => {
         </>
     )
 }
+
+export const Password = ({val, req, error, changeFn}) => {
+    return(
+        <>
+        <label>Password: {req && <span className="required">*</span>}</label>
+        <input
+            type="password"
+            value={val}
+            onChange={changeFn}
+            className={error ? 'error' : ''}
+        />
+        </>
+    )
+}

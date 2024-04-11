@@ -1,39 +1,9 @@
-form.self-signup {
-    width: 40vw;
+div.self-signup {
+    width: 30vw;
     margin: 5vh auto;
     padding: 40px;
     border: 4px solid var(--primary);
     border-radius: 20px;
     background: var(--bg-dark);
     background: rgba(0,0,0,0.8);
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-}
-
-form.self-signup h3 {
-    margin: 0;
-    font-size: 3rem;
-}
-
-form.self-signup label {
-    margin-top: 20px;
-}
-
-form.self-signup .required {
-    color: var(--button-grn);
-    font-weight: 600;
-}
-
-form.self-signup input, form.self-signup select {
-    width: 20vw;
-    margin: 0 auto;
-}
-
-form.self-signup button {
-    margin: 20px auto 0 auto;
-}
-
-form.self-signup div.error {
-    margin-top: 20px;
 }
