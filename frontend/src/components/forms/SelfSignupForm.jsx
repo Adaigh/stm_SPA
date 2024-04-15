@@ -69,7 +69,7 @@ const SelfSignupForm = () => {
     }
 
     return (
-        <form className="signup-form" onSubmit={handleSubmit}>
+        <form className="self-signup" onSubmit={handleSubmit}>
             <h3>Sign Up:</h3>
 
             <EmailAddress

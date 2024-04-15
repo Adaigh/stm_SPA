@@ -90,83 +90,83 @@ const GuestAppointmentForm = ({date, closeForm}) => {
     }
 
     return (
-        <div className="app-req">
-        <span 
-            className="material-symbols-outlined close" 
-            onClick={() => closeForm()}
-            >close</span>
+        <div className="guest-app-req">
+            <span 
+                className="material-symbols-outlined close" 
+                onClick={() => closeForm()}
+                >close</span>
 
-        <h2>Request Appointment: </h2>
-        <h3>{date.toDateString()}</h3>
-        <form onSubmit={handleSubmit}>
-            <div>
-                <FirstName 
-                    val={firstName}
-                    req={true}
-                    error={emptyFields && emptyFields.includes('firstName')}
-                    changeFn={(e) => setFirstName(e.target.value)}
-                    />
+            <h2>Request Appointment: </h2>
+            <h3>{date.toDateString()}</h3>
+            <form className="guest-request" onSubmit={handleSubmit}>
+                <div>
+                    <FirstName 
+                        val={firstName}
+                        req={true}
+                        error={emptyFields && emptyFields.includes('firstName')}
+                        changeFn={(e) => setFirstName(e.target.value)}
+                        />
 
-                <LastName
-                    val={lastName}
-                    req={true}
-                    error={emptyFields && emptyFields.includes('lastName')}
-                    changeFn={(e) => setLastName(e.target.value)}
-                    />
+                    <LastName
+                        val={lastName}
+                        req={true}
+                        error={emptyFields && emptyFields.includes('lastName')}
+                        changeFn={(e) => setLastName(e.target.value)}
+                        />
 
-                <PhoneNumber
-                    val={phoneNumber}
-                    req={true}
-                    error={emptyFields && emptyFields.includes('phoneNumber')}
-                    changeFn={(e) => setPhoneNumber(e.target.value)}
-                    />
+                    <PhoneNumber
+                        val={phoneNumber}
+                        req={true}
+                        error={emptyFields && emptyFields.includes('phoneNumber')}
+                        changeFn={(e) => setPhoneNumber(e.target.value)}
+                        />
 
-                <EmailAddress
-                    val={emailAddress}
-                    req={false}
-                    changeFn={(e) => setEmailAddress(e.target.value)}
-                    />
-            </div>
+                    <EmailAddress
+                        val={emailAddress}
+                        req={false}
+                        changeFn={(e) => setEmailAddress(e.target.value)}
+                        />
+                </div>
 
-            <div>
-                <VehicleYear
-                    val={vYear}
-                    req={true}
-                    error={emptyFields && emptyFields.includes('vehicleYear')}
-                    changeFn={(e) => setVYear(e.target.value)}
-                    />
+                <div>
+                    <VehicleYear
+                        val={vYear}
+                        req={true}
+                        error={emptyFields && emptyFields.includes('vehicleYear')}
+                        changeFn={(e) => setVYear(e.target.value)}
+                        />
 
-                <VehicleMake
-                    val={vMake}
-                    req={true}
-                    error={emptyFields && emptyFields.includes('vehicleMake')}
-                    changeFn={(e) => setVMake(e.target.value)}
-                    />
+                    <VehicleMake
+                        val={vMake}
+                        req={true}
+                        error={emptyFields && emptyFields.includes('vehicleMake')}
+                        changeFn={(e) => setVMake(e.target.value)}
+                        />
 
-                <VehicleModel 
-                    val={vModel}
-                    req={true}
-                    error={emptyFields && emptyFields.includes('vehicleModel')}
-                    changeFn={(e) => setVModel(e.target.value)}
-                    />
-                <VinEntry
-                    val={vin}
-                    changeFn={(e)=> setVin(e.target.value)}
-                    />
-            </div>
+                    <VehicleModel 
+                        val={vModel}
+                        req={true}
+                        error={emptyFields && emptyFields.includes('vehicleModel')}
+                        changeFn={(e) => setVModel(e.target.value)}
+                        />
+                    <VinEntry
+                        val={vin}
+                        changeFn={(e)=> setVin(e.target.value)}
+                        />
+                </div>
 
-            <div>
-                <Description
-                    val={description}
-                    req={true}
-                    error={emptyFields && emptyFields.includes('description')}
-                    changeFn={(e)=> setDescription(e.target.value)}
-                    />
-            </div>
+                <div>
+                    <Description
+                        val={description}
+                        req={true}
+                        error={emptyFields && emptyFields.includes('description')}
+                        changeFn={(e)=> setDescription(e.target.value)}
+                        />
+                </div>
 
-        </form>
-        <button onClick={handleSubmit}>Submit Request</button>
-        {error && <div className="error">{error}</div>}
+            </form>
+            <button onClick={handleSubmit}>Submit Request</button>
+            {error && <div className="error">{error}</div>}
         </div>
     )
 }
