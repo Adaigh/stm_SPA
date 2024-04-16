@@ -24,7 +24,8 @@ const GuestAppointmentForm = ({date, closeForm}) => {
     const [vMake, setVMake] = useState('')
     const [vModel, setVModel] = useState('')
     const [vin, setVin] = useState('')
-    const [description, setDescription] = useState('') 
+    const [description, setDescription] = useState('')
+
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
 
@@ -36,6 +37,7 @@ const GuestAppointmentForm = ({date, closeForm}) => {
         const missing = []
         if(!firstName) missing.push('firstName')
         if(!lastName) missing.push('lastName')
+        if(!phoneNumber) missing.push('phoneNumber')
         if(!vYear) missing.push('vehicleYear')
         if(!vMake) missing.push('vehicleMake')
         if(!vModel) missing.push('vehicleModel')
@@ -47,7 +49,6 @@ const GuestAppointmentForm = ({date, closeForm}) => {
         } else {
             setError(null)
             setEmptyFields([])
-            console.log("All fields filled! fetching...")
         }
 
         // Create new appointment object
@@ -82,10 +83,14 @@ const GuestAppointmentForm = ({date, closeForm}) => {
             setVYear('')
             setVMake('')
             setVModel('')
+            setVin('')
+            setDescription('')
+
             setError(null)
             setEmptyFields([])
+            
             closeForm()
-            window.confirm("New appointment requested!")
+            window.alert("New appointment requested!")
         }
     }
 

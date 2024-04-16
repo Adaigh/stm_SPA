@@ -6,6 +6,7 @@ import AboutPane from '../components/ui/AboutPane'
 import CalendarDisplay from '../components/ui/CalendarDisplay'
 import ContactInfo from '../components/ui/ContactInfo'
 import GuestAppointmentForm from '../components/forms/GuestAppointmentForm'
+import CustomerAppointmentForm from '../components/forms/CustomerAppointmentForm'
 
 // Hooks
 import { useAuthContext } from "../hooks/useAuthContext";
@@ -80,6 +81,8 @@ const Calendar = () => {
                 overlayClassName="overlay"
                 >
                     {!user && <GuestAppointmentForm date={selectedDate}
+                    closeForm={() => setFormIsOpen(false)}/>}
+                    {user && <CustomerAppointmentForm date={selectedDate}
                     closeForm={() => setFormIsOpen(false)}/>}
             </Modal>
             <ContactInfo/>
