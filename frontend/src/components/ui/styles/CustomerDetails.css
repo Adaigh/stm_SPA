@@ -1,6 +1,15 @@
-.customer-details h3 {
-    margin: 0;
-    font-weight: 500;
+.info-columns {
+    display: flex;
+}
+
+.customer-details {
+    padding: 10px;
+    background: var(--bg-dark);
+    background: rgba(0,0,0,0.8);
+    border: 1px solid darkgray;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0,0,0.5);
+    margin-bottom: 5px;
 }
 
 .customer-details ul {
@@ -8,24 +17,24 @@
     list-style: none;
 }
 
-.info-columns {
-    display: flex;
-}
-  
-.customer-details {
-    margin-bottom: 10px;
-    padding: 0 20px 10px 0;
-    background: var(--bg-dark);
-    background: rgba(0,0,0,0.8);
-    border: 1px solid darkgray;
-    border-radius: 10px;
-    box-shadow: 2px 2px 5px rgba(0,0,0.5);
-}
-
 .customer-details-header {
+    font-weight: 500;
     display: flex;
     justify-content: space-between;
-    margin: 10px 10px 0 10px;
+}
+
+.customer-details-header h3 {
+    display: inline;
+}
+
+.expandable {
+    cursor: pointer;
+}
+
+span.expand-more,
+span.expand-less {
+    position: relative;
+    top:5px;
 }
 
 .delete {
