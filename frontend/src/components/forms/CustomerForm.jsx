@@ -102,7 +102,7 @@ const CustomerForm = () => {
     }
 
     return (
-        <form className="create" onSubmit={handleSubmit}>
+        <form className="customer" onSubmit={handleSubmit}>
             <FirstName 
                 val={firstName}
                 req={true}

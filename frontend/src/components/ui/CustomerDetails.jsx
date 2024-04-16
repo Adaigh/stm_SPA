@@ -1,11 +1,21 @@
+import { useState } from 'react'
 import './styles/CustomerDetails.css'
 import { useCustomersContext } from '../../hooks/useCustomersContext'
 import { useAuthContext } from "../../hooks/useAuthContext"
 
 const CustomerDetails = ({customerInfo}) => {
+    const [expanded, setExpanded] = useState(false)
     const {dispatch} = useCustomersContext()
     const {user} = useAuthContext()
 
+    const toggleExpand = () => {
+        expanded ? setExpanded(false) : setExpanded(true)
+    }
+
+    const formatPhone = (num) => {
+        return num.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')
+    }
+    
     const handleSubmit = async () => {
         if(!user){
             return
@@ -28,12 +38,19 @@ const CustomerDetails = ({customerInfo}) => {
     }
 
     return (
-        <div className="customer-details">
+        <div className="customer-details" >
             <div className='customer-details-header'>
-                <h3>{customerInfo.lastName}, {customerInfo.firstName}</h3>
+                <div className='expandable' onClick={toggleExpand}>
+                    {!expanded && <span className='material-symbols-outlined expand-more'>expand_more</span>}
+                    {expanded && <span className='material-symbols-outlined expand-less'>expand_less</span>}
+                    <h3>
+                        {customerInfo.lastName}, {customerInfo.firstName}
+                        {!expanded && <span> &emsp; {formatPhone(customerInfo.phoneNumbers[0])}</span>}
+                    </h3>
+                </div>
                 <span className='material-symbols-outlined delete' onClick={handleSubmit}>delete</span>
             </div>
-            <div className='info-columns'>
+            {expanded && <div className='info-columns'>
                 {/* Listing phone number */}
                 <ul>
                     <li><u>Phone Numbers</u>:&emsp;</li>
@@ -56,7 +73,7 @@ const CustomerDetails = ({customerInfo}) => {
                                     VIN: {vehicle.vehicleVIN}</li>
                     })}
                 </ul>
-            </div>
+            </div>}
         </div>
     )
 }
