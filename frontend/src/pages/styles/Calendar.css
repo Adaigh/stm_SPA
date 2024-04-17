@@ -1,8 +1,4 @@
 .calendar-container {
-    height: calc(100vh - 150px);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     --red: #f22;
     --orange: #f84;
     --blue: #55f;

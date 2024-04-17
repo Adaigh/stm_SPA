@@ -1,0 +1,7 @@
+div.details-container {
+    margin: 0 auto;
+    padding: 50px;
+    background: var(--bg-dark);
+    border-radius: 20px;
+    border: 3px solid var(--container-border);
+}

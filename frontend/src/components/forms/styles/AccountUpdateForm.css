@@ -1,0 +1,17 @@
+form.acct-update-form,
+div.new-vehicle{
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+}
+
+.acct-update-form .check {
+    color: greenyellow;
+    padding: 5px;
+}
+
+.acct-update-form .check:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}

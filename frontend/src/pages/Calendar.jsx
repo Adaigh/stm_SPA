@@ -35,7 +35,7 @@ const Calendar = () => {
     const [formIsOpen, setFormIsOpen] = useState(false)
 
     return (
-        <div className="calendar-container">
+        <div className="calendar-container page">
             <AboutPane
                 header="Shop calendar"
                 >

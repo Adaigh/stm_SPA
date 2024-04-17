@@ -1,6 +1,7 @@
 /* google font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+@import url('./pages/styles/standardStyles.css');
 
 * {
   box-sizing: border-box;
@@ -11,6 +12,7 @@
   --error: #e7195a;
   --bg-primary: #0039a6;
   --bg-dark: #222;
+  --container-border: #a1a1a1;
   --button-border: #f1f1f1;
   --button-grn: #1aac83;
 }

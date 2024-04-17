@@ -8,7 +8,7 @@ import './styles/STMHome.css'
 const STMHome = () => {
 
     return(
-        <div className='stm-home'>
+        <div className='stm-home page'>
             <AboutPane 
                 header="STM Tuning"
                 >

@@ -35,7 +35,7 @@ const NavBar = () => {
             <div className="links">
                 {user && (
                     <div className="logged-in">
-                        {user.access > 0 && <span><u>STAFF</u>: {user.user}</span>}
+                        {user.access > 0 && <span><u>STAFF</u>: <Link to='/details'>{user.user}</Link></span>}
                         {user.access === 0 && 
                             <Link to='/details'>{user.user}</Link>
                         }

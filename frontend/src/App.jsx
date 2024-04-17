@@ -9,7 +9,7 @@ import Login from './pages/Login'
 import SelfSignup from './pages/SelfSignup'
 import Calendar from './pages/Calendar'
 import Schedule from './pages/Schedule'
-import CustomerDetailHome from './pages/CustomerDetailHome'
+import AccountDetail from './pages/AccountDetail'
 
 
 function App() {
@@ -42,7 +42,7 @@ function App() {
                 />
               <Route
                 path="/details"
-                element={user ? <CustomerDetailHome /> : <Navigate to="/login"/>}
+                element={user ? <AccountDetail /> : <Navigate to="/login"/>}
                 />
               <Route
                 path="/login"

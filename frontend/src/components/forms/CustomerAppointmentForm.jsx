@@ -89,7 +89,11 @@ const CustomerAppointmentForm = ({date, closeForm}) => {
         if(!enterVehicle){
             newAppt['vehicle'] = selectedVehicle
         } else {
-            newAppt['vehicle'] = {vehicleYear: vYear, vehicleMake: vMake, vehicleModel: vModel}
+            newAppt['vehicle'] = {
+                vehicleYear: vYear,
+                vehicleMake: vMake,
+                vehicleModel: vModel
+            }
         }
         newAppt['description'] = description
 

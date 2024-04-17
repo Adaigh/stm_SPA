@@ -14,7 +14,7 @@ form.guest-request button{
     margin-top: 5px;
 }
 
-div.guest-app-req .close {
+div.guest-app-req span.close {
     position: fixed;
     left: auto;
     right: 20px;
