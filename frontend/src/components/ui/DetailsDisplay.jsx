@@ -4,8 +4,8 @@ import Modal from 'react-modal';
 
 import PhoneNumbersTable from './PhoneNumberTable'
 import VehiclesTable from './VehiclesTable'
-import './styles/DetailsDisplay.css'
 import AccountUpdateForm from '../forms/AccountUpdateForm';
+import './styles/DetailsDisplay.css'
 
 const standardStyle = {
     content: {
@@ -67,7 +67,7 @@ const DetailsDisplay = ({currentUser}) => {
                 className="modal"
                 overlayClassName="overlay"
                 >
-                    <AccountUpdateForm currentUser={currentUser}/>
+                    <AccountUpdateForm currentUser={currentUser} closeForm={() => setShowEdit(false)}/>
             </Modal>
         </div>
     )
