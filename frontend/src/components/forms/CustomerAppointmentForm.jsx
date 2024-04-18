@@ -92,7 +92,8 @@ const CustomerAppointmentForm = ({date, closeForm}) => {
             newAppt['vehicle'] = {
                 vehicleYear: vYear,
                 vehicleMake: vMake,
-                vehicleModel: vModel
+                vehicleModel: vModel,
+                vehicleVIN: vin ? vin : 'Not Stored'
             }
         }
         newAppt['description'] = description
@@ -174,10 +175,10 @@ const CustomerAppointmentForm = ({date, closeForm}) => {
                     {!enterVehicle && <>
                         <label>Select Vehicle:</label>
                         <select
-                            onChange={(e)=> setSelectedVehicle(e.target.value)}
+                            onChange={(e)=> {console.log(e.target.value);setSelectedVehicle(currentUser.vehicles[e.target.value])}}
                             className={(emptyFields && emptyFields.includes('selectedVehicle')) ? 'error' : ''}>
                             {currentUser.vehicles.map((vehicle, index) => {
-                                return <option key={index} value={vehicle}>{vehicle.vehicleYear} {vehicle.vehicleModel}</option>
+                                return <option key={index} value={index}>{vehicle.vehicleYear} {vehicle.vehicleModel}</option>
                             })}
                         </select>
                     </>}

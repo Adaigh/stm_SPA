@@ -58,7 +58,12 @@ const GuestAppointmentForm = ({date, closeForm}) => {
             lastName,
             phoneNumber,
             emailAddress,
-            vehicle: {vehicleYear: vYear, vehicleMake: vMake, vehicleModel: vModel},
+            vehicle: {
+                vehicleYear: vYear,
+                vehicleMake: vMake,
+                vehicleModel: vModel,
+                vehicleVIN: vin ? vin : 'Not Stored'
+            },
             description
         }
 
