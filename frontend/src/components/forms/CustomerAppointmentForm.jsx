@@ -175,10 +175,18 @@ const CustomerAppointmentForm = ({date, closeForm}) => {
                     {!enterVehicle && <>
                         <label>Select Vehicle:</label>
                         <select
-                            onChange={(e)=> {console.log(e.target.value);setSelectedVehicle(currentUser.vehicles[e.target.value])}}
+                            onChange={(e)=> {
+                                console.log(e.target.value);
+                                setSelectedVehicle(currentUser.vehicles[e.target.value]
+                                )}}
                             className={(emptyFields && emptyFields.includes('selectedVehicle')) ? 'error' : ''}>
                             {currentUser.vehicles.map((vehicle, index) => {
-                                return <option key={index} value={index}>{vehicle.vehicleYear} {vehicle.vehicleModel}</option>
+                                return (<option
+                                    key={index}
+                                    value={index}>
+                                        {vehicle.vehicleYear} {vehicle.vehicleModel}
+                                    </option>
+                                )
                             })}
                         </select>
                     </>}

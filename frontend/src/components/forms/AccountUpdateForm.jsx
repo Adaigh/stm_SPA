@@ -145,12 +145,10 @@ const AccountUpdateForm = ({currentUser, closeForm}) => {
         }
         
         let updatedInfo = {...currentUser}
-        console.log(updatedInfo, currentUser)
         updatedInfo.firstName = firstName
         updatedInfo.lastName = lastName
         updatedInfo.phoneNumbers = phoneNumbers
         updatedInfo.vehicles = vehicles
-        console.log(updatedInfo, currentUser)
 
         if (JSON.stringify(updatedInfo) === JSON.stringify(currentUser)) {
             setError('')
