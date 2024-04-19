@@ -8,11 +8,6 @@ const AccountDetail = () => {
 
     const {details} = useDetailsContext()
 
-    
-
-    let currentUser = {}
-    if(details) currentUser = details.user
-
     return (
         <div className="account-details page">
 
@@ -34,8 +29,8 @@ const AccountDetail = () => {
                     </div>
                 }
 
-                {currentUser && 
-                    <DetailsDisplay currentUser={currentUser}/>
+                {details && 
+                    <DetailsDisplay/>
                 }
 
             <ContactInfo/>

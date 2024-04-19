@@ -35,6 +35,8 @@ export const FirstName = ({val, req, error, changeFn}) => {
         <input
             type="text"
             onChange={changeFn}
+            title="Letters only"
+            pattern="[a-zA-Z]+"
             value={val}
             className={error ? 'error' : ''}
             />
@@ -49,6 +51,8 @@ export const LastName = ({val, req, error, changeFn}) => {
         <input
             type="text"
             onChange={changeFn}
+            title="Letters only"
+            pattern="[a-zA-Z]+"
             value={val}
             className={error ? 'error' : ''}
             />
@@ -100,6 +104,8 @@ export const VehicleModel = ({val, req, error, changeFn}) => {
         <input
             type="text"
             value={val}
+            title="Letters and numbers only"
+            pattern="[a-zA-Z0-9]+"
             onChange={changeFn}
             className={error ? 'error' : ''}
         />
@@ -130,6 +136,8 @@ export const VinEntry = ({val, req, error, changeFn}) => {
         <input
             type="text"
             value={val}
+            title="17 letters and numbers only"
+            pattern="[a-zA-Z0-9]+"
             onChange={changeFn}
             className={error ? 'error' : ''}
         />

@@ -59,7 +59,7 @@ const CustomerDetails = ({customerInfo}) => {
                     })}
                 </ul>
                 <ul>
-                    <li><u>Email Addresses</u>:&emsp;</li>
+                    <li><u>Email Address</u>:&emsp;</li>
                     <li>{customerInfo.emailAddress}</li>
                 </ul>
                 <ul>

@@ -19,6 +19,7 @@ div.cust-app-req .close {
     left: auto;
     right: 20px;
     top: 20px;
+    cursor: pointer;
 }
 
 div.or {

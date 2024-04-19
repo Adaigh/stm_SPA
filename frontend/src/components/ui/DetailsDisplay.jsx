@@ -6,6 +6,7 @@ import PhoneNumbersTable from './PhoneNumberTable'
 import VehiclesTable from './VehiclesTable'
 import AccountUpdateForm from '../forms/AccountUpdateForm';
 import './styles/DetailsDisplay.css'
+import { useDetailsContext } from '../../hooks/useDetailsContext';
 
 const standardStyle = {
     content: {
@@ -18,9 +19,11 @@ const standardStyle = {
     }
 }
 
-const DetailsDisplay = ({currentUser}) => {
+const DetailsDisplay = () => {
 
     const [showEdit, setShowEdit] = useState(false)
+    const {details} = useDetailsContext()
+
 
     const toggleEdit = (e) => {
         e.preventDefault()
@@ -28,48 +31,48 @@ const DetailsDisplay = ({currentUser}) => {
     }
 
     return (
-        <div className="details-container">
+            <div className="details-container">
 
-            <h1>Account Details: </h1>
+                <h1>Account Details: </h1>
 
-            <button onClick={toggleEdit}>Edit Account Details</button>
+                <button onClick={toggleEdit}>Edit Account Details</button>
 
-            
-            <table className='details-list'>
-                <tbody>
-                <tr>
-                    <td>Name</td>
-                    <td>{currentUser.firstName} {currentUser.lastName}</td>
-                </tr>
-                <tr>
-                    <td>Email</td>
-                    <td>{currentUser.emailAddress}</td>
-                </tr>
-                <tr>
-                    <td>Phone Numbers</td>
-                        <td>
-                            <PhoneNumbersTable phoneNumbers={currentUser.phoneNumbers}/>
-                        </td>
+                
+                <table className='details-list'>
+                    <tbody>
+                    <tr>
+                        <td>Name</td>
+                        <td>{details.user.firstName} {details.user.lastName}</td>
                     </tr>
                     <tr>
-                        <td>Vehicles</td>
-                        <td>
-                            <VehiclesTable vehicles={currentUser.vehicles}/>
-                        </td>
+                        <td>Email</td>
+                        <td>{details.user.emailAddress}</td>
                     </tr>
-                </tbody>
-            </table>
-            <Modal
-                isOpen={showEdit}
-                onRequestClose={() => setShowEdit(false)}
-                style={standardStyle}
-                contentLabel="Edit Account Details"
-                className="modal"
-                overlayClassName="overlay"
-                >
-                    <AccountUpdateForm currentUser={currentUser} closeForm={() => setShowEdit(false)}/>
-            </Modal>
-        </div>
+                    <tr>
+                        <td>Phone Numbers</td>
+                            <td>
+                                <PhoneNumbersTable phoneNumbers={details.user.phoneNumbers}/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Vehicles</td>
+                            <td>
+                                <VehiclesTable vehicles={details.user.vehicles}/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <Modal
+                    isOpen={showEdit}
+                    onRequestClose={() => setShowEdit(false)}
+                    style={standardStyle}
+                    contentLabel="Edit Account Details"
+                    className="modal"
+                    overlayClassName="overlay"
+                    >
+                        <AccountUpdateForm closeForm={() => setShowEdit(false)}/>
+                </Modal>
+            </div>
     )
 }
 

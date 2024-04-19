@@ -11,6 +11,10 @@ export const detailsReducer = (state, action) => {
         case 'CLEAR_DETAILS':
             return { details: null }
 
+        case 'UPDATE_DETAILS':
+            state.details.user = action.payload
+            return state
+
         default:
             return state
     }

@@ -10,18 +10,21 @@ import {
     VinEntry,
 } from './labeledInputs'
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { useDetailsContext } from "../../hooks/useDetailsContext";
 
 const formatPhone = (num) => {
     return num.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')
 }
 
-const AccountUpdateForm = ({currentUser, closeForm}) => {
+const AccountUpdateForm = ({closeForm}) => {
 
-    const [firstName, setFirstName] = useState(currentUser.firstName)
-    const [lastName, setLastName] = useState(currentUser.lastName)
-    const [phoneNumbers, setPhoneNumbers] = useState([...currentUser.phoneNumbers])
+    const {details, dispatch} = useDetailsContext()
+    
+    const [firstName, setFirstName] = useState(details.user.firstName)
+    const [lastName, setLastName] = useState(details.user.lastName)
+    const [phoneNumbers, setPhoneNumbers] = useState([...details.user.phoneNumbers])
     const [phoneNumber, setPhoneNumber] = useState('')
-    const [vehicles, setVehicles] = useState([...currentUser.vehicles])
+    const [vehicles, setVehicles] = useState([...details.user.vehicles])
     const [vYear, setVYear] = useState('')
     const [vMake, setVMake] = useState('')
     const [vModel, setVModel] = useState('')
@@ -144,33 +147,35 @@ const AccountUpdateForm = ({currentUser, closeForm}) => {
             return
         }
         
-        let updatedInfo = {...currentUser}
+        let updatedInfo = {...details.user}
         updatedInfo.firstName = firstName
         updatedInfo.lastName = lastName
         updatedInfo.phoneNumbers = phoneNumbers
         updatedInfo.vehicles = vehicles
 
-        if (JSON.stringify(updatedInfo) === JSON.stringify(currentUser)) {
+        if (JSON.stringify(updatedInfo) === JSON.stringify(details.user)) {
             setError('')
             closeForm()
             return
         }
 
-        let response = await fetch('/api/customers/' + currentUser._id, {
+        let response = await fetch('/api/customers/' + details.user._id, {
             method: 'PATCH',
             headers: {'Content-Type': 'application/json',
                         'Authorization': `Bearer ${user.webToken}`},
             body: JSON.stringify(updatedInfo)
         })
 
-        console.log(response)
+        const json = response.json()
 
         if(response.ok){
             window.alert("Updates Successful!")
+            dispatch({type: 'UPDATE_DETAILS', payload: updatedInfo})
             setError('')
+            closeForm()
             return
         } else {
-            setError('UPDATES FAILED: Please contact the shop for help.')
+            setError(json.error)
         }
         
     }
