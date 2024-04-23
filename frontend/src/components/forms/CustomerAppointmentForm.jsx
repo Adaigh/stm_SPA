@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useDetailsContext } from "../../hooks/useDetailsContext";
 import './styles/CustomerAppointmentForm.css'
 
 import {
@@ -14,7 +13,7 @@ import {
     Description
 } from "./labeledInputs"
 
-const CustomerAppointmentForm = ({date, closeForm}) => {
+const CustomerAppointmentForm = ({date, customer, closeForm}) => {
 
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
@@ -32,22 +31,18 @@ const CustomerAppointmentForm = ({date, closeForm}) => {
 
     const [enterVehicle, setEnterVehicle] = useState(false)
 
-    const {details} = useDetailsContext()
-    const currentUser = details.user
-
-    
     useEffect(() => {
-        setFirstName(currentUser.firstName)
-        setLastName(currentUser.lastName)
-        setPhoneNumber(currentUser.phoneNumbers[0])
-        setEmailAddress(currentUser.emailAddress)
-        setSelectedVehicle(currentUser.vehicles[0])
+        setFirstName(customer.firstName)
+        setLastName(customer.lastName)
+        setPhoneNumber(customer.phoneNumbers[0])
+        setEmailAddress(customer.emailAddress)
+        setSelectedVehicle(customer.vehicles[0])
     }, [
-        currentUser.firstName,
-        currentUser.lastName,
-        currentUser.phoneNumbers,
-        currentUser.emailAddress,
-        currentUser.vehicles
+        customer.firstName,
+        customer.lastName,
+        customer.phoneNumbers,
+        customer.emailAddress,
+        customer.vehicles
     ])
 
     const toggleEnterVehicle = (e) => {
@@ -112,11 +107,11 @@ const CustomerAppointmentForm = ({date, closeForm}) => {
         if(!response.ok){
             setError(json.error)
         } else {
-            setFirstName(currentUser.firstName)
-            setLastName(currentUser.lastName)
-            setPhoneNumber(currentUser.phoneNumbers[0])
-            setEmailAddress(currentUser.emailAddress)
-            setSelectedVehicle(currentUser.vehicles[0])
+            setFirstName(customer.firstName)
+            setLastName(customer.lastName)
+            setPhoneNumber(customer.phoneNumbers[0])
+            setEmailAddress(customer.emailAddress)
+            setSelectedVehicle(customer.vehicles[0])
             setVYear('')
             setVMake('')
             setVModel('')
@@ -177,10 +172,10 @@ const CustomerAppointmentForm = ({date, closeForm}) => {
                         <select
                             onChange={(e)=> {
                                 console.log(e.target.value);
-                                setSelectedVehicle(currentUser.vehicles[e.target.value]
+                                setSelectedVehicle(customer.vehicles[e.target.value]
                                 )}}
                             className={(emptyFields && emptyFields.includes('selectedVehicle')) ? 'error' : ''}>
-                            {currentUser.vehicles.map((vehicle, index) => {
+                            {customer.vehicles.map((vehicle, index) => {
                                 return (<option
                                     key={index}
                                     value={index}>

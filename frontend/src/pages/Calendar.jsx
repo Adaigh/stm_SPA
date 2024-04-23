@@ -10,6 +10,7 @@ import CustomerAppointmentForm from '../components/forms/CustomerAppointmentForm
 
 // Hooks
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useDetailsContext } from "../hooks/useDetailsContext";
 
 // Styles
 import './styles/Calendar.css'
@@ -30,6 +31,8 @@ Modal.setAppElement('#root');
 const Calendar = () => {
 
     const {user} = useAuthContext();
+    const {details} = useDetailsContext()
+
     const [today] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(null);
     const [formIsOpen, setFormIsOpen] = useState(false)
@@ -82,7 +85,8 @@ const Calendar = () => {
                 >
                     {!user && <GuestAppointmentForm date={selectedDate}
                     closeForm={() => setFormIsOpen(false)}/>}
-                    {user && <CustomerAppointmentForm date={selectedDate}
+                    {user && details && <CustomerAppointmentForm date={selectedDate}
+                    customer={details.user}
                     closeForm={() => setFormIsOpen(false)}/>}
             </Modal>
             <ContactInfo/>
