@@ -11,6 +11,7 @@ import {
     VinEntry,
 } from './labeledInputs'
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { useCustomersContext } from "../../hooks/useCustomersContext";
 import { formatPhone } from "../../hooks/useUtils";
 
 const CustomerUpdateForm = ({closeForm, customer}) => {
@@ -34,6 +35,8 @@ const CustomerUpdateForm = ({closeForm, customer}) => {
     const [addVehicle, setAddVehicle] = useState(false)
 
     const {user} = useAuthContext()
+    const {customers, dispatch} = useCustomersContext()
+
 
     const addNewPhoneNumber = (e) => {
         e.preventDefault()
@@ -176,6 +179,10 @@ const CustomerUpdateForm = ({closeForm, customer}) => {
 
         if(response.ok){
             window.confirm("Updates Successful!")
+            let newCustomersInfo = [...customers]
+            let updateIndex = newCustomersInfo.indexOf(customer)
+            newCustomersInfo[updateIndex] = updatedInfo
+            dispatch({type: 'SET_CUSTOMERS', payload: newCustomersInfo})
             setError('')
             closeForm()
             return
