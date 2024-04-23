@@ -2,13 +2,10 @@ const Appointment = require('../models/appointmentModel')
 const mongoose = require('mongoose')
 
 
-// Get all appointments with user information 
-// ********************
-// TODO: FILTER ONLY FOR CURRENT APPOINTMENTS
-// ********************
+// Get all appointments with user information
 const getAppointments = async (req,res) => {
-    const appointments = await Appointment.find()
-    .sort({date:-1})
+    const today = new Date().toLocaleDateString()
+    const appointments = await Appointment.find({date: {$gte: today}})
     res.status(200).json(appointments)
 }
 

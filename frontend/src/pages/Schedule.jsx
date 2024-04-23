@@ -1,9 +1,38 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react'
+import { useAuthContext } from '../hooks/useAuthContext'
+import ScheduleWeekly from '../components/ui/ScheduleWeekly'
 
 const Schedule = () => {
 
-    const [currentDate, setCurrentDate] = useState(new Date());
+    const [currentSchedule, setCurrentSchedule] = useState([])
+
+    const {user} = useAuthContext()
+
+    const [currentDate] = useState(new Date())
     const [monthly, setMonthly] = useState(false)
+
+    useEffect(() => {
+
+        const getSchedule = async () => {
+            const response = await fetch ('/api/appointments/', {
+                method: "GET",
+                headers: {'Authorization': `Bearer ${user.webToken}`}
+            })
+    
+            const json = await response.json()
+            if(response.ok) setCurrentSchedule(json)
+        }
+
+        getSchedule()
+
+    }, [user])
+
+    const weekday = (num) => {
+        const date = new Date()
+        return new Date(date.getFullYear(), date.getMonth(), date.getDate() + num)
+    }
+
+    console.log(currentSchedule)
 
     return (
         <div className='schedule'>
@@ -14,11 +43,9 @@ const Schedule = () => {
             <div className='scheduleDisplay'>
             {!monthly &&
                 <>
-                    <div>Monday</div>
-                    <div>Tuesday</div>
-                    <div>Wednesday</div>
-                    <div>Thursday</div>
-                    <div>Friday</div>
+                <ScheduleWeekly date={weekday(0)} schedule={currentSchedule}/>
+                <ScheduleWeekly date={weekday(1)} schedule={currentSchedule}/>
+                <ScheduleWeekly date={weekday(2)} schedule={currentSchedule}/>
                 </>
             }
             {monthly &&
