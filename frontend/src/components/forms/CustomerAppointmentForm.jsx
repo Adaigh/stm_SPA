@@ -171,7 +171,6 @@ const CustomerAppointmentForm = ({date, customer, closeForm}) => {
                         <label>Select Vehicle:</label>
                         <select
                             onChange={(e)=> {
-                                console.log(e.target.value);
                                 setSelectedVehicle(customer.vehicles[e.target.value]
                                 )}}
                             className={(emptyFields && emptyFields.includes('selectedVehicle')) ? 'error' : ''}>

@@ -41,8 +41,6 @@ export const DetailsContextProvider = ({children}) => {
         }
     }, [user, dispatch])
 
-    console.log(state)
-
     return (
         <DetailsContext.Provider value={{...state, dispatch}}>
             {children}
