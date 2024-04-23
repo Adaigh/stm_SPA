@@ -144,6 +144,15 @@ const AccountUpdateForm = ({closeForm}) => {
             return
         }
         
+        let missing = []
+        if(!firstName) missing.push('firstName')
+        if(!lastName) missing.push('lastName')
+        if(missing.length > 0){
+            setError("Fields cannot be empty")
+            setEmptyFields(missing)
+            return
+        }
+        
         let updatedInfo = {...details.user}
         updatedInfo.firstName = firstName
         updatedInfo.lastName = lastName
@@ -262,8 +271,10 @@ const AccountUpdateForm = ({closeForm}) => {
                 </div>
             }
             <div className="controls">
-                <button onClick={handleSubmit}>Submit Changes</button>
-                <button onClick={(e)=> {e.preventDefault(); closeForm()}}>Cancel</button>
+                <button className="submit"
+                    onClick={handleSubmit}>Submit Changes</button>
+                <button className="cancel"
+                    onClick={(e)=> {e.preventDefault(); closeForm()}}>Cancel</button>
             </div>
             {error && <div className="error">{error}</div>}
         </form>

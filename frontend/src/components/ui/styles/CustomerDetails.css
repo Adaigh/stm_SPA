@@ -45,3 +45,7 @@ span.expand-less {
 .delete:hover {
     text-decoration: underline;
 }
+
+button.edit {
+    margin: 10px;
+}

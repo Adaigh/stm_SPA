@@ -232,7 +232,7 @@ const CustomerAppointmentForm = ({date, customer, closeForm}) => {
                         />
                 </div>
             </form>
-            <button onClick={handleSubmit}>Submit Request</button>
+            <button className="submit" onClick={handleSubmit}>Submit Request</button>
             {error && <div className="error">{error}</div>}
         </div>
     )

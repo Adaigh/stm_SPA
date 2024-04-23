@@ -61,6 +61,14 @@ button {
   min-width: 80px;
 }
 
+button.cancel {
+  background: var(--error);
+}
+
+button.submit {
+  background: var(--button-grn);
+}
+
 div.error {
   border: 2px solid var(--error);
   border-radius: 10px;

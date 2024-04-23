@@ -3,14 +3,27 @@ import './styles/CustomerDetails.css'
 import { useCustomersContext } from '../../hooks/useCustomersContext'
 import { useAuthContext } from "../../hooks/useAuthContext"
 import { formatPhone } from '../../hooks/useUtils'
+import CustomerUpdateForm from '../forms/CustomerUpdateForm'
 
 const CustomerDetails = ({customerInfo}) => {
+
     const [expanded, setExpanded] = useState(false)
+    const [edit, setEdit] = useState(false)
+
     const {dispatch} = useCustomersContext()
     const {user} = useAuthContext()
 
     const toggleExpand = () => {
-        expanded ? setExpanded(false) : setExpanded(true)
+        if(!expanded){
+            setExpanded(true)
+            return
+        } else {
+            if(edit) {
+                if(!window.confirm("Updates NOT saved, continue?")) return
+                setEdit(false)
+            }
+            setExpanded(false)
+        }
     }
     
     const handleSubmit = async () => {
@@ -47,30 +60,45 @@ const CustomerDetails = ({customerInfo}) => {
                 </div>
                 <span className='material-symbols-outlined delete' onClick={handleSubmit}>delete</span>
             </div>
-            {expanded && <div className='info-columns'>
-                {/* Listing phone number */}
-                <ul>
-                    <li><u>Phone Numbers</u>:&emsp;</li>
-                    {customerInfo.phoneNumbers.map((number, index) => {
-                        return <li key={index}>{number.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')}</li>
-                    })}
-                </ul>
-                <ul>
-                    <li><u>Email Address</u>:&emsp;</li>
-                    <li>{customerInfo.emailAddress}</li>
-                </ul>
-                <ul>
-                    {/* List vehicles */}
-                    <li><u>Vehicles</u>:&emsp;</li>
-                    {customerInfo.vehicles.map((vehicle, index) => {
-                        return  <li key={index}>
-                                    {vehicle.vehicleYear}&nbsp;
-                                    {vehicle.vehicleMake}&nbsp;
-                                    {vehicle.vehicleModel} &nbsp;
-                                    VIN: {vehicle.vehicleVIN}</li>
-                    })}
-                </ul>
-            </div>}
+            {expanded && 
+            
+                <>
+                {!edit && 
+                    <>
+                    <div className='info-columns'>
+                        {/* Listing phone numbers */}
+                        <ul>
+                            <li><u>Phone Numbers</u>:&emsp;</li>
+                            {customerInfo.phoneNumbers.map((number, index) => {
+                                return <li key={index}>{number.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')}</li>
+                            })}
+                        </ul>
+                        <ul>
+                            <li><u>Email Address</u>:&emsp;</li>
+                            <li>{customerInfo.emailAddress}</li>
+                        </ul>
+                        <ul>
+                            {/* List vehicles */}
+                            <li><u>Vehicles</u>:&emsp;</li>
+                            {customerInfo.vehicles.map((vehicle, index) => {
+                                return  <li key={index}>
+                                            {vehicle.vehicleYear}&nbsp;
+                                            {vehicle.vehicleMake}&nbsp;
+                                            {vehicle.vehicleModel} &nbsp;
+                                            VIN: {vehicle.vehicleVIN}</li>
+                            })}
+                        </ul>
+                    </div>
+                    <button className='edit'
+                        onClick={(e) => {(e).preventDefault(); setEdit(true)}}>Edit</button>
+                    </>
+                }
+                {edit && 
+                    <CustomerUpdateForm customer={customerInfo}
+                    closeForm={() => setEdit(false)}/>
+                }
+            </>
+            }
         </div>
     )
 }

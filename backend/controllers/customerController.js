@@ -57,7 +57,7 @@ const createCustomer = async (req, res) => {
 
     // If email is not provided, create placeholder string
     if(!emailAddress){
-        emailAddress = `PLACEHOLDER - ${firstName} ${lastName}`
+        emailAddress = `${firstName} ${lastName} - (SHOP)`
     }
 
     // Check to see if Customer already exists
@@ -93,6 +93,7 @@ const deleteCustomer = async (req,res) => {
 
 // UPDATE a Customer
 const updateCustomer = async (req, res) => {
+
     // ID validation check
     const {id} = req.params
     if(!mongoose.Types.ObjectId.isValid(id)){

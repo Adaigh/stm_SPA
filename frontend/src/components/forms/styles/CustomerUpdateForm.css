@@ -1,0 +1,14 @@
+.cust-update-form{
+    margin: 0 20px;
+}
+
+.cust-cols {
+    display: flex;
+    gap: 50px;
+    padding: 20px;
+}
+
+.cust-info {
+    display: flex;
+    flex-direction: column;
+}
