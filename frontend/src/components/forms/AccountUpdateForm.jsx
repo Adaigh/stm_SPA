@@ -11,10 +11,7 @@ import {
 } from './labeledInputs'
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useDetailsContext } from "../../hooks/useDetailsContext";
-
-const formatPhone = (num) => {
-    return num.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')
-}
+import { formatPhone } from "../../hooks/useUtils";
 
 const AccountUpdateForm = ({closeForm}) => {
 

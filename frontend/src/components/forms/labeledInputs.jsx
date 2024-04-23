@@ -137,7 +137,7 @@ export const VinEntry = ({val, req, error, changeFn}) => {
             type="text"
             value={val}
             title="17 letters and numbers only"
-            pattern="[a-zA-Z0-9]+"
+            pattern="[a-zA-Z0-9]{17}"
             onChange={changeFn}
             className={error ? 'error' : ''}
         />

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './styles/CustomerDetails.css'
 import { useCustomersContext } from '../../hooks/useCustomersContext'
 import { useAuthContext } from "../../hooks/useAuthContext"
+import { formatPhone } from '../../hooks/useUtils'
 
 const CustomerDetails = ({customerInfo}) => {
     const [expanded, setExpanded] = useState(false)
@@ -10,10 +11,6 @@ const CustomerDetails = ({customerInfo}) => {
 
     const toggleExpand = () => {
         expanded ? setExpanded(false) : setExpanded(true)
-    }
-
-    const formatPhone = (num) => {
-        return num.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')
     }
     
     const handleSubmit = async () => {
