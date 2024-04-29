@@ -60,6 +60,9 @@ const Calendar = () => {
             <CalendarDisplay
                 today={today}
                 selectedDate={selectedDate}
+                showNeigors={false}
+                decorated={true}
+                limited={true}
                 setSelectedDate={setSelectedDate}>
 
                 <div className="appointment-request">

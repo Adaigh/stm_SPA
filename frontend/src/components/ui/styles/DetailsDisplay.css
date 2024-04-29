@@ -14,8 +14,8 @@ div.details-container button {
     margin-bottom: 20px
 }
 
-table.details-list,
-table.details-list td {
+div.details-container table.details-list,
+div.details-container table.details-list td {
     padding: 15px;
     border: 2px solid var(--container-border);
     border-collapse: collapse;
@@ -23,7 +23,7 @@ table.details-list td {
     font-size: 1.2rem;
 }
 
-td:nth-child(odd) {
+div.details-container td:nth-child(odd) {
     font-weight: 600;
     background-color: #555;
 }

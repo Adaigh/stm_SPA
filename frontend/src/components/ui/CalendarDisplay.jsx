@@ -5,6 +5,9 @@ import { useCalendarContext } from '../../hooks/useCalendarContext'
 
 function CalendarDisplay({today,
                           setSelectedDate,
+                          showNeigors,
+                          decorated,
+                          limited,
                           children}) {
 
     const [prevDayPicked, setPrevDayPicked] = useState(null)
@@ -13,7 +16,6 @@ function CalendarDisplay({today,
     const {calendar} = useCalendarContext()
 
     const handleDaySelect = (value, event) => {
-      if(value < new Date()) return
       setSelectedDate(value)
       if(prevDayPicked) prevDayPicked.classList.toggle('selectedDay')
       event.currentTarget.classList.toggle('selectedDay')
@@ -21,18 +23,18 @@ function CalendarDisplay({today,
     }
 
     return (
-      <div className="calendar">
+      <div className={decorated ? "calendar decorated" : "calendar"}>
           <h2>{currentDate.toLocaleString('default', { month: 'long', year: 'numeric' })}</h2>
         {/* Calendar for the current month */}
         <Calendar 
             value={currentDate}
-            minDate={today}
-            maxDate={endDate}
+            minDate={limited ? today : null}
+            maxDate={limited ? endDate : null}
             onChange={(value, event) => handleDaySelect(value, event)}
             prevLabel={<h2>&lt;</h2>}
             nextLabel={<h2>&gt;</h2>}
             onActiveStartDateChange={val => setCurrentDate(val.activeStartDate)}
-            showNeighboringMonth={false}
+            showNeighboringMonth={showNeigors}
             showNavigation={true}
             calendarType="gregory"
             view="month"

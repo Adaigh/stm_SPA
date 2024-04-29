@@ -1,13 +1,16 @@
 .calendar {
     background: var(--bg-dark);
-    background: url(./assets/interior.jpg);
-    background-size: cover;
-    background-position: center;
     margin: 0 auto;
     max-width: 1200px;
     padding: 50px;
     border-radius: 20px;
     border: 3px solid var(--container-border);
+}
+
+.decorated {
+    background: url(./assets/interior.jpg);
+    background-size: cover;
+    background-position: center;
 }
 
 .calendar h2 {
@@ -51,15 +54,15 @@
     border-width: 4px;
 }
 
-.calendar .full {
+button.full {
     background: var(--red);
 }
 
-.calendar .partial {
+button.partial {
     background: var(--orange);
 }
 
-.weekend, .past{
+button.weekend, button.past{
     background: #888;
     border: none;
 }
@@ -68,10 +71,10 @@ button.weekend, button.past {
     cursor: default !important;
 }
 
-.weekday {
+button.weekday {
     background: var(--blue);
 }
 
-.selectedDay {
+button.selectedDay {
     border-color: #5f5;
 }

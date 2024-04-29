@@ -78,12 +78,12 @@ export const PhoneNumber = ({val, req, error, changeFn}) => {
     )
 }
 
-export const VehicleMake = ({req, error, changeFn}) => {
+export const VehicleMake = ({val, req, error, changeFn}) => {
     return (
         <>
         <label>Vehicle Make: {req && <span className="required">*</span>}</label>
         <select 
-            defaultValue={''}
+            defaultValue={val? val.toString(): ''}
             onChange={changeFn}
             className={error ? 'error' : ''}>
 
