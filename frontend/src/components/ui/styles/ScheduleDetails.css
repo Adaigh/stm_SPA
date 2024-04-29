@@ -1,0 +1,6 @@
+div.schedule-day {
+    width: 500px;
+    background: var(--bg-dark);
+    padding: 40px;
+    border-radius: 20px;
+}

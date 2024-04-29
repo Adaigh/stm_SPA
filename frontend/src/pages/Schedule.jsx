@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react'
 import { useAuthContext } from '../hooks/useAuthContext'
+import { useScheduleContext } from '../hooks/useScheduleContext'
 import ScheduleWeekly from '../components/ui/ScheduleWeekly'
+import CalendarDisplay from '../components/ui/CalendarDisplay'
+import AppointmentRequest from '../components/ui/AppointmentRequest'
+import './styles/Schedule.css'
 
 const Schedule = () => {
 
-    const [currentSchedule, setCurrentSchedule] = useState([])
-
+    const {schedule,dispatch} = useScheduleContext()
     const {user} = useAuthContext()
 
-    const [currentDate] = useState(new Date())
+    const [currentDate, setCurrentDate] = useState(new Date())
     const [monthly, setMonthly] = useState(false)
 
     useEffect(() => {
@@ -20,131 +23,54 @@ const Schedule = () => {
             })
     
             const json = await response.json()
-            if(response.ok) setCurrentSchedule(json)
+            if(response.ok) dispatch({type: 'SET_SCHEDULE', payload: json})
         }
 
         getSchedule()
 
-    }, [user])
+    }, [user, dispatch])
 
-    const weekday = (num) => {
-        const date = new Date()
-        return new Date(date.getFullYear(), date.getMonth(), date.getDate() + num)
+    const changeDate = (date) => {
+        setCurrentDate(date)
+        setMonthly(false)
     }
-
-    console.log(currentSchedule)
 
     return (
         <div className='schedule'>
-            <h1>{currentDate.toLocaleDateString()}</h1>
-            <button onClick={
-                () => monthly ? setMonthly(false) : setMonthly(true)
-            }>{monthly && <>Week</>}{!monthly && <>Month</>} View</button>
+            
             <div className='scheduleDisplay'>
-            {!monthly &&
-                <>
-                <ScheduleWeekly date={weekday(0)} schedule={currentSchedule}/>
-                <ScheduleWeekly date={weekday(1)} schedule={currentSchedule}/>
-                <ScheduleWeekly date={weekday(2)} schedule={currentSchedule}/>
-                </>
-            }
-            {monthly &&
-                <>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                    <div>
-                        <p>TEST</p>
-                    </div>
-                </>
-            }
+                <h2>Schedule</h2>
+                <hr/>
+                <button className='view-button' onClick={
+                    () => monthly ? setMonthly(false) : setMonthly(true)
+                }>{monthly && <>Week</>}{!monthly && <>Month</>} View</button>
+                {!monthly &&
+                    <ScheduleWeekly date={currentDate}/>
+                }
+                {monthly &&
+                    <>
+                        <CalendarDisplay
+                            today={new Date()}
+                            selectedDate={currentDate}
+                            showNeigors={true}
+                            decorated={false}
+                            limited={false}
+                            setSelectedDate={changeDate}/>
+                    </>
+                }
+            </div>
+            <div>
+                <h2>Appointment Requests</h2>
+                <hr/>
+                <div className='requests'>
+                    {schedule && schedule.filter((app) => {
+                        return app.reviewed === false
+                    }).map((appReq)=> {
+                        return(
+                            <AppointmentRequest key={appReq._id} appReq={appReq}/>
+                        )
+                    })}
+                </div>
             </div>
         </div>
     )

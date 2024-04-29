@@ -1,0 +1,6 @@
+div.schedule-weekly {
+    width: 90vw;
+    margin: 0 auto;
+    display: flex;
+    gap: 20px;
+}

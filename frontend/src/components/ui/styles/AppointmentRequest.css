@@ -1,0 +1,27 @@
+div.request {
+    margin: 10px;
+    width: 80vw;
+    min-width: 450px;
+    max-width: 1200px;
+    padding: 10px;
+    background: var(--bg-dark);
+    border-radius: 10px;
+}
+
+div.request h3 {
+    margin: 0;
+}
+
+div.request td:nth-child(1) {
+    min-width: 200px;
+}
+
+div.request td.req-desc {
+    width: 70vw;
+    padding: 0 10px;
+    border-left: 2px solid grey;
+}
+
+div.request td.button {
+    width: 50px;
+}

@@ -1,0 +1,21 @@
+div.schedule {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100vh - 250px);
+    margin: 50px;
+    gap: 50px;
+}
+
+button.view-button {
+    margin: 20px;
+}
+
+div.requests {
+    overflow-y: auto;
+    margin: 0 auto;
+    max-height: 45vh;
+    background-color: var(--bg-dark);
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 15px;
+}
