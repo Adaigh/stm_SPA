@@ -5,7 +5,8 @@ const {
     getAppointments,
     getAppointment,
     createAppointment,
-    getAppointmentCounts
+    getAppointmentCounts,
+    updateAppointment
 } = require ('../controllers/appointmentController')
 
 const router = express.Router()
@@ -22,5 +23,8 @@ router.post('/', createAppointment)
 
 // Get appointment counts
 router.get('/counts', getAppointmentCounts)
+
+// Update an appointment record
+router.patch('/:id', requireAuth, verifyAccessLevel(staffAccess), updateAppointment)
 
 module.exports = router

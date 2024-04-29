@@ -77,9 +77,31 @@ const getAppointmentCounts = async (req,res) => {
     res.status(200).json(results)
 }
 
+// UPDATE a Customer
+const updateAppointment = async (req, res) => {
+
+    // ID validation check
+    const {id} = req.params
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(400).json({error: 'Invalid request data'})
+    }
+
+    // ********************
+    // TODO: VALIDATION CHECKS
+    // ********************
+
+    const appt = await Appointment.findByIdAndUpdate(id, {...req.body})
+
+    if(!appt){
+        return res.status(404).json({error: 'Appointment not found'})
+    }
+    res.status(200).json({AppointmentData: appt, updates: {...req.body}})
+}
+
 module.exports = {
     getAppointments,
     getAppointment,
     createAppointment,
-    getAppointmentCounts
+    getAppointmentCounts,
+    updateAppointment
 }
