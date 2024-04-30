@@ -61,6 +61,9 @@ const Schedule = () => {
             </div>
             <div>
                 <h2>Appointment Requests</h2>
+                {schedule && schedule.filter((app) => {
+                        return app.reviewed === false
+                    }).length == 0 && <>No new requests</>}
                 <hr/>
                 <div className='requests'>
                     {schedule && schedule.filter((app) => {

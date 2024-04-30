@@ -7,6 +7,11 @@ div.schedule {
     gap: 50px;
 }
 
+div.schedule h2 {
+  font-weight: 500;
+
+}
+
 button.view-button {
     margin: 20px;
 }

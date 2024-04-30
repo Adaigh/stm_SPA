@@ -39,6 +39,12 @@ const CustomerHome = () => {
     }
 
     return (
+
+        <>
+        <div className="customer-management-header">
+            <h2>Customer Information Management</h2>
+            <hr/>
+        </div>
         <div className="customerHome">
 
             {/* New User Information form */}
@@ -76,6 +82,7 @@ const CustomerHome = () => {
 
             </div>            
         </div>
+        </>
     )
 }
 
