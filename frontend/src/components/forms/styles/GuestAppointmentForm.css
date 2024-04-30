@@ -20,3 +20,7 @@ div.guest-app-req span.close {
     right: 20px;
     top: 20px;
 }
+
+div.guest-app-req div.controls button{
+    margin: 10px;
+}

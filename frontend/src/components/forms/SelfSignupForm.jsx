@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useSelfSignup } from '../../hooks/useSelfSignup'
+import { capitalize } from '../../hooks/useUtils'
 import './styles/SelfSignupForm.css'
 
 // Form inputs
@@ -26,6 +27,7 @@ const SelfSignupForm = () => {
     const [vModel, setVModel] = useState('')
     const [emptyFields, setEmptyFields] = useState([])
     const [vin, setVin] = useState('')
+
     const {selfSignup, isLoading, error, setError} = useSelfSignup()
 
     const handleSubmit = async (e) => {
@@ -49,22 +51,21 @@ const SelfSignupForm = () => {
             setEmptyFields([])
         }
 
-        let newCustomer = {
-            firstName,
-            lastName,
+        const newVin = vin ? vin.toUpperCase() : "Not Stored"
+
+        const newCustomer = {
+            firstName: capitalize(firstName),
+            lastName: capitalize(lastName),
             emailAddress: email,
             phoneNumbers: [phoneNumber],
             vehicles: [{
                 vehicleYear: vYear,
                 vehicleMake: vMake,
                 vehicleModel: vModel,
-                vehicleVin: vin ? vin : "Not Stored"
+                vehicleVIN: newVin
             }]
         }
 
-        // Capitalize names
-        newCustomer.firstName = newCustomer.firstName.charAt(0).toUpperCase() + newCustomer.firstName.slice(1)
-        newCustomer.lastName = newCustomer.lastName.charAt(0).toUpperCase() + newCustomer.lastName.slice(1)
         await selfSignup(email, password, newCustomer)
     }
 
@@ -128,9 +129,9 @@ const SelfSignupForm = () => {
                 />
 
             <VinEntry
-                    val={vin}
-                    changeFn={(e)=> setVin(e.target.value)}
-                    />
+                val={vin}
+                changeFn={(e) => setVin(e.target.value)}
+                />
 
             <button disabled={isLoading}>Submit</button>
             {error && <div className="error">{error}</div>}

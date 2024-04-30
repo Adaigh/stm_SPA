@@ -4,6 +4,7 @@ import { useState } from "react"
 // Context
 import { useCustomersContext } from "../../hooks/useCustomersContext"
 import { useAuthContext } from "../../hooks/useAuthContext"
+import { capitalize } from '../../hooks/useUtils'
 
 // Form inputs
 import {
@@ -19,7 +20,6 @@ import {
 
 const CustomerForm = () => {
 
-    const {dispatch} = useCustomersContext()
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [phoneNumber, setPhoneNumber] = useState('')
@@ -28,9 +28,12 @@ const CustomerForm = () => {
     const [vMake, setVMake] = useState('')
     const [vModel, setVModel] = useState('')
     const [vin, setVin] = useState('')
+
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
+
     const {user} = useAuthContext()
+    const {dispatch} = useCustomersContext()
 
     // Form submission handler
     const handleSubmit = async (e) => {
@@ -53,23 +56,22 @@ const CustomerForm = () => {
             setEmptyFields([])
         }
 
+        const newEmail = emailAddress ? emailAddress + ' (SHOP)' : null
+        const newVin = vin ? vin.toUpperCase() : "Not Stored"
+
         // Create new customer object
-        let newCustomer = {
-            firstName,
-            lastName,
+        const newCustomer = {
+            firstName: capitalize(firstName),
+            lastName: capitalize(lastName),
             phoneNumbers: [phoneNumber],
-            emailAddress: emailAddress ? emailAddress+' (SHOP)' : null,
+            emailAddress: newEmail,
             vehicles: [{
                 vehicleYear: vYear,
                 vehicleMake: vMake,
                 vehicleModel: vModel,
-                vehicleVIN: vin ? vin : "Not Stored"
+                vehicleVIN: newVin
             }]
         }
-        
-        // Capitalize names
-        newCustomer.firstName = newCustomer.firstName.charAt(0).toUpperCase() + newCustomer.firstName.slice(1)
-        newCustomer.lastName = newCustomer.lastName.charAt(0).toUpperCase() + newCustomer.lastName.slice(1)
 
         // Fetch the new user details
         const response = await fetch('/api/customers', {

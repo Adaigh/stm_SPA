@@ -26,14 +26,14 @@ const AccountUpdateForm = ({closeForm}) => {
     const [vMake, setVMake] = useState('')
     const [vModel, setVModel] = useState('')
     const [vin, setVin] = useState('')
-
+    
     const [emptyFields, setEmptyFields] = useState([])
     const [error, setError] = useState('')
-
+    
     const [addPhone, setAddPhone] = useState(false)
     const [validPhone, setValidPhone] = useState(true)
     const [addVehicle, setAddVehicle] = useState(false)
-
+    
     const {user} = useAuthContext()
 
 
@@ -91,18 +91,17 @@ const AccountUpdateForm = ({closeForm}) => {
             return
         }
 
-        let newVehicle = {
+        const newVin = vin ? vin.toUpperCase() : "Not Stored"
+
+        const newVehicle = {
             vehicleYear: parseInt(vYear),
             vehicleMake: vMake,
             vehicleModel: vModel,
-            vehicleVIN: vin ? vin : 'Not Stored'
+            vehicleVIN: newVin
         }
 
         for(let entry of vehicles){
-            if(entry.vehicleYear === newVehicle.vehicleYear &&
-                entry.vehicleMake === newVehicle.vehicleMake &&
-                entry.vehicleModel === newVehicle.vehicleModel &&
-                entry.vehicleVIN === newVehicle.vehicleVIN) {
+            if(JSON.stringify(entry) === JSON.stringify(newVehicle)) {
                     setError("Vehicle already stored")
                     setVYear('')
                     setVMake('')
@@ -165,7 +164,7 @@ const AccountUpdateForm = ({closeForm}) => {
             return
         }
 
-        let response = await fetch('/api/customers/' + details.user._id, {
+        const response = await fetch('/api/customers/' + details.user._id, {
             method: 'PATCH',
             headers: {'Content-Type': 'application/json',
                         'Authorization': `Bearer ${user.webToken}`},
@@ -187,7 +186,7 @@ const AccountUpdateForm = ({closeForm}) => {
     }
 
     return (
-        <form className="acct-update-form">
+        <form id="customer-account-update-form" className="acct-update-form" onSubmit={handleSubmit}>
             <h1>Edit Account Information:</h1>
             <FirstName
                 val={firstName}
@@ -272,7 +271,7 @@ const AccountUpdateForm = ({closeForm}) => {
             }
             <div className="controls">
                 <button className="submit"
-                    onClick={handleSubmit}>Submit Changes</button>
+                    form="customer-account-update-form">Submit Changes</button>
                 <button className="cancel"
                     onClick={(e)=> {e.preventDefault(); closeForm()}}>Cancel</button>
             </div>

@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { capitalize } from "../../hooks/useUtils";
 import './styles/CustomerAppointmentForm.css'
 
 import {
@@ -15,11 +16,11 @@ import {
 
 const CustomerAppointmentForm = ({date, customer, closeForm}) => {
 
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [phoneNumber, setPhoneNumber] = useState('')
-    const [emailAddress, setEmailAddress] = useState('')
-    const [selectedVehicle, setSelectedVehicle] = useState('')
+    const [firstName, setFirstName] = useState(customer.firstName)
+    const [lastName, setLastName] = useState(customer.lastName)
+    const [phoneNumber, setPhoneNumber] = useState(customer.phoneNumbers[0])
+    const [emailAddress, setEmailAddress] = useState(customer.emailAddress)
+    const [selectedVehicle, setSelectedVehicle] = useState(customer.vehicles[0])
     const [vYear, setVYear] = useState('')
     const [vMake, setVMake] = useState('')
     const [vModel, setVModel] = useState('')
@@ -30,20 +31,6 @@ const CustomerAppointmentForm = ({date, customer, closeForm}) => {
     const [emptyFields, setEmptyFields] = useState([])
 
     const [enterVehicle, setEnterVehicle] = useState(false)
-
-    useEffect(() => {
-        setFirstName(customer.firstName)
-        setLastName(customer.lastName)
-        setPhoneNumber(customer.phoneNumbers[0])
-        setEmailAddress(customer.emailAddress)
-        setSelectedVehicle(customer.vehicles[0])
-    }, [
-        customer.firstName,
-        customer.lastName,
-        customer.phoneNumbers,
-        customer.emailAddress,
-        customer.vehicles
-    ])
 
     const toggleEnterVehicle = (e) => {
         e.preventDefault()
@@ -74,24 +61,28 @@ const CustomerAppointmentForm = ({date, customer, closeForm}) => {
             setError(null)
             setEmptyFields([])
         }
+        
+        const newVin = vin ? vin.toUpperCase() : "Not Stored"
 
-        let newAppt = {}
-        newAppt['date'] = date.toLocaleDateString()
-        newAppt['firstName'] = firstName
-        newAppt['lastName'] = lastName
-        newAppt['phoneNumber'] = phoneNumber
-        newAppt['emailAddress'] = emailAddress
-        if(!enterVehicle){
-            newAppt['vehicle'] = selectedVehicle
-        } else {
-            newAppt['vehicle'] = {
+        let newVehicle = selectedVehicle
+        if(enterVehicle) {
+            newVehicle = {
                 vehicleYear: vYear,
                 vehicleMake: vMake,
                 vehicleModel: vModel,
-                vehicleVIN: vin ? vin : 'Not Stored'
+                vehicleVIN: newVin
             }
         }
-        newAppt['description'] = description
+
+        let newAppt = {
+            date: date.toLocaleDateString(),
+            firstName: capitalize(firstName),
+            lastName: capitalize(lastName),
+            phoneNumber: phoneNumber,
+            emailAddress: emailAddress,
+            vehicle: newVehicle,
+            description: description
+        }
 
         // Fetch new appointment details
         const response = await fetch('/api/appointments', {
@@ -136,7 +127,7 @@ const CustomerAppointmentForm = ({date, customer, closeForm}) => {
 
             <h2>Request Appointment</h2>
             <h3>{date.toDateString()}</h3>
-            <form className="cust-request" onSubmit={handleSubmit}>
+            <form id="customer-appointment-form" className="cust-request" onSubmit={handleSubmit}>
             <div>
                     <FirstName 
                         val={firstName}
@@ -231,7 +222,8 @@ const CustomerAppointmentForm = ({date, customer, closeForm}) => {
                         />
                 </div>
             </form>
-            <button className="submit" onClick={handleSubmit}>Submit Request</button>
+            <button className="submit"
+                form="customer-appointment-form">Submit Request</button>
             {error && <div className="error">{error}</div>}
         </div>
     )

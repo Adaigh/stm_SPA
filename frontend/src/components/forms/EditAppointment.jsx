@@ -13,6 +13,7 @@ import {
 import './styles/EditAppointment.css'
 import { useAuthContext } from "../../hooks/useAuthContext"
 import { useScheduleContext } from "../../hooks/useScheduleContext"
+import { capitalize } from "../../hooks/useUtils"
 
 const EditAppointmentForm = ({appointment, closeForm}) => {
     
@@ -65,14 +66,17 @@ const EditAppointmentForm = ({appointment, closeForm}) => {
             return
         }
 
-        let updatedAppointment = {...appointment}
+        const updatedAppointment = {...appointment}
         updatedAppointment.date = date
-        updatedAppointment.firstName = firstName
-        updatedAppointment.lastName = lastName
+        updatedAppointment.firstName = capitalize(firstName)
+        updatedAppointment.lastName = capitalize(lastName)
         updatedAppointment.phoneNumber = phone
-        updatedAppointment.vehicleYear = vYear
-        updatedAppointment.vehicleMake = vMake
-        updatedAppointment.vehicleModel = vModel
+        updatedAppointment.vehicle = {
+            vehicleYear: vYear,
+            vehicleMake: vMake,
+            vehicleModel: vModel,
+            vehicleVIN: vin
+        }
         updatedAppointment.description = description
 
         if (JSON.stringify(updatedAppointment) === JSON.stringify(appointment)) {
@@ -81,7 +85,7 @@ const EditAppointmentForm = ({appointment, closeForm}) => {
             return
         }
 
-        let response = await fetch('/api/appointments/' + appointment._id, {
+        const response = await fetch('/api/appointments/' + appointment._id, {
             method: 'PATCH',
             headers: {'Content-Type': 'application/json',
                         'Authorization': `Bearer ${user.webToken}`},
@@ -108,7 +112,7 @@ const EditAppointmentForm = ({appointment, closeForm}) => {
         <div className="edit-appt-form">
 
             <h1>Test Form</h1>
-            <form className="edit-appt">
+            <form id="edit-appointment-form" className="edit-appt" onSubmit={handleSubmit}>
 
                 <div>
                     <label>Date: </label>
@@ -175,9 +179,12 @@ const EditAppointmentForm = ({appointment, closeForm}) => {
 
             <div className="controls">
                 <button className="submit"
-                    onClick={(e) => handleSubmit(e)}>Submit Changes</button>
+                    form="edit-appointment-form">Submit Changes</button>
                 <button className="cancel"
-                    onClick={(e)=> {e.preventDefault(); closeForm()}}>Cancel</button>
+                    onClick={(e)=> {
+                        e.preventDefault()
+                        closeForm()
+                    }}>Cancel</button>
             </div>
             {error && <div className="error">{error}</div>}
         </div>

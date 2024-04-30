@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { capitalize } from "../../hooks/useUtils";
 import './styles/GuestAppointmentForm.css'
 
 // Form inputs
@@ -34,7 +35,7 @@ const GuestAppointmentForm = ({date, closeForm}) => {
         e.preventDefault()
         
         // Check for missing fields
-        const missing = []
+        let missing = []
         if(!firstName) missing.push('firstName')
         if(!lastName) missing.push('lastName')
         if(!phoneNumber) missing.push('phoneNumber')
@@ -51,20 +52,22 @@ const GuestAppointmentForm = ({date, closeForm}) => {
             setEmptyFields([])
         }
 
+        const newVin = vin ? vin.toUpperCase() : "Not Stored"
+
         // Create new appointment object
-        let newAppt = {
+        const newAppt = {
             date: date.toLocaleDateString(),
-            firstName,
-            lastName,
-            phoneNumber,
-            emailAddress,
+            firstName: capitalize(firstName),
+            lastName: capitalize(lastName),
+            phoneNumber: phoneNumber,
+            emailAddress: emailAddress,
             vehicle: {
                 vehicleYear: vYear,
                 vehicleMake: vMake,
                 vehicleModel: vModel,
-                vehicleVIN: vin ? vin : 'Not Stored'
+                vehicleVIN: newVin
             },
-            description
+            description: description
         }
 
         // Fetch new appointment details
@@ -108,7 +111,7 @@ const GuestAppointmentForm = ({date, closeForm}) => {
 
             <h2>Request Appointment: </h2>
             <h3>{date.toDateString()}</h3>
-            <form className="guest-request" onSubmit={handleSubmit}>
+            <form id="guest-app-req-form" className="guest-request" onSubmit={handleSubmit}>
                 <div>
                     <FirstName 
                         val={firstName}
@@ -175,7 +178,16 @@ const GuestAppointmentForm = ({date, closeForm}) => {
                 </div>
 
             </form>
-            <button className="submit" onClick={handleSubmit}>Submit Request</button>
+
+            <div className="controls">
+                <button form="guest-app-req-form" className="submit">Submit Request</button>
+                <button className="cancel"
+                    onClick={(e) => {
+                        e.preventDefault()
+                        closeForm()
+                    }}>Cancel</button>
+            </div>
+
             {error && <div className="error">{error}</div>}
         </div>
     )

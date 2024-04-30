@@ -105,7 +105,7 @@ export const VehicleModel = ({val, req, error, changeFn}) => {
             type="text"
             value={val}
             title="Letters and numbers only"
-            pattern="[a-zA-Z0-9]+"
+            pattern="[a-zA-Z0-9 ]+"
             onChange={changeFn}
             className={error ? 'error' : ''}
         />

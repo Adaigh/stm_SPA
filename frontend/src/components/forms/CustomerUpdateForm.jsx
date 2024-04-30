@@ -12,7 +12,7 @@ import {
 } from './labeledInputs'
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useCustomersContext } from "../../hooks/useCustomersContext";
-import { formatPhone } from "../../hooks/useUtils";
+import { formatPhone, capitalize } from "../../hooks/useUtils";
 
 const CustomerUpdateForm = ({closeForm, customer}) => {
 
@@ -92,18 +92,17 @@ const CustomerUpdateForm = ({closeForm, customer}) => {
             return
         }
 
-        let newVehicle = {
+        const newVin = vin ? vin.toUpperCase() : "Not Stored"
+
+        const newVehicle = {
             vehicleYear: parseInt(vYear),
             vehicleMake: vMake,
             vehicleModel: vModel,
-            vehicleVIN: vin ? vin : 'Not Stored'
+            vehicleVIN: newVin
         }
 
         for(let entry of vehicles){
-            if(entry.vehicleYear === newVehicle.vehicleYear &&
-                entry.vehicleMake === newVehicle.vehicleMake &&
-                entry.vehicleModel === newVehicle.vehicleModel &&
-                entry.vehicleVIN === newVehicle.vehicleVIN) {
+            if(JSON.stringify(entry) === JSON.stringify(newVehicle)) {
                     setError("Vehicle already stored")
                     setVYear('')
                     setVMake('')
@@ -156,8 +155,8 @@ const CustomerUpdateForm = ({closeForm, customer}) => {
         }
         
         let updatedInfo = {...customer}
-        updatedInfo.firstName = firstName
-        updatedInfo.lastName = lastName
+        updatedInfo.firstName = capitalize(firstName)
+        updatedInfo.lastName = capitalize(lastName)
         updatedInfo.emailAddress = emailAddress
         updatedInfo.phoneNumbers = phoneNumbers
         updatedInfo.vehicles = vehicles
@@ -168,7 +167,7 @@ const CustomerUpdateForm = ({closeForm, customer}) => {
             return
         }
 
-        let response = await fetch('/api/customers/' + customer._id, {
+        const response = await fetch('/api/customers/' + customer._id, {
             method: 'PATCH',
             headers: {'Content-Type': 'application/json',
                         'Authorization': `Bearer ${user.webToken}`},
@@ -178,10 +177,9 @@ const CustomerUpdateForm = ({closeForm, customer}) => {
         const json = response.json()
 
         if(response.ok){
-            window.confirm("Updates Successful!")
+            window.alert("Updates Successful!")
             let newCustomersInfo = [...customers]
-            let updateIndex = newCustomersInfo.indexOf(customer)
-            newCustomersInfo[updateIndex] = updatedInfo
+            newCustomersInfo[newCustomersInfo.indexOf(customer)] = updatedInfo
             dispatch({type: 'SET_CUSTOMERS', payload: newCustomersInfo})
             setError('')
             closeForm()
@@ -194,7 +192,7 @@ const CustomerUpdateForm = ({closeForm, customer}) => {
 
     return (
         <>
-        <form className="cust-update-form">
+        <form id="customer-update-form" className="cust-update-form" onSubmit={handleSubmit}>
 
             <div className="cust-info">
                 <FirstName
@@ -295,13 +293,15 @@ const CustomerUpdateForm = ({closeForm, customer}) => {
 
             <div className="controls">
                 <button className="submit"
-                    onClick={handleSubmit}>Submit Changes</button>
+                    form="customer-update-form">Submit Changes</button>
                 <button className='cancel'
-                    onClick={(e)=> {e.preventDefault(); closeForm()}}>Cancel</button>
+                    onClick={(e)=> {
+                        e.preventDefault()
+                        closeForm()
+                    }}>Cancel</button>
             </div>
 
         </form>
-            
 
         {error && <div className="error">{error}</div>}
         </>
