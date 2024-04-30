@@ -66,7 +66,7 @@ const EditAppointmentForm = ({appointment, closeForm}) => {
             return
         }
 
-        const updatedAppointment = {...appointment}
+        let updatedAppointment = {...appointment}
         updatedAppointment.date = date
         updatedAppointment.firstName = capitalize(firstName)
         updatedAppointment.lastName = capitalize(lastName)
