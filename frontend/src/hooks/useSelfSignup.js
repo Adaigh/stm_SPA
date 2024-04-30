@@ -10,8 +10,6 @@ export const useSelfSignup = () => {
         setIsLoading(true)
         setError(null)
 
-        console.log(email, password, newCustomer)
-
         const response = await fetch('/api/account/signup', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
