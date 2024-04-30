@@ -8,16 +8,7 @@ import AccountUpdateForm from '../forms/AccountUpdateForm';
 import './styles/DetailsDisplay.css'
 import { useDetailsContext } from '../../hooks/useDetailsContext';
 
-const standardStyle = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-    }
-}
+import { standardStyle } from '../../hooks/useUtils';
 
 const DetailsDisplay = () => {
 
