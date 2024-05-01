@@ -53,8 +53,6 @@ export const useSelfSignup = () => {
         // Update auth context
         dispatch({type: 'LOGIN', payload: accountJson})
 
-        // TODO: UPDATE ACCOUNT WITH USERINFO ID
-
         setIsLoading(false)
     }
 
