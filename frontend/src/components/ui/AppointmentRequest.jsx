@@ -31,8 +31,7 @@ const AppointmentRequest = ({appReq}) => {
 
     const denyRequest = async (e) => {
         e.preventDefault()
-        const message = await deleteApp(appReq)
-        window.alert(message)
+        await deleteApp(appReq)
     }
 
     return (
@@ -44,7 +43,7 @@ const AppointmentRequest = ({appReq}) => {
                         <td><h3>{appReq.date}</h3></td>
                         <td className='req-desc' rowSpan={5}>{appReq.description}</td>
                         <td className='button'>
-                            <button onClick={editRequest}>Edit</button>
+                            <button className='edit' onClick={editRequest}>Edit</button>
                         </td>
                     </tr>
                     <tr>
@@ -57,7 +56,7 @@ const AppointmentRequest = ({appReq}) => {
                             {appReq.vehicle.vehicleModel}
                         </td>
                         <td className='button'>
-                            <button onClick={approveRequest}>Approve</button>
+                            <button className='approve' onClick={approveRequest}>Approve</button>
                         </td>
                     </tr>
                     <tr>
@@ -66,7 +65,7 @@ const AppointmentRequest = ({appReq}) => {
                     <tr>
                         <td>{formatPhone(appReq.phoneNumber)}</td>
                         <td className='button'>
-                            <button onClick={denyRequest}>Deny</button>
+                            <button className='deny' onClick={denyRequest}>Deny</button>
                         </td>
                     </tr>
                 </tbody>
