@@ -3,25 +3,21 @@ import { useState } from 'react';
 import Modal from 'react-modal';
 import EditAppointmentForm from '../forms/EditAppointment';
 
-import { useAuthContext } from "../../hooks/useAuthContext"
-import { useScheduleContext } from "../../hooks/useScheduleContext"
 import { formatPhone, standardStyle } from '../../hooks/useUtils'
 
 import './styles/AppointmentRequest.css'
-import { useCalendarContext } from '../../hooks/useCalendarContext';
 import { useDeleteAppointment } from '../../hooks/api/useDeleteAppointment';
+import { useApproveAppointment } from '../../hooks/api/useApproveAppointment';
 
 const AppointmentRequest = ({appReq}) => {
 
     const [showEdit, setShowEdit] = useState(false)
     // const [showDelDiag, setShowDelDiag] = useState(false)
 
-    const {user} = useAuthContext()
-    const {schedule, dispatch} = useScheduleContext()
-    let calendar = useCalendarContext().calendar
-    let calendarDispatch = useCalendarContext().dispatch
 
     const {deleteApp} = useDeleteAppointment()
+    const {approveApp} = useApproveAppointment()
+
 
     const editRequest = (e) => {
         e.preventDefault()
@@ -30,32 +26,7 @@ const AppointmentRequest = ({appReq}) => {
 
     const approveRequest = async (e) => {
         e.preventDefault()
-
-        let reviewedAppointment = {...appReq}
-        reviewedAppointment.reviewed = true
-
-        const response = await fetch('/api/appointments/' + appReq._id, {
-            method: 'PATCH',
-            headers: {'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${user.webToken}`},
-            body: JSON.stringify(reviewedAppointment)
-        })
-
-        const json = response.json()
-
-        if(response.ok){
-
-            let updatedAppointments = [...schedule]
-            updatedAppointments[updatedAppointments.indexOf(appReq)] = reviewedAppointment
-            dispatch({type: 'SET_SCHEDULE', payload: updatedAppointments})
-            
-            let updateDate = reviewedAppointment.date
-            calendar[updateDate] = calendar[updateDate] ? calendar[updateDate] + 1 : 1
-            calendarDispatch({type: 'SET_CALENDAR', payload: calendar})
-            return
-        } else {
-            window.alert(json.error)
-        }
+        await approveApp(appReq)
     }
 
     const denyRequest = async (e) => {
