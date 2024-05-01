@@ -14,6 +14,10 @@ div.details-container button {
     margin-bottom: 20px
 }
 
+div.details-container button.edit {
+    color: var(--orange)
+}
+
 div.details-container table.details-list,
 div.details-container table.details-list td {
     padding: 15px;

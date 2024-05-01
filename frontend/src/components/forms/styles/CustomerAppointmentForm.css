@@ -22,7 +22,11 @@ div.cust-app-req .close {
     cursor: pointer;
 }
 
-div.or {
+div.cust-app-req div.or {
     padding: 5px;
     text-align: center;
+}
+
+div.cust-app-req button.edit{
+    color: var(--orange);
 }

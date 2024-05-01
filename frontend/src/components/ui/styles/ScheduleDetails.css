@@ -4,3 +4,9 @@ div.schedule-day {
     padding: 40px;
     border-radius: 20px;
 }
+
+
+div.schedule-day span {
+    float: right;
+    margin-left: 10px;
+}

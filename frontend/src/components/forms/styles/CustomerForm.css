@@ -10,3 +10,7 @@ form.customer label {
     font-weight: 600;
     margin-left: 20px;
 }
+
+form.customer button {
+    color: var(--green)
+}

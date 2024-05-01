@@ -1,14 +1,30 @@
-.cust-update-form{
+form.cust-update-form{
     margin: 0 20px;
 }
 
-.cust-cols {
+form.cust-update-form div.cust-cols {
     display: flex;
     gap: 50px;
     padding: 20px;
 }
 
-.cust-info {
+form.cust-update-form div.cust-info {
     display: flex;
     flex-direction: column;
+}
+
+form.cust-update-form div.controls {
+    display: flex;
+    gap: 50px;
+}
+
+
+form.cust-update-form span.check {
+    color: greenyellow;
+    padding: 5px;
+}
+
+form.cust-update-form span.check:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }

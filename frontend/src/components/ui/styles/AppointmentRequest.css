@@ -25,3 +25,15 @@ div.request td.req-desc {
 div.request td.button {
     width: 50px;
 }
+
+div.request button.edit {
+    color: var(--orange)
+}
+
+div.request button.approve {
+    color: var(--green)
+}
+
+div.request button.deny {
+    color: var(--red)
+}

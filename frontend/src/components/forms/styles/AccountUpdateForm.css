@@ -6,31 +6,35 @@ div.new-vehicle{
     gap:5px;
 }
 
-.acct-update-form .check {
+form.acct-update-form span.check {
     color: greenyellow;
     padding: 5px;
 }
 
-.acct-update-form .check:hover {
+form.acct-update-form span.check:hover {
     cursor: pointer;
     text-decoration: underline;
 }
 
-.acct-update-form label {
+form.acct-update-form label {
     margin-top: 20px;
     font-weight: 600;
     color: var(--primary)
 }
-.acct-update-form input {
+form.acct-update-form input {
     margin: 0 auto 0 0;
 }
 
-.acct-update-form button {
+form.acct-update-form button {
     margin: 0 auto 0 0;
 }
 
-.acct-update-form .controls {
+form.acct-update-form .controls {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+}
+
+form.acct-update-form button.edit {
+    color: var(--orange)
 }

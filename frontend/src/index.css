@@ -14,7 +14,10 @@
   --bg-dark: #222;
   --container-border: #a1a1a1;
   --button-border: #f1f1f1;
-  --button-grn: #1aac83;
+  --orange: #f84;
+  --blue: #55f;
+  --green: greenyellow;
+  --red: var(--error);
 }
 
 body {
@@ -61,14 +64,6 @@ button {
   min-width: 80px;
 }
 
-button.cancel {
-  background: var(--error);
-}
-
-button.submit {
-  background: var(--button-grn);
-}
-
 div.error {
   border: 2px solid var(--error);
   border-radius: 10px;
@@ -77,8 +72,31 @@ div.error {
   background: #ffefef
 }
 
+span.delete {
+  color: var(--error);
+  cursor: pointer;
+}
 
+span.delete:hover {
+  text-decoration: underline;
+}
 
+span.edit {
+  color: var(--orange);
+  cursor: pointer;
+}
+
+span.edit:hover {
+  text-decoration: underline;
+}
+
+button.submit {
+  color: var(--green)
+}
+
+button.cancel {
+  color: var(--red)
+}
 /* 
 header .container {
   max-width: 1400px;

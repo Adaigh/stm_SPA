@@ -1,8 +1,8 @@
-.info-columns {
+div.customer-details div.info-columns {
     display: flex;
 }
 
-.customer-details {
+div.customer-details {
     padding: 10px;
     background: var(--bg-dark);
     background: rgba(0,0,0,0.8);
@@ -12,40 +12,32 @@
     margin-bottom: 5px;
 }
 
-.customer-details ul {
+div.customer-details ul {
     margin: 0;
     list-style: none;
 }
 
-.customer-details-header {
+div.customer-details-header {
     font-weight: 500;
     display: flex;
     justify-content: space-between;
 }
 
-.customer-details-header h3 {
+div.customer-details-header h3 {
     display: inline;
 }
 
-.expandable {
+div.expandable {
     cursor: pointer;
 }
 
-span.expand-more,
-span.expand-less {
+div.customer-details span.expand-more,
+div.customer-details span.expand-less {
     position: relative;
     top:5px;
 }
 
-.delete {
-    color: var(--error);
-    cursor: pointer;
-}
-
-.delete:hover {
-    text-decoration: underline;
-}
-
-button.edit {
+div.customer-details button.edit {
     margin: 10px;
+    color: var(--orange);
 }
