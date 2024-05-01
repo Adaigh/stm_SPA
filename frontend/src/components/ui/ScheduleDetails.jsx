@@ -24,7 +24,7 @@ const ScheduleDetails = ({dow, date}) => {
             {day.map((app) => {
                 return (
                     <div key={app._id} className='appointment'>
-                        {app.firstName} {app.lastName}
+                        {app.firstName} {app.lastName} <span className='material-symbols-outlined delete' >delete</span>
                         <br/>
                         {formatPhone(app.phoneNumber)}
                         <br/>

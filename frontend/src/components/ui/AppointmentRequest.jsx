@@ -40,9 +40,11 @@ const AppointmentRequest = ({appReq}) => {
         const json = response.json()
 
         if(response.ok){
+
             let updatedAppointments = [...schedule]
             updatedAppointments[updatedAppointments.indexOf(appReq)] = reviewedAppointment
             dispatch({type: 'SET_SCHEDULE', payload: updatedAppointments})
+            
             let updateDate = reviewedAppointment.date
             calendar[updateDate] = calendar[updateDate] ? calendar[updateDate] + 1 : 1
             calendarDispatch({type: 'SET_CALENDAR', payload: calendar})
