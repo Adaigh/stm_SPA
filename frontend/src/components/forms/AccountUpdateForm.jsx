@@ -207,7 +207,7 @@ const AccountUpdateForm = ({closeForm}) => {
                     </div>
                 )
             })}
-            {!addPhone && <button onClick={(e) => {e.preventDefault();setAddPhone(true)}}>Add Phone Number</button>}
+            {!addPhone && <button className='edit' onClick={(e) => {e.preventDefault();setAddPhone(true)}}>Add Phone Number</button>}
             {addPhone && 
                 <div className="new-phone">
                     <input
@@ -236,7 +236,7 @@ const AccountUpdateForm = ({closeForm}) => {
                     </div>
                 )
             })}
-            {!addVehicle && <button onClick={(e) => {e.preventDefault();setAddVehicle(true)}}>Add New Vehicle</button>}
+            {!addVehicle && <button className='edit' onClick={(e) => {e.preventDefault();setAddVehicle(true)}}>Add New Vehicle</button>}
             {addVehicle && 
                 <div className="new-vehicle">
 
