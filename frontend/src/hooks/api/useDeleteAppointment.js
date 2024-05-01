@@ -8,6 +8,10 @@ export const useDeleteAppointment = () => {
 
     const deleteApp = async (appReq) => {
 
+        if(!window.confirm("Are you sure you want to delete this appointment?")) {
+            return
+        }
+
         const request = {
             method: 'DELETE',
             headers: {
@@ -18,9 +22,7 @@ export const useDeleteAppointment = () => {
         const response = await fetch('/api/appointments/' + appReq._id, request)
         const json = response.json()
 
-        let message = ''
         if(response.ok){
-            message = "Appointment removed successfully"
 
             let updatedAppointments = schedule.filter((app)=> {
                 return app !== appReq
@@ -29,9 +31,8 @@ export const useDeleteAppointment = () => {
             dispatch({type: 'SET_SCHEDULE', payload: updatedAppointments})
 
         } else {
-            message = json.error
+            window.alert(json.error)
         }
-        return message
     }
 
     return {deleteApp}
