@@ -26,7 +26,7 @@ const DetailsDisplay = () => {
 
                 <h1>Account Details: </h1>
 
-                <button onClick={toggleEdit}>Edit Account Details</button>
+                <button className='edit' onClick={toggleEdit}>Edit Account Details</button>
 
                 
                 <table className='details-list'>
