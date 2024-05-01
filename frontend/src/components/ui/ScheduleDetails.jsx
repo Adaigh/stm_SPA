@@ -1,7 +1,8 @@
 import './styles/ScheduleDetails.css'
-import {formatPhone} from '../../hooks/useUtils'
+import { formatPhone } from '../../hooks/useUtils'
 import { useScheduleContext } from '../../hooks/useScheduleContext'
 import { useEffect, useState } from 'react'
+import { useDeleteAppointment } from '../../hooks/api/useDeleteAppointment'
 
 const ScheduleDetails = ({dow, date}) => {
 
@@ -10,9 +11,17 @@ const ScheduleDetails = ({dow, date}) => {
 
     useEffect(() => {
         if(schedule) setDay(
-                schedule.filter((x)=> x.date === date)
-                .filter((x) => x.reviewed === true))
+                schedule.filter((x)=> x.date === date && x.reviewed === true)
+        )
     },[schedule, date])
+
+    const {deleteApp} = useDeleteAppointment()
+
+    const deleteAppointment = async (e, app) => {
+        e.preventDefault()
+        const message = await deleteApp(app)
+        window.alert(message)
+    }
 
     return (
         <div className='schedule-day'>
@@ -24,7 +33,8 @@ const ScheduleDetails = ({dow, date}) => {
             {day.map((app) => {
                 return (
                     <div key={app._id} className='appointment'>
-                        {app.firstName} {app.lastName} <span className='material-symbols-outlined delete' >delete</span>
+                        {app.firstName} {app.lastName} 
+                        <span onClick={(e) => deleteAppointment(e, app)} className='material-symbols-outlined delete'>delete</span>
                         <br/>
                         {formatPhone(app.phoneNumber)}
                         <br/>

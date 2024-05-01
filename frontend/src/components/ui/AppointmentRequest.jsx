@@ -9,15 +9,19 @@ import { formatPhone, standardStyle } from '../../hooks/useUtils'
 
 import './styles/AppointmentRequest.css'
 import { useCalendarContext } from '../../hooks/useCalendarContext';
+import { useDeleteAppointment } from '../../hooks/api/useDeleteAppointment';
 
 const AppointmentRequest = ({appReq}) => {
 
     const [showEdit, setShowEdit] = useState(false)
+    // const [showDelDiag, setShowDelDiag] = useState(false)
 
     const {user} = useAuthContext()
     const {schedule, dispatch} = useScheduleContext()
     let calendar = useCalendarContext().calendar
     let calendarDispatch = useCalendarContext().dispatch
+
+    const {deleteApp} = useDeleteAppointment()
 
     const editRequest = (e) => {
         e.preventDefault()
@@ -52,7 +56,12 @@ const AppointmentRequest = ({appReq}) => {
         } else {
             window.alert(json.error)
         }
+    }
 
+    const denyRequest = async (e) => {
+        e.preventDefault()
+        const message = await deleteApp(appReq)
+        window.alert(message)
     }
 
     return (
@@ -86,7 +95,7 @@ const AppointmentRequest = ({appReq}) => {
                     <tr>
                         <td>{formatPhone(appReq.phoneNumber)}</td>
                         <td className='button'>
-                            <button>Deny</button>
+                            <button onClick={denyRequest}>Deny</button>
                         </td>
                     </tr>
                 </tbody>
@@ -104,6 +113,20 @@ const AppointmentRequest = ({appReq}) => {
                         closeForm={() => setShowEdit(false)}
                         />
             </Modal>
+
+            {/* <Modal
+                isOpen={showEdit}
+                onRequestClose={() => setShowEdit(false)}
+                style={standardStyle}
+                contentLabel="Edit Appointment Details"
+                className="modal"
+                overlayClassName="overlay"
+                >
+                    <EditAppointmentForm
+                        appointment={appReq}
+                        closeForm={() => setShowEdit(false)}
+                        />
+            </Modal> */}
         </div>
     )
 }
