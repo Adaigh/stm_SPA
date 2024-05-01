@@ -1,13 +1,21 @@
-import './styles/ScheduleDetails.css'
-import { formatPhone } from '../../hooks/useUtils'
-import { useScheduleContext } from '../../hooks/useScheduleContext'
 import { useEffect, useState } from 'react'
+import Modal from 'react-modal';
+
+import EditAppointmentForm from '../forms/EditAppointment';
+
+import { formatPhone, standardStyle } from '../../hooks/useUtils'
+import { useScheduleContext } from '../../hooks/useScheduleContext'
 import { useDeleteAppointment } from '../../hooks/api/useDeleteAppointment'
+import './styles/ScheduleDetails.css'
 
 const ScheduleDetails = ({dow, date}) => {
 
-    const {schedule} = useScheduleContext()
     const [day, setDay] = useState(null)
+    const [selectedAppointment, setSelectedAppointment] = useState(null)
+
+    const [showEdit, setShowEdit] = useState(false)
+
+    const {schedule} = useScheduleContext()
 
     useEffect(() => {
         if(schedule) setDay(
@@ -19,8 +27,13 @@ const ScheduleDetails = ({dow, date}) => {
 
     const deleteAppointment = async (e, app) => {
         e.preventDefault()
-        const message = await deleteApp(app)
-        window.alert(message)
+        await deleteApp(app)
+    }
+
+    const editAppt = (e, app) => {
+        e.preventDefault()
+        setSelectedAppointment(app)
+        setShowEdit(true)
     }
 
     return (
@@ -33,14 +46,16 @@ const ScheduleDetails = ({dow, date}) => {
             {day.map((app) => {
                 return (
                     <div key={app._id} className='appointment'>
-                        {app.firstName} {app.lastName} 
-                        <span onClick={(e) => deleteAppointment(e, app)} className='material-symbols-outlined delete'>delete</span>
+                        {app.firstName} {app.lastName}
+                            <span onClick={(e) => deleteAppointment(e, app)} className='material-symbols-outlined delete'>delete</span>
+                            <span onClick={(e) => editAppt(e, app)} className='material-symbols-outlined edit'>edit</span>
                         <br/>
                         {formatPhone(app.phoneNumber)}
                         <br/>
                         {app.vehicle.vehicleYear}&nbsp;
                         {app.vehicle.vehicleMake}&nbsp;
                         {app.vehicle.vehicleModel}&emsp;
+                        <br/>
                         VIN: {app.vehicle.vehicleVIN}
                         <br/>
                         {app.description}
@@ -48,8 +63,20 @@ const ScheduleDetails = ({dow, date}) => {
                     </div>
                 )
             })}
-            </>
-            }
+            </>}
+            <Modal
+                isOpen={showEdit}
+                onRequestClose={() => setShowEdit(false)}
+                style={standardStyle}
+                contentLabel="Edit Appointment Details"
+                className="modal"
+                overlayClassName="overlay"
+                >
+                    <EditAppointmentForm
+                        appointment={selectedAppointment}
+                        closeForm={() => setShowEdit(false)}
+                        />
+            </Modal>
         </div>
     )
 }
