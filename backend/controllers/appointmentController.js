@@ -77,7 +77,7 @@ const getAppointmentCounts = async (req,res) => {
     res.status(200).json(results)
 }
 
-// UPDATE a Customer
+// UPDATE an Appointment
 const updateAppointment = async (req, res) => {
 
     // ID validation check
@@ -98,10 +98,28 @@ const updateAppointment = async (req, res) => {
     res.status(200).json({AppointmentData: appt, updates: {...req.body}})
 }
 
+// DELETE an Appointment
+const deleteAppointment = async (req,res) => {
+
+    // ID validation check
+    const {id} = req.params
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(400).json({error: 'Invalid request data'})
+    }
+
+    const appt = await Appointment.findByIdAndDelete(id)
+
+    if(!appt){
+        return res.status(404).json({error: 'Appointment not found'})
+    }
+    res.status(200).json(appt)
+}
+
 module.exports = {
     getAppointments,
     getAppointment,
     createAppointment,
     getAppointmentCounts,
-    updateAppointment
+    updateAppointment,
+    deleteAppointment
 }

@@ -6,7 +6,8 @@ const {
     getAppointment,
     createAppointment,
     getAppointmentCounts,
-    updateAppointment
+    updateAppointment,
+    deleteAppointment
 } = require ('../controllers/appointmentController')
 
 const router = express.Router()
@@ -26,5 +27,8 @@ router.get('/counts', getAppointmentCounts)
 
 // Update an appointment record
 router.patch('/:id', requireAuth, verifyAccessLevel(staffAccess), updateAppointment)
+
+// Delete an appointment record
+router.delete('/:id', requireAuth, verifyAccessLevel(staffAccess), deleteAppointment)
 
 module.exports = router
