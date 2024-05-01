@@ -11,9 +11,8 @@ import {
 } from "./labeledInputs"
 
 import './styles/EditAppointment.css'
-import { useAuthContext } from "../../hooks/useAuthContext"
-import { useScheduleContext } from "../../hooks/useScheduleContext"
 import { capitalize } from "../../hooks/useUtils"
+import { useUpdateAppointment } from "../../hooks/api/useUpdateAppointment"
 
 const EditAppointmentForm = ({appointment, closeForm}) => {
     
@@ -28,11 +27,9 @@ const EditAppointmentForm = ({appointment, closeForm}) => {
     const [description, setDescription] = useState(appointment.description) 
     
     const [formattedDate, setFormattedDate] = useState([])
-    const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
-
-    const {user} = useAuthContext()
-    const {schedule, dispatch} = useScheduleContext()
+    
+    const {updateApp, error, setError} = useUpdateAppointment()
 
     const changeDate = (e) => {
         e.preventDefault()
@@ -40,6 +37,10 @@ const EditAppointmentForm = ({appointment, closeForm}) => {
         selected.setDate(selected.getDate()+1)
         setDate(selected.toLocaleDateString())
     }
+
+    useEffect(() => {
+        if(vin === "Not Stored") setVin('')
+    },[vin])
 
     useEffect(()=> {
         const reformat = () => {
@@ -84,27 +85,8 @@ const EditAppointmentForm = ({appointment, closeForm}) => {
             closeForm()
             return
         }
-
-        const response = await fetch('/api/appointments/' + appointment._id, {
-            method: 'PATCH',
-            headers: {'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${user.webToken}`},
-            body: JSON.stringify(updatedAppointment)
-        })
-
-        const json = response.json()
-
-        if(response.ok){
-            window.alert("Updates Successful!")
-            let updatedAppointments = [...schedule]
-            updatedAppointments[updatedAppointments.indexOf(appointment)] = updatedAppointment
-            dispatch({type: 'SET_SCHEDULE', payload: updatedAppointments})
-            setError('')
-            closeForm()
-            return
-        } else {
-            setError(json.error)
-        }
+        
+        await updateApp(appointment, updatedAppointment, closeForm)
         
     }
 
