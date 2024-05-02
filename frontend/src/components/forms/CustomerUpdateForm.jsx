@@ -66,6 +66,12 @@ const CustomerUpdateForm = ({closeForm, customer}) => {
         }
     }
 
+    const cancelPhone = (e) => {
+        e.preventDefault()
+        setPhoneNumber('')
+        setAddPhone(false)
+    }
+
     const removePhoneNumber = (e, num) => {
         e.preventDefault()
         setPhoneNumbers(phoneNumbers.filter((number) => {
@@ -123,6 +129,15 @@ const CustomerUpdateForm = ({closeForm, customer}) => {
         setEmptyFields([])
         setError('')
 
+    }
+
+    const cancelVehicle = (e) => {
+        e.preventDefault()
+        setVYear('')
+        setVMake('')
+        setVModel('')
+        setVin('')
+        setAddVehicle(false)
     }
 
     const removeVehicle = (e, vehicle) => {
@@ -236,7 +251,10 @@ const CustomerUpdateForm = ({closeForm, customer}) => {
                                 value={phoneNumber}
                                 className={validPhone ? '' : 'error'}
                             />
-                            <span className="material-symbols-outlined check" onClick={addNewPhoneNumber}>check</span>
+                            <div>
+                    <button className="submit" onClick={addNewPhoneNumber}>Confirm</button>
+                    <button className="cancel" onClick={cancelPhone}>Cancel</button>
+                    </div>
                         </div>
                     }
                 </div>
@@ -283,15 +301,16 @@ const CustomerUpdateForm = ({closeForm, customer}) => {
                                 val={vin}
                                 changeFn={(e)=> setVin(e.target.value)}
                                 />
-                            <button onClick={addNewVehicle}>
-                            <span className="material-symbols-outlined check">check</span>
-                            </button>
+                            <div>
+                            <button className="submit" onClick={addNewVehicle}>Confirm</button>
+                            <button className="cancel" onClick={cancelVehicle}>Cancel</button>
+                            </div>
                         </div>
                     }
                 </div>
             </div>
 
-            <div className="controls">
+            {!addPhone && !addVehicle && <div className="controls">
                 <button className="submit"
                     form="customer-update-form">Submit Changes</button>
                 <button className='cancel'
@@ -299,7 +318,7 @@ const CustomerUpdateForm = ({closeForm, customer}) => {
                         e.preventDefault()
                         closeForm()
                     }}>Cancel</button>
-            </div>
+            </div>}
 
         </form>
 
