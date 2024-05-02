@@ -93,7 +93,7 @@ const EditAppointmentForm = ({appointment, closeForm}) => {
     return (
         <div className="edit-appt-form">
 
-            <h1>Test Form</h1>
+            <h1>Edit Appointment Details</h1>
             <form id="edit-appointment-form" className="edit-appt" onSubmit={handleSubmit}>
 
                 <div>
@@ -125,21 +125,18 @@ const EditAppointmentForm = ({appointment, closeForm}) => {
                 <div>
                     <VehicleYear
                         val={vYear}
-                        req={true}
                         error={emptyFields && emptyFields.includes('vehicleYear')}
                         changeFn={(e) => setVYear(e.target.value)}
                         />
 
                     <VehicleMake
                         val={vMake}
-                        req={true}
                         error={emptyFields && emptyFields.includes('vehicleMake')}
                         changeFn={(e) => setVMake(e.target.value)}
                         />
 
                     <VehicleModel 
                         val={vModel}
-                        req={true}
                         error={emptyFields && emptyFields.includes('vehicleModel')}
                         changeFn={(e) => setVModel(e.target.value)}
                         />
@@ -152,7 +149,6 @@ const EditAppointmentForm = ({appointment, closeForm}) => {
                 <div>
                     <Description
                         val={description}
-                        req={true}
                         error={emptyFields && emptyFields.includes('description')}
                         changeFn={(e)=> setDescription(e.target.value)}
                         />
