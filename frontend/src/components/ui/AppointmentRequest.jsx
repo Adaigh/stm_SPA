@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import Modal from 'react-modal';
-import EditAppointmentForm from '../forms/EditAppointment';
+import EditAppointmentForm from '../forms/EditAppointmentForm';
 
 import { formatPhone, standardStyle } from '../../hooks/useUtils'
 
