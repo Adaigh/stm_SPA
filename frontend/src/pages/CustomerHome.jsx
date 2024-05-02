@@ -1,34 +1,22 @@
-import { useCallback, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useCustomersContext } from "../hooks/useCustomersContext"
-import { useAuthContext } from "../hooks/useAuthContext"
 import './styles/CustomerHome.css'
 
 // Components
 import CustomerDetails from '../components/ui/CustomerDetails'
 import CustomerForm from "../components/forms/CustomerForm"
+import { useFetchCustomers } from "../hooks/api/useFetchCustomers"
 
 const CustomerHome = () => {
-    const {customers, dispatch} = useCustomersContext()
+    const {customers} = useCustomersContext()
     const [filter, setFilter] = useState('')
-    const {user} = useAuthContext()
-
-    // GET user data from server
-    const fetchCustomers = useCallback(async () => {
-        const response = await fetch('/api/customers/', {
-            headers: {
-                'Authorization': `Bearer ${user.webToken}`
-            }
-        })
-        const json = await response.json()
-        if(response.ok) {
-            dispatch({type:'SET_CUSTOMERS', payload: json})
-        }
-    }, [dispatch, user.webToken])
+    const {fetchCustomers} = useFetchCustomers()
 
     // Fetch user list on load 
-    useEffect(() =>{
-        fetchCustomers()
-    }, [dispatch, user, fetchCustomers])
+    useEffect(() => {
+        if(!customers) fetchCustomers()
+        // eslint-disable-next-line
+    },[customers])
 
     // Refresh (fetch) user list
     const callRefreshCustomers = (e) => {
