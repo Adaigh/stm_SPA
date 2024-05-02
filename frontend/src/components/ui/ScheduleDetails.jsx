@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import Modal from 'react-modal';
 
-import EditAppointmentForm from '../forms/EditAppointment';
+import EditAppointmentForm from '../forms/EditAppointmentForm';
 
 import { formatPhone, standardStyle } from '../../hooks/useUtils'
 import { useScheduleContext } from '../../hooks/useScheduleContext'
 import { useDeleteAppointment } from '../../hooks/api/useDeleteAppointment'
 import './styles/ScheduleDetails.css'
+import AddAppointmentForm from '../forms/AddAppointmentForm';
 
 const ScheduleDetails = ({dow, date}) => {
 
@@ -14,6 +15,7 @@ const ScheduleDetails = ({dow, date}) => {
     const [selectedAppointment, setSelectedAppointment] = useState(null)
 
     const [showEdit, setShowEdit] = useState(false)
+    const [showAdd, setShowAdd] = useState(false)
 
     const {schedule} = useScheduleContext()
 
@@ -34,6 +36,11 @@ const ScheduleDetails = ({dow, date}) => {
         e.preventDefault()
         setSelectedAppointment(app)
         setShowEdit(true)
+    }
+
+    const addApp = (e, app) => {
+        e.preventDefault()
+        setShowAdd(true)
     }
 
     return (
@@ -63,6 +70,7 @@ const ScheduleDetails = ({dow, date}) => {
                     </div>
                 )
             })}
+            <button className='edit' onClick={addApp}>Add Appointment</button>
             </>}
             <Modal
                 isOpen={showEdit}
@@ -76,6 +84,19 @@ const ScheduleDetails = ({dow, date}) => {
                         appointment={selectedAppointment}
                         closeForm={() => setShowEdit(false)}
                         />
+            </Modal>
+            <Modal
+                isOpen={showAdd}
+                onRequestClose={() => setShowAdd(false)}
+                style={standardStyle}
+                contentLabel="Add New Appointment Details"
+                className="modal"
+                overlayClassName="overlay"
+                >
+                    {date && <AddAppointmentForm
+                        date={new Date(date)}
+                        closeForm={() => setShowAdd(false)}
+                        />}
             </Modal>
         </div>
     )
