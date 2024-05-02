@@ -20,7 +20,7 @@ export const useDeleteAppointment = () => {
         }
 
         const response = await fetch('/api/appointments/' + appReq._id, request)
-        const json = response.json()
+        const json = await response.json()
 
         if(response.ok){
 

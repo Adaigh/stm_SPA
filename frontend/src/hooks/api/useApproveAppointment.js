@@ -21,7 +21,7 @@ export const useApproveAppointment = () => {
             body: JSON.stringify(reviewedAppointment)
         })
 
-        const json = response.json()
+        const json = await response.json()
 
         if(response.ok){
 
