@@ -4,8 +4,8 @@ const mongoose = require('mongoose')
 
 // Get all appointments with user information
 const getAppointments = async (req,res) => {
-    const today = new Date().toLocaleDateString()
-    const appointments = await Appointment.find({date: {$gte: today}})
+    const this_month = new Date().getMonth()+1
+    const appointments = await Appointment.find({date: {$gte: this_month}})
     res.status(200).json(appointments)
 }
 
@@ -29,7 +29,7 @@ const getAppointment = async (req,res) => {
 
 // Create a new appointment
 const createAppointment = async (req,res) => {
-    const {date, firstName, lastName, phoneNumber, emailAddress, vehicle, description} = req.body
+    const {date, firstName, lastName, phoneNumber, emailAddress, vehicle, description, reviewed} = req.body
     
     if(!date || !firstName || !lastName || !phoneNumber || !vehicle || !description) {
         return res.status(400).json({error: "Missing required fields"})
@@ -44,9 +44,11 @@ const createAppointment = async (req,res) => {
         return res.status(409).json({error: "Appointment already exists"})
     }
 
+    alreadyReviewed = reviewed ? true : false
+
     try {
         appointment = await Appointment.create({
-            date, firstName, lastName, phoneNumber, emailAddress, vehicle, description, reviewed: false
+            date, firstName, lastName, phoneNumber, emailAddress, vehicle, description, reviewed: alreadyReviewed
         })
         res.status(200).json(appointment)
     } catch (error){
