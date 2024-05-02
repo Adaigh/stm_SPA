@@ -18,10 +18,20 @@ form.cust-update-form div.controls {
     gap: 50px;
 }
 
+form.cust-update-form div.new-phone button {
+    margin: 5px;
+}
+
+form.cust-update-form div.new-vehicle button {
+    margin: 5px;
+}
+
+form.cust-update-form div.new-vehicle {
+    max-width: 50%;
+}
 
 form.cust-update-form span.check {
     color: greenyellow;
-    padding: 5px;
 }
 
 form.cust-update-form span.check:hover {

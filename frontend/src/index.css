@@ -97,6 +97,10 @@ button.submit {
 button.cancel {
   color: var(--red)
 }
+
+button.edit {
+  color: var(--orange)
+}
 /* 
 header .container {
   max-width: 1400px;

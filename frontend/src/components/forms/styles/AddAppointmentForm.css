@@ -1,0 +1,9 @@
+form.add-appointment {
+    display: flex;
+    gap: 50px;
+}
+
+form.add-appointment div.entry-column {
+    display: flex;
+    flex-direction: column;
+}
