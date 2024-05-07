@@ -3,3 +3,6 @@ node_modules/
 
 #Ignore .env for privacy
 .env
+
+#Ignore the archive
+image_archive/
