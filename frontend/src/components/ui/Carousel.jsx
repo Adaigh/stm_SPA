@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Carousel } from 'react-responsive-carousel'
 import InfoPane from './InfoPane'
 import "react-responsive-carousel/lib/styles/carousel.min.css"
@@ -17,7 +17,10 @@ const MyCarousel = ({sectionData}) => {
         showStatus={false}
         onChange={setSelected}
         onClickItem={setSelected}
-        onClickThumb={setSelected} 
+        onClickThumb={setSelected}
+        autoPlay={true}
+        interval={10000}
+        infiniteLoop={true}
       >
         {sectionData.map((section, index) => (
           <InfoPane key={index} bgurl={section.bgurl}>
