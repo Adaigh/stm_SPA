@@ -3,7 +3,10 @@ version: '3.8'
 services:
 
   docker:
-    memory: 2048
+    deploy:
+      resources:
+        limits:
+          memory: 2G
 
   client:
     build: ./frontend
@@ -22,6 +25,10 @@ services:
     container_name: express_api_container
     ports:
      - "4000:4000"
+    deploy:
+      resources:
+        limits:
+          memory: 2G
 
   caddy:
     image: caddy:2.7.6-alpine
