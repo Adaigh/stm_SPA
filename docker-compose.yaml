@@ -1,6 +1,6 @@
 version: '3.8'
 
-defenitions:
+definitions:
   services:
     docker:
       memory: 2048
