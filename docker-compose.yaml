@@ -1,9 +1,12 @@
 version: '3.8'
 
-services:
+defenitions:
+  services:
+    docker:
+      memory: 2048
 
-  docker:
-    memory: 2048
+
+services:
 
   client:
     build: ./frontend
