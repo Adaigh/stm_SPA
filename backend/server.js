@@ -1,16 +1,31 @@
 require('dotenv').config()
 
 const express = require('express')
+const mongoose = require('mongoose')
+const RateLimit = require('express-rate-limit')
+const cors = require('cors')
+
 const customerRoutes = require('./routes/customers')
 const userAccountRoutes = require('./routes/userAccount')
 const appointmentRoutes = require('./routes/appointments')
-const mongoose = require('mongoose')
 
 // Create the express app
 const app = express()
 
 // Middleware to send request body to router
 app.use(express.json())
+
+// Rate limiter of 60req/min
+app.use(RateLimit({
+    windowMs: 60000, // 1 minute
+    max: 60,
+}))
+
+// Testing
+const corsOptions = {
+    origin: 'http://client:3000'
+}
+app.use(cors())
 
 // Middleware to log incoming requests
 app.use((req, res, next) => {
