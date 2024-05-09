@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY package.json .
 
-RUN npm install --ignore-engines
+RUN sudo npm install 
 
 COPY . .
 
