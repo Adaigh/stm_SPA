@@ -2,6 +2,9 @@ version: '3.8'
 
 services:
 
+  docker:
+    memory: 2048
+
   client:
     build: ./frontend
     container_name: react_app_container
