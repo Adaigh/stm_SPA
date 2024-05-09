@@ -5,7 +5,6 @@ services:
   client:
     image: xanderdaigh/stm_test:react_app
     container_name: react_app_container
-    image: xanderdaigh/stm_test:react_app
     restart: unless-stopped
     ports:
      - "3000:3000"
@@ -22,7 +21,6 @@ services:
     image: xanderdaigh/stm_test:express_api
     restart: unless-stopped
     container_name: express_api_container
-    image: xanderdaigh/stm_test:express_api
     ports:
      - "4000:4000"
     deploy:
