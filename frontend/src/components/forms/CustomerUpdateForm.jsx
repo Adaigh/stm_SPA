@@ -14,6 +14,8 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import { useCustomersContext } from "../../hooks/useCustomersContext";
 import { formatPhone, capitalize } from "../../hooks/useUtils";
 
+import { api_url } from "../../production_variables";
+
 const CustomerUpdateForm = ({closeForm, customer}) => {
 
     const [emailAddress, setEmailAddress] = useState(customer.emailAddress)
@@ -182,7 +184,7 @@ const CustomerUpdateForm = ({closeForm, customer}) => {
             return
         }
 
-        const response = await fetch('/api/customers/' + customer._id, {
+        const response = await fetch(`${api_url}/api/customers/` + customer._id, {
             method: 'PATCH',
             headers: {'Content-Type': 'application/json',
                         'Authorization': `Bearer ${user.webToken}`},

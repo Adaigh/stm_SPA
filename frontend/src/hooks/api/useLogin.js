@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useAuthContext } from "../useAuthContext";
 
+import { api_url } from "../../production_variables";
+
 export const useLogin = () => {
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(null)
@@ -10,7 +12,9 @@ export const useLogin = () => {
         setIsLoading(true)
         setError(null)
 
-        const response = await fetch('/api/account/login', {
+        console.log(`${api_url}/api/account/login`)
+
+        const response = await fetch(`${api_url}/api/account/login`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({user, password})

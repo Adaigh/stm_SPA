@@ -1,5 +1,6 @@
 import { useAuthContext } from "../useAuthContext"
 import { useCustomersContext } from "../useCustomersContext"
+import { api_url } from "../../production_variables"
 
 export const useFetchCustomers = () => {
 
@@ -8,7 +9,7 @@ export const useFetchCustomers = () => {
 
     const fetchCustomers = async () => {
 
-        const response = await fetch('/api/customers/', {
+        const response = await fetch(`${api_url}/api/customers/`, {
             headers: {
                 'Authorization': `Bearer ${user.webToken}`
             }

@@ -6,6 +6,8 @@ import CalendarDisplay from '../components/ui/CalendarDisplay'
 import AppointmentRequest from '../components/ui/AppointmentRequest'
 import './styles/Schedule.css'
 
+import { api_url } from '../production_variables'
+
 const Schedule = () => {
 
     const {schedule,dispatch} = useScheduleContext()
@@ -17,7 +19,7 @@ const Schedule = () => {
     useEffect(() => {
 
         const getSchedule = async () => {
-            const response = await fetch ('/api/appointments/', {
+            const response = await fetch (`${api_url}/api/appointments/`, {
                 method: "GET",
                 headers: {'Authorization': `Bearer ${user.webToken}`}
             })

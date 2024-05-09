@@ -2,6 +2,7 @@ import { useState } from "react";
 import { capitalize } from "../../hooks/useUtils";
 import './styles/GuestAppointmentForm.css'
 
+import { api_url } from "../../production_variables";
 // Form inputs
 import {
     FirstName,
@@ -71,7 +72,7 @@ const GuestAppointmentForm = ({date, closeForm}) => {
         }
 
         // Fetch new appointment details
-        const response = await fetch('/api/appointments', {
+        const response = await fetch(`${api_url}/api/appointments`, {
             method: 'POST',
             body: JSON.stringify(newAppt),
             headers: {

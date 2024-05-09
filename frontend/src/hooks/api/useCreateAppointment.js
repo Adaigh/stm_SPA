@@ -1,6 +1,6 @@
 import { useCalendarContext } from "../useCalendarContext"
 import { useScheduleContext } from "../useScheduleContext"
-
+import { api_url } from "../../production_variables"
 
 export const useCreateAppointment = () => {
 
@@ -11,7 +11,7 @@ export const useCreateAppointment = () => {
 
     const submitApp = async (newAppt) => {
         // Fetch new appointment details
-        const response = await fetch('/api/appointments', {
+        const response = await fetch(`${api_url}/api/appointments`, {
             method: 'POST',
             body: JSON.stringify(newAppt),
             headers: {

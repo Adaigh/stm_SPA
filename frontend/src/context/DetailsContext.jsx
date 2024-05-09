@@ -1,6 +1,6 @@
 import { createContext, useEffect, useReducer } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
-
+import { api_url } from "../production_variables";
 export const DetailsContext = createContext()
 
 export const detailsReducer = (state, action) => {
@@ -28,7 +28,7 @@ export const DetailsContextProvider = ({children}) => {
 
     useEffect(  () => {
         const getDetails = async (token) => {
-            const response = await fetch('/api/customers/details', {
+            const response = await fetch(`${api_url}/api/customers/details`, {
                 headers: {'Authorization': `Bearer ${token}`}
             })
             const json = await response.json()

@@ -1,6 +1,7 @@
 import { useAuthContext } from "../useAuthContext"
 import { useScheduleContext } from "../useScheduleContext";
 import { useCalendarContext } from "../useCalendarContext";
+import { api_url } from "../../production_variables";
 
 export const useApproveAppointment = () => {
 
@@ -14,7 +15,7 @@ export const useApproveAppointment = () => {
         let reviewedAppointment = {...appReq}
         reviewedAppointment.reviewed = true
 
-        const response = await fetch('/api/appointments/' + appReq._id, {
+        const response = await fetch(`${api_url}/api/appointments/` + appReq._id, {
             method: 'PATCH',
             headers: {'Content-Type': 'application/json',
                         'Authorization': `Bearer ${user.webToken}`},

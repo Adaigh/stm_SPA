@@ -8,6 +8,7 @@ const NavBar = () => {
 
     const {logout} = useLogout()
     const {user} = useAuthContext()
+    const logo = require('./styles/assets/STMlogo.png')
 
     const handleClick = () => {
         logout()
@@ -19,7 +20,7 @@ const NavBar = () => {
                 <div className="logo-link">
                     <Link to="/">
                         <PictureFrame
-                            src={process.env.PUBLIC_URL + '/images/STMLogo.png'} 
+                            src={logo} 
                             alt={'STM Tuning, Volkswagen and Audi performance garage and repair shop.'} /> 
                     </Link>
                 </div>

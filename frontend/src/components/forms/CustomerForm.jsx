@@ -6,6 +6,7 @@ import { useCustomersContext } from "../../hooks/useCustomersContext"
 import { useAuthContext } from "../../hooks/useAuthContext"
 import { capitalize } from '../../hooks/useUtils'
 
+import { api_url } from '../../production_variables'
 // Form inputs
 import {
     EmailAddress,
@@ -74,7 +75,7 @@ const CustomerForm = () => {
         }
 
         // Fetch the new user details
-        const response = await fetch('/api/customers', {
+        const response = await fetch(`${api_url}/api/customers`, {
             method: 'POST',
             body: JSON.stringify(newCustomer),
             headers: {

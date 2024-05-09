@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react";
 import { useEffect } from "react";
-
+import { api_url } from "../production_variables";
 export const CalendarContext = createContext();
 
 export const calendarReducer = (state, action) => {
@@ -22,7 +22,7 @@ export const CalendarContextProvider = ({children}) => {
 
     useEffect(() => {
         const getAppt = async () => {
-            const response = await fetch('/api/appointments/counts')
+            const response = await fetch(`${api_url}/api/appointments/counts`)
             const json = await response.json()
             if(response.ok) dispatch({type: 'SET_CALENDAR', payload: json})
             else return "error"

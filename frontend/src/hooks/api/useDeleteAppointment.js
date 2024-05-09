@@ -1,5 +1,6 @@
 import { useAuthContext } from "../useAuthContext"
 import { useScheduleContext } from "../useScheduleContext";
+import { api_url } from "../../production_variables";
 
 export const useDeleteAppointment = () => {
 
@@ -19,7 +20,7 @@ export const useDeleteAppointment = () => {
             }
         }
 
-        const response = await fetch('/api/appointments/' + appReq._id, request)
+        const response = await fetch(`${api_url}/api/appointments/` + appReq._id, request)
         const json = await response.json()
 
         if(response.ok){

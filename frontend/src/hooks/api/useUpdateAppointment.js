@@ -2,6 +2,8 @@ import { useState } from "react"
 import { useAuthContext } from "../useAuthContext"
 import { useScheduleContext } from "../useScheduleContext"
 
+import { api_url } from "../../production_variables"
+
 export const useUpdateAppointment = () => {
     
     const {user} = useAuthContext()
@@ -11,7 +13,7 @@ export const useUpdateAppointment = () => {
 
     const updateApp = async function(app, newApp, closeForm) {
 
-        const response = await fetch('/api/appointments/' + app._id, {
+        const response = await fetch(`${api_url}/api/appointments/` + app._id, {
             method: 'PATCH',
             headers: {'Content-Type': 'application/json',
                         'Authorization': `Bearer ${user.webToken}`},

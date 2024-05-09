@@ -12,6 +12,7 @@ import {
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useDetailsContext } from "../../hooks/useDetailsContext";
 import { formatPhone } from "../../hooks/useUtils";
+import { api_url } from "../../production_variables";
 
 const AccountUpdateForm = ({closeForm}) => {
 
@@ -179,7 +180,7 @@ const AccountUpdateForm = ({closeForm}) => {
             return
         }
 
-        const response = await fetch('/api/customers/' + details.user._id, {
+        const response = await fetch(`${api_url}/api/customers/` + details.user._id, {
             method: 'PATCH',
             headers: {'Content-Type': 'application/json',
                         'Authorization': `Bearer ${user.webToken}`},

@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useAuthContext } from "../useAuthContext";
 
+import { api_url } from "../../production_variables"
+
+
 export const useSelfSignup = () => {
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(null)
@@ -10,7 +13,7 @@ export const useSelfSignup = () => {
         setIsLoading(true)
         setError(null)
 
-        const response = await fetch('/api/account/signup', {
+        const response = await fetch(`${api_url}/api/account/signup`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({'user': email, password})            
@@ -27,7 +30,7 @@ export const useSelfSignup = () => {
 
 
         // Fetch the new user details
-        const customerResponse = await fetch('/api/customers', {
+        const customerResponse = await fetch(`${api_url}/api/customers`, {
             method: 'POST',
             body: JSON.stringify(newCustomer),
             headers: {
@@ -39,7 +42,7 @@ export const useSelfSignup = () => {
 
         if(!customerResponse.ok) {
             setError(customerJson.error)
-            await fetch('/api/account/' + accountJson._id, {
+            await fetch(`${api_url}/api/account/` + accountJson._id, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
