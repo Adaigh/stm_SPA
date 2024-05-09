@@ -22,7 +22,7 @@ services:
     deploy:
       resources:
         limits:
-          momory: 2G
+          memory: 2G
 
   caddy:
     image: caddy:2.7.6-alpine
