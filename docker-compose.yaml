@@ -5,6 +5,7 @@ services:
   client:
     build: ./frontend
     container_name: react_app_container
+    image: xanderdaigh/stm_test:react_app
     restart: unless-stopped
     ports:
      - "3000:3000"
@@ -12,13 +13,22 @@ services:
     tty: true
     depends_on:
      - api
+    deploy:
+      resources:
+        limits:
+          memory: 0.4G
 
   api:
     build: ./backend
     restart: unless-stopped
     container_name: express_api_container
+    image: xanderdaigh/stm_test:express_api
     ports:
      - "4000:4000"
+    deploy:
+      resources:
+        limits:
+          memory: 0.4G
 
   caddy:
     image: caddy:2.7.6-alpine
@@ -32,6 +42,10 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
+    deploy:
+      resources:
+        limits:
+          memory: 0.1G
 
 volumes:
   caddy_data:
