@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+
+  client:
+    build: ./frontend
+    container_name: react_app_container
+    restart: unless-stopped
+    ports:
+     - "3000:3000"
+    stdin_open: true
+    tty: true
+    depends_on:
+     - api
+
+  api:
+    build: ./backend
+    restart: unless-stopped
+    container_name: express_api_container
+    ports:
+     - "4000:4000"
+
+  caddy:
+    image: caddy:2.7.6-alpine
+    restart: unless-stopped
+    container_name: caddy_container
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:
