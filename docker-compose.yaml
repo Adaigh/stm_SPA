@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   client:
-    image: xanderdaigh/stm_test:react_app
+    image: xanderdaigh/stm_test:client
     container_name: react_app_container
     restart: unless-stopped
     ports:
@@ -18,7 +18,7 @@ services:
           memory: 0.4G
 
   api:
-    image: xanderdaigh/stm_test:express_api
+    image: xanderdaigh/stm_test:server
     restart: unless-stopped
     container_name: express_api_container
     ports:
