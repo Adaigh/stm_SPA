@@ -23,9 +23,10 @@ app.use(RateLimit({
 
 // Testing
 const corsOptions = {
-    origin: 'http://client:3000'
+    origin: 'http://localhost'
 }
-app.use(cors())
+
+app.use(cors(corsOptions))
 
 // Middleware to log incoming requests
 app.use((req, res, next) => {
@@ -39,7 +40,7 @@ app.use('/api/account', userAccountRoutes)
 app.use('/api/appointments', appointmentRoutes)
 
 // Connect to DB
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URI, {dbName: 'STM_test'})
     .then(() => {
         app.listen(process.env.PORT, () => {
             console.log("Connected to DB")
