@@ -2,6 +2,6 @@
     reverse_proxy client:3000
 }
 
-localhost:4000 {
+localhost:3000 {
     reverse_proxy server:4000
 }
