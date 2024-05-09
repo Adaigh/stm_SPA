@@ -23,10 +23,10 @@ app.use(RateLimit({
 
 // Testing
 const corsOptions = {
-    origin: 'http://localhost'
+    origin: 'http://18.236.129.108'
 }
 
-app.use(cors(corsOptions))
+app.use(cors())
 
 // Middleware to log incoming requests
 app.use((req, res, next) => {
