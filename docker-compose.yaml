@@ -1,11 +1,5 @@
 version: '3.8'
 
-definitions:
-  services:
-    docker:
-      memory: 2048
-
-
 services:
 
   client:
@@ -25,6 +19,10 @@ services:
     container_name: express_api_container
     ports:
      - "4000:4000"
+    deploy:
+      resources:
+        limits:
+          momory: 2G
 
   caddy:
     image: caddy:2.7.6-alpine
