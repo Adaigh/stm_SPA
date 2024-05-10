@@ -4,6 +4,7 @@ services:
 
   client:
     image: xanderdaigh/stm_test:client
+    network_mode: "host"
     container_name: react_app_container
     restart: unless-stopped
     ports:
@@ -23,6 +24,7 @@ services:
 
   api:
     image: xanderdaigh/stm_test:server
+    network_mode: "host"
     restart: unless-stopped
     container_name: express_api_container
     ports:
@@ -31,12 +33,11 @@ services:
       resources:
         limits:
           memory: 0.4G
-    networks:
-      - local
     
 
   caddy:
     image: caddy:2.7.6-alpine
+    network_mode: "host"
     restart: unless-stopped
     container_name: caddy_container
     ports:
@@ -51,14 +52,7 @@ services:
       resources:
         limits:
           memory: 0.1G
-    networks:
-      - local
 
 volumes:
   caddy_data:
   caddy_config:
-
-networks:
-  local:
-    mode: host
-    driver: bridge
