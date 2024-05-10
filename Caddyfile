@@ -1,3 +1,7 @@
+{
+    debug
+}
+
 :80 {
     reverse_proxy client:3000
 }
