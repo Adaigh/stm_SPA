@@ -19,8 +19,6 @@ services:
           memory: 0.4G
     links:
      - api
-    networks:
-      - local
 
   api:
     image: xanderdaigh/stm_test:server
