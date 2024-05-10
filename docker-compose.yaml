@@ -60,4 +60,5 @@ volumes:
 
 networks:
   local:
-    driver: host
+    network_mode: host
+    driver: bridge
