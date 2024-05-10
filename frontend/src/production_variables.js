@@ -1,1 +1,1 @@
-export const api_url = 'http://server:4000'
+export const api_url = 'http://api:4000'
