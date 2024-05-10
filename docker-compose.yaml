@@ -6,9 +6,6 @@ services:
     image: xanderdaigh/stm_test:client
     container_name: react_app_container
     restart: unless-stopped
-    network_mode: host
-    # ports:
-    #  - "3000:3000"
     stdin_open: true
     tty: true
     depends_on:
@@ -17,35 +14,35 @@ services:
       resources:
         limits:
           memory: 0.4G
-    # links:
-    #  - api
-    # networks:
-    #   - local
+    links:
+     - caddy:api
+    networks:
+      - local
+    ports:
+     - "3000:3000"
+     - "3000:3000/udp"
 
   api:
     image: xanderdaigh/stm_test:server
-    restart: unless-stopped
     container_name: express_api_container
-    network_mode: host
-    # ports:
-    #  - "4000:4000"
+    restart: unless-stopped
+    depends_on:
+      - caddy
     deploy:
       resources:
         limits:
           memory: 0.4G
-    # networks:
-    #   - local
+    networks:
+      - local
+    ports:
+     - "5000:5000"
+     - "5000:5000/udp"
     
 
   caddy:
     image: caddy:2.7.6-alpine
     restart: unless-stopped
     container_name: caddy_container
-    network_mode: host
-    # ports:
-    #   - "80:80"
-    #   - "443:443"
-    #   - "443:443/udp"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
@@ -54,14 +51,20 @@ services:
       resources:
         limits:
           memory: 0.1G
-    # networks:
-    #   - local
+    cap_add:
+      - NET_ADMIN
+    networks:
+      - local
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+      - "4000:4000"
+      - "4000:4000/udp"
 
 volumes:
   caddy_data:
   caddy_config:
 
-# networks:
-#   local:
-#     external: true
-#     name: host
+networks:
+  local:

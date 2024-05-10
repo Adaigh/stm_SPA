@@ -3,5 +3,5 @@
 }
 
 :4000 {
-    reverse_proxy api:4000
+    reverse_proxy api:5000
 }

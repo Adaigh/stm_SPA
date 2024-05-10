@@ -22,9 +22,9 @@ app.use(RateLimit({
 }))
 
 // Testing
-const corsOptions = {
-    origin: 'http://18.236.129.108'
-}
+// const corsOptions = {
+//     origin: 'http://18.236.129.108'
+// }
 
 app.use(cors())
 

@@ -24,3 +24,86 @@ For this project I am reworking the company website I made for STM Tuning to pro
    - Install dependencies ```npm install```
    - Run frontend dev ```npm start```
    - Frontend is served at ```localhost:3000```
+
+## Production Deployment to AWS
+1. Update apt
+   ```
+   sudo apt update
+   sudo apt upgrade
+   ```
+2. Install bash
+   ```
+   sudo apt install bash
+   ```
+3. Install node and npm
+   ```
+   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+   source ~/.bashrc
+   nvm install --lts
+   # Check running version
+   node -e "console.log('Running Node.js ' + process.version)"
+   ```
+4. Install git
+   ```
+   sudo apt install git
+   ```
+
+5. Generate ssh key
+   - Use Default location, no password
+      ```
+      ssh-keygen -t ed25519 -C "adaigh@asu.edu"
+      ```
+   - Ensure agent is running
+      ```   
+      eval $(ssh-agent)
+      ```
+
+   - Display public key to copy to github
+      ```
+      cat /home/ubuntu/.ssh/id_ed25519.pub
+      ```
+6. Clone repository
+   ```
+   git clone -b deployment git@github.com:Adaigh/stm_SPA.git
+   ```
+
+7. Install Docker
+   - Dependency updates
+      ```
+      sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
+      ```
+   - Docker GPG Key
+      ```
+      curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+      ```
+   - Docker APT Repo
+      ```
+      echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+      ```
+   - Updates
+      ```
+      sudo apt update
+      sudo apt upgrade
+      ```
+   - Docker Install
+      ```
+      sudo apt install -y docker-ce docker-ce-cli containerd.io
+      ```
+   - Start/enable docker
+      ```
+      sudo systemctl start docker
+      sudo systemctl enable docker
+      ```
+   - Verify docker version
+      ```
+      sudo docker –-version
+      ```
+8. Install Docker-compose
+   ```
+   sudo apt install docker-compose
+   ```
+9. Build/run project
+   ```
+   cd stm_SPA
+   sudo docker-compose up
+   ```
