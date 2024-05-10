@@ -6,7 +6,7 @@ services:
     image: xanderdaigh/stm_test:client
     container_name: react_app_container
     restart: unless-stopped
-    network-mode: host
+    network_mode: host
     # ports:
     #  - "3000:3000"
     stdin_open: true
@@ -26,7 +26,7 @@ services:
     image: xanderdaigh/stm_test:server
     restart: unless-stopped
     container_name: express_api_container
-    network-mode: host
+    network_mode: host
     # ports:
     #  - "4000:4000"
     deploy:
@@ -41,7 +41,7 @@ services:
     image: caddy:2.7.6-alpine
     restart: unless-stopped
     container_name: caddy_container
-    network-mode: host
+    network_mode: host
     # ports:
     #   - "80:80"
     #   - "443:443"
