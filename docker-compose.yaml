@@ -17,7 +17,7 @@ services:
         limits:
           memory: 0.4G
     links:
-     - api
+     - api:4000
     networks:
       - local
 
@@ -57,7 +57,7 @@ services:
 volumes:
   caddy_data:
   caddy_config:
-  
+
 networks:
   local:
     driver: bridge
