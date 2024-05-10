@@ -16,6 +16,8 @@ services:
       resources:
         limits:
           memory: 0.4G
+    links:
+     - client
 
   api:
     image: xanderdaigh/stm_test:server
@@ -27,8 +29,7 @@ services:
       resources:
         limits:
           memory: 0.4G
-    links:
-     - client
+    
 
   caddy:
     image: caddy:2.7.6-alpine
