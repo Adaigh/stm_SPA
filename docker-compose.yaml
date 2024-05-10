@@ -60,4 +60,4 @@ volumes:
 
 networks:
   local:
-    driver: bridge
+    driver: host
