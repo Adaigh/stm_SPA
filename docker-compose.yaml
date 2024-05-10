@@ -18,6 +18,8 @@ services:
           memory: 0.4G
     links:
      - api
+    networks:
+      - local
 
   api:
     image: xanderdaigh/stm_test:server
@@ -29,6 +31,8 @@ services:
       resources:
         limits:
           memory: 0.4G
+    networks:
+      - local
     
 
   caddy:
@@ -47,7 +51,13 @@ services:
       resources:
         limits:
           memory: 0.1G
+    networks:
+      - local
 
 volumes:
   caddy_data:
   caddy_config:
+  
+networks:
+  local:
+    driver: bridge
