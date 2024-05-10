@@ -1,1 +1,1 @@
-export const api_url = ':4000'
+export const api_url = ''
