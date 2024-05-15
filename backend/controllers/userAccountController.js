@@ -4,6 +4,9 @@ const jwt = require('jsonwebtoken')
 
 // JWT creator
 const createToken = (_id) => {
+    if(!mongoose.Types.ObjectId.isValid(_id)){
+        throw new TypeError('ID invalid for token creation')
+    }
     return jwt.sign({_id}, process.env.JWT_SECRET, {expiresIn: '1d'})
 }
 
@@ -81,4 +84,5 @@ module.exports = {
     loginUserAccount,
     signupUserAccount,
     createUserAccount,
-    deleteUserAccount}
+    deleteUserAccount,
+    createToken}
