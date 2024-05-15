@@ -187,7 +187,7 @@ describe('CUSTOMERS TESTS', () => {
             // Setup
             let cust = structuredClone(newCustomerNoEmail[0])
             req.body = cust
-            cust['emailAddress'] = `PLACEHOLDER - ${cust.firstName} ${cust.lastName}`
+            cust['emailAddress'] = `${cust.firstName} ${cust.lastName} - (SHOP)`
             
             // Execute
             await createCustomer(req, res);
@@ -209,7 +209,7 @@ describe('CUSTOMERS TESTS', () => {
             // Setup
             let cust = structuredClone(newCustomerNoEmail[1])
             req.body = cust
-            cust['emailAddress'] = `PLACEHOLDER - ${cust.firstName} ${cust.lastName}`
+            cust['emailAddress'] = `${cust.firstName} ${cust.lastName} - (SHOP)`
             
             // Execute
             await createCustomer(req, res);
