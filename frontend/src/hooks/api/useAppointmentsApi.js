@@ -5,6 +5,41 @@ import { useCalendarContext } from "../useCalendarContext"
 
 import { api_url } from "../../production_variables"
 
+// Create a new appointment
+export const useCreateAppointment = () => {
+
+    const {schedule, dispatch} = useScheduleContext()
+    
+    let calendar = useCalendarContext().calendar
+    let calendarDispatch = useCalendarContext().dispatch
+
+    const submitApp = async (newAppt) => {
+        // Fetch new appointment details
+        const response = await fetch(`${api_url}/api/appointments`, {
+            method: 'POST',
+            body: JSON.stringify(newAppt),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+
+        const json = await response.json()
+
+        if(response.ok){
+            let updatedAppointments = [...schedule]
+            updatedAppointments.push(json)
+            dispatch({type: 'SET_SCHEDULE', payload: updatedAppointments})
+
+            let updateDate = newAppt.date
+            calendar[updateDate] = calendar[updateDate] ? calendar[updateDate] + 1 : 1
+            calendarDispatch({type: 'SET_CALENDAR', payload: calendar})
+        }
+        return {response, json}
+    }
+
+    return {submitApp}
+}
+
 // Fetch detailed schedule
 export const useGetSchedule = () => {
 
@@ -59,79 +94,7 @@ export const useUpdateAppointment = () => {
     return {updateApp, error, setError}
 }
 
-// Delete appointment
-// TODO: verify calendar is updated after delete
-export const useDeleteAppointment = () => {
-
-    const {user} = useAuthContext();
-    const {schedule, dispatch} = useScheduleContext()
-
-    const deleteApp = async (appReq) => {
-
-        if(!window.confirm("Are you sure you want to delete this appointment?")) {
-            return
-        }
-
-        const request = {
-            method: 'DELETE',
-            headers: {
-                'Authorization': `Bearer ${user.webToken}`
-            }
-        }
-
-        const response = await fetch(`${api_url}/api/appointments/` + appReq._id, request)
-
-        const json = await response.json()
-
-        if(response.ok){
-            let updatedAppointments = schedule.filter((app)=> {
-                return app !== appReq
-            })
-            dispatch({type: 'SET_SCHEDULE', payload: updatedAppointments})
-        } else {
-            window.alert(json.error)
-        }
-    }
-
-    return {deleteApp}
-}
-
-// Create a new appointment
-export const useCreateAppointment = () => {
-
-    const {schedule, dispatch} = useScheduleContext()
-    
-    let calendar = useCalendarContext().calendar
-    let calendarDispatch = useCalendarContext().dispatch
-
-    const submitApp = async (newAppt) => {
-        // Fetch new appointment details
-        const response = await fetch(`${api_url}/api/appointments`, {
-            method: 'POST',
-            body: JSON.stringify(newAppt),
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-
-        const json = await response.json()
-
-        if(response.ok){
-            let updatedAppointments = [...schedule]
-            updatedAppointments.push(json)
-            dispatch({type: 'SET_SCHEDULE', payload: updatedAppointments})
-
-            let updateDate = newAppt.date
-            calendar[updateDate] = calendar[updateDate] ? calendar[updateDate] + 1 : 1
-            calendarDispatch({type: 'SET_CALENDAR', payload: calendar})
-        }
-        return {response, json}
-    }
-
-    return {submitApp}
-}
-
-// Approve an appointment request
+// Approve an appointment request (minor update)
 export const useApproveAppointment = () => {
 
     const {user} = useAuthContext();
@@ -169,4 +132,41 @@ export const useApproveAppointment = () => {
     }
 
     return {approveApp}
+}
+
+// Delete appointment
+// TODO: verify calendar is updated after delete
+export const useDeleteAppointment = () => {
+
+    const {user} = useAuthContext();
+    const {schedule, dispatch} = useScheduleContext()
+
+    const deleteApp = async (appReq) => {
+
+        if(!window.confirm("Are you sure you want to delete this appointment?")) {
+            return
+        }
+
+        const request = {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${user.webToken}`
+            }
+        }
+
+        const response = await fetch(`${api_url}/api/appointments/` + appReq._id, request)
+
+        const json = await response.json()
+
+        if(response.ok){
+            let updatedAppointments = schedule.filter((app)=> {
+                return app !== appReq
+            })
+            dispatch({type: 'SET_SCHEDULE', payload: updatedAppointments})
+        } else {
+            window.alert(json.error)
+        }
+    }
+
+    return {deleteApp}
 }
