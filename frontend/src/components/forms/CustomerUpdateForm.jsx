@@ -10,11 +10,8 @@ import {
     VehicleYear,
     VinEntry,
 } from './labeledInputs'
-import { useAuthContext } from "../../hooks/useAuthContext";
-import { useCustomersContext } from "../../hooks/useCustomersContext";
 import { formatPhone, capitalize } from "../../hooks/useUtils";
-
-import { api_url } from "../../production_variables";
+import { useUpdateCustomer } from "../../hooks/api/useCustomersApi";
 
 const CustomerUpdateForm = ({closeForm, customer}) => {
 
@@ -36,8 +33,7 @@ const CustomerUpdateForm = ({closeForm, customer}) => {
     const [validPhone, setValidPhone] = useState(true)
     const [addVehicle, setAddVehicle] = useState(false)
 
-    const {user} = useAuthContext()
-    const {customers, dispatch} = useCustomersContext()
+    const {updateCustomer} = useUpdateCustomer()
 
 
     const addNewPhoneNumber = (e) => {
@@ -184,20 +180,9 @@ const CustomerUpdateForm = ({closeForm, customer}) => {
             return
         }
 
-        const response = await fetch(`${api_url}/api/customers/` + customer._id, {
-            method: 'PATCH',
-            headers: {'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${user.webToken}`},
-            body: JSON.stringify(updatedInfo)
-        })
-
-        const json = response.json()
+        const {response, json} = await updateCustomer(updatedInfo, customer)
 
         if(response.ok){
-            window.alert("Updates Successful!")
-            let newCustomersInfo = [...customers]
-            newCustomersInfo[newCustomersInfo.indexOf(customer)] = updatedInfo
-            dispatch({type: 'SET_CUSTOMERS', payload: newCustomersInfo})
             setError('')
             closeForm()
             return

@@ -5,7 +5,7 @@ import EditAppointmentForm from '../forms/EditAppointmentForm';
 
 import { formatPhone, standardStyle } from '../../hooks/useUtils'
 import { useScheduleContext } from '../../hooks/useScheduleContext'
-import { useDeleteAppointment } from '../../hooks/api/useDeleteAppointment'
+import { useDeleteAppointment } from '../../hooks/api/useAppointmentsApi';
 import './styles/ScheduleDetails.css'
 import AddAppointmentForm from '../forms/AddAppointmentForm';
 

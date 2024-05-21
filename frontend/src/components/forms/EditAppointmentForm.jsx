@@ -12,7 +12,7 @@ import {
 
 import './styles/EditAppointment.css'
 import { capitalize } from "../../hooks/useUtils"
-import { useUpdateAppointment } from "../../hooks/api/useUpdateAppointment"
+import { useUpdateAppointment } from "../../hooks/api/useAppointmentsApi"
 
 const EditAppointmentForm = ({appointment, closeForm}) => {
     

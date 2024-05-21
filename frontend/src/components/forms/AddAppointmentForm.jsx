@@ -14,8 +14,8 @@ import {
     Description
 } from "./labeledInputs"
 import { useCustomersContext } from "../../hooks/useCustomersContext";
-import { useFetchCustomers } from "../../hooks/api/useFetchCustomers";
-import { useCreateAppointment } from "../../hooks/api/useCreateAppointment";
+import { useFetchCustomers } from "../../hooks/api/useCustomersApi";
+import { useCreateAppointment } from "../../hooks/api/useAppointmentsApi";
 
 const AddAppointmentForm = ({date, closeForm}) => {
     const [firstName, setFirstName] = useState('')

@@ -1,36 +1,25 @@
 import { useEffect, useState } from 'react'
-import { useAuthContext } from '../hooks/useAuthContext'
 import { useScheduleContext } from '../hooks/useScheduleContext'
 import ScheduleWeekly from '../components/ui/ScheduleWeekly'
 import CalendarDisplay from '../components/ui/CalendarDisplay'
 import AppointmentRequest from '../components/ui/AppointmentRequest'
 import './styles/Schedule.css'
+import { useGetSchedule } from '../hooks/api/useAppointmentsApi'
 
-import { api_url } from '../production_variables'
 
 const Schedule = () => {
 
-    const {schedule,dispatch} = useScheduleContext()
-    const {user} = useAuthContext()
+    const {schedule} = useScheduleContext()
 
     const [currentDate, setCurrentDate] = useState(new Date())
     const [monthly, setMonthly] = useState(false)
 
+    const {getSchedule} = useGetSchedule()
+
     useEffect(() => {
-
-        const getSchedule = async () => {
-            const response = await fetch (`${api_url}/api/appointments/`, {
-                method: "GET",
-                headers: {'Authorization': `Bearer ${user.webToken}`}
-            })
-    
-            const json = await response.json()
-            if(response.ok) dispatch({type: 'SET_SCHEDULE', payload: json})
-        }
-
-        getSchedule()
-
-    }, [user, dispatch])
+        if(!schedule) getSchedule()
+        // eslint-disable-next-line
+    }, [schedule])
 
     const changeDate = (date) => {
         setCurrentDate(date)

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { capitalize } from "../../hooks/useUtils";
 import './styles/CustomerAppointmentForm.css'
-import { api_url } from "../../production_variables";
 
 import {
     FirstName,
@@ -14,6 +13,7 @@ import {
     VinEntry,
     Description
 } from "./labeledInputs"
+import { useCreateAppointment } from "../../hooks/api/useAppointmentsApi";
 
 const CustomerAppointmentForm = ({date, customer, closeForm}) => {
 
@@ -32,6 +32,7 @@ const CustomerAppointmentForm = ({date, customer, closeForm}) => {
     const [emptyFields, setEmptyFields] = useState([])
 
     const [enterVehicle, setEnterVehicle] = useState(false)
+    const {submitApp} = useCreateAppointment()
 
     const toggleEnterVehicle = (e) => {
         e.preventDefault()
@@ -85,15 +86,7 @@ const CustomerAppointmentForm = ({date, customer, closeForm}) => {
             description: description
         }
 
-        // Fetch new appointment details
-        const response = await fetch(`${api_url}/api/appointments`, {
-            method: 'POST',
-            body: JSON.stringify(newAppt),
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-        const json = await response.json()
+        const {response, json} = await submitApp(newAppt)
 
         // Handle response errors
         if(!response.ok){

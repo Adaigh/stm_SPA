@@ -2,7 +2,6 @@ import { useState } from "react";
 import { capitalize } from "../../hooks/useUtils";
 import './styles/GuestAppointmentForm.css'
 
-import { api_url } from "../../production_variables";
 // Form inputs
 import {
     FirstName,
@@ -15,6 +14,7 @@ import {
     VinEntry,
     Description
 } from "./labeledInputs"
+import { useCreateAppointment } from "../../hooks/api/useAppointmentsApi";
 
 const GuestAppointmentForm = ({date, closeForm}) => {
 
@@ -30,6 +30,7 @@ const GuestAppointmentForm = ({date, closeForm}) => {
 
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
+    const {submitApp} = useCreateAppointment()
 
     // Form submission handler
     const handleSubmit = async (e) => {
@@ -71,15 +72,7 @@ const GuestAppointmentForm = ({date, closeForm}) => {
             description: description
         }
 
-        // Fetch new appointment details
-        const response = await fetch(`${api_url}/api/appointments`, {
-            method: 'POST',
-            body: JSON.stringify(newAppt),
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-        const json = await response.json()
+        const {response, json} = await submitApp(newAppt)
 
         // Handle response errors
         if(!response.ok){

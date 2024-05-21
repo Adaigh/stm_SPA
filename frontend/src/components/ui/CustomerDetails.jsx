@@ -1,17 +1,15 @@
 import { useState } from 'react'
 import './styles/CustomerDetails.css'
-import { useCustomersContext } from '../../hooks/useCustomersContext'
-import { useAuthContext } from "../../hooks/useAuthContext"
 import { formatPhone } from '../../hooks/useUtils'
 import CustomerUpdateForm from '../forms/CustomerUpdateForm'
+import { useDeleteCustomer } from '../../hooks/api/useCustomersApi'
 
 const CustomerDetails = ({customerInfo}) => {
 
     const [expanded, setExpanded] = useState(false)
     const [edit, setEdit] = useState(false)
 
-    const {dispatch} = useCustomersContext()
-    const {user} = useAuthContext()
+    const {deleteCustomer} = useDeleteCustomer()
 
     const toggleExpand = () => {
         if(!expanded){
@@ -27,24 +25,12 @@ const CustomerDetails = ({customerInfo}) => {
     }
     
     const handleSubmit = async () => {
-        if(!user){
-            return
-        }
 
         if(!window.confirm("Are you sure you want to delete user " + customerInfo.firstName + " " + customerInfo.lastName + "?")){
             return;
         }
-        const response = await fetch('/api/customers/' + customerInfo._id, {
-            method: 'DELETE',
-            headers: {
-                'Authorization': `Bearer ${user.webToken}`
-            }
-        })
-        const json = await response.json()
 
-        if(response.ok) {
-            dispatch({type: 'DELETE_CUSTOMER', payload: json})
-        }
+        await deleteCustomer(customerInfo)
     }
 
     return (

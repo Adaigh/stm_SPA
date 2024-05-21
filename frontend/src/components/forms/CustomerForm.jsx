@@ -2,11 +2,8 @@ import './styles/CustomerForm.css'
 import { useState } from "react"
 
 // Context
-import { useCustomersContext } from "../../hooks/useCustomersContext"
-import { useAuthContext } from "../../hooks/useAuthContext"
 import { capitalize } from '../../hooks/useUtils'
 
-import { api_url } from '../../production_variables'
 // Form inputs
 import {
     EmailAddress,
@@ -18,6 +15,7 @@ import {
     VehicleYear,
     VinEntry,
 } from './labeledInputs'
+import { useCreateCustomer } from '../../hooks/api/useCustomersApi'
 
 const CustomerForm = () => {
 
@@ -33,8 +31,7 @@ const CustomerForm = () => {
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
 
-    const {user} = useAuthContext()
-    const {dispatch} = useCustomersContext()
+    const {createCustomer} = useCreateCustomer()
 
     // Form submission handler
     const handleSubmit = async (e) => {
@@ -74,22 +71,12 @@ const CustomerForm = () => {
             }]
         }
 
-        // Fetch the new user details
-        const response = await fetch(`${api_url}/api/customers`, {
-            method: 'POST',
-            body: JSON.stringify(newCustomer),
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${user.webToken}`
-            }
-        })
-        const json = await response.json()
+        const {response, json} = await createCustomer(newCustomer)
 
         // Handle response errors
         if(!response.ok) {
             setError(json.error)
-        }
-        if(response.ok) {
+        } else {
             setFirstName('')
             setLastName('')
             setPhoneNumber('')
@@ -100,7 +87,6 @@ const CustomerForm = () => {
             setVin('')
             setError(null)
             setEmptyFields([])
-            dispatch({type: 'CREATE_CUSTOMER', payload: json})
         }
     }
 

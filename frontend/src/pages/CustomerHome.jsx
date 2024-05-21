@@ -5,7 +5,7 @@ import './styles/CustomerHome.css'
 // Components
 import CustomerDetails from '../components/ui/CustomerDetails'
 import CustomerForm from "../components/forms/CustomerForm"
-import { useFetchCustomers } from "../hooks/api/useFetchCustomers"
+import { useFetchCustomers } from "../hooks/api/useCustomersApi"
 
 const CustomerHome = () => {
     const {customers} = useCustomersContext()

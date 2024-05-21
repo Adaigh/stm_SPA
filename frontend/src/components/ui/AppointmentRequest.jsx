@@ -2,22 +2,20 @@ import { useState } from 'react';
 
 import Modal from 'react-modal';
 import EditAppointmentForm from '../forms/EditAppointmentForm';
-
 import { formatPhone, standardStyle } from '../../hooks/useUtils'
-
+import {
+    useDeleteAppointment,
+    useApproveAppointment
+} from '../../hooks/api/useAppointmentsApi';
 import './styles/AppointmentRequest.css'
-import { useDeleteAppointment } from '../../hooks/api/useDeleteAppointment';
-import { useApproveAppointment } from '../../hooks/api/useApproveAppointment';
 
 const AppointmentRequest = ({appReq}) => {
 
     const [showEdit, setShowEdit] = useState(false)
     // const [showDelDiag, setShowDelDiag] = useState(false)
 
-
     const {deleteApp} = useDeleteAppointment()
     const {approveApp} = useApproveAppointment()
-
 
     const editRequest = (e) => {
         e.preventDefault()
