@@ -27,7 +27,7 @@ export const customersReducer = (state, action) => {
 export const CustomersContextProvider = ({ children }) => {
 
     const [state, dispatch] = useReducer(customersReducer, {
-        users: null
+        customers: null
     })
 
     return (
