@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { capitalize } from "../../hooks/useUtils";
-import './styles/AddAppointmentForm.css'
+
 // Form inputs
 import {
     FirstName,
@@ -13,9 +12,13 @@ import {
     VinEntry,
     Description
 } from "./labeledInputs"
+
+import { capitalize } from "../../hooks/useUtils";
 import { useCustomersContext } from "../../hooks/useCustomersContext";
 import { useFetchCustomers } from "../../hooks/api/useCustomersApi";
 import { useCreateAppointment } from "../../hooks/api/useAppointmentsApi";
+
+import './styles/AddAppointmentForm.css'
 
 const AddAppointmentForm = ({date, closeForm}) => {
     const [firstName, setFirstName] = useState('')

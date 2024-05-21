@@ -1,8 +1,11 @@
 import { useState } from 'react'
-import './styles/CustomerDetails.css'
-import { formatPhone } from '../../hooks/useUtils'
+
 import CustomerUpdateForm from '../forms/CustomerUpdateForm'
+
+import { formatPhone } from '../../hooks/useUtils'
 import { useDeleteCustomer } from '../../hooks/api/useCustomersApi'
+
+import './styles/CustomerDetails.css'
 
 const CustomerDetails = ({customerInfo}) => {
 

@@ -5,10 +5,11 @@ import Modal from 'react-modal';
 import PhoneNumbersTable from './PhoneNumberTable'
 import VehiclesTable from './VehiclesTable'
 import AccountUpdateForm from '../forms/AccountUpdateForm';
-import './styles/DetailsDisplay.css'
-import { useDetailsContext } from '../../hooks/useDetailsContext';
 
+import { useDetailsContext } from '../../hooks/useDetailsContext';
 import { standardStyle } from '../../hooks/useUtils';
+
+import './styles/DetailsDisplay.css'
 
 const DetailsDisplay = () => {
 

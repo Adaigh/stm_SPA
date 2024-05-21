@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+
 import {
     FirstName,
     LastName,
@@ -10,9 +11,10 @@ import {
     Description
 } from "./labeledInputs"
 
-import './styles/EditAppointment.css'
 import { capitalize } from "../../hooks/useUtils"
 import { useUpdateAppointment } from "../../hooks/api/useAppointmentsApi"
+
+import './styles/EditAppointment.css'
 
 const EditAppointmentForm = ({appointment, closeForm}) => {
     

@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Carousel } from 'react-responsive-carousel'
+
 import InfoPane from './InfoPane'
+
 import "react-responsive-carousel/lib/styles/carousel.min.css"
 import './styles/Carousel.css'
 

@@ -1,8 +1,9 @@
 
-import { useDetailsContext } from "../hooks/useDetailsContext";
 import AboutPane from '../components/ui/AboutPane'
 import ContactInfo from '../components/ui/ContactInfo'
 import DetailsDisplay from "../components/ui/DetailsDisplay";
+
+import { useDetailsContext } from "../hooks/useDetailsContext";
 
 const AccountDetail = () => {
 

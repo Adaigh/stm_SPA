@@ -1,5 +1,5 @@
 import './styles/AboutPane.css'
-// Component specifically for about section
+
 const AboutPane = ({header, children}) => {
 
   return (

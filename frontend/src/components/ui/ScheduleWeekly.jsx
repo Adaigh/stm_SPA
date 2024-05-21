@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
+
 import ScheduleDetails from "./ScheduleDetails"
+
 import'./styles/ScheduleWeekly.css'
 
 const ScheduleWeekly = ({date}) => {

@@ -1,7 +1,9 @@
-import Calendar from 'react-calendar';
-import './styles/CalendarDisplay.css'
 import { useState } from 'react';
+import Calendar from 'react-calendar';
+
 import { useCalendarContext } from '../../hooks/useCalendarContext'
+
+import './styles/CalendarDisplay.css'
 
 function CalendarDisplay({today,
                           setSelectedDate,

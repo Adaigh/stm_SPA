@@ -1,6 +1,7 @@
 import AboutPane from '../components/ui/AboutPane'
 import MyCarousel from '../components/ui/Carousel'
 import ContactInfo from '../components/ui/ContactInfo'
+
 import { sectionData } from './resources/CarouselData'
 
 import './styles/STMHome.css'

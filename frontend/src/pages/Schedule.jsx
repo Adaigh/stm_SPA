@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react'
-import { useScheduleContext } from '../hooks/useScheduleContext'
+
 import ScheduleWeekly from '../components/ui/ScheduleWeekly'
 import CalendarDisplay from '../components/ui/CalendarDisplay'
 import AppointmentRequest from '../components/ui/AppointmentRequest'
-import './styles/Schedule.css'
+
+import { useScheduleContext } from '../hooks/useScheduleContext'
 import { useGetSchedule } from '../hooks/api/useAppointmentsApi'
+
+import './styles/Schedule.css'
 
 
 const Schedule = () => {

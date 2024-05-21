@@ -1,6 +1,5 @@
 import './styles/PictureFrame.css'
 
-
 // Could be adjusted to use the above image component
 const PictureFrame = ({ src, alt, caption }) => {
     

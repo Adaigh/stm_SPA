@@ -1,5 +1,4 @@
 import { useState } from "react";
-import './styles/AccountUpdateForm.css'
 
 import {
     FirstName,
@@ -9,9 +8,12 @@ import {
     VehicleYear,
     VinEntry,
 } from './labeledInputs'
-import { useDetailsContext } from "../../hooks/useDetailsContext";
+
 import { formatPhone } from "../../hooks/useUtils";
+import { useDetailsContext } from "../../hooks/useDetailsContext";
 import { useUpdateCustomer } from "../../hooks/api/useCustomersApi";
+
+import './styles/AccountUpdateForm.css'
 
 const AccountUpdateForm = ({closeForm}) => {
 

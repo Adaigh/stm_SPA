@@ -1,11 +1,13 @@
 import { useState } from "react"
-import { useLogin } from "../../hooks/api/useLogin"
-import './styles/LoginForm.css'
 
 import {
     EmailAddress,
     Password,
 } from './labeledInputs'
+
+import { useLogin } from "../../hooks/api/useLogin"
+
+import './styles/LoginForm.css'
 
 const LoginForm = () => {
     const [email, setEmail] = useState('')

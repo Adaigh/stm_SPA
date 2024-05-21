@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react'
 import Modal from 'react-modal';
 
 import EditAppointmentForm from '../forms/EditAppointmentForm';
+import AddAppointmentForm from '../forms/AddAppointmentForm';
 
 import { formatPhone, standardStyle } from '../../hooks/useUtils'
 import { useScheduleContext } from '../../hooks/useScheduleContext'
 import { useDeleteAppointment } from '../../hooks/api/useAppointmentsApi';
+
 import './styles/ScheduleDetails.css'
-import AddAppointmentForm from '../forms/AddAppointmentForm';
 
 const ScheduleDetails = ({dow, date}) => {
 

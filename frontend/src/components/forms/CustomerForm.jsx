@@ -1,8 +1,4 @@
-import './styles/CustomerForm.css'
 import { useState } from "react"
-
-// Context
-import { capitalize } from '../../hooks/useUtils'
 
 // Form inputs
 import {
@@ -15,7 +11,11 @@ import {
     VehicleYear,
     VinEntry,
 } from './labeledInputs'
+
+import { capitalize } from '../../hooks/useUtils'
 import { useCreateCustomer } from '../../hooks/api/useCustomersApi'
+
+import './styles/CustomerForm.css'
 
 const CustomerForm = () => {
 

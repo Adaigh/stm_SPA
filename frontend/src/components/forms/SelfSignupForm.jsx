@@ -1,6 +1,8 @@
 import { useState } from 'react'
+
 import { useSelfSignup } from '../../hooks/api/useSelfSignup'
 import { capitalize } from '../../hooks/useUtils'
+
 import './styles/SelfSignupForm.css'
 
 // Form inputs

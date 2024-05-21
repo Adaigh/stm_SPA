@@ -1,5 +1,7 @@
 import { useState } from "react";
+
 import { capitalize } from "../../hooks/useUtils";
+
 import './styles/GuestAppointmentForm.css'
 
 // Form inputs

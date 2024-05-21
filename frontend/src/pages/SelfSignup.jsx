@@ -1,6 +1,6 @@
 import SelfSignupForm from '../components/forms/SelfSignupForm'
-import './styles/SelfSignup.css'
 
+import './styles/SelfSignup.css'
 
 const SelfSignup = () => {
     return (

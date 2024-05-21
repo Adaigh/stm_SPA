@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom"
+
+import PictureFrame from './PictureFrame'
+
 import { useLogout } from '../../hooks/useLogout'
 import { useAuthContext } from "../../hooks/useAuthContext"
-import PictureFrame from './PictureFrame'
+
 import './styles/NavBar.css'
 
 const NavBar = () => {

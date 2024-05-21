@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
-import { useCustomersContext } from "../hooks/useCustomersContext"
-import './styles/CustomerHome.css'
 
-// Components
 import CustomerDetails from '../components/ui/CustomerDetails'
 import CustomerForm from "../components/forms/CustomerForm"
+
+import { useCustomersContext } from "../hooks/useCustomersContext"
 import { useFetchCustomers } from "../hooks/api/useCustomersApi"
+
+import './styles/CustomerHome.css'
 
 const CustomerHome = () => {
     const {customers} = useCustomersContext()

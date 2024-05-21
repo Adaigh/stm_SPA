@@ -1,12 +1,14 @@
 import { useState } from 'react';
-
 import Modal from 'react-modal';
+
 import EditAppointmentForm from '../forms/EditAppointmentForm';
+
 import { formatPhone, standardStyle } from '../../hooks/useUtils'
 import {
     useDeleteAppointment,
     useApproveAppointment
 } from '../../hooks/api/useAppointmentsApi';
+
 import './styles/AppointmentRequest.css'
 
 const AppointmentRequest = ({appReq}) => {

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import './styles/CustomerUpdateForm.css'
 
 import {
     EmailAddress,
@@ -10,8 +9,11 @@ import {
     VehicleYear,
     VinEntry,
 } from './labeledInputs'
+
 import { formatPhone, capitalize } from "../../hooks/useUtils";
 import { useUpdateCustomer } from "../../hooks/api/useCustomersApi";
+
+import './styles/CustomerUpdateForm.css'
 
 const CustomerUpdateForm = ({closeForm, customer}) => {
 
