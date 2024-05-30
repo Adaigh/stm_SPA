@@ -30,8 +30,9 @@ const EditAppointmentForm = ({appointment, closeForm}) => {
     
     const [formattedDate, setFormattedDate] = useState([])
     const [emptyFields, setEmptyFields] = useState([])
+    const [error, setError] = useState('')
     
-    const {updateApp, error, setError} = useUpdateAppointment()
+    const {updateApp} = useUpdateAppointment()
 
     const changeDate = (e) => {
         e.preventDefault()
@@ -88,7 +89,15 @@ const EditAppointmentForm = ({appointment, closeForm}) => {
             return
         }
         
-        await updateApp(appointment, updatedAppointment, closeForm)
+        const {response, json} = await updateApp(appointment, updatedAppointment)
+
+        if(!response.ok) {
+            setError(json.error)
+        } else {
+            window.alert("Updates Successful!")
+            setError('')
+            closeForm()
+        }
         
     }
 

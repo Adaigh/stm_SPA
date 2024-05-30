@@ -47,9 +47,9 @@ function CalendarDisplay({today,
               if(date === today) return 'today'
               if(calendar && date.toLocaleDateString() in calendar) {
                 if(calendar[date.toLocaleDateString()] === 1) return 'partial'
-                return 'full'
+                if(calendar[date.toLocaleDateString()] > 1) return 'full'
               }
-              else return 'weekday'
+              return 'weekday'
             }}
         />
         {children}
