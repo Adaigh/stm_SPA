@@ -135,7 +135,6 @@ const AddAppointmentForm = ({date, closeForm}) => {
             setSelectedCustomer(null)
 
             closeForm()
-            window.alert("New appointment requested!")
         }
     }
 
