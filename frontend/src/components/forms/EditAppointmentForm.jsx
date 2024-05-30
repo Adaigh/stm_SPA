@@ -70,6 +70,8 @@ const EditAppointmentForm = ({appointment, closeForm}) => {
             return
         }
 
+        const newVin = vin ? vin.toUpperCase() : "Not Stored"
+
         let updatedAppointment = {...appointment}
         updatedAppointment.date = date
         updatedAppointment.firstName = capitalize(firstName)
@@ -79,7 +81,7 @@ const EditAppointmentForm = ({appointment, closeForm}) => {
             vehicleYear: vYear,
             vehicleMake: vMake,
             vehicleModel: vModel,
-            vehicleVIN: vin
+            vehicleVIN: newVin
         }
         updatedAppointment.description = description
 
