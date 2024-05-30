@@ -184,7 +184,6 @@ const AccountUpdateForm = ({closeForm}) => {
         const {response, json} = await updateCustomer(updatedInfo, details.user)
 
         if(response.ok){
-            window.alert("Updates Successful!")
             dispatch({type: 'UPDATE_DETAILS', payload: updatedInfo})
             setError('')
             closeForm()
