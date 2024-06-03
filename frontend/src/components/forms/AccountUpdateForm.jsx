@@ -38,6 +38,13 @@ const AccountUpdateForm = ({closeForm}) => {
     
     const {updateCustomer} = useUpdateCustomer()
 
+    const vehicleFieldsToReset = [
+        setVYear,
+        setVMake,
+        setVModel,
+        setVin
+    ]
+
 
     const addNewPhoneNumber = (e) => {
         e.preventDefault()
@@ -111,10 +118,7 @@ const AccountUpdateForm = ({closeForm}) => {
         for(let entry of vehicles){
             if(JSON.stringify(entry) === JSON.stringify(newVehicle)) {
                     setError("Vehicle already stored")
-                    setVYear('')
-                    setVMake('')
-                    setVModel('')
-                    setVin('')
+                    vehicleFieldsToReset.forEach(fn => fn(''))
                     setEmptyFields([])
                     setAddVehicle(false)
                     return
@@ -122,10 +126,7 @@ const AccountUpdateForm = ({closeForm}) => {
         }
 
         setVehicles([...vehicles, newVehicle])
-        setVYear('')
-        setVMake('')
-        setVModel('')
-        setVin('')
+        vehicleFieldsToReset.forEach(fn => fn(''))
         setAddVehicle(false)
         setEmptyFields([])
         setError('')
@@ -134,10 +135,7 @@ const AccountUpdateForm = ({closeForm}) => {
 
     const cancelVehicle = (e) => {
         e.preventDefault()
-        setVYear('')
-        setVMake('')
-        setVModel('')
-        setVin('')
+        vehicleFieldsToReset.forEach(fn => fn(''))
         setAddVehicle(false)
     }
 
@@ -185,7 +183,6 @@ const AccountUpdateForm = ({closeForm}) => {
 
         if(response.ok){
             dispatch({type: 'UPDATE_DETAILS', payload: updatedInfo})
-            setError('')
             closeForm()
             return
         } else {

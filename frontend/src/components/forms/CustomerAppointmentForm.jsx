@@ -13,7 +13,7 @@ import {
 } from "./labeledInputs"
 
 import { capitalize } from "../../hooks/useUtils";
-import { useCreateAppointment } from "../../hooks/api/useAppointmentsApi";
+import { useRequestAppointment } from "../../hooks/api/useAppointmentsApi";
 
 import './styles/CustomerAppointmentForm.css'
 
@@ -34,7 +34,7 @@ const CustomerAppointmentForm = ({date, customer, closeForm}) => {
     const [emptyFields, setEmptyFields] = useState([])
 
     const [enterVehicle, setEnterVehicle] = useState(false)
-    const {submitApp} = useCreateAppointment()
+    const {requestApp} = useRequestAppointment()
 
     const toggleEnterVehicle = (e) => {
         e.preventDefault()
@@ -88,27 +88,12 @@ const CustomerAppointmentForm = ({date, customer, closeForm}) => {
             description: description
         }
 
-        const {response, json} = await submitApp(newAppt)
+        const {response, json} = await requestApp(newAppt)
 
         // Handle response errors
         if(!response.ok){
             setError(json.error)
         } else {
-            setFirstName(customer.firstName)
-            setLastName(customer.lastName)
-            setPhoneNumber(customer.phoneNumbers[0])
-            setEmailAddress(customer.emailAddress)
-            setSelectedVehicle(customer.vehicles[0])
-            setVYear('')
-            setVMake('')
-            setVModel('')
-            setVin('')
-            setDescription('')
-
-            setError(null)
-            setEmptyFields([])
-
-            setEnterVehicle(false)
             closeForm()
             window.alert("New appointment requested!")
         }

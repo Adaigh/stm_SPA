@@ -2,10 +2,20 @@
     debug
 }
 
+(common) {
+    header /* {
+        -Server
+    }
+}
+
 :80 {
     reverse_proxy client:3000
+
+    import common
 }
 
 :4000 {
     reverse_proxy api:5000
+    
+    import common
 }

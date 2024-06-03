@@ -119,21 +119,6 @@ const AddAppointmentForm = ({date, closeForm}) => {
         if(!response.ok){
             setError(json.error)
         } else {
-            setFirstName('')
-            setLastName('')
-            setPhoneNumber('')
-            setEmailAddress('')
-            setVYear('')
-            setVMake('')
-            setVModel('')
-            setVin('')
-            setDescription('')
-            
-            setError(null)
-            setEmptyFields([])
-            
-            setSelectedCustomer(null)
-
             closeForm()
         }
     }

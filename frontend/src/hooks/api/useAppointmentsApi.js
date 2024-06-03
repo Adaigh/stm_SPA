@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { useAuthContext } from "../useAuthContext"
 import { useScheduleContext } from "../useScheduleContext"
 import { useCalendarContext } from "../useCalendarContext"
@@ -38,6 +37,27 @@ export const useCreateAppointment = () => {
     }
 
     return {submitApp}
+}
+
+// Request a new appointment
+export const useRequestAppointment = () => {
+
+    const requestApp = async (newAppt) => {
+        // Fetch new appointment details
+        const response = await fetch(`${api_url}/api/appointments`, {
+            method: 'POST',
+            body: JSON.stringify(newAppt),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+
+        const json = await response.json()
+
+        return {response, json}
+    }
+
+    return {requestApp}
 }
 
 // Fetch detailed schedule

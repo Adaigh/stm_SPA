@@ -40,7 +40,7 @@ app.use('/api/account', userAccountRoutes)
 app.use('/api/appointments', appointmentRoutes)
 
 // Connect to DB
-mongoose.connect(process.env.MONGO_URI, {dbName: 'STM_test'})
+mongoose.connect(process.env.MONGO_URI, {dbName: 'test'})
     .then(() => {
         app.listen(process.env.PORT, () => {
             console.log("Connected to DB")

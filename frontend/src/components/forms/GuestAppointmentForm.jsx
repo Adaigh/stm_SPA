@@ -16,7 +16,7 @@ import {
     VinEntry,
     Description
 } from "./labeledInputs"
-import { useCreateAppointment } from "../../hooks/api/useAppointmentsApi";
+import { useRequestAppointment } from "../../hooks/api/useAppointmentsApi";
 
 const GuestAppointmentForm = ({date, closeForm}) => {
 
@@ -32,7 +32,7 @@ const GuestAppointmentForm = ({date, closeForm}) => {
 
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
-    const {submitApp} = useCreateAppointment()
+    const {requestApp} = useRequestAppointment()
 
     // Form submission handler
     const handleSubmit = async (e) => {
@@ -74,25 +74,12 @@ const GuestAppointmentForm = ({date, closeForm}) => {
             description: description
         }
 
-        const {response, json} = await submitApp(newAppt)
+        const {response, json} = await requestApp(newAppt)
 
         // Handle response errors
         if(!response.ok){
             setError(json.error)
         } else {
-            setFirstName('')
-            setLastName('')
-            setPhoneNumber('')
-            setEmailAddress('')
-            setVYear('')
-            setVMake('')
-            setVModel('')
-            setVin('')
-            setDescription('')
-
-            setError(null)
-            setEmptyFields([])
-            
             closeForm()
             window.alert("New appointment requested!")
         }

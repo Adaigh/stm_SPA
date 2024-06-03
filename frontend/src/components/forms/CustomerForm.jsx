@@ -31,7 +31,18 @@ const CustomerForm = () => {
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
 
-    const {createCustomer} = useCreateCustomer()
+    const { createCustomer } = useCreateCustomer()
+
+    const fieldsToReset = [
+        setFirstName,
+        setLastName,
+        setPhoneNumber,
+        setEmailAddress,
+        setVYear,
+        setVMake,
+        setVModel,
+        setVin
+    ]
 
     // Form submission handler
     const handleSubmit = async (e) => {
@@ -39,13 +50,13 @@ const CustomerForm = () => {
 
         // Check for missing fields
         let missing = []
-        if(!firstName) missing.push('firstName')
-        if(!lastName) missing.push('lastName')
-        if(!phoneNumber) missing.push('phoneNumber')
-        if(!vYear) missing.push('vehicleYear')
-        if(!vMake) missing.push('vehicleMake')
-        if(!vModel) missing.push('vehicleModel')
-        if(missing.length > 0){
+        if (!firstName) missing.push('firstName')
+        if (!lastName) missing.push('lastName')
+        if (!phoneNumber) missing.push('phoneNumber')
+        if (!vYear) missing.push('vehicleYear')
+        if (!vMake) missing.push('vehicleMake')
+        if (!vModel) missing.push('vehicleModel')
+        if (missing.length > 0) {
             setError("All (*) fields are required")
             setEmptyFields(missing)
             return
@@ -71,20 +82,13 @@ const CustomerForm = () => {
             }]
         }
 
-        const {response, json} = await createCustomer(newCustomer)
+        const { response, json } = await createCustomer(newCustomer)
 
         // Handle response errors
-        if(!response.ok) {
+        if (!response.ok) {
             setError(json.error)
         } else {
-            setFirstName('')
-            setLastName('')
-            setPhoneNumber('')
-            setEmailAddress('')
-            setVYear('')
-            setVMake('')
-            setVModel('')
-            setVin('')
+            fieldsToReset.forEach(fn => fn(''))
             setError(null)
             setEmptyFields([])
         }
@@ -92,57 +96,57 @@ const CustomerForm = () => {
 
     return (
         <form className="customer" onSubmit={handleSubmit}>
-            <FirstName 
+            <FirstName
                 val={firstName}
                 req={true}
                 error={emptyFields && emptyFields.includes('firstName')}
                 changeFn={(e) => setFirstName(e.target.value)}
-                />
+            />
 
             <LastName
                 val={lastName}
                 req={true}
                 error={emptyFields && emptyFields.includes('lastName')}
                 changeFn={(e) => setLastName(e.target.value)}
-                />
+            />
 
             <PhoneNumber
                 val={phoneNumber}
                 req={true}
                 error={emptyFields && emptyFields.includes('phoneNumber')}
                 changeFn={(e) => setPhoneNumber(e.target.value)}
-                />
+            />
 
             <EmailAddress
                 val={emailAddress}
                 req={false}
                 changeFn={(e) => setEmailAddress(e.target.value)}
-                />
+            />
 
             <VehicleYear
                 val={vYear}
                 req={true}
                 error={emptyFields && emptyFields.includes('vehicleYear')}
                 changeFn={(e) => setVYear(e.target.value)}
-                />
+            />
 
             <VehicleMake
                 req={true}
                 error={emptyFields && emptyFields.includes('vehicleMake')}
                 changeFn={(e) => setVMake(e.target.value)}
-                />
-                    
-            <VehicleModel 
+            />
+
+            <VehicleModel
                 val={vModel}
                 req={true}
                 error={emptyFields && emptyFields.includes('vehicleModel')}
                 changeFn={(e) => setVModel(e.target.value)}
-                />
+            />
 
             <VinEntry
-                    val={vin}
-                    changeFn={(e)=> setVin(e.target.value)}
-                    />
+                val={vin}
+                changeFn={(e) => setVin(e.target.value)}
+            />
 
             <button> Add User </button>
             {error && <div className="error">{error}</div>}
