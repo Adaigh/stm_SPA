@@ -60,7 +60,7 @@ const Calendar = () => {
             <CalendarDisplay
                 today={today}
                 selectedDate={selectedDate}
-                showNeigors={false}
+                showNeighbors={false}
                 decorated={true}
                 limited={true}
                 setSelectedDate={setSelectedDate}>

@@ -16,6 +16,11 @@ button.view-button {
     margin: 20px;
 }
 
+div.scheduleDisplay div.button-bar {
+    margin: 0 auto;
+    text-align: center;
+}
+
 div.requests {
     overflow-y: auto;
     margin: 0 auto;

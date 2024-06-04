@@ -45,7 +45,7 @@ const ScheduleDetails = ({dow, date}) => {
     }
 
     return (
-        <div className='schedule-day'>
+        <div className={new Date().toLocaleDateString() === new Date(date).toLocaleDateString() ? 'schedule-day today' : 'schedule-day'}>
             {day && 
             <>
             <h2>{dow}, {new Date(date).toLocaleString({}, {month: 'short', day: 'numeric'})}</h2>

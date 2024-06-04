@@ -10,3 +10,7 @@ div.schedule-day span {
     float: right;
     margin-left: 10px;
 }
+
+div.schedule-day.today {
+    border: 2px solid #5f5;
+}

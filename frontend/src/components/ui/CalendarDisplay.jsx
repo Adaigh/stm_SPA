@@ -7,7 +7,8 @@ import './styles/CalendarDisplay.css'
 
 function CalendarDisplay({today,
                           setSelectedDate,
-                          showNeigors,
+                          showNeighbors,
+                          showNavigation,
                           decorated,
                           limited,
                           children}) {
@@ -36,7 +37,7 @@ function CalendarDisplay({today,
             prevLabel={<h2>&lt;</h2>}
             nextLabel={<h2>&gt;</h2>}
             onActiveStartDateChange={val => setCurrentDate(val.activeStartDate)}
-            showNeighboringMonth={showNeigors}
+            showNeighboringMonth={showNeighbors}
             showNavigation={true}
             calendarType="gregory"
             view="month"

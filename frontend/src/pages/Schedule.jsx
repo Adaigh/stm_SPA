@@ -12,15 +12,15 @@ import './styles/Schedule.css'
 
 const Schedule = () => {
 
-    const {schedule} = useScheduleContext()
+    const { schedule } = useScheduleContext()
 
     const [currentDate, setCurrentDate] = useState(new Date())
     const [monthly, setMonthly] = useState(false)
 
-    const {getSchedule} = useGetSchedule()
+    const { getSchedule } = useGetSchedule()
 
     useEffect(() => {
-        if(!schedule) getSchedule()
+        if (!schedule) getSchedule()
         // eslint-disable-next-line
     }, [schedule])
 
@@ -29,42 +29,77 @@ const Schedule = () => {
         setMonthly(false)
     }
 
+    const nextWeek = (e) => {
+        e.preventDefault()
+        const msPerWeek = 604800000  // 7d * 24h * 60m * 60s * 1000ms
+        const newDT = currentDate.getTime() + msPerWeek
+        setCurrentDate(new Date(newDT))
+    }
+
+    const prevWeek = (e) => {
+        e.preventDefault()
+        const msPerWeek = 604800000  // 7d * 24h * 60m * 60s * 1000ms
+        const newDT = currentDate.getTime() - msPerWeek
+        setCurrentDate(new Date(newDT))
+    }
+
+    const goToToday = (e) => {
+        e.preventDefault()
+        setCurrentDate(new Date())
+    }
+
+    const toggleMonthly = (e) => {
+        e.preventDefault()
+        setMonthly(!monthly)
+    }
+
     return (
         <div className='schedule'>
-            
+
             <div className='scheduleDisplay'>
                 <h2>Schedule</h2>
-                <hr/>
-                <button className='view-button' onClick={
-                    () => monthly ? setMonthly(false) : setMonthly(true)
-                }>{monthly && <>Week</>}{!monthly && <>Month</>} View</button>
+                <hr />
+                <div className='button-bar'>
+                    {!monthly && <button className='view-button' onClick={e => prevWeek(e)}>
+                        &lt;
+                    </button>}
+                    <button className='view-button' onClick={(e) => toggleMonthly(e)}>
+                        {monthly && <>Week</>}{!monthly && <>Month</>} View
+                    </button>
+                    {!monthly && <button className='view-button' onClick={e => goToToday(e)}>
+                        This Week
+                    </button>}
+                    {!monthly && <button className='view-button' onClick={e => nextWeek(e)}>
+                        &gt;
+                    </button>}
+                </div>
                 {!monthly &&
-                    <ScheduleWeekly date={currentDate}/>
+                    <ScheduleWeekly date={currentDate} />
                 }
                 {monthly &&
                     <>
                         <CalendarDisplay
                             today={new Date()}
                             selectedDate={currentDate}
-                            showNeigors={true}
+                            showNeighbors={true}
                             decorated={false}
                             limited={false}
-                            setSelectedDate={changeDate}/>
+                            setSelectedDate={changeDate} />
                     </>
                 }
             </div>
             <div>
                 <h2>Appointment Requests</h2>
                 {schedule && schedule.filter((app) => {
-                        return app.reviewed === false
-                    }).length === 0 && <>No new requests</>}
-                <hr/>
+                    return app.reviewed === false
+                }).length === 0 && <>No new requests</>}
+                <hr />
                 <div className='requests'>
                     {schedule && schedule.filter((app) => {
                         return app.reviewed === false
-                    }).map((appReq)=> {
-                        return(
-                            <AppointmentRequest key={appReq._id} appReq={appReq}/>
+                    }).map((appReq) => {
+                        return (
+                            <AppointmentRequest key={appReq._id} appReq={appReq} />
                         )
                     })}
                 </div>
