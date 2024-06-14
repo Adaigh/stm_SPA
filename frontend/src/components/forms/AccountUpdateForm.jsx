@@ -15,10 +15,10 @@ import { useUpdateCustomer } from "../../hooks/api/useCustomersApi";
 
 import './styles/AccountUpdateForm.css'
 
-const AccountUpdateForm = ({closeForm}) => {
+const AccountUpdateForm = ({ closeForm }) => {
 
-    const {details, dispatch} = useDetailsContext()
-    
+    const { details, dispatch } = useDetailsContext()
+
     const [firstName, setFirstName] = useState(details.user.firstName)
     const [lastName, setLastName] = useState(details.user.lastName)
     const [phoneNumbers, setPhoneNumbers] = useState([...details.user.phoneNumbers])
@@ -28,15 +28,15 @@ const AccountUpdateForm = ({closeForm}) => {
     const [vMake, setVMake] = useState('')
     const [vModel, setVModel] = useState('')
     const [vin, setVin] = useState('')
-    
+
     const [emptyFields, setEmptyFields] = useState([])
     const [error, setError] = useState('')
-    
+
     const [addPhone, setAddPhone] = useState(false)
     const [validPhone, setValidPhone] = useState(true)
     const [addVehicle, setAddVehicle] = useState(false)
-    
-    const {updateCustomer} = useUpdateCustomer()
+
+    const { updateCustomer } = useUpdateCustomer()
 
     const vehicleFieldsToReset = [
         setVYear,
@@ -49,13 +49,13 @@ const AccountUpdateForm = ({closeForm}) => {
     const addNewPhoneNumber = (e) => {
         e.preventDefault()
 
-        if(phoneNumber === ''){
+        if (phoneNumber === '') {
             setValidPhone(true)
             setAddPhone(false)
             return
         }
 
-        if(phoneNumbers.includes(phoneNumber)) {
+        if (phoneNumbers.includes(phoneNumber)) {
             setValidPhone(true)
             setPhoneNumber('')
             setAddPhone(false)
@@ -63,7 +63,7 @@ const AccountUpdateForm = ({closeForm}) => {
             return
         }
 
-        if(/[0-9]{10}/.test(phoneNumber)) {
+        if (/[0-9]{10}/.test(phoneNumber)) {
             setPhoneNumbers([...phoneNumbers, phoneNumber])
             setValidPhone(true)
             setPhoneNumber('')
@@ -90,17 +90,17 @@ const AccountUpdateForm = ({closeForm}) => {
     const addNewVehicle = (e) => {
         e.preventDefault()
 
-        if(!vYear && !vMake && !vModel){
+        if (!vYear && !vMake && !vModel) {
             setEmptyFields([])
             setAddVehicle(false)
             return
         }
 
         let missing = []
-        if(!vYear) missing.push('vehicleYear')
-        if(!vMake) missing.push('vehicleMake')
-        if(!vModel) missing.push('vehicleModel')
-        if(missing.length > 0) {
+        if (!vYear) missing.push('vehicleYear')
+        if (!vMake) missing.push('vehicleMake')
+        if (!vModel) missing.push('vehicleModel')
+        if (missing.length > 0) {
             setEmptyFields(missing)
             setError('Missing vehicle data')
             return
@@ -115,14 +115,14 @@ const AccountUpdateForm = ({closeForm}) => {
             vehicleVIN: newVin
         }
 
-        for(let entry of vehicles){
-            if(JSON.stringify(entry) === JSON.stringify(newVehicle)) {
-                    setError("Vehicle already stored")
-                    vehicleFieldsToReset.forEach(fn => fn(''))
-                    setEmptyFields([])
-                    setAddVehicle(false)
-                    return
-                }
+        for (let entry of vehicles) {
+            if (JSON.stringify(entry) === JSON.stringify(newVehicle)) {
+                setError("Vehicle already stored")
+                vehicleFieldsToReset.forEach(fn => fn(''))
+                setEmptyFields([])
+                setAddVehicle(false)
+                return
+            }
         }
 
         setVehicles([...vehicles, newVehicle])
@@ -149,25 +149,25 @@ const AccountUpdateForm = ({closeForm}) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        if(addPhone) {
+        if (addPhone) {
             setError("Please confirm new phone number")
             return
         }
-        if(addVehicle) {
+        if (addVehicle) {
             setError("Please confirm new vehicle info")
             return
         }
-        
+
         let missing = []
-        if(!firstName) missing.push('firstName')
-        if(!lastName) missing.push('lastName')
-        if(missing.length > 0){
+        if (!firstName) missing.push('firstName')
+        if (!lastName) missing.push('lastName')
+        if (missing.length > 0) {
             setError("Fields cannot be empty")
             setEmptyFields(missing)
             return
         }
-        
-        let updatedInfo = {...details.user}
+
+        let updatedInfo = { ...details.user }
         updatedInfo.firstName = firstName
         updatedInfo.lastName = lastName
         updatedInfo.phoneNumbers = phoneNumbers
@@ -179,16 +179,16 @@ const AccountUpdateForm = ({closeForm}) => {
             return
         }
 
-        const {response, json} = await updateCustomer(updatedInfo, details.user)
+        const { response, json } = await updateCustomer(updatedInfo, details.user)
 
-        if(response.ok){
-            dispatch({type: 'UPDATE_DETAILS', payload: updatedInfo})
+        if (response.ok) {
+            dispatch({ type: 'UPDATE_DETAILS', payload: updatedInfo })
             closeForm()
             return
         } else {
             setError(json.error)
         }
-        
+
     }
 
     return (
@@ -198,23 +198,23 @@ const AccountUpdateForm = ({closeForm}) => {
                 val={firstName}
                 error={emptyFields && emptyFields.includes('firstName')}
                 changeFn={(e) => setFirstName(e.target.value)}
-                />
+            />
             <LastName
                 val={lastName}
                 error={emptyFields && emptyFields.includes('lastName')}
                 changeFn={(e) => setLastName(e.target.value)}
-                />
+            />
             <label>Phone Numbers:</label>
-            {phoneNumbers.map((num, index)=> {
-                return(
+            {phoneNumbers.map((num, index) => {
+                return (
                     <div key={index}>
                         {formatPhone(num)}
                         {phoneNumbers.length > 1 && <span className="material-symbols-outlined delete" onClick={(e) => removePhoneNumber(e, num)}>delete</span>}
                     </div>
                 )
             })}
-            {!addPhone && <button className='edit' onClick={(e) => {e.preventDefault();setAddPhone(true)}}>Add Phone Number</button>}
-            {addPhone && 
+            {!addPhone && <button className='edit' onClick={(e) => { e.preventDefault(); setAddPhone(true) }}>Add Phone Number</button>}
+            {addPhone &&
                 <div className="new-phone">
                     <input
                         type="text"
@@ -226,27 +226,27 @@ const AccountUpdateForm = ({closeForm}) => {
                         className={validPhone ? '' : 'error'}
                     />
                     <div>
-                    <button className="submit" onClick={addNewPhoneNumber}>Confirm</button>
-                    <button className="cancel" onClick={cancelPhone}>Cancel</button>
+                        <button className="submit" onClick={addNewPhoneNumber}>Confirm</button>
+                        <button className="cancel" onClick={cancelPhone}>Cancel</button>
                     </div>
                 </div>
             }
 
             <label>Vehicles:</label>
-            {vehicles.map((entry, index)=> {
-                return(
+            {vehicles.map((entry, index) => {
+                return (
                     <div key={index}>
                         {entry.vehicleYear} {entry.vehicleMake} {entry.vehicleModel}&emsp;(VIN: {entry.vehicleVIN})
-                        {vehicles.length > 1 && 
-                            <span 
+                        {vehicles.length > 1 &&
+                            <span
                                 className="material-symbols-outlined delete"
                                 onClick={(e) => removeVehicle(e, entry)}>delete</span>
-                            }
+                        }
                     </div>
                 )
             })}
-            {!addVehicle && <button className='edit' onClick={(e) => {e.preventDefault();setAddVehicle(true)}}>Add New Vehicle</button>}
-            {addVehicle && 
+            {!addVehicle && <button className='edit' onClick={(e) => { e.preventDefault(); setAddVehicle(true) }}>Add New Vehicle</button>}
+            {addVehicle &&
                 <div className="new-vehicle">
 
                     <VehicleYear
@@ -254,37 +254,37 @@ const AccountUpdateForm = ({closeForm}) => {
                         req={true}
                         error={emptyFields && emptyFields.includes('vehicleYear')}
                         changeFn={(e) => setVYear(e.target.value)}
-                        />
+                    />
 
                     <VehicleMake
                         req={true}
                         error={emptyFields && emptyFields.includes('vehicleMake')}
                         changeFn={(e) => setVMake(e.target.value)}
-                        />
+                    />
 
-                    <VehicleModel 
+                    <VehicleModel
                         val={vModel}
                         req={true}
                         error={emptyFields && emptyFields.includes('vehicleModel')}
                         changeFn={(e) => setVModel(e.target.value)}
-                        />
+                    />
 
                     <VinEntry
                         val={vin}
-                        changeFn={(e)=> setVin(e.target.value)}
-                        />
-                    <div/>
+                        changeFn={(e) => setVin(e.target.value)}
+                    />
+                    <div />
                     <div>
-                    <button className="submit" onClick={addNewVehicle}>Confirm</button>
-                    <button className="cancel" onClick={cancelVehicle}>Cancel</button>
+                        <button className="submit" onClick={addNewVehicle}>Confirm</button>
+                        <button className="cancel" onClick={cancelVehicle}>Cancel</button>
                     </div>
                 </div>
             }
-            {!addPhone && !addVehicle &&<div className="controls">
+            {!addPhone && !addVehicle && <div className="controls">
                 <button className="submit"
                     form="customer-account-update-form">Submit Changes</button>
                 <button className="cancel"
-                    onClick={(e)=> {e.preventDefault(); closeForm()}}>Cancel</button>
+                    onClick={(e) => { e.preventDefault(); closeForm() }}>Cancel</button>
             </div>}
             {error && <div className="error">{error}</div>}
         </form>
