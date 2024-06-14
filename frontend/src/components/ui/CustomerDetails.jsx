@@ -27,7 +27,7 @@ const CustomerDetails = ({customerInfo}) => {
         }
     }
     
-    const handleSubmit = async () => {
+    const handleDelete = async () => {
 
         if(!window.confirm("Are you sure you want to delete user " + customerInfo.firstName + " " + customerInfo.lastName + "?")){
             return;
@@ -47,7 +47,7 @@ const CustomerDetails = ({customerInfo}) => {
                         {!expanded && <span> &emsp; {formatPhone(customerInfo.phoneNumbers[0])}</span>}
                     </h3>
                 </div>
-                <span className='material-symbols-outlined delete' onClick={handleSubmit}>delete</span>
+                <span className='material-symbols-outlined delete' onClick={handleDelete}>delete</span>
             </div>
             {expanded && 
             
