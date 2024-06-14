@@ -18,7 +18,6 @@ const UserAccount = require('../../models/userAccountModel')
 
 // Testing data
 const {
-    testIDs,
     invalidID,
     newID
 } = require('../testData/testUtils')
@@ -29,7 +28,6 @@ const {
     newCustomerDupEmail,
     newCustomerNoEmail,
     customerReqFields,
-    populatedAccount
  } = require("../testData/customerTestData")
 
 const {newAccount} = require('../testData/userAccountTestData')
