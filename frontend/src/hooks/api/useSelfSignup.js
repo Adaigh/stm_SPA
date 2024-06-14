@@ -13,7 +13,7 @@ export const useSelfSignup = () => {
         setIsLoading(true)
         setError(null)
 
-        const response = await fetch(`${api_url}/api/account/signup`, {
+        const response = await fetch(`${api_url}/api/accounts/signup`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({'user': email, password})            
@@ -42,7 +42,7 @@ export const useSelfSignup = () => {
 
         if(!customerResponse.ok) {
             setError(customerJson.error)
-            await fetch(`${api_url}/api/account/` + accountJson._id, {
+            await fetch(`${api_url}/api/accounts/${accountJson._id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
