@@ -9,8 +9,8 @@ import './styles/NavBar.css'
 
 const NavBar = () => {
 
-    const {logout} = useLogout()
-    const {user} = useAuthContext()
+    const { logout } = useLogout()
+    const { user } = useAuthContext()
     const logo = require('./styles/assets/STMlogo.png')
 
     const handleClick = () => {
@@ -23,16 +23,20 @@ const NavBar = () => {
                 <div className="logo-link">
                     <Link to="/">
                         <PictureFrame
-                            src={logo} 
-                            alt={'STM Tuning, Volkswagen and Audi performance garage and repair shop.'} /> 
+                            src={logo}
+                            alt={'STM Tuning, Volkswagen and Audi performance garage and repair shop.'} />
                     </Link>
                 </div>
                 <Link to="/">Home</Link>
                 <Link to="/calendar">Calendar</Link>
-                {user && user.access > 1 && 
+                {user && user.access > 0 &&
                     <>
                         <Link to="/customers" className="staff-only">Customers</Link>
-                        <Link to="/Schedule" className="staff-only">Schedule</Link>    
+                        <Link to="/schedule" className="staff-only">Schedule</Link>
+                    </>}
+                {user && user.access > 1 &&
+                    <>
+                        <Link to="/admin" className="staff-only">Admin</Link>
                     </>}
             </div>
 
@@ -40,7 +44,7 @@ const NavBar = () => {
                 {user && (
                     <div className="logged-in">
                         {user.access > 0 && <span><u>STAFF</u>: <Link to='/details'>{user.user}</Link></span>}
-                        {user.access === 0 && 
+                        {user.access === 0 &&
                             <Link to='/details'>{user.user}</Link>
                         }
                         <button onClick={handleClick}>Log Out</button>
