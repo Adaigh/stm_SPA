@@ -1,0 +1,23 @@
+form.admin-acct-update-form {
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+}
+
+form.admin-acct-update-form label {
+    margin-top: 20px;
+    font-weight: 600;
+    color: var(--primary)
+}
+
+form.admin-acct-update-form input,
+form.admin-acct-update-form button,
+form.admin-acct-update-form select {
+    margin-right: auto
+}
+
+form.admin-acct-update-form div.controls {
+    display: flex;
+    gap: 50px;
+    margin: 40px auto 0 auto;
+}

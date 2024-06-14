@@ -1,0 +1,29 @@
+.accounts-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.accounts-header .refresh,
+.accounts-header .close {
+    cursor: pointer;
+    position: relative;
+    left: -45px;
+}
+
+.accounts-header .refresh {
+    border: 2px solid rgba(0, 0, 0, 0);
+}
+
+
+div.accounts div.accounts-container {
+    margin: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 50px;
+    background-color: var(--bg-dark);
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    padding: 20px;
+}
