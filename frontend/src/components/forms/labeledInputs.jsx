@@ -158,3 +158,21 @@ export const Password = ({val, req, error, changeFn}) => {
         </>
     )
 }
+
+export const AccessLevel = ({val, req, error, changeFn}) => {
+    return (
+        <>
+        <label>Access Level: {req && <span className="required">*</span>}</label>
+        <select 
+            defaultValue={val ? val : 0}
+            onChange={changeFn}
+            className={error ? 'error' : ''}>
+
+            <option value={0}>Customer</option>
+            <option value={1}>Staff</option>
+            <option value={2}>Administrator</option>
+
+        </select>
+        </>
+    )
+}
