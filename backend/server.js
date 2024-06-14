@@ -9,6 +9,9 @@ const customerRoutes = require('./routes/customers')
 const userAccountRoutes = require('./routes/userAccount')
 const appointmentRoutes = require('./routes/appointments')
 
+const cron = require('node-cron')
+const {sendAppointmentUpdateEmail} = require('./controllers/mailerController')
+
 // Create the express app
 const app = express()
 
@@ -36,11 +39,14 @@ app.use((req, res, next) => {
 
 // Route handler
 app.use('/api/customers', customerRoutes)
-app.use('/api/account', userAccountRoutes)
+app.use('/api/accounts', userAccountRoutes)
 app.use('/api/appointments', appointmentRoutes)
 
+// Check for new appointment requests each day at 8:45
+cron.schedule('45 8 * * 1-5', () => sendAppointmentUpdateEmail())
+
 // Connect to DB
-mongoose.connect(process.env.MONGO_URI, {dbName: 'test'})
+mongoose.connect(process.env.MONGO_URI, { dbName: 'test' })
     .then(() => {
         app.listen(process.env.PORT, () => {
             console.log("Connected to DB")
