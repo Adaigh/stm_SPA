@@ -5,23 +5,34 @@ const {
     loginUserAccount,
     signupUserAccount,
     createUserAccount,
-    // findUserDetails,
-    deleteUserAccount
+    deleteUserAccount,
+    getAccounts,
+    getAccount,
+    updateAccount
 } = require ('../controllers/userAccountController')
 
 const router = express.Router()
-const adminAccess = 3;
+const adminAccess = 2;
 
 // Login
 router.post('/login', loginUserAccount)
 
-// Signup
+// Create (Self-Signup)
 router.post('/signup', signupUserAccount)
 
-router.post('/create', requireAuth, verifyAccessLevel(adminAccess), createUserAccount)
+// Create
+router.post('/', requireAuth, verifyAccessLevel(adminAccess), createUserAccount)
 
-// router.get('/', findUserDetails)
+// Read all
+router.get('/', requireAuth, verifyAccessLevel(adminAccess), getAccounts)
 
+// Read one
+router.get('/:id', requireAuth, verifyAccessLevel(adminAccess), getAccount)
+
+// Update
+router.patch('/:id', requireAuth, verifyAccessLevel(adminAccess), updateAccount)
+
+// Delete
 router.delete('/:id', deleteUserAccount)
 
 module.exports = router
