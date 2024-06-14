@@ -6,20 +6,15 @@ div.new-vehicle {
     gap:5px;
 }
 
-form.acct-update-form span.check {
-    color: greenyellow;
-    padding: 5px;
-}
-
-form.acct-update-form span.check:hover {
-    cursor: pointer;
-    text-decoration: underline;
-}
-
 form.acct-update-form label {
     margin-top: 20px;
     font-weight: 600;
     color: var(--primary)
+}
+
+form.acct-update-form input,
+form.acct-update-form button{
+    margin-right: auto
 }
 
 form.acct-update-form div.new-vehicle {
@@ -37,13 +32,8 @@ form.acct-update-form div.new-phone button {
     margin: 5px;
 }
 
-
 form.acct-update-form div.controls {
     display: flex;
     gap: 50px;
-    margin-top: 20px;
-}
-
-form.acct-update-form button.edit {
-    color: var(--orange)
+    margin: 40px auto 0 auto;
 }
