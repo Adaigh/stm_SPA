@@ -7,18 +7,21 @@ import { AuthContextProvider } from './context/AuthContext'
 import { CalendarContextProvider } from './context/CalendarContext';
 import { DetailsContextProvider } from './context/DetailsContext';
 import { ScheduleContextProvider } from './context/ScheduleContext';
+import { AccountsContextProvider } from './context/AccountsContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <AuthContextProvider>
-    <DetailsContextProvider>
-      <CustomersContextProvider>
-        <CalendarContextProvider>
+  <CalendarContextProvider>
+    <AuthContextProvider>
+      <DetailsContextProvider>
+        <CustomersContextProvider>
           <ScheduleContextProvider>
-            <App />
+            <AccountsContextProvider>
+              <App />
+            </AccountsContextProvider>
           </ScheduleContextProvider>
-        </CalendarContextProvider>
-      </CustomersContextProvider>
-    </DetailsContextProvider>
-  </AuthContextProvider>
+        </CustomersContextProvider>
+      </DetailsContextProvider>
+    </AuthContextProvider>
+  </CalendarContextProvider>
 );
