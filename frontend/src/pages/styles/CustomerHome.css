@@ -3,7 +3,7 @@
   width: 80vw;
 }
 
-.customer-management-header h2{
+.customer-management-header h2 {
   font-weight: 500;
 }
 
@@ -19,7 +19,7 @@
   margin: 5vh auto;
 }
 
-.customerHome h2{
+.customerHome h2 {
   font-weight: 600;
 }
 
@@ -36,12 +36,13 @@ span.waiting {
   background: #ffefef
 }
 
-.customer-header .refresh, .customer-header .close {
+.customer-header .refresh,
+.customer-header .close {
   cursor: pointer;
   position: relative;
   left: -45px;
 }
 
 .customer-header .refresh {
-  border: 2px solid rgba(0,0,0,0);
+  border: 2px solid rgba(0, 0, 0, 0);
 }

@@ -27,6 +27,13 @@ const CustomerHome = () => {
         e.target.classList.toggle("waiting")
     }
 
+    const filterCustomers = (customerInfo) => {
+        return (customerInfo.firstName.toUpperCase().includes(filter.toUpperCase()) ||
+        customerInfo.lastName.toUpperCase().includes(filter.toUpperCase()) || 
+        customerInfo.phoneNumbers[0].toString().includes(filter) || 
+        (customerInfo.emailAddress && customerInfo.emailAddress.toUpperCase().includes(filter.toUpperCase())))
+    }
+
     return (
 
         <>
@@ -37,8 +44,8 @@ const CustomerHome = () => {
         <div className="customerHome">
 
             {/* New User Information form */}
-            <div className="customer-form">
-                <h2 className="add-customer-title">Add a New Customer:</h2>
+            <div>
+                <h2>Add a New Customer:</h2>
                 <CustomerForm />
             </div>
 
@@ -46,9 +53,8 @@ const CustomerHome = () => {
 
                 {/* Header including search filter and buttons  */}
                 <div className="customer-header">
-                    <h2 className="customer-title">Customers</h2> 
+                    <h2>Customers</h2> 
                     <input
-                        className="customer-filter"
                         type="text"
                         onChange={(e) => setFilter(e.target.value)}
                         value={filter}
@@ -60,12 +66,7 @@ const CustomerHome = () => {
                 </div>
 
                 {/* Filter and map users into CustomerDetail components */}
-                {customers && customers.filter((customerInfo) => {
-                    return (customerInfo.firstName.toUpperCase().includes(filter.toUpperCase()) ||
-                    customerInfo.lastName.toUpperCase().includes(filter.toUpperCase()) || 
-                    customerInfo.phoneNumbers[0].toString().includes(filter) || 
-                    (customerInfo.emailAddress && customerInfo.emailAddress.toUpperCase().includes(filter.toUpperCase())))
-                }).map((customerInfo) => (
+                {customers && customers.filter(filterCustomers).map((customerInfo) => (
                     <CustomerDetails key={customerInfo._id} customerInfo={customerInfo} />
                 ))}
 
