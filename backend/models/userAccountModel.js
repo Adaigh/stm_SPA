@@ -46,7 +46,6 @@ userAccountSchema.statics.signup = async function(user, password, access) {
     // Password encryption
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, salt)
-    console.log(user, password, access)
     // Create new user account
     const userAccount = await this.create({user, password: hash, access})
 
