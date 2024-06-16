@@ -11,7 +11,7 @@ const appointmentRoutes = require('./routes/appointments')
 const mailerRoutes = require('./routes/mailer')
 
 const cron = require('node-cron')
-const {sendAppointmentUpdateEmail} = require('./controllers/mailerController')
+const { sendAppointmentUpdateEmail } = require('./controllers/mailerController')
 
 // Create the express app
 const app = express()
@@ -47,6 +47,7 @@ app.use('/api/mailer', mailerRoutes)
 // Check for new appointment requests each day at 8:45
 cron.schedule('45 8 * * 1-5', () => sendAppointmentUpdateEmail())
 // sendAppointmentUpdateEmail()
+
 // Connect to DB
 mongoose.connect(process.env.MONGO_URI, { dbName: 'test' })
     .then(() => {
