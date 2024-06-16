@@ -36,6 +36,7 @@ const Administration = () => {
         setFilter('')
         e.target.classList.toggle("waiting")
         fetchAccounts()
+        fetchCustomers()
         e.target.classList.toggle("waiting")
     }
 
