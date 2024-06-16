@@ -131,6 +131,7 @@ const CustomerForm = () => {
             />
 
             <VehicleMake
+                val={vMake}
                 req={true}
                 error={emptyFields && emptyFields.includes('vehicleMake')}
                 changeFn={(e) => setVMake(e.target.value)}
