@@ -112,10 +112,10 @@ export const useDeleteAccount = () => {
             headers: stdHeaders(user)
         })
 
-        const json = await response.json()
         if (response.ok) {
             dispatch({ type: 'DELETE_ACCOUNT', payload: account })
         }
+        return { response }
     }
 
     return { deleteAccount }
