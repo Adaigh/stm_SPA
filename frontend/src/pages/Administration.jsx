@@ -32,7 +32,7 @@ const Administration = () => {
     }, [accounts])
 
     // Refresh (fetch) user list
-    const callRefreshCustomers = (e) => {
+    const callRefreshAccounts = (e) => {
         setFilter('')
         e.target.classList.toggle("waiting")
         fetchAccounts()
@@ -87,7 +87,7 @@ const Administration = () => {
                                 size='50'
                             />
                             <span className="material-symbols-outlined close" onClick={() => setFilter('')}>close</span>
-                            <span className="material-symbols-outlined refresh" onClick={(e) => callRefreshCustomers(e)}>refresh</span>
+                            <span className="material-symbols-outlined refresh" onClick={(e) => callRefreshAccounts(e)}>refresh</span>
                             <button className="submit" onClick={() => setAddUser(true)}>Add New Account</button>
                         </div>
                         <hr />
