@@ -1,6 +1,7 @@
 import { useAuthContext } from "../useAuthContext"
 import { useCustomersContext } from "../useCustomersContext"
 import { api_url } from "../../production_variables"
+import { stdHeaders } from "../useUtils"
 
 // Create a new customer record
 export const useCreateCustomer = () => {
@@ -12,10 +13,7 @@ export const useCreateCustomer = () => {
         const response = await fetch(`${api_url}/api/customers`, {
             method: 'POST',
             body: JSON.stringify(newCustomer),
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${user.webToken}`
-            }
+            headers: stdHeaders(user)
         })
 
         const json = await response.json()
@@ -36,9 +34,7 @@ export const useFetchCustomers = () => {
     const fetchCustomers = async () => {
 
         const response = await fetch(`${api_url}/api/customers/`, {
-            headers: {
-                'Authorization': `Bearer ${user.webToken}`
-            }
+            headers: stdHeaders(user)
         })
 
         const json = await response.json()
@@ -59,10 +55,7 @@ export const useUpdateCustomer = () => {
     const updateCustomer = async (updatedInfo, customer) => {
         const response = await fetch(`${api_url}/api/customers/` + customer._id, {
             method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${user.webToken}`
-            },
+            headers: stdHeaders(user),
             body: JSON.stringify(updatedInfo)
         })
 
@@ -90,9 +83,7 @@ export const useDeleteCustomer = () => {
     const deleteCustomer = async (customerInfo) => {
         const response = await fetch(`${api_url}/api/customers/` + customerInfo._id, {
             method: 'DELETE',
-            headers: {
-                'Authorization': `Bearer ${user.webToken}`
-            }
+            headers: stdHeaders(user)
         })
 
         const json = await response.json()

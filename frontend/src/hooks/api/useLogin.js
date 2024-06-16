@@ -14,20 +14,20 @@ export const useLogin = () => {
 
         const response = await fetch(`${api_url}/api/accounts/login`, {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({user, password})
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user, password })
         })
 
         const json = await response.json()
 
-        if(!response.ok){
+        if (!response.ok) {
             setIsLoading(false)
             setError(json.error)
         } else {
             localStorage.setItem('STMuser', JSON.stringify(json))
-            dispatch({type: 'LOGIN', payload: json})
+            dispatch({ type: 'LOGIN', payload: json })
             setIsLoading(false)
         }
     }
-    return {login, isLoading, error}
+    return { login, isLoading, error }
 }

@@ -2,14 +2,7 @@ import { api_url } from "../../production_variables"
 import { useAccountsContext } from "../useAccountsContext"
 import { useAuthContext } from "../useAuthContext"
 import { useCustomersContext } from "../useCustomersContext"
-
-
-const stdHeaders = (user) => {
-    return {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${user.webToken}`
-    }
-}
+import { stdHeaders } from "../useUtils"
 
 
 export const useCreateAccount = () => {
