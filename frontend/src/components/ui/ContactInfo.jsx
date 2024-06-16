@@ -22,7 +22,7 @@ const ContactInfo = () => {
                 </li>
                 <li>
                     <a href="https://maps.app.goo.gl/QbksovXGtDDT5ptB9"
-                        target='_blank'>
+                        target="_blank" rel="noreferrer">
                         <span>address</span> | {address}
                     </a>
                 </li>
