@@ -8,6 +8,7 @@ const cors = require('cors')
 const customerRoutes = require('./routes/customers')
 const userAccountRoutes = require('./routes/userAccount')
 const appointmentRoutes = require('./routes/appointments')
+const mailerRoutes = require('./routes/mailer')
 
 const cron = require('node-cron')
 const {sendAppointmentUpdateEmail} = require('./controllers/mailerController')
@@ -41,10 +42,11 @@ app.use((req, res, next) => {
 app.use('/api/customers', customerRoutes)
 app.use('/api/accounts', userAccountRoutes)
 app.use('/api/appointments', appointmentRoutes)
+app.use('/api/mailer', mailerRoutes)
 
 // Check for new appointment requests each day at 8:45
 cron.schedule('45 8 * * 1-5', () => sendAppointmentUpdateEmail())
-
+// sendAppointmentUpdateEmail()
 // Connect to DB
 mongoose.connect(process.env.MONGO_URI, { dbName: 'test' })
     .then(() => {

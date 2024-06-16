@@ -35,14 +35,49 @@ const sendAppointmentUpdateEmail = async () => {
             to: recipients,
             subject: "STM Appointment Request Update",
             text: message,
-            category: "Integration Test",
+            category: "Appointments Notification",
         })
         .then(console.log)
         .catch(console.error)
 }
 
-const sendApprovalEmail = async (appointment) => {
+const sendApprovalEmail = async (req,res) => {
 
-} 
+    const appointment = req.body
 
-module.exports = {sendAppointmentUpdateEmail}
+    // Build Approval Email
+    let message = "Hello,\n  Your appointment at STM Tuning has been approved! "
+    message += "Details are below, and please don't hesitate to call with any questions. "
+    message += "We appreciate your patronage and are excited to help with your vehicle.\n\n"
+    message += `Date: ${appointment.date}\n`
+    message += `Name: ${appointment.firstName} ${appointment.lastName}\n`
+    message += `Phone: ${appointment.phoneNumber}\n\n`
+    message += `Year: ${appointment.vehicle.vehicleYear}\n`
+    message += `Make: ${appointment.vehicle.vehicleMake}\n`
+    message += `Model: ${appointment.vehicle.vehicleModel}\n`
+    message += `Description: ${appointment.description}\n\n`
+    message += `STM Tuning\n`
+    message += `4715 E Trent Ave\n`
+    message += `Spokane, WA 99212\n`
+    message += `(509) 893-2367\n`
+    message += `9am-5pm, Monday through Friday\n`
+    
+    //Send mail
+    let response = await client.send({
+            from: sender,
+            to: recipients,
+            subject: "STM Appointment Approval",
+            text: message,
+            category: "Appointments Notification",
+        })
+    
+    if(!response.success){
+        return res.status(500).json({error: 'Email not sent'})
+    }
+    res.status(200).json({message:"Email sent successfully"})
+}
+
+module.exports = {
+    sendAppointmentUpdateEmail,
+    sendApprovalEmail
+}
