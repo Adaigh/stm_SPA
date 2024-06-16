@@ -13,7 +13,7 @@ import { formatPhone, capitalize } from "../../hooks/useUtils";
 import { useCreateAccount, useUpdateAccount } from '../../hooks/api/useAccountsApi';
 
 import './styles/AccountForm.css'
-import { useCreateCustomer, useUpdateCustomer } from '../../hooks/api/useCustomersApi';
+import { useUpdateCustomer } from '../../hooks/api/useCustomersApi';
 
 const AccountForm = ({ account, closeForm }) => {
 
@@ -33,7 +33,6 @@ const AccountForm = ({ account, closeForm }) => {
     const [error, setError] = useState('')
 
     const { createAccount } = useCreateAccount()
-    const { createCustomer } = useCreateCustomer()
 
     const { updateAccount } = useUpdateAccount()
     const { updateCustomer } = useUpdateCustomer()
@@ -46,6 +45,7 @@ const AccountForm = ({ account, closeForm }) => {
             setPhoneNumbers(account.user.phoneNumbers)
             setAccessLevel(account.access)
         }
+        // eslint-disable-next-line
     }, [])
 
     const addNewPhoneNumber = (e) => {
