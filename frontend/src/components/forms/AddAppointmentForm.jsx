@@ -49,6 +49,9 @@ const AddAppointmentForm = ({date, closeForm}) => {
     const setCustomerInfo = (e) => {
         e.preventDefault()
         setSelectedVehicle('')
+        setVYear('')
+        setVMake('')
+        setVModel('')
         const cust = customers[e.target.value]
         setSelectedCustomer(cust)
         setFirstName(cust.firstName)
