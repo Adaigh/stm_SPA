@@ -3,13 +3,13 @@ import { useScheduleContext } from "../useScheduleContext"
 import { useCalendarContext } from "../useCalendarContext"
 
 import { api_url } from "../../production_variables"
+import { stdHeaders } from "../useUtils"
 
 // Create a new appointment
 export const useCreateAppointment = () => {
 
-    const {schedule, dispatch} = useScheduleContext()
-    const calendar = useCalendarContext().calendar
-    const calendarDispatch = useCalendarContext().dispatch
+    const { schedule, dispatch: scheduleDispatch } = useScheduleContext()
+    const { calendar, dispatch: calendarDispatch } = useCalendarContext()
 
     const submitApp = async (newAppt) => {
         // Fetch new appointment details
@@ -23,20 +23,20 @@ export const useCreateAppointment = () => {
 
         const json = await response.json()
 
-        if(response.ok){
+        if (response.ok) {
             let updatedAppointments = [...schedule]
             updatedAppointments.push(json)
-            dispatch({type: 'SET_SCHEDULE', payload: updatedAppointments})
+            scheduleDispatch({ type: 'SET_SCHEDULE', payload: updatedAppointments })
 
             let updateDate = newAppt.date
-            let newCal = {...calendar}
+            let newCal = { ...calendar }
             newCal[updateDate] = newCal[updateDate] ? newCal[updateDate] + 1 : 1
-            calendarDispatch({type: 'SET_CALENDAR', payload: newCal})
+            calendarDispatch({ type: 'SET_CALENDAR', payload: newCal })
         }
-        return {response, json}
+        return { response, json }
     }
 
-    return {submitApp}
+    return { submitApp }
 }
 
 // Request a new appointment
@@ -54,120 +54,132 @@ export const useRequestAppointment = () => {
 
         const json = await response.json()
 
-        return {response, json}
+        return { response, json }
     }
 
-    return {requestApp}
+    return { requestApp }
 }
 
 // Fetch detailed schedule
 export const useGetSchedule = () => {
 
-    const {user} = useAuthContext()
-    const {dispatch} = useScheduleContext()
+    const { user } = useAuthContext()
+    const { dispatch } = useScheduleContext()
 
     const getSchedule = async () => {
-        const response = await fetch (`${api_url}/api/appointments/`, {
+        const response = await fetch(`${api_url}/api/appointments/`, {
             method: "GET",
-            headers: {'Authorization': `Bearer ${user.webToken}`}
+            headers: stdHeaders(user)
         })
 
         const json = await response.json()
-        
-        if(response.ok) {
-            dispatch({type: 'SET_SCHEDULE', payload: json})
+
+        if (response.ok) {
+            dispatch({ type: 'SET_SCHEDULE', payload: json })
         }
     }
-    return {getSchedule}
+    return { getSchedule }
 }
 
 // Update appointment request
 export const useUpdateAppointment = () => {
-    
-    const {user} = useAuthContext()
-    const {schedule, dispatch} = useScheduleContext()
+
+    const { user } = useAuthContext()
+    const { schedule, dispatch } = useScheduleContext()
     const calendar = useCalendarContext().calendar
     const calendarDispatch = useCalendarContext().dispatch
 
-    const updateApp = async function(app, newApp) {
+    const updateApp = async function (app, newApp) {
 
         const response = await fetch(`${api_url}/api/appointments/` + app._id, {
             method: 'PATCH',
-            headers: {'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${user.webToken}`},
+            headers: stdHeaders(user),
             body: JSON.stringify(newApp)
         })
 
         const json = await response.json()
 
-        if(response.ok){
+        if (response.ok) {
             let updatedAppointments = [...schedule]
             updatedAppointments[updatedAppointments.indexOf(app)] = newApp
-            dispatch({type: 'SET_SCHEDULE', payload: updatedAppointments})
+            dispatch({ type: 'SET_SCHEDULE', payload: updatedAppointments })
 
             let updateDate = app.date
-            let newCal = {...calendar}
+            let newCal = { ...calendar }
             newCal[updateDate] -= 1
-            if(newCal[updateDate] === 0) delete newCal[updateDate]
+            if (newCal[updateDate] === 0) delete newCal[updateDate]
             updateDate = newApp.date
             newCal[updateDate] = newCal[updateDate] ? newCal[updateDate] + 1 : 1
-            calendarDispatch({type: 'SET_CALENDAR', payload: newCal})
+            calendarDispatch({ type: 'SET_CALENDAR', payload: newCal })
         }
-        return {response, json}
+        return { response, json }
     }
-    return {updateApp}
+    return { updateApp }
 }
 
 // Approve an appointment request (minor update)
 export const useApproveAppointment = () => {
 
-    const {user} = useAuthContext();
-    const {schedule, dispatch} = useScheduleContext()
+    const { user } = useAuthContext();
+    const { schedule, dispatch } = useScheduleContext()
     const calendar = useCalendarContext().calendar
     const calendarDispatch = useCalendarContext().dispatch
 
     const approveApp = async (appReq) => {
-        let reviewedAppointment = {...appReq}
+        let reviewedAppointment = { ...appReq }
         reviewedAppointment.reviewed = true
 
         const response = await fetch(`${api_url}/api/appointments/` + appReq._id, {
             method: 'PATCH',
-            headers: {'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${user.webToken}`},
+            headers: stdHeaders(user),
             body: JSON.stringify(reviewedAppointment)
         })
 
         const json = await response.json()
 
-        if(response.ok){
-
-            let updatedAppointments = [...schedule]
-            updatedAppointments[updatedAppointments.indexOf(appReq)] = reviewedAppointment
-            dispatch({type: 'SET_SCHEDULE', payload: updatedAppointments})
-            
-            let updateDate = reviewedAppointment.date
-            let newCal = {...calendar}
-            newCal[updateDate] = newCal[updateDate] ? newCal[updateDate] + 1 : 1
-            calendarDispatch({type: 'SET_CALENDAR', payload: newCal})
-        } else {
+        if (!response.ok) {
             window.alert(json.error)
+            return
+        }
+
+        let updatedAppointments = [...schedule]
+        updatedAppointments[updatedAppointments.indexOf(appReq)] = reviewedAppointment
+        dispatch({ type: 'SET_SCHEDULE', payload: updatedAppointments })
+
+        let updateDate = reviewedAppointment.date
+        let newCal = { ...calendar }
+        newCal[updateDate] = newCal[updateDate] ? newCal[updateDate] + 1 : 1
+        calendarDispatch({ type: 'SET_CALENDAR', payload: newCal })
+
+        const emailResponse = await fetch(`${api_url}/api/mailer/approve`, {
+            method: 'POST',
+            headers: stdHeaders(user),
+            body: JSON.stringify(appReq)
+        })
+
+        const emailJson = emailResponse.json()
+
+        if (!emailResponse.ok) {
+            console.log(emailJson.error)
+        } else {
+            console.log(emailJson.message)
         }
     }
 
-    return {approveApp}
+    return { approveApp }
 }
 
 // Delete appointment
 export const useDeleteAppointment = () => {
 
-    const {user} = useAuthContext();
-    const {schedule, dispatch} = useScheduleContext()
+    const { user } = useAuthContext();
+    const { schedule, dispatch } = useScheduleContext()
     const calendar = useCalendarContext().calendar
     const calendarDispatch = useCalendarContext().dispatch
 
     const deleteApp = async (appReq) => {
 
-        if(!window.confirm("Are you sure you want to delete this appointment?")) {
+        if (!window.confirm("Are you sure you want to delete this appointment?")) {
             return
         }
 
@@ -182,19 +194,19 @@ export const useDeleteAppointment = () => {
 
         const json = await response.json()
 
-        if(response.ok){
-            let updatedAppointments = schedule.filter((app)=> app !== appReq)
-            dispatch({type: 'SET_SCHEDULE', payload: updatedAppointments})
+        if (response.ok) {
+            let updatedAppointments = schedule.filter((app) => app !== appReq)
+            dispatch({ type: 'SET_SCHEDULE', payload: updatedAppointments })
 
             let updateDate = appReq.date
-            let newCal = {...calendar}
+            let newCal = { ...calendar }
             newCal[updateDate] -= 1
-            if(newCal[updateDate] === 0) delete newCal[updateDate]
-            calendarDispatch({type: 'SET_CALENDAR', payload: newCal})
+            if (newCal[updateDate] === 0) delete newCal[updateDate]
+            calendarDispatch({ type: 'SET_CALENDAR', payload: newCal })
         } else {
             window.alert(json.error)
         }
     }
 
-    return {deleteApp}
+    return { deleteApp }
 }
