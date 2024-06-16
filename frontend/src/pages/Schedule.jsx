@@ -10,7 +10,6 @@ import { useGetSchedule } from '../hooks/api/useAppointmentsApi'
 
 import './styles/Schedule.css'
 
-
 const Schedule = () => {
 
     const { schedule } = useScheduleContext()
@@ -53,6 +52,10 @@ const Schedule = () => {
         e.preventDefault()
         setMonthly(!monthly)
     }
+
+    // Fetch updates every 15 minutes
+    const msInterval = 900000 // 15m* 60s * 1000ms
+    setInterval(() => getSchedule(), msInterval)
 
     return (
         <>
