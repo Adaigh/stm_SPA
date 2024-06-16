@@ -54,7 +54,7 @@ const Schedule = () => {
     }
 
     // Fetch updates every 15 minutes
-    const msInterval = 900000 // 15m* 60s * 1000ms
+    const msInterval = 900000 // 15m * 60s * 1000ms
     setInterval(() => getSchedule(), msInterval)
 
     return (
