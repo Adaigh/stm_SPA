@@ -16,3 +16,7 @@
     color: #DFF7FA;
     font-weight: 500;
 }
+
+.contact a {
+    text-decoration: none;
+}
