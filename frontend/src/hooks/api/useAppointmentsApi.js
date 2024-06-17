@@ -135,11 +135,8 @@ export const useApproveAppointment = () => {
             body: JSON.stringify(reviewedAppointment)
         })
 
-        const json = await response.json()
-
         if (!response.ok) {
-            window.alert(json.error)
-            return
+            return response
         }
 
         let updatedAppointments = [...schedule]
@@ -179,10 +176,6 @@ export const useDeleteAppointment = () => {
 
     const deleteApp = async (appReq) => {
 
-        if (!window.confirm("Are you sure you want to delete this appointment?")) {
-            return
-        }
-
         const request = {
             method: 'DELETE',
             headers: {
@@ -191,8 +184,6 @@ export const useDeleteAppointment = () => {
         }
 
         const response = await fetch(`${api_url}/api/appointments/` + appReq._id, request)
-
-        const json = await response.json()
 
         if (response.ok) {
             let updatedAppointments = schedule.filter((app) => app !== appReq)
@@ -204,7 +195,7 @@ export const useDeleteAppointment = () => {
             if (newCal[updateDate] === 0) delete newCal[updateDate]
             calendarDispatch({ type: 'SET_CALENDAR', payload: newCal })
         } else {
-            window.alert(json.error)
+            return response
         }
     }
 
