@@ -126,7 +126,6 @@ const AccountForm = ({ account, closeForm }) => {
                 setError(json.error)
                 return
             }
-            console.log(`Created new account: ${emailAddress}, ${password}, ${accessLevel}`)
             closeForm()
 
         } else {
@@ -163,7 +162,6 @@ const AccountForm = ({ account, closeForm }) => {
                 setError(acctJSON.error)
                 return
             }
-            console.log("Updated acct info")
             closeForm()
         }
 

@@ -65,7 +65,6 @@ export const useUpdateCustomer = () => {
             newCustomersInfo[newCustomersInfo.indexOf(customer)] = updatedInfo
             dispatch({ type: 'SET_CUSTOMERS', payload: newCustomersInfo })
         }
-        console.log(response, json)
 
         return { response, json }
     }
