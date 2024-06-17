@@ -96,6 +96,7 @@ const CustomerForm = () => {
 
     return (
         <form className="customer" onSubmit={handleSubmit}>
+            <h2>Add a New Customer:</h2>
             <FirstName
                 val={firstName}
                 req={true}
@@ -149,7 +150,7 @@ const CustomerForm = () => {
                 changeFn={(e) => setVin(e.target.value)}
             />
 
-            <button> Add User </button>
+            <button className="submit"> Add User </button>
             {error && <div className="error">{error}</div>}
         </form>
     )

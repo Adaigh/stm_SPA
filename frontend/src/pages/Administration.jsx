@@ -76,7 +76,7 @@ const Administration = () => {
                     <div className="accounts-customers">
                         {/* Header including search filter and buttons  */}
                         <div className="accounts-header">
-                            <h2>Registered Accounts</h2>
+                            <h2>Customer Accounts</h2>
                             <input
                                 type="text"
                                 onChange={(e) => setFilter(e.target.value)}

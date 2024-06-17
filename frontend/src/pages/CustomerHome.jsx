@@ -50,7 +50,6 @@ const CustomerHome = () => {
 
                 {/* New User Information form */}
                 <div>
-                    <h2>Add a New Customer:</h2>
                     <CustomerForm />
                 </div>
 

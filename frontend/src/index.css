@@ -101,6 +101,26 @@ button.cancel {
 button.edit {
   color: var(--orange)
 }
+
+div.modal {
+  position: fixed;
+  background: var(--bg-dark);
+  padding: 30px;
+  border-radius: 20px;
+}
+
+div.modal h2, .modal h3 {
+  text-align: center;
+}
+
+div.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+}
 /* 
 header .container {
   max-width: 1400px;

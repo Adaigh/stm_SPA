@@ -24,7 +24,4 @@ div.requests {
     overflow-y: auto;
     margin: 0 auto;
     max-height: 45vh;
-    background-color: var(--bg-dark);
-    background-color: rgba(0,0,0,0.3);
-    border-radius: 15px;
 }

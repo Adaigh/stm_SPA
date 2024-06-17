@@ -74,7 +74,7 @@ const Calendar = () => {
 
                 <div className="appointment-request">
                     {selectedDate && <button onClick={() => setFormIsOpen(true)}>
-                        <h3>Request Appointment </h3>
+                        <h3 className="request-button-header">Request Appointment </h3>
                         {selectedDate.toDateString()}
                     </button>}
                     {!selectedDate && <button style={{ cursor: 'default' }} disabled><h3>Select a day to request an appointment!</h3></button>}

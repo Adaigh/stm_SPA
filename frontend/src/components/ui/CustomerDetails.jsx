@@ -24,7 +24,7 @@ const CustomerDetails = ({ customerInfo }) => {
             return
         } else {
             if (edit) {
-                if (!window.confirm("Updates NOT saved, continue?")) return
+                if (!window.confirm("Updates will NOT be saved, continue?")) return
                 setEdit(false)
             }
             setExpanded(false)

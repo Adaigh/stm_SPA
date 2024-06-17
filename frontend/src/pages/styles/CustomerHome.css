@@ -1,48 +1,53 @@
-.customer-management-header {
+div.customer-management-header {
   margin: 50px auto;
   width: 80vw;
 }
 
-.customer-management-header h2 {
+div.customer-management-header h2 {
   font-weight: 500;
 }
 
-.customers {
-  width: 60%;
-  max-width: 900px;
+div.customers {
+  width: 70vw;
+  max-width: 1000px;
+  
+  background-color: var(--bg-dark);
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 15px;
+  padding: 0 20px;
 }
 
-.customerHome {
+div.customerHome {
   display: flex;
   justify-content: center;
-  gap: 5vw;
-  margin: 0 auto;
+  gap: 50px;
+  margin: 20px 0;
 }
 
-.customerHome h2 {
+div.customerHome h2 {
   font-weight: 600;
 }
 
-.customer-header {
+div.customer-header {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
-span.waiting {
+div.customer-header span.waiting {
   border: 2px solid var(--error);
   border-radius: 10px;
   color: var(--error);
   background: #ffefef
 }
 
-.customer-header .refresh,
-.customer-header .close {
+div.customer-header span.refresh,
+div.customer-header span.close {
   cursor: pointer;
   position: relative;
   left: -45px;
 }
 
-.customer-header .refresh {
+div.customer-header span.refresh {
   border: 2px solid rgba(0, 0, 0, 0);
 }

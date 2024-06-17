@@ -1,67 +1,51 @@
-.calendar-container h2 {
+div.calendar-container h2 {
     font-family: 'Black Ops One';
     font-weight: 400;
 }
 
-.calendar-container button{
+div.calendar-container button{
     cursor: pointer;
 }
 
-.appointment-request {
+div.calendar-container div.appointment-request {
     margin-top: 40px;
     text-align: center;
 }
 
-.appointment-request h3 {
+div.calendar-container div.appointment-request h3 {
     margin: 5px;
     font-weight: 500;
 }
 
-.appointment-request button {
+div.calendar-container div.appointment-request h3.request-button-header {
+    color: var(--green)
+}
+
+div.calendar-container div.appointment-request button {
     padding: 10px;
 }
 
-.legend {
+div.legend {
     margin-top: 40px;
     display: flex;
     justify-content: space-around;
 }
 
-.legend .red {
+div.legend .red {
     background: var(--red);   
 }
 
-.legend .orange {
+div.legend .orange {
     background: var(--orange);
 }
 
-.legend .blue {
+div.legend .blue {
     background: var(--blue);
 }
 
-.legend button {
+div.legend button {
     width: 250px;
     border-radius: 0;
     padding: 10px;
     cursor: default;
-}
-
-.modal {
-    position: fixed;
-    background: var(--bg-dark);
-    padding: 30px;
-    border-radius: 20px;
-}
-
-.modal h2, .modal h3 {
-    text-align: center;
-}
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.5);
 }

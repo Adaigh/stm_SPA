@@ -22,10 +22,13 @@ div.accounts div.accounts-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 50px;
+    gap: 20px;
+}
+
+div.accounts div.accounts-customers,
+div.accounts div.accounts-staff {
     background-color: var(--bg-dark);
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.7);
     border-radius: 15px;
-    padding: 20px;
-    flex-basis: fit-content;
+    padding: 20px 40px;
 }

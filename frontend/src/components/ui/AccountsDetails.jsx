@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Modal from 'react-modal';
-import { standardStyle } from '../../hooks/useUtils';
+import { standardStyle, formatPhone } from '../../hooks/useUtils';
 
 import './styles/AccountsDetail.css'
 import AccountForm from '../forms/AccountForm';
@@ -32,7 +32,11 @@ const AccountsDetails = ({ info }) => {
     return (
         <>
             <div className='accounts-detail'>
-                <span>{info.user.emailAddress} - {info.user.firstName} {info.user.lastName}</span>
+                <div className='info-area'>
+                    <span>{info.user.emailAddress}</span>
+                    <br />
+                    <span>{info.user.lastName}, {info.user.firstName} {formatPhone(info.user.phoneNumbers[0])}</span>
+                </div>
                 <div>
                     <button className='edit' onClick={() => setEdit(true)}>Edit</button>
                     <button className='cancel' onClick={(e) => confirmDelete(e)}>Delete</button>
