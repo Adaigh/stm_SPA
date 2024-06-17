@@ -17,7 +17,8 @@
 
 
 div.accounts div.accounts-container {
-    margin: 50px;
+    margin: 20px auto;
+    width: 90vw;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -26,4 +27,5 @@ div.accounts div.accounts-container {
     background-color: rgba(0, 0, 0, 0.8);
     border-radius: 15px;
     padding: 20px;
+    flex-basis: fit-content;
 }
