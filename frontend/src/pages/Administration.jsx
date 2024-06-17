@@ -65,10 +65,10 @@ const Administration = () => {
 
                 <AboutPane header="Account Administration" >
                     <ul>
-                        <li>This page allows you to grant elevated privileges to registered accounts</li>
-                        <li>There are three classifications: <b>Customer, Staff, Administrator</b></li>
-                        <li>Customers can only access the "Home" and "Calendar" tabs</li>
-                        <li>Staff can access all tabs except "Admin"</li>
+                        <li>This page allows you to grant elevated privileges to registered accounts.</li>
+                        <li>There are three classifications: <b>Customer, Staff, Administrator</b>.</li>
+                        <li>Customers can only access the "Home" and "Calendar" tabs.</li>
+                        <li>Staff can access all tabs except "Admin".</li>
                     </ul>
                 </AboutPane>
 
