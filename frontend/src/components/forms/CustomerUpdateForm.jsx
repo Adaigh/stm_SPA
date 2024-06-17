@@ -175,17 +175,17 @@ const CustomerUpdateForm = ({ closeForm, customer }) => {
 
         if (JSON.stringify(updatedInfo) === JSON.stringify(customer)) {
             setError('')
-            closeForm()
+            closeForm(false)
             return
         }
 
         const { response, json } = await updateCustomer(updatedInfo, customer)
 
         if (response.ok) {
-            closeForm()
+            closeForm(true)
             return
         } else {
-            setError(json.error)
+            closeForm(false)
         }
 
     }
@@ -302,7 +302,7 @@ const CustomerUpdateForm = ({ closeForm, customer }) => {
                     <button className='cancel'
                         onClick={(e) => {
                             e.preventDefault()
-                            closeForm()
+                            closeForm(false)
                         }}>Cancel</button>
                 </div>}
 

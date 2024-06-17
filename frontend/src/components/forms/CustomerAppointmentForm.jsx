@@ -94,8 +94,7 @@ const CustomerAppointmentForm = ({date, customer, closeForm}) => {
         if(!response.ok){
             setError(json.error)
         } else {
-            closeForm()
-            window.alert("New appointment requested!")
+            closeForm(true)
         }
     }
 
@@ -103,7 +102,7 @@ const CustomerAppointmentForm = ({date, customer, closeForm}) => {
         <div className="cust-app-req">
             <span 
                 className="material-symbols-outlined close" 
-                onClick={() => closeForm()}
+                onClick={() => closeForm(false)}
                 >close</span>
 
             <h2>Request Appointment</h2>

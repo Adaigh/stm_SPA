@@ -2,7 +2,8 @@ import { useState } from 'react';
 import Modal from 'react-modal';
 
 import EditAppointmentForm from '../forms/EditAppointmentForm';
-
+import AlertModal from '../forms/AlertModal';
+import ConfirmModal from '../forms/ConfirmModal'
 import { formatPhone, standardStyle } from '../../hooks/useUtils'
 import {
     useDeleteAppointment,
@@ -14,10 +15,16 @@ import './styles/AppointmentRequest.css'
 const AppointmentRequest = ({appReq}) => {
 
     const [showEdit, setShowEdit] = useState(false)
-    // const [showDelDiag, setShowDelDiag] = useState(false)
+    const [alertIsOpen, setAlertIsOpen] = useState(false)
+    const [confirmIsOpen, setConfirmIsOpen] = useState(false)
 
     const {deleteApp} = useDeleteAppointment()
     const {approveApp} = useApproveAppointment()
+
+    const closeForm = (updated) => {
+        setShowEdit(false)
+        setAlertIsOpen(updated)
+    }
 
     const editRequest = (e) => {
         e.preventDefault()
@@ -29,9 +36,14 @@ const AppointmentRequest = ({appReq}) => {
         await approveApp(appReq)
     }
 
-    const denyRequest = async (e) => {
+    const confirmDeny = (e) => {
         e.preventDefault()
-        await deleteApp(appReq)
+        setConfirmIsOpen(true)
+    }
+
+    const denyRequest = async (confirmed) => {
+        setConfirmIsOpen(false)
+        if(confirmed) await deleteApp(appReq)
     }
 
     return (
@@ -65,14 +77,15 @@ const AppointmentRequest = ({appReq}) => {
                     <tr>
                         <td>{formatPhone(appReq.phoneNumber)}</td>
                         <td className='button'>
-                            <button className='deny' onClick={denyRequest}>Deny</button>
+                            <button className='deny' onClick={confirmDeny}>Deny</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
+
             <Modal
                 isOpen={showEdit}
-                onRequestClose={() => setShowEdit(false)}
+                onRequestClose={() => closeForm(false)}
                 style={standardStyle}
                 contentLabel="Edit Appointment Details"
                 className="modal"
@@ -80,23 +93,21 @@ const AppointmentRequest = ({appReq}) => {
                 >
                     <EditAppointmentForm
                         appointment={appReq}
-                        closeForm={() => setShowEdit(false)}
+                        closeForm={closeForm}
                         />
             </Modal>
 
-            {/* <Modal
-                isOpen={showEdit}
-                onRequestClose={() => setShowEdit(false)}
-                style={standardStyle}
-                contentLabel="Edit Appointment Details"
-                className="modal"
-                overlayClassName="overlay"
-                >
-                    <EditAppointmentForm
-                        appointment={appReq}
-                        closeForm={() => setShowEdit(false)}
-                        />
-            </Modal> */}
+            <AlertModal
+                modalIsOpen={alertIsOpen}
+                onClose={() => setAlertIsOpen(false)}
+                message="Updates successful."
+            />
+            
+            <ConfirmModal
+                modalIsOpen={confirmIsOpen}
+                onClose={denyRequest}
+                message="Are you sure you want to deny this appointment?"
+            />
         </div>
     )
 }

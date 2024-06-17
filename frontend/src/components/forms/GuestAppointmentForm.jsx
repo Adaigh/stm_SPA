@@ -79,9 +79,9 @@ const GuestAppointmentForm = ({date, closeForm}) => {
         // Handle response errors
         if(!response.ok){
             setError(json.error)
+            closeForm(false)
         } else {
-            closeForm()
-            window.alert("New appointment requested!")
+            closeForm(true)
         }
     }
 
@@ -167,7 +167,7 @@ const GuestAppointmentForm = ({date, closeForm}) => {
                 <button className="cancel"
                     onClick={(e) => {
                         e.preventDefault()
-                        closeForm()
+                        closeForm(false)
                     }}>Cancel</button>
             </div>
 

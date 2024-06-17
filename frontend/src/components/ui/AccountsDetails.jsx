@@ -6,18 +6,24 @@ import './styles/AccountsDetail.css'
 import AccountForm from '../forms/AccountForm';
 import { useDeleteCustomer } from '../../hooks/api/useCustomersApi';
 import { useDeleteAccount } from '../../hooks/api/useAccountsApi';
+import ConfirmModal from '../forms/ConfirmModal';
 
 const AccountsDetails = ({ info }) => {
 
     const [edit, setEdit] = useState(false)
+    const [confirmIsOpen, setConfirmIsOpen] = useState(false)
 
-    const {deleteCustomer} = useDeleteCustomer()
-    const {deleteAccount} = useDeleteAccount()
+    const { deleteCustomer } = useDeleteCustomer()
+    const { deleteAccount } = useDeleteAccount()
 
-    const handleDelete = async (e) => {
+    const confirmDelete = (e) => {
         e.preventDefault()
+        setConfirmIsOpen(true)
+    }
 
-        if(window.confirm(`Are you sure you want to delete the account for ${info.user.emailAddress}?`)) {
+    const handleDelete = async (confirmed) => {
+        setConfirmIsOpen(false)
+        if (confirmed) {
             await deleteCustomer(info.user)
             await deleteAccount(info)
         }
@@ -29,7 +35,7 @@ const AccountsDetails = ({ info }) => {
                 <span>{info.user.emailAddress} - {info.user.firstName} {info.user.lastName}</span>
                 <div>
                     <button className='edit' onClick={() => setEdit(true)}>Edit</button>
-                    <button className='cancel' onClick={(e) => handleDelete(e)}>Delete</button>
+                    <button className='cancel' onClick={(e) => confirmDelete(e)}>Delete</button>
                 </div>
                 <Modal
                     isOpen={edit}
@@ -43,6 +49,11 @@ const AccountsDetails = ({ info }) => {
                         account={info}
                         closeForm={() => setEdit(false)} />
                 </Modal>
+                <ConfirmModal
+                    modalIsOpen={confirmIsOpen}
+                    onClose={handleDelete}
+                    message={"Are you sure you want to delete the account for: " + info.user.emailAddress}
+                />
             </div>
         </>
     )

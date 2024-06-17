@@ -96,9 +96,8 @@ const EditAppointmentForm = ({appointment, closeForm}) => {
         if(!response.ok) {
             setError(json.error)
         } else {
-            window.alert("Updates Successful!")
             setError('')
-            closeForm()
+            closeForm(true)
         }
         
     }
@@ -174,7 +173,7 @@ const EditAppointmentForm = ({appointment, closeForm}) => {
                 <button className="cancel"
                     onClick={(e)=> {
                         e.preventDefault()
-                        closeForm()
+                        closeForm(false)
                     }}>Cancel</button>
             </div>
             {error && <div className="error">{error}</div>}
