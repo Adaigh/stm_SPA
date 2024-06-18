@@ -25,10 +25,10 @@ div.accounts div.accounts-container {
     gap: 20px;
 }
 
-div.accounts div.accounts-customers,
-div.accounts div.accounts-staff {
+div.accounts div.accounts-container > div {
     background-color: var(--bg-dark);
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 15px;
     padding: 20px 40px;
+    height: max-content;
 }

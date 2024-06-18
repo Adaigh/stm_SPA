@@ -7,11 +7,13 @@ import AccountForm from "../components/forms/AccountForm";
 
 import { useAccountsContext } from "../hooks/useAccountsContext"
 import { useFetchAccounts } from "../hooks/api/useAccountsApi"
+import { useRecipientsContext } from "../hooks/useRecipientsContext";
 import { standardStyle } from "../hooks/useUtils"
 
 import './styles/Administration.css'
 import { useCustomersContext } from "../hooks/useCustomersContext";
 import { useFetchCustomers } from "../hooks/api/useCustomersApi";
+import { useRetrieveMailerList } from "../hooks/api/useMailerApi";
 
 const Administration = () => {
 
@@ -24,10 +26,14 @@ const Administration = () => {
     const { customers } = useCustomersContext()
     const { fetchCustomers } = useFetchCustomers()
 
+    const { recipients } = useRecipientsContext()
+    const { getMailerList } = useRetrieveMailerList()
+
     // Fetch account.user list on load 
     useEffect(() => {
         if (!accounts) fetchAccounts()
         if (!customers) fetchCustomers()
+        if (!recipients) getMailerList()
         // eslint-disable-next-line
     }, [accounts])
 
@@ -73,7 +79,7 @@ const Administration = () => {
                 </AboutPane>
 
                 <div className="accounts-container">
-                    <div className="accounts-customers">
+                    <div>
                         {/* Header including search filter and buttons  */}
                         <div className="accounts-header">
                             <h2>Customer Accounts</h2>
@@ -96,7 +102,7 @@ const Administration = () => {
                         ))}
                     </div>
 
-                    <div className='accounts-staff'>
+                    <div>
                         <div>
                             <h2>Administrators</h2>
                             <hr />
@@ -111,6 +117,15 @@ const Administration = () => {
                                 <AccountsDetails key={account.user._id} info={account} />
                             ))}
                         </div>
+                    </div>
+
+                    <div className="email notifications">
+
+                        <h2>Appointment Request Email List</h2>
+                        <hr />
+                        {recipients && recipients.map((r,index) => {
+                            return <div key={index}>{r}</div>
+                        })}
                     </div>
 
                 </div>
