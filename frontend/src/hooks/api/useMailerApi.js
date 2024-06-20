@@ -36,7 +36,6 @@ export const useRetrieveMailerList = () => {
 
         if (response.ok) {
             const json = await response.json()
-            console.log(json)
             dispatch({ type: 'SET_RECIPIENTS', payload: json })
         }
 

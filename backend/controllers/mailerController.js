@@ -21,7 +21,6 @@ const recipients = [
 const addtoMailerList = async (req, res) => {
     try {
         let body = req.body
-        console.log(body)
         let record = await Recipient.findOne(body)
         if(record) {
             res.status(409).json({error: "Recipient already exists"})
@@ -45,8 +44,6 @@ const retrieveMailerList = async (req, res) => {
         let emailList = await Recipient.find({}, {email: 1, _id:0})
         let list = []
         emailList.forEach(entry => list.push(entry.email))
-        console.log(emailList)
-        console.log(list)
         res.status(200).json(list)
     } catch {
         res.status(500).json({ error: "Unable to retrieve email list" })
