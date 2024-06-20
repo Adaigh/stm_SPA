@@ -3,6 +3,7 @@ const verifyAccessLevel = require('../middleware/verifyAccessLevel')
 const requireAuth = require('../middleware/requireAuth')
 const {
     loginUserAccount,
+    refreshToken,
     signupUserAccount,
     createUserAccount,
     deleteUserAccount,
@@ -16,6 +17,9 @@ const adminAccess = 2;
 
 // Login
 router.post('/login', loginUserAccount)
+
+// Refresh token
+router.get('/refresh', requireAuth, refreshToken)
 
 // Create (Self-Signup)
 router.post('/signup', signupUserAccount)

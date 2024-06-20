@@ -26,20 +26,21 @@ export const DetailsContextProvider = ({children}) => {
     })
     const {user} = useAuthContext()
 
-    useEffect(  () => {
+    useEffect(() => {
         const getDetails = async (token) => {
+            localStorage.setItem('details', true)
             const response = await fetch(`${api_url}/api/customers/details`, {
                 headers: {'Authorization': `Bearer ${token}`}
             })
             const json = await response.json()
             if(response.ok) dispatch({type: 'SET_DETAILS', payload: json})
-            else return "error"
         }
 
         if(user) {
-            getDetails(user.webToken)
+            const fetched = JSON.parse(localStorage.getItem('details'))
+            if(!fetched) getDetails(user.webToken)
         }
-    }, [user, dispatch])
+    }, [user])
 
     return (
         <DetailsContext.Provider value={{...state, dispatch}}>

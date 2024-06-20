@@ -27,6 +27,20 @@ const loginUserAccount = async (req, res) => {
     }
 }
 
+// Refresh jwt token
+const refreshToken = async (req, res) => {
+    try {
+        const {user} = req
+        if (!user) {
+            return res.status(400).json({ error: "Invalid authorization" })
+        }
+        const newToken = createToken(user._id)
+        res.status(200).json({user: user.user, access: user.access, webToken: newToken })
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
 // POST self-signup customer
 const signupUserAccount = async (req, res) => {
 
@@ -45,15 +59,15 @@ const signupUserAccount = async (req, res) => {
 
 // POST a new account
 const createUserAccount = async (req, res) => {
-    
+
     const { user, password, access } = req.body
 
     try {
         const account = await UserAccount.signup(user, password, access)
 
-        res.status(200).json({_id: account._id, user, access })
+        res.status(200).json({ _id: account._id, user, access })
     } catch (error) {
-        res.status(400).json({error: error.message})
+        res.status(400).json({ error: error.message })
     }
 }
 
@@ -70,7 +84,7 @@ const getAccounts = async (req, res) => {
 // GET a single account
 const getAccount = async (req, res) => {
 
-    const {id} = req.params
+    const { id } = req.params
 
     const account = await UserAccount.findById(id).populate({
         path: 'user',
@@ -82,18 +96,18 @@ const getAccount = async (req, res) => {
 
 // PATCH an account
 const updateAccount = async (req, res) => {
-    const {id} = req.params
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(400).json({error: 'Invalid request data'})
+    const { id } = req.params
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ error: 'Invalid request data' })
     }
 
-    const account = await UserAccount.findByIdAndUpdate(id, {...req.body})
+    const account = await UserAccount.findByIdAndUpdate(id, { ...req.body })
 
-    if(!account){
-        return res.status(404).json({error: 'Account not found'})
+    if (!account) {
+        return res.status(404).json({ error: 'Account not found' })
 
     }
-    res.status(200).json({data: account})
+    res.status(200).json({ data: account })
 }
 
 // DELETE an account
@@ -119,6 +133,7 @@ const deleteUserAccount = async (req, res) => {
 
 module.exports = {
     loginUserAccount,
+    refreshToken,
     signupUserAccount,
     createUserAccount,
     getAccounts,

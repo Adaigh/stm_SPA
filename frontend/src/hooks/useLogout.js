@@ -8,6 +8,7 @@ export const useLogout = () => {
     const logout = () => {
         // Removing user info from LocalStorage
         localStorage.removeItem('STMuser')
+        localStorage.removeItem('details')
 
         // Update AuthContext
         logoutUser({type:'LOGOUT'})
