@@ -48,9 +48,10 @@ export const useDeleteMailerRecipient = () => {
     const { user } = useAuthContext()
     const { dispatch } = useRecipientsContext()
 
-    const deleteRecipient = async (id) => {
-        const response = await fetch(`${api_url}/api/mailer/list/${id}`, {
+    const deleteRecipient = async (userEmail) => {
+        const response = await fetch(`${api_url}/api/mailer/list`, {
             method: 'DELETE',
+            body: JSON.stringify({email: userEmail}),
             headers: stdHeaders(user)
         })
 

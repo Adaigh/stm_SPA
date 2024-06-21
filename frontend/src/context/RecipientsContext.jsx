@@ -16,7 +16,7 @@ export const recipientsReducer = (state, action) => {
         
         case 'DELETE_RECIPIENT':
             return {
-                recipients: state.recipients.filter((r)=> r.email !== action.payload.email)
+                recipients: state.recipients.filter((r)=> r !== action.payload)
             }
 
         default:

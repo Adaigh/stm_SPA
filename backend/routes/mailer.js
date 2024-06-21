@@ -21,9 +21,9 @@ router.post('/list', addtoMailerList)
 router.get('/list', retrieveMailerList)
 
 // Delete
-router.delete('/list/:id', removefromMailerList)
+router.delete('/list', removefromMailerList)
 
 // Approval email route
-router.post('/approve',verifyAccessLevel(1), sendApprovalEmail)
+router.post('/approve', verifyAccessLevel(1), sendApprovalEmail)
 
 module.exports = router

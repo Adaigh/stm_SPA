@@ -13,7 +13,7 @@ import { standardStyle } from "../hooks/useUtils"
 import './styles/Administration.css'
 import { useCustomersContext } from "../hooks/useCustomersContext";
 import { useFetchCustomers } from "../hooks/api/useCustomersApi";
-import { useRetrieveMailerList } from "../hooks/api/useMailerApi";
+import { useDeleteMailerRecipient, useRetrieveMailerList } from "../hooks/api/useMailerApi";
 
 const Administration = () => {
 
@@ -28,6 +28,7 @@ const Administration = () => {
 
     const { recipients } = useRecipientsContext()
     const { getMailerList } = useRetrieveMailerList()
+    const { deleteRecipient } = useDeleteMailerRecipient()
 
     // Fetch account.user list on load 
     useEffect(() => {
@@ -65,6 +66,15 @@ const Administration = () => {
         return (account.access === 2)
     }
 
+    const removeFromMailerList = async (email) => {
+        const { response } = await deleteRecipient(email)
+
+        if (!response.ok) {
+            const json = await response.json()
+            window.alert("Email not removed, could not contact server.")
+        }
+    }
+
     return (
         <>
             <div className="accounts">
@@ -83,15 +93,29 @@ const Administration = () => {
                         {/* Header including search filter and buttons  */}
                         <div className="accounts-header">
                             <h2>Customer Accounts</h2>
-                            <input
-                                type="text"
-                                onChange={(e) => setFilter(e.target.value)}
-                                value={filter}
-                                placeholder="Search by Name, Phone, or Email"
-                                size='50'
-                            />
-                            <span className="material-symbols-outlined close" onClick={() => setFilter('')}>close</span>
-                            <span className="material-symbols-outlined refresh" onClick={(e) => callRefreshAccounts(e)}>refresh</span>
+                            <div className="filter-bar">
+                                <input
+                                    type="text"
+                                    onChange={(e) => setFilter(e.target.value)}
+                                    value={filter}
+                                    placeholder="Search by Name, Phone, or Email"
+                                    size='50'
+                                />
+                                <span
+                                    className="material-symbols-outlined close"
+                                    onClick={() => setFilter('')}
+                                    title="Clear the filter."
+                                >
+                                    close
+                                </span>
+                                <span
+                                    className="material-symbols-outlined refresh"
+                                    onClick={(e) => callRefreshAccounts(e)}
+                                    title="Refresh accounts list."
+                                >
+                                    refresh
+                                </span>
+                            </div>
                             <button className="submit" onClick={() => setAddUser(true)}>Add New Account</button>
                         </div>
                         <hr />
@@ -102,7 +126,7 @@ const Administration = () => {
                         ))}
                     </div>
 
-                    <div>
+                    <div className="accounts-staff">
                         <div>
                             <h2>Administrators</h2>
                             <hr />
@@ -121,10 +145,21 @@ const Administration = () => {
 
                     <div className="email notifications">
 
-                        <h2>Appointment Request Email List</h2>
+                        <h2>Updates Mailer List</h2>
                         <hr />
-                        {recipients && recipients.map((r,index) => {
-                            return <div key={index}>{r}</div>
+                        {recipients && recipients.sort().map((r, index) => {
+                            return (
+                                <div className="recipient-container" key={index}>
+                                    {r}
+                                    <span
+                                        className='material-symbols-outlined delete'
+                                        onClick={() => removeFromMailerList(r)}
+                                        title='Remove email from mailer list.'
+                                    >
+                                        delete
+                                    </span>
+                                </div>
+                            )
                         })}
                     </div>
 

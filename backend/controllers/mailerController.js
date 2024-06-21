@@ -53,8 +53,8 @@ const retrieveMailerList = async (req, res) => {
 // Delete
 const removefromMailerList = async (req, res) => {
     try {
-        let id = req.params
-            recipient = await Recipient.findOneAndDelete({_id: id})
+        let {email: providedEmail} = req.body
+            recipient = await Recipient.findOneAndDelete({email: providedEmail})
         if (recipient) {
             res.status(200).json(recipient)
         } else {

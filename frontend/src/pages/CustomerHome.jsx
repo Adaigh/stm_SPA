@@ -65,8 +65,20 @@ const CustomerHome = () => {
                             placeholder="Search by Name, Phone, or Email"
                             size='50'
                         />
-                        <span className="material-symbols-outlined close" onClick={() => setFilter('')}>close</span>
-                        <span className="material-symbols-outlined refresh" onClick={(e) => callRefreshCustomers(e)}>refresh</span>
+                        <span
+                            className="material-symbols-outlined close"
+                            onClick={() => setFilter('')}
+                            title="Clear the filter."
+                        >
+                            close
+                        </span>
+                        <span
+                            className="material-symbols-outlined refresh"
+                            onClick={(e) => callRefreshCustomers(e)}
+                            title="Refresh accounts list."
+                        >
+                            refresh
+                        </span>
                     </div>
 
                     {/* Filter and map users into CustomerDetail components */}
