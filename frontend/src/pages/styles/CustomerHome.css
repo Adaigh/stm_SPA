@@ -10,11 +10,11 @@ div.customer-management-header h2 {
 div.customers {
   width: 70vw;
   max-width: 1000px;
-  
+  height:fit-content;
   background-color: var(--bg-dark);
   background-color: rgba(0, 0, 0, 0.7);
   border-radius: 15px;
-  padding: 0 20px;
+  padding: 0 20px 20px 20px;
 }
 
 div.customerHome {

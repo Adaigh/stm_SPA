@@ -74,22 +74,26 @@ div.error {
 
 span.delete {
   color: var(--error);
-  cursor: pointer;
 }
 
-span.delete:hover {
-  text-decoration: underline;
-}
 
 span.edit {
   color: var(--orange);
+}
+
+span.outgoing_mail,
+span.delete,
+span.edit {
   cursor: pointer;
 }
 
+span.outgoing_mail:hover,
+span.delete:hover,
 span.edit:hover {
   text-decoration: underline;
 }
 
+span.outgoing_mail,
 button.submit {
   color: var(--green)
 }
@@ -100,6 +104,10 @@ button.cancel {
 
 button.edit {
   color: var(--orange)
+}
+
+button {
+  cursor: pointer;
 }
 
 div.modal {
