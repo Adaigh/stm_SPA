@@ -7,3 +7,15 @@ div.self-signup {
     background: var(--bg-dark);
     background: rgba(0,0,0,0.8);
 }
+
+@media only screen and (max-width: 1400px) {
+    div.self-signup {
+        width: 70vw;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    div.self-signup {
+        width: 90vw;
+    }
+}

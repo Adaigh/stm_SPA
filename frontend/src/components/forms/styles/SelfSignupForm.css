@@ -25,3 +25,16 @@ form.self-signup button {
 form.self-signup div.error {
     margin-top: 20px;
 }
+
+@media only screen and (max-width: 1400px) {
+    form.self-signup input, form.self-signup select {
+        width: 70%;
+    }
+}
+
+
+@media only screen and (max-width: 700px) {
+    form.self-signup input, form.self-signup select {
+        width: 90%;
+    }
+}

@@ -8,6 +8,11 @@ form.cust-update-form div.cust-cols {
     padding: 20px;
 }
 
+form.cust-update-form div.cust-cols label {
+    font-weight: 600;
+    color: var(--primary)
+}
+
 form.cust-update-form div.cust-info {
     display: flex;
     flex-direction: column;
@@ -37,4 +42,16 @@ form.cust-update-form span.check {
 form.cust-update-form span.check:hover {
     cursor: pointer;
     text-decoration: underline;
+}
+
+@media only screen and (max-width:950px) {
+    form.cust-update-form div.cust-cols {
+        flex-direction: column;
+        gap:20px;
+    }
+
+    form.cust-update-form div.new-vehicle {
+        max-width: 100%;
+        width:100%;
+    }
 }

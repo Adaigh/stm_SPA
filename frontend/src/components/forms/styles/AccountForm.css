@@ -21,3 +21,9 @@ form.admin-acct-update-form div.controls {
     gap: 50px;
     margin: 40px auto 0 auto;
 }
+
+@media only screen and (max-width: 950px) {
+    form.admin-acct-update-form {
+        width: 100%;
+    }
+}

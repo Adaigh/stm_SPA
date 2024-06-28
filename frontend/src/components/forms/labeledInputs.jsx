@@ -87,7 +87,7 @@ export const VehicleMake = ({ val, req, error, changeFn }) => {
                 onChange={changeFn}
                 className={error ? 'error' : ''}>
 
-                <option value="" disabled>--Please choose vehicle make--</option>
+                <option value="" disabled>--Please choose--</option>
                 <option value="Audi">Audi</option>
                 <option value="VW">VW</option>
                 <option value="BMW">BMW</option>

@@ -14,7 +14,7 @@ import {
 import { capitalize } from "../../hooks/useUtils"
 import { useUpdateAppointment } from "../../hooks/api/useAppointmentsApi"
 
-import './styles/EditAppointment.css'
+import './styles/EditAppointmentForm.css'
 
 const EditAppointmentForm = ({appointment, closeForm}) => {
     

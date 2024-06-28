@@ -24,3 +24,9 @@ div.guest-app-req span.close {
 div.guest-app-req div.controls button{
     margin: 10px;
 }
+
+@media only screen and (max-width: 950px) {
+    form.guest-request {
+        flex-direction: column;
+    }
+}
