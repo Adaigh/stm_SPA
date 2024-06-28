@@ -33,6 +33,9 @@ div.details-container td:nth-child(odd) {
 }
 
 @media only screen and (max-width:530px) {
+    div.details-container {
+        padding: 20px 10px;
+    }
     div.details-container table.details-list td{
         font-size: 1rem;
     }
