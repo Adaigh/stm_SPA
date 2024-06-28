@@ -27,8 +27,6 @@ const standardStyle = {
     }
 }
 
-Modal.setAppElement('#root');
-
 const Calendar = () => {
 
     const { user } = useAuthContext();
@@ -64,27 +62,29 @@ const Calendar = () => {
                     </li>
                 </ul>
             </AboutPane>
-            <CalendarDisplay
-                today={today}
-                selectedDate={selectedDate}
-                showNeighbors={false}
-                decorated={true}
-                limited={true}
-                setSelectedDate={setSelectedDate}>
+            <div className="calendar-area">
+                <CalendarDisplay
+                    today={today}
+                    selectedDate={selectedDate}
+                    showNeighbors={false}
+                    decorated={true}
+                    limited={true}
+                    setSelectedDate={setSelectedDate}>
 
-                <div className="appointment-request">
-                    {selectedDate && <button onClick={() => setFormIsOpen(true)}>
-                        <h3 className="request-button-header">Request Appointment </h3>
-                        {selectedDate.toDateString()}
-                    </button>}
-                    {!selectedDate && <button style={{ cursor: 'default' }} disabled><h3>Select a day to request an appointment!</h3></button>}
-                </div>
-                <div className="legend">
-                    <button className="blue" disabled>Many appointments available</button>
-                    <button className="orange" disabled>Few appointments available</button>
-                    <button className="red" disabled>Urgent appointments only</button>
-                </div>
-            </CalendarDisplay>
+                    <div className="appointment-request">
+                        {selectedDate && <button onClick={() => setFormIsOpen(true)}>
+                            <h3 className="request-button-header">Request Appointment </h3>
+                            {selectedDate.toDateString()}
+                        </button>}
+                        {!selectedDate && <button style={{ cursor: 'default' }} disabled><h3>Select a day to request an appointment!</h3></button>}
+                    </div>
+                    <div className="legend">
+                        <button className="blue" disabled>Many appointments available</button>
+                        <button className="orange" disabled>Few appointments available</button>
+                        <button className="red" disabled>Urgent appointments only</button>
+                    </div>
+                </CalendarDisplay>
+            </div>
             <Modal
                 isOpen={formIsOpen}
                 onRequestClose={() => closeForm(false)}

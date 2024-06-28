@@ -72,7 +72,7 @@ const Schedule = () => {
                         {!monthly && <button className='view-button' onClick={e => prevWeek(e)}>
                             &lt;
                         </button>}
-                        <button className='view-button' onClick={(e) => toggleMonthly(e)}>
+                        <button className='view-button monthly' onClick={(e) => toggleMonthly(e)}>
                             {monthly && <>Week</>}{!monthly && <>Month</>} View
                         </button>
                         {!monthly && <button className='view-button' onClick={e => goToToday(e)}>
@@ -97,7 +97,7 @@ const Schedule = () => {
                         </>
                     }
                 </div>
-                <div>
+                <div className='schedule-requests'>
                     <h2>Appointment Requests</h2>
                     {schedule && schedule.filter((app) => {
                         return app.reviewed === false

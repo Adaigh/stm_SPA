@@ -1,17 +1,18 @@
-.accounts-header {
+div.accounts div.accounts-header,
+div.accounts div.filter-bar {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-.accounts-header .refresh,
-.accounts-header .close {
+div.accounts.accounts-header span.refresh,
+div.accounts.accounts-header span.close {
     cursor: pointer;
     position: relative;
     left: -45px;
 }
 
-.accounts-header .refresh {
+div.accounts.accounts-header span.refresh {
     border: 2px solid rgba(0, 0, 0, 0);
 }
 
@@ -31,4 +32,35 @@ div.accounts div.accounts-container > div {
     border-radius: 15px;
     padding: 20px 40px;
     height: max-content;
+    flex-shrink: 0;
+}
+
+div.accounts div.recipient-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media only screen and (max-width:1720px) {
+
+    div.accounts div.accounts-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media only screen and (max-width:1420px) {
+
+    div.accounts div.accounts-container {
+        flex-direction: column-reverse;
+        max-width: 800px;
+    }
+}
+
+@media only screen and (max-width:530px) {
+
+    div.accounts div.filter-bar {
+        max-width: 350px;
+        gap: 5px;
+    }
+    
 }

@@ -1,6 +1,14 @@
 div.schedule-weekly {
-    width: 90vw;
     margin: 0 auto;
     display: flex;
     gap: 20px;
+}
+
+@media only screen and (max-width: 1420px) {
+    
+    div.schedule-weekly {
+        flex-direction: column;
+        align-items: center;
+        margin: 0
+    }
 }

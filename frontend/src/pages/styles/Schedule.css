@@ -1,27 +1,38 @@
 div.schedule {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 250px);
     margin: 0 50px;
     gap: 50px;
 }
 
 div.schedule h2 {
-  font-weight: 500;
-
+    font-weight: 500;
 }
 
-button.view-button {
+div.schedule div.scheduleDisplay div.button-bar {
+    display: flex;
+    justify-content: center;
     margin: 20px;
+    gap: 2vw;
 }
 
-div.scheduleDisplay div.button-bar {
-    margin: 0 auto;
-    text-align: center;
-}
-
-div.requests {
+div.schedule div.requests {
     overflow-y: auto;
     margin: 0 auto;
-    max-height: 45vh;
+}
+
+div.schedule button.view-button {
+    min-width: 50px;
+}
+
+@media only screen and (max-width: 1420px) {
+    div.schedule {
+        margin: 0 20px;
+    }
+}
+
+@media only screen and (max-width: 530px) {
+    div.schedule {
+        margin: 0;
+    }
 }

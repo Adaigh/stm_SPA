@@ -2,6 +2,7 @@
     background: var(--bg-dark);
     margin: 0 auto;
     max-width: 1200px;
+    /* min-width: 730px; */
     padding: 50px;
     border-radius: 20px;
     border: 3px solid var(--container-border);
@@ -62,12 +63,14 @@ button.partial {
     background: var(--orange);
 }
 
-button.weekend, button.past{
+button.weekend,
+button.past {
     background: #888;
     border: none;
 }
 
-button.weekend, button.past {
+button.weekend,
+button.past {
     cursor: default !important;
 }
 
@@ -77,4 +80,21 @@ button.weekday {
 
 button.selectedDay {
     border-color: #5f5;
+}
+
+@media only screen and (max-width: 530px) {
+    .calendar-area {
+        overflow-x: hidden;
+    }
+    
+    .calendar {
+        padding: 10px 0;
+        border-radius: 0;
+    }
+
+    .react-calendar__month-view__weekdays__weekday--weekend,
+    button.weekend {
+        width: 0;
+        opacity: 0;
+    }
 }

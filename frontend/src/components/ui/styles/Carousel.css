@@ -1,15 +1,15 @@
-.carousel-container {
+div.carousel-container {
   background: var(--bg-dark);
   background: url(./assets/gears3.jpg);
   background-size: cover;
   margin: auto 0;
 }
 
-.carousel-container h2 {
+div.carousel-container h2 {
   font-size: 3rem;
 }
 
-.carousel-nav button{
+div.carousel-container button{
     border: unset;
     background: unset;
     color: #000;
@@ -17,10 +17,16 @@
     cursor: pointer;
   }
 
-.carousel-nav li{
+  div.carousel-container .carousel-nav li{
     display: inline;
 }
 
-.control-dots {
-  position: relative;
+@media only screen and (max-width: 530px) {
+  div.carousel-container h2 {
+    font-size: 2rem;
+  }
+
+  div.carousel-container button {
+    display: none;
+  }
 }

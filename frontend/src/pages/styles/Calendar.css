@@ -3,8 +3,10 @@ div.calendar-container h2 {
     font-weight: 400;
 }
 
-div.calendar-container button{
-    cursor: pointer;
+div.calendar-container div.calendar-area {
+    min-height: 720px;
+    display: flex;
+    align-items: center;
 }
 
 div.calendar-container div.appointment-request {
@@ -44,8 +46,13 @@ div.legend .blue {
 }
 
 div.legend button {
-    width: 250px;
     border-radius: 0;
     padding: 10px;
     cursor: default;
+}
+
+@media only screen and (max-width:530px ) {
+    div.legend {
+        flex-direction: column;
+    }
 }

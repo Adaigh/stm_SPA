@@ -1,22 +1,27 @@
-.contact {
+div.contact {
     background: rgba(0,0,0,0.8);
     padding: 5px;
     width: 100%;
 }
 
-.contact ul {
+div.contact h4 {
+    font-family: 'Black Ops One';
+    font-weight: 400;
+}
+
+div.contact ul {
     list-style: none;
 }
 
-.contact li {
+div.contact li {
     color: #aaa;
 }
 
-.contact span {
+div.contact span {
     color: #DFF7FA;
     font-weight: 500;
 }
 
-.contact a {
+div.contact a {
     text-decoration: none;
 }

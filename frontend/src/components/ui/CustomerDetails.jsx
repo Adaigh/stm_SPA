@@ -55,8 +55,8 @@ const CustomerDetails = ({ customerInfo }) => {
                         {expanded && <span className='material-symbols-outlined expand-less'>expand_less</span>}
                         <h3>
                             {customerInfo.lastName}, {customerInfo.firstName}
-                            {!expanded && <span> &emsp; {formatPhone(customerInfo.phoneNumbers[0])}</span>}
                         </h3>
+                        {!expanded && <div className='phone'> &emsp; {formatPhone(customerInfo.phoneNumbers[0])}</div>}
                     </div>
                     {customerInfo.emailAddress.includes('(SHOP)') &&
                         <span>(SHOP RECORD) <span className='material-symbols-outlined delete' onClick={(e) => confirmDelete(e)}>delete</span></span>

@@ -1,7 +1,7 @@
 .infopane {
-  margin:  0 15vw;
+  margin: 0 15vw;
   background: none;
-  background: rgba(0,0,255,0.2);
+  background: rgba(0, 0, 255, 0.2);
   transform: skewX(-15deg);
   translate: -2%;
   height: 100%;
@@ -33,4 +33,15 @@
 
 .info-list {
   text-align: start;
+}
+
+@media only screen and (max-width:530px) {
+  .infopane {
+    margin: 0 5vw;
+  transform: skewX(-5deg);
+  }
+
+  .infochildren {
+    transform: skewX(5deg);
+  }
 }

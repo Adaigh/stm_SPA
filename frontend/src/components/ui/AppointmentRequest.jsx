@@ -12,14 +12,14 @@ import {
 
 import './styles/AppointmentRequest.css'
 
-const AppointmentRequest = ({appReq}) => {
+const AppointmentRequest = ({ appReq }) => {
 
     const [showEdit, setShowEdit] = useState(false)
     const [alertIsOpen, setAlertIsOpen] = useState(false)
     const [confirmIsOpen, setConfirmIsOpen] = useState(false)
 
-    const {deleteApp} = useDeleteAppointment()
-    const {approveApp} = useApproveAppointment()
+    const { deleteApp } = useDeleteAppointment()
+    const { approveApp } = useApproveAppointment()
 
     const closeForm = (updated) => {
         setShowEdit(false)
@@ -43,13 +43,13 @@ const AppointmentRequest = ({appReq}) => {
 
     const denyRequest = async (confirmed) => {
         setConfirmIsOpen(false)
-        if(confirmed) await deleteApp(appReq)
+        if (confirmed) await deleteApp(appReq)
     }
 
     return (
         <div className='request'>
 
-            <table>
+            <table className='req-table'>
                 <tbody>
                     <tr>
                         <td><h3>{appReq.date}</h3></td>
@@ -82,6 +82,29 @@ const AppointmentRequest = ({appReq}) => {
                     </tr>
                 </tbody>
             </table>
+            <div className='req-div'>
+                <div>
+                    <h3>{appReq.date}</h3>
+                    {appReq.firstName} {appReq.lastName}
+                    <br />
+                    {appReq.vehicle.vehicleYear}&nbsp;
+                    {appReq.vehicle.vehicleMake}&nbsp;
+                    {appReq.vehicle.vehicleModel}
+                    <br />
+                    VIN: {appReq.vehicle.vehicleVIN}
+                    <br />
+                    {formatPhone(appReq.phoneNumber)}
+                    <hr />
+                    {appReq.description}
+                    <br />
+                    <br />
+                    <div className='controls'>
+                        <button className='edit' onClick={editRequest}>Edit</button>
+                        <button className='approve' onClick={approveRequest}>Approve</button>
+                        <button className='deny' onClick={confirmDeny}>Deny</button>
+                    </div>
+                </div>
+            </div>
 
             <Modal
                 isOpen={showEdit}
@@ -90,11 +113,11 @@ const AppointmentRequest = ({appReq}) => {
                 contentLabel="Edit Appointment Details"
                 className="modal"
                 overlayClassName="overlay"
-                >
-                    <EditAppointmentForm
-                        appointment={appReq}
-                        closeForm={closeForm}
-                        />
+            >
+                <EditAppointmentForm
+                    appointment={appReq}
+                    closeForm={closeForm}
+                />
             </Modal>
 
             <AlertModal
@@ -102,7 +125,7 @@ const AppointmentRequest = ({appReq}) => {
                 onClose={() => setAlertIsOpen(false)}
                 message="Updates successful."
             />
-            
+
             <ConfirmModal
                 modalIsOpen={confirmIsOpen}
                 onClose={denyRequest}

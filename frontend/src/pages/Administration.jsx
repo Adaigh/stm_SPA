@@ -70,7 +70,6 @@ const Administration = () => {
         const { response } = await deleteRecipient(email)
 
         if (!response.ok) {
-            const json = await response.json()
             window.alert("Email not removed, could not contact server.")
         }
     }
@@ -98,8 +97,8 @@ const Administration = () => {
                                     type="text"
                                     onChange={(e) => setFilter(e.target.value)}
                                     value={filter}
-                                    placeholder="Search by Name, Phone, or Email"
-                                    size='50'
+                                    placeholder="Search by Name/Phone/Email"
+                                    size='28'
                                 />
                                 <span
                                     className="material-symbols-outlined close"

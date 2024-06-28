@@ -1,54 +1,98 @@
-header {
+div.navigation {
+    display: flex;
     background: #333;
-    display: flex;
-    justify-content: space-between;
-    gap:50px;
-    height: 150px;
-}
-
-.links {
-    display: flex;
-    gap:50px;
     align-items: center;
-    justify-content: space-between;
-    overflow-y: hidden;
 }
 
-.links a {
+div.navigation div.logo-link {
+    padding: 20px;
+    background-color: #000;
+}
+
+div.navigation div.nav,
+div.navigation div.account{
+    display: flex;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+div.navigation a {
     text-decoration: none;
-    font-weight: 400;
-    font-size: 1.2rem;
-    border: 2px solid #333;
 }
 
-.links a:hover {
-    border-bottom: 2px solid red;
+div.navigation a:hover {
+    text-decoration: underline;
 }
 
-.logo-link {
-    background: #000;
+div.navigation div.account {
+    margin-left: auto;
 }
 
-.logo-link img{
-    height: 100px;
-}
 
-.logged-in button {
-    margin: 0 15px;
-}
-
-.login a {
-    margin-right: 15px;
-}
-
-a.staff-only {
+div.navigation a.staff-only {
     padding: 0 5px;
     border: 2px solid #333;
     border-left: 2px solid red;
     border-top: 2px solid red;
 }
 
-a.staff-only:hover {
+div.navigation a.staff-only:hover {
     text-decoration: none;
     border: 2px solid red;
+}
+
+div.navigation div.menu-icon {
+    margin: 0 50px;
+    cursor: pointer;
+    display: none;
+}
+
+div.navigation div.mobile-menu {
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    background-color: #333;
+    z-index: 5;
+    position: absolute;
+    top: 150px;
+    width: 300px;
+    transform: translateX(-300px);
+    transition: transform 1s;
+}
+
+div.navigation div.mobile-menu.active {
+    transform: translateX(0px);
+}
+
+@media only screen and (max-width:1200px) {
+    div.navigation {
+        justify-content: space-between;
+        background-color: #333;
+        flex-basis: 0;
+    }
+
+    div.navigation div.menu-icon {
+        display: block;
+    }
+
+    div.navigation div.logo-link {
+        padding: 20px;
+        background-color: #000;
+    }
+
+    div.navigation div.nav,
+    div.navigation div.account {
+        display: none;
+    }
+
+    div.navigation div.mobile-menu {
+        display: flex;
+    }
+}
+
+@media only screen and (max-width:530px) {
+    div.navigation div.menu-icon {
+        margin: 0 auto;
+    }
 }

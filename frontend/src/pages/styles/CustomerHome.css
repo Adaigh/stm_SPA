@@ -1,53 +1,76 @@
-div.customer-management-header {
-  margin: 50px auto;
-  width: 80vw;
+div.customerHome {
+  display: flex;
+  justify-content: center;
+  gap: 3%;
+  margin: 20px 0;
 }
 
-div.customer-management-header h2 {
-  font-weight: 500;
-}
-
-div.customers {
+div.customerHome div.customers {
   width: 70vw;
   max-width: 1000px;
   height:fit-content;
   background-color: var(--bg-dark);
   background-color: rgba(0, 0, 0, 0.7);
   border-radius: 15px;
-  padding: 0 20px 20px 20px;
+  padding: 20px;
 }
 
-div.customerHome {
-  display: flex;
-  justify-content: center;
-  gap: 50px;
-  margin: 20px 0;
-}
-
-div.customerHome h2 {
-  font-weight: 600;
-}
-
-div.customer-header {
+div.customerHome div.customer-header,
+div.customerHome div.filter-bar{
   display: flex;
   align-items: center;
   gap: 15px;
+  padding-bottom: 20px;
 }
 
-div.customer-header span.waiting {
+div.customerHome input.small-bar {
+  display: none;
+}
+
+div.customerHome  span.waiting {
   border: 2px solid var(--error);
   border-radius: 10px;
   color: var(--error);
   background: #ffefef
 }
 
-div.customer-header span.refresh,
-div.customer-header span.close {
+div.customerHome span.refresh,
+div.customerHome span.close {
   cursor: pointer;
   position: relative;
   left: -45px;
 }
 
-div.customer-header span.refresh {
+div.customerHome span.refresh {
   border: 2px solid rgba(0, 0, 0, 0);
+}
+
+@media only screen and (max-width: 1420px) {
+  div.customerHome {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  div.customerHome input.large-bar{
+    display: none;
+  }
+
+  div.customerHome input.small-bar{
+    display: block;
+  }
+
+}
+
+@media only screen and (max-width:1000px) {
+  
+  div.customerHome div.customers {
+    width:100%;
+    max-width: 450px;
+  }
+
+  div.customerHome div.customer-header {
+    flex-direction: column;
+    align-items: baseline;
+  }
 }

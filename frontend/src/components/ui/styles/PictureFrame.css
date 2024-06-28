@@ -1,3 +1,13 @@
-img {
-    max-height: 250px;
+div.pictureFrame figure {
+    margin:0;
+}
+
+div.pictureFrame img {
+    height: 100px;
+}
+
+@media only screen and (max-width:1200px) {
+    div.pictureFrame img {
+        height: 80px;
+    }
 }

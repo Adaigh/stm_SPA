@@ -58,27 +58,38 @@ const CustomerHome = () => {
                     {/* Header including search filter and buttons  */}
                     <div className="customer-header">
                         <h2>Customers</h2>
-                        <input
-                            type="text"
-                            onChange={(e) => setFilter(e.target.value)}
-                            value={filter}
-                            placeholder="Search by Name, Phone, or Email"
-                            size='50'
-                        />
-                        <span
-                            className="material-symbols-outlined close"
-                            onClick={() => setFilter('')}
-                            title="Clear the filter."
-                        >
-                            close
-                        </span>
-                        <span
-                            className="material-symbols-outlined refresh"
-                            onClick={(e) => callRefreshCustomers(e)}
-                            title="Refresh accounts list."
-                        >
-                            refresh
-                        </span>
+                        <div className="filter-bar">
+                            <input
+                                className="large-bar"
+                                type="text"
+                                onChange={(e) => setFilter(e.target.value)}
+                                value={filter}
+                                placeholder="Search by Name, Phone, or Email"
+                                size='50'
+                            />
+                            <input
+                                className="small-bar"
+                                type="text"
+                                onChange={(e) => setFilter(e.target.value)}
+                                value={filter}
+                                placeholder="Name, Phone, or Email"
+                                size='30'
+                            />
+                            <span
+                                className="material-symbols-outlined close"
+                                onClick={() => setFilter('')}
+                                title="Clear the filter."
+                            >
+                                close
+                            </span>
+                            <span
+                                className="material-symbols-outlined refresh"
+                                onClick={(e) => callRefreshCustomers(e)}
+                                title="Refresh accounts list."
+                            >
+                                refresh
+                            </span>
+                        </div>
                     </div>
 
                     {/* Filter and map users into CustomerDetail components */}

@@ -1,6 +1,10 @@
-.aboutpane {
+div.aboutpane {
   background: url(./assets/gears2.jpg);
   background-size: cover;
   padding: 20px 50px;
+}
 
+div.aboutpane h2 {
+  font-family: 'Black Ops One';
+  font-weight: 400;
 }

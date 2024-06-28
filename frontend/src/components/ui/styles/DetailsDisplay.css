@@ -31,3 +31,9 @@ div.details-container td:nth-child(odd) {
     font-weight: 600;
     background-color: #555;
 }
+
+@media only screen and (max-width:530px) {
+    div.details-container table.details-list td{
+        font-size: 1rem;
+    }
+}

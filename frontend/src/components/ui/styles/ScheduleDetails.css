@@ -14,3 +14,16 @@ div.schedule-day span {
 div.schedule-day.today {
     border: 2px solid #5f5;
 }
+
+@media only screen and (max-width: 1420px) {
+    div.schedule-day {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 530px) {
+    div.schedule-day {
+        width: 100%;
+        padding: 20px;
+    }
+}

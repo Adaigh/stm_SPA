@@ -1,11 +1,18 @@
 div.request {
-    margin: 10px;
-    width: 80vw;
-    min-width: 450px;
-    max-width: 1200px;
+    margin: 10px auto;
+    width: 90%;
     padding: 10px;
     background: var(--bg-dark);
     border-radius: 10px;
+}
+
+div.request div.req-div {
+    display: none;
+}
+
+div.request div.req-div div.controls {
+    display: flex;
+    justify-content: space-between;
 }
 
 div.request h3 {
@@ -36,4 +43,13 @@ div.request button.approve {
 
 div.request button.deny {
     color: var(--red)
+}
+
+@media only screen and (max-width: 530px) {
+    div.request table{
+        display: none;
+    }
+    div.request div.req-div {
+        display: block;
+    }
 }
