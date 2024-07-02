@@ -2,20 +2,20 @@
     debug
 }
 
-(common) {
-    header /* {
-        -Server
-    }
-}
-
 :80 {
-    reverse_proxy client:3000
 
-    import common
+    @whitelisted {
+        path / /static* /turbo.ico
+    }
+
+    reverse_proxy @whitelisted client:3000
 }
 
 :4000 {
-    reverse_proxy api:5000
-    
-    import common
+
+    @whitelisted {
+        path /api*
+    }
+
+    reverse_proxy @whitelisted api:5000
 }

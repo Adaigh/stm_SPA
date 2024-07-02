@@ -208,11 +208,13 @@ const AddAppointmentForm = ({ date, closeForm }) => {
                         changeFn={(e) => setVYear(e.target.value)}
                     />
 
-                    <VehicleMake
-                        val={vMake}
-                        req={true}
-                        error={emptyFields && emptyFields.includes('vehicleMake')}
-                        changeFn={(e) => setVMake(e.target.value)}
+                    <label>Vehicle Make: <span className="required">*</span></label>
+                    <input 
+                        type="text"
+                        onChange={(e) => setVMake(e.target.value)}
+                        placeholder="Type in vehicle make"
+                        value={vMake}
+                        className={emptyFields && emptyFields.includes('vehicleMake') ? 'error' : ''}
                     />
 
                     <VehicleModel
@@ -239,7 +241,7 @@ const AddAppointmentForm = ({ date, closeForm }) => {
             </form>
 
             <div className="controls">
-                <button form="add-app-form" className="submit">Submit Request</button>
+                <button form="add-app-form" className="submit">Create</button>
                 <button className="cancel"
                     onClick={(e) => {
                         e.preventDefault()

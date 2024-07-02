@@ -2,6 +2,7 @@ div.add-app form.add-appointment,
 div.add-app div.cust-select {
     display: flex;
     gap: 50px;
+    max-width: 100%;
 }
 
 div.add-app form.add-appointment div.entry-column {

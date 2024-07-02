@@ -12,7 +12,7 @@ const verifyAccessLevel = require('../middleware/verifyAccessLevel')
 const router = express.Router()
 
 //Middleware
-// router.use(requireAuth)
+router.use(requireAuth)
 
 // Create
 router.post('/list', addtoMailerList)

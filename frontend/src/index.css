@@ -150,7 +150,7 @@ div.overlay {
   div.modal {
     margin:auto 0;
     max-height:100vh;
-    overflow-y: scroll;
+    max-width: 100vw;
   }
 }
 

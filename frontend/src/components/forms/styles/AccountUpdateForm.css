@@ -4,6 +4,7 @@ div.new-vehicle {
     display: flex;
     flex-direction: column;
     gap:5px;
+    max-width: 100%;
 }
 
 form.acct-update-form label {

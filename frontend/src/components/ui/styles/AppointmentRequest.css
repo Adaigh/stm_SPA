@@ -30,7 +30,7 @@ div.request td.req-desc {
 }
 
 div.request td.button {
-    width: 50px;
+    min-width: 50px;
 }
 
 div.request button.edit {

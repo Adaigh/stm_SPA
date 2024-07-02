@@ -11,6 +11,7 @@ import Calendar from './pages/Calendar'
 import Schedule from './pages/Schedule'
 import AccountDetail from './pages/AccountDetail'
 import Administration from './pages/Administration'
+import ErrorPage from './pages/ErrorPage'
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
             <Route
               path="/"
               element={<STMHome />}
+              errorElement={<ErrorPage/>}
             />
             <Route
               path="/calendar"

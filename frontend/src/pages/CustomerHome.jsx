@@ -73,7 +73,7 @@ const CustomerHome = () => {
                                 onChange={(e) => setFilter(e.target.value)}
                                 value={filter}
                                 placeholder="Name, Phone, or Email"
-                                size='30'
+                                size='25'
                             />
                             <span
                                 className="material-symbols-outlined close"

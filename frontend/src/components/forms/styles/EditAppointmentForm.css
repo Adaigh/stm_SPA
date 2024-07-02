@@ -2,6 +2,7 @@ form.edit-appt {
     display: flex;
     gap: 20px;
     margin-bottom: 10px;
+    max-width: 100%;
 }
 
 form.edit-appt div{

@@ -22,7 +22,10 @@ app.use(express.json())
 // Rate limiter of 60req/min
 app.use(RateLimit({
     windowMs: 60000, // 1 minute
-    max: 60,
+    limit: 60,
+    validate: {
+        xForwardedForHeader: false
+    }
 }))
 
 // Testing

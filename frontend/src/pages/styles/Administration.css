@@ -58,7 +58,12 @@ div.accounts div.recipient-container {
 
 @media only screen and (max-width:530px) {
 
+    div.accounts {
+        max-width: 100%;
+    }
+
     div.accounts div.filter-bar {
+        width: 90%;
         max-width: 350px;
         gap: 5px;
     }
