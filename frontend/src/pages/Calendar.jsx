@@ -12,20 +12,9 @@ import AlertModal from "../components/forms/AlertModal";
 // Hooks
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useDetailsContext } from "../hooks/useDetailsContext";
-
+import { standardStyle } from "../hooks/useUtils";
 // Styles
 import './styles/Calendar.css'
-
-const standardStyle = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-    }
-}
 
 const Calendar = () => {
 

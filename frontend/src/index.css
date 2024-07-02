@@ -148,8 +148,8 @@ div.overlay {
 
 @media only screen and (max-width: 950px) {
   div.modal {
+    position: relative;
     margin:auto 0;
-    max-height:100vh;
     max-width: 100vw;
   }
 }

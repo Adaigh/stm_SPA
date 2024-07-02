@@ -29,5 +29,6 @@ div.guest-app-req div.controls button{
 @media only screen and (max-width: 950px) {
     form.guest-request {
         flex-direction: column;
+        overflow-y: scroll;
     }
 }
