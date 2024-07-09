@@ -24,6 +24,16 @@ const Schedule = () => {
         // eslint-disable-next-line
     }, [schedule])
 
+    useEffect(() => {
+        let interval = setInterval(() => {
+            getSchedule(), 900000 // 15m * 60s * 1000ms
+        })
+
+        return () => {
+            clearInterval(interval)
+        }
+    }, [])
+
     const changeDate = (date) => {
         setCurrentDate(date)
         setMonthly(false)
@@ -52,10 +62,6 @@ const Schedule = () => {
         e.preventDefault()
         setMonthly(!monthly)
     }
-
-    // Fetch updates every 15 minutes
-    const msInterval = 900000 // 15m * 60s * 1000ms
-    setInterval(() => getSchedule(), msInterval)
 
     return (
         <>
