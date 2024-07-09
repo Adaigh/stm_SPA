@@ -12,6 +12,7 @@ import Schedule from './pages/Schedule'
 import AccountDetail from './pages/AccountDetail'
 import Administration from './pages/Administration'
 import ErrorPage from './pages/ErrorPage'
+import AppointmentRequestPage from './components/ui/AppointmentRequestPage'
 
 
 function App() {
@@ -34,6 +35,10 @@ function App() {
             <Route
               path="/calendar"
               element={<Calendar />}
+            />
+            <Route
+              path='/appointment_request'
+              element={<AppointmentRequestPage />}
             />
             <Route
               path="/schedule"

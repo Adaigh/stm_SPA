@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"
 import Modal from 'react-modal';
 
 // Components
@@ -15,6 +16,7 @@ import { useDetailsContext } from "../hooks/useDetailsContext";
 import { standardStyle } from "../hooks/useUtils";
 // Styles
 import './styles/Calendar.css'
+import AppointmentRequestPage from "../components/ui/AppointmentRequestPage";
 
 const Calendar = () => {
 
@@ -23,11 +25,17 @@ const Calendar = () => {
 
     const [today] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(null)
+    const [pageIsOpen, setPageIsOpen] = useState(false)
     const [formIsOpen, setFormIsOpen] = useState(false)
     const [alertIsOpen, setAlertIsOpen] = useState(false)
 
     const closeForm = (requested) => {
         setFormIsOpen(false)
+        setAlertIsOpen(requested)
+    }
+
+    const closePage = (requested) => {
+        setPageIsOpen(false)
         setAlertIsOpen(requested)
     }
 
@@ -51,7 +59,7 @@ const Calendar = () => {
                     </li>
                 </ul>
             </AboutPane>
-            <div className="calendar-area">
+            {!pageIsOpen && <div className="calendar-area">
                 <CalendarDisplay
                     today={today}
                     selectedDate={selectedDate}
@@ -61,8 +69,12 @@ const Calendar = () => {
                     setSelectedDate={setSelectedDate}>
 
                     <div className="appointment-request">
-                        {selectedDate && <button onClick={() => setFormIsOpen(true)}>
+                        {selectedDate && <button className='modal-button' onClick={() => setFormIsOpen(true)}>
                             <h3 className="request-button-header">Request Appointment </h3>
+                            {selectedDate.toDateString()}
+                        </button>}
+                        {selectedDate && <button className='swap-button' onClick={() => setPageIsOpen(true)}>
+                            <h3 className="request-button-header">Request Appointment Page </h3>
                             {selectedDate.toDateString()}
                         </button>}
                         {!selectedDate && <button style={{ cursor: 'default' }} disabled><h3>Select a day to request an appointment!</h3></button>}
@@ -73,7 +85,9 @@ const Calendar = () => {
                         <button className="red" disabled>Urgent appointments only</button>
                     </div>
                 </CalendarDisplay>
-            </div>
+            </div>}
+            {pageIsOpen && !user && <AppointmentRequestPage appointmentDate={selectedDate} closeForm={closePage}/>}
+            {pageIsOpen && user && <AppointmentRequestPage appointmentDate={selectedDate} closeForm={closePage} user={details.user}/>}
             <Modal
                 isOpen={formIsOpen}
                 onRequestClose={() => closeForm(false)}

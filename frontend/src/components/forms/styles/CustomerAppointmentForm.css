@@ -1,21 +1,21 @@
-form.cust-request {
+div.cust-app-req form.cust-request {
     display: flex;
     gap: 20px;
     margin-bottom: 10px;
     max-width: 100%;
 }
 
-form.cust-request div{
+div.cust-app-req form.cust-request div{
     display: flex;
     flex-direction: column;
 }
 
-form.cust-request label,
-form.cust-request button{
+div.cust-app-req form.cust-request label,
+div.cust-app-req form.cust-request button{
     margin-top: 5px;
 }
 
-div.cust-app-req .close {
+div.cust-app-req span.close {
     position: fixed;
     left: auto;
     right: 20px;
@@ -32,9 +32,16 @@ div.cust-app-req button.edit{
     color: var(--orange);
 }
 
+div.cust-app-req div.controls button{
+    margin: 10px;
+}
 
 @media only screen and (max-width: 950px) {
-    form.cust-request {
+    div.cust-app-req form.cust-request {
         flex-direction: column;
+    }
+
+    div.cust-app-req span.close {
+        display: none;
     }
 }

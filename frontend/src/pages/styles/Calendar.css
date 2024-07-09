@@ -3,6 +3,10 @@ div.calendar-container h2 {
     font-weight: 400;
 }
 
+div.calendar-container button.swap-button {
+    display: none;
+}
+
 div.calendar-container div.calendar-area {
     min-height: 720px;
     display: flex;
@@ -27,32 +31,42 @@ div.calendar-container div.appointment-request button {
     padding: 10px;
 }
 
-div.legend {
+div.calendar-container div.legend {
     margin-top: 40px;
     display: flex;
     justify-content: space-around;
 }
 
-div.legend .red {
+div.calendar-container div.legend .red {
     background: var(--red);   
 }
 
-div.legend .orange {
+div.calendar-container div.legend .orange {
     background: var(--orange);
 }
 
-div.legend .blue {
+div.calendar-container div.legend .blue {
     background: var(--blue);
 }
 
-div.legend button {
+div.calendar-container div.legend button {
     border-radius: 0;
     padding: 10px;
     cursor: default;
 }
 
-@media only screen and (max-width:530px ) {
-    div.legend {
+@media only screen and (max-width:950px) {
+    div.calendar-container button.modal-button {
+        display: none;
+    }
+    
+    div.calendar-container button.swap-button {
+        display: unset;
+    }
+}
+
+@media only screen and (max-width:530px) {
+    div.calendar-container div.legend {
         flex-direction: column;
     }
 }
