@@ -94,6 +94,7 @@ const Calendar = () => {
                 contentLabel="Appointment Request"
                 className="modal"
                 overlayClassName="overlay"
+                appElement={document.getElementById('root') || undefined}
             >
                 {!user && <GuestAppointmentForm date={selectedDate}
                     closeForm={closeForm} />}

@@ -119,7 +119,7 @@ const ScheduleDetails = ({ dow, date }) => {
                 contentLabel="Add New Appointment Details"
                 className="modal"
                 overlayClassName="overlay"
-                
+                appElement={document.getElementById('root') || undefined}
             >
                 {date && <AddAppointmentForm
                     date={new Date(date)}

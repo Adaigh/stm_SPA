@@ -12,6 +12,7 @@ const AlertModal = ({ modalIsOpen, onClose, message }) => {
             contentLabel="Message Alert"
             className="modal"
             overlayClassName="overlay"
+            appElement={document.getElementById('root') || undefined}
         >
             {message}
             <br/>

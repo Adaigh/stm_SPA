@@ -131,6 +131,7 @@ const AppointmentRequest = ({ appReq }) => {
                 contentLabel="Edit Appointment Details"
                 className="modal"
                 overlayClassName="overlay"
+                appElement={document.getElementById('root') || undefined}
             >
                 <EditAppointmentForm
                     appointment={appReq}

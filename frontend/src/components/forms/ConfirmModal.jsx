@@ -12,6 +12,7 @@ const ConfirmModal = ({modalIsOpen, onClose, message}) => {
         contentLabel="Confirmation Dialog"
         className="modal"
         overlayClassName="overlay"
+        appElement={document.getElementById('root') || undefined}
         >
 
             {message}
