@@ -61,6 +61,7 @@ const DetailsDisplay = () => {
                     contentLabel="Edit Account Details"
                     className="modal"
                     overlayClassName="overlay"
+                    
                     >
                         <AccountUpdateForm closeForm={() => setShowEdit(false)}/>
                 </Modal>

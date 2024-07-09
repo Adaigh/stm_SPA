@@ -15,6 +15,10 @@ div.schedule-day.today {
     border: 2px solid #5f5;
 }
 
+div.schedule-day button.small {
+    display: none;
+}
+
 @media only screen and (max-width: 1420px) {
     div.schedule-day {
         width: 90%;
@@ -25,5 +29,17 @@ div.schedule-day.today {
     div.schedule-day {
         width: 100%;
         padding: 20px;
+    }
+
+    div.schedule-day span.material-symbols-outlined {
+        display: none;
+    }
+
+    div.schedule-day button.large {
+        display: none;
+    }
+
+    div.schedule-day button.small {
+        display: unset;
     }
 }

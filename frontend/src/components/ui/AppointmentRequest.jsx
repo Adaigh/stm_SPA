@@ -17,18 +17,26 @@ const AppointmentRequest = ({ appReq }) => {
     const [showEdit, setShowEdit] = useState(false)
     const [alertIsOpen, setAlertIsOpen] = useState(false)
     const [confirmIsOpen, setConfirmIsOpen] = useState(false)
+    const [pageIsOpen, setPageIsOpen] = useState(false)
+
 
     const { deleteApp } = useDeleteAppointment()
     const { approveApp } = useApproveAppointment()
 
     const closeForm = (updated) => {
         setShowEdit(false)
+        setPageIsOpen(false)
         setAlertIsOpen(updated)
     }
 
     const editRequest = (e) => {
         e.preventDefault()
         setShowEdit(true)
+    }
+
+    const editRequestPage = (e) => {
+        e.preventDefault()
+        setPageIsOpen(true)
     }
 
     const approveRequest = async (e) => {
@@ -49,62 +57,72 @@ const AppointmentRequest = ({ appReq }) => {
     return (
         <div className='request'>
 
-            <table className='req-table'>
-                <tbody>
-                    <tr>
-                        <td><h3>{appReq.date}</h3></td>
-                        <td className='req-desc' rowSpan={5}>{appReq.description}</td>
-                        <td className='button'>
-                            <button className='edit' onClick={editRequest}>Edit</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>{appReq.firstName} {appReq.lastName}</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            {appReq.vehicle.vehicleYear}&nbsp;
-                            {appReq.vehicle.vehicleMake}&nbsp;
-                            {appReq.vehicle.vehicleModel}
-                        </td>
-                        <td className='button'>
+            {!pageIsOpen && <>
+                <table className='req-table'>
+                    <tbody>
+                        <tr>
+                            <td><h3>{appReq.date}</h3></td>
+                            <td className='req-desc' rowSpan={5}>{appReq.description}</td>
+                            <td className='button'>
+                                <button className='edit' onClick={editRequest}>Edit</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{appReq.firstName} {appReq.lastName}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {appReq.vehicle.vehicleYear}&nbsp;
+                                {appReq.vehicle.vehicleMake}&nbsp;
+                                {appReq.vehicle.vehicleModel}
+                            </td>
+                            <td className='button'>
+                                <button className='approve' onClick={approveRequest}>Approve</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>VIN: {appReq.vehicle.vehicleVIN}</td>
+                        </tr>
+                        <tr>
+                            <td>{formatPhone(appReq.phoneNumber)}</td>
+                            <td className='button'>
+                                <button className='deny' onClick={confirmDeny}>Deny</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div className='req-div'>
+                    <div>
+                        <h3>{appReq.date}</h3>
+                        {appReq.firstName} {appReq.lastName}
+                        <br />
+                        {appReq.vehicle.vehicleYear}&nbsp;
+                        {appReq.vehicle.vehicleMake}&nbsp;
+                        {appReq.vehicle.vehicleModel}
+                        <br />
+                        VIN: {appReq.vehicle.vehicleVIN}
+                        <br />
+                        {formatPhone(appReq.phoneNumber)}
+                        <hr />
+                        {appReq.description}
+                        <br />
+                        <br />
+                        <div className='controls'>
+                            <button className='edit large' onClick={editRequest}>Edit modal</button>
+                            <button className='edit small' onClick={editRequestPage}>Edit form</button>
                             <button className='approve' onClick={approveRequest}>Approve</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>VIN: {appReq.vehicle.vehicleVIN}</td>
-                    </tr>
-                    <tr>
-                        <td>{formatPhone(appReq.phoneNumber)}</td>
-                        <td className='button'>
                             <button className='deny' onClick={confirmDeny}>Deny</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div className='req-div'>
-                <div>
-                    <h3>{appReq.date}</h3>
-                    {appReq.firstName} {appReq.lastName}
-                    <br />
-                    {appReq.vehicle.vehicleYear}&nbsp;
-                    {appReq.vehicle.vehicleMake}&nbsp;
-                    {appReq.vehicle.vehicleModel}
-                    <br />
-                    VIN: {appReq.vehicle.vehicleVIN}
-                    <br />
-                    {formatPhone(appReq.phoneNumber)}
-                    <hr />
-                    {appReq.description}
-                    <br />
-                    <br />
-                    <div className='controls'>
-                        <button className='edit' onClick={editRequest}>Edit</button>
-                        <button className='approve' onClick={approveRequest}>Approve</button>
-                        <button className='deny' onClick={confirmDeny}>Deny</button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </>}
+
+            {pageIsOpen &&
+                <EditAppointmentForm
+                    appointment={appReq}
+                    closeForm={closeForm}
+                    />
+            }
 
             <Modal
                 isOpen={showEdit}

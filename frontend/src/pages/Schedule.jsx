@@ -26,12 +26,13 @@ const Schedule = () => {
 
     useEffect(() => {
         let interval = setInterval(() => {
-            getSchedule(), 900000 // 15m * 60s * 1000ms
-        })
+            getSchedule()
+        }, 900000) // 15m * 60s * 1000ms
 
         return () => {
             clearInterval(interval)
         }
+        // eslint-disable-next-line
     }, [])
 
     const changeDate = (date) => {
