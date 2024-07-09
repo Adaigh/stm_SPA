@@ -1,6 +1,8 @@
 import Modal from 'react-modal'
 import { standardStyle } from '../../hooks/useUtils'
 
+import './styles/ModalStyle.css'
+
 const ConfirmModal = ({modalIsOpen, onClose, message}) => {
     return (
         <Modal
