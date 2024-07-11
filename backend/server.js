@@ -48,7 +48,7 @@ app.use('/api/appointments', appointmentRoutes)
 app.use('/api/mailer', mailerRoutes)
 
 // Check for new appointment requests each day at 8:45
-cron.schedule('45 8 * * 1-5', () => sendAppointmentUpdateEmail())
+cron.schedule('45 15 * * 1-5', () => sendAppointmentUpdateEmail())
 // sendAppointmentUpdateEmail()
 
 // Connect to DB
