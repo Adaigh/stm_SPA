@@ -29,8 +29,8 @@ div.request td.req-desc {
     border-left: 2px solid grey;
 }
 
-div.request td.button {
-    min-width: 80px;
+div.request button {
+    width: 80px;
 }
 
 div.request button.edit {
