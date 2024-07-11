@@ -94,11 +94,20 @@ const Administration = () => {
                             <h2>Customer Accounts</h2>
                             <div className="filter-bar">
                                 <input
+                                    className="large-bar"
                                     type="text"
                                     onChange={(e) => setFilter(e.target.value)}
                                     value={filter}
-                                    placeholder="Search by Name/Phone/Email"
-                                    size='28'
+                                    placeholder="Search by Name, Phone, or Email"
+                                    size='50'
+                                />
+                                <input
+                                    className="small-bar"
+                                    type="text"
+                                    onChange={(e) => setFilter(e.target.value)}
+                                    value={filter}
+                                    placeholder="Name, Phone, or Email"
+                                    size='20'
                                 />
                                 <span
                                     className="material-symbols-outlined close"

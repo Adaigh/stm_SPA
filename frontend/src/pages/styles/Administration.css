@@ -26,7 +26,7 @@ div.accounts div.accounts-container {
     gap: 20px;
 }
 
-div.accounts div.accounts-container > div {
+div.accounts div.accounts-container>div {
     background-color: var(--bg-dark);
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 15px;
@@ -38,6 +38,10 @@ div.accounts div.accounts-container > div {
 div.accounts div.recipient-container {
     display: flex;
     justify-content: space-between;
+}
+
+div.accounts input.small-bar {
+    display: none;
 }
 
 @media only screen and (max-width:1720px) {
@@ -56,6 +60,17 @@ div.accounts div.recipient-container {
     }
 }
 
+@media only screen and (max-width:1000px) {
+
+    div.accounts input.large-bar {
+        display: none;
+    }
+
+    div.accounts input.small-bar {
+        display: block;
+    }
+}
+
 @media only screen and (max-width:530px) {
 
     div.accounts {
@@ -67,5 +82,4 @@ div.accounts div.recipient-container {
         max-width: 350px;
         gap: 5px;
     }
-    
 }
