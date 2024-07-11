@@ -1,4 +1,5 @@
 const Appointment = require('../models/appointmentModel')
+const val = require('./validation')
 const mongoose = require('mongoose')
 
 
@@ -31,13 +32,26 @@ const getAppointment = async (req,res) => {
 const createAppointment = async (req,res) => {
     const {date, firstName, lastName, phoneNumber, emailAddress, vehicle, description, reviewed} = req.body
     
+    // VALIDATION CHECKS
+
     if(!date || !firstName || !lastName || !phoneNumber || !vehicle || !description) {
         return res.status(400).json({error: "Missing required fields"})
     }
 
-    // ********************
-    // TODO: VALIDATION CHECKS
-    // ********************
+    let errors = []
+    if(!val.isValidDate(date)) errors.push('date')
+    if(!val.isValidName(firstName)) errors.push('firstName')
+    if(!val.isValidName(lastName)) errors.push('lastName')
+    if(!val.isValidPhoneNumber(phoneNumber)) errors.push('phoneNumber')
+    if(!val.isValidYear(vehicle.vehicleYear)) errors.push('vehicleYear')
+    if(!val.isValidName(vehicle.vehicleMake)) errors.push('vehicleMake')
+    if(vehicle.vehicleModel.length > 30) rrors.push('vehicleModel')
+    if(!val.isValidVIN(vehicle.vehicleVIN)) errors.push('vehicleVIN')
+    if(!val.isValidDescription(description)) errors.push('description')
+    if(errors.length>0){
+        const message = `Errors in parameters: ${errors.join(', ')}`
+        return res.status(400).json({error: message})
+    }
     
     let appointment = await Appointment.findOne({date, firstName, lastName, vehicle})
     if(appointment) {
@@ -87,10 +101,6 @@ const updateAppointment = async (req, res) => {
     if(!mongoose.Types.ObjectId.isValid(id)){
         return res.status(400).json({error: 'Invalid request data'})
     }
-
-    // ********************
-    // TODO: VALIDATION CHECKS
-    // ********************
 
     const appt = await Appointment.findByIdAndUpdate(id, {...req.body})
 
