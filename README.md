@@ -51,7 +51,7 @@ For this project I am reworking the company website I made for STM Tuning to pro
 5. Generate ssh key
    - Use Default location, no password
       ```
-      ssh-keygen -t ed25519 -C "adaigh@asu.edu"
+      ssh-keygen -t ed25519 -C "your@email.com"
       ```
    - Ensure agent is running
       ```   
